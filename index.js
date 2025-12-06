@@ -27,9 +27,6 @@ app.get('/courses', (req, res) => {
     res.render('courses/course')
 })
 
-app.get('/careers', (req, res) => {
-    res.render('careers/careers')
-})
 
 app.get('/blog', (req, res) => {
     res.render('blog/blog')
