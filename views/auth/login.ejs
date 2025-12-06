@@ -10,7 +10,7 @@
 
 <body>
     <!-- Header -->
-    <%-include('header.ejs')%>
+    <%-include('../partials/header.ejs')%>
         <div class="p-10">
             <div class="flex justify-center p-4">
                 <!-- Left Side - Image -->
@@ -38,13 +38,14 @@
 
                             <!-- Login/Register Tabs -->
                             <div class="flex gap-4 mb-8 md:w-80 justify-center bg-cyan-400 rounded-full p-2 mx-auto">
-                                <button class="px-8 py-2 bg-cyan-600 text-white rounded-full font-semibold  transition">
+                                <a role="button"
+                                    class="px-8 py-2 bg-cyan-600 text-white rounded-full font-semibold  transition">
                                     Login
-                                </button>
-                                <button
+                                </a>
+                                <a href="/register"
                                     class="px-8 py-2  text-white rounded-full font-semibold hover:bg-cyan-600 transition">
                                     Register
-                                </button>
+                                </a>
                             </div>
 
                         </div>

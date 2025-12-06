@@ -16,5 +16,13 @@
     "express": "^5.1.0",
     "nodemon": "^3.1.11",
     "tailwindcss": "^4.1.17"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RaviGahire/lms-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RaviGahire/lms-app/issues"
+  },
+  "homepage": "https://github.com/RaviGahire/lms-app#readme"
 }

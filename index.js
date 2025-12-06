@@ -10,11 +10,17 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 
-// tailwindcss file
-const tailwindcss = '/css/style.css'
+
 
 app.get('/', (req, res) => {
-    res.render('home/home',{tailwindcss})
+    res.render('home/home')
+})
+app.get('/login',(req,res)=>{
+    res.render('auth/login')
+})
+
+app.get('/register',(req,res)=>{
+    res.render('auth/register')
 })
 
 app.get('/courses', (req, res) => {
