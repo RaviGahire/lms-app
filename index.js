@@ -31,6 +31,9 @@ app.get('/courses', (req, res) => {
 app.get('/blog', (req, res) => {
     res.render('blog/blog')
 })
+app.get('/blogdetails', (req, res) => {
+    res.render('blog/blogDetails')
+})
 
 app.get('/about', (req, res) => {
     res.render('aboutus/about')

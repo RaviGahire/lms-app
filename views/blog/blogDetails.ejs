@@ -1,5 +1,250 @@
-<section aria-label="blog-details">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <%-include('../partials/header.ejs')%>
+        <section aria-label="blog-details">
+            <!-- top iamge -->
+            <div class="w-full h-100 overflow-hidden ">
+                <img class="w-full bg-cover  bg-center bg-no-repeat"
+                    src="https://images.theconversation.com/files/45159/original/rptgtpxd-1396254731.jpg?ixlib=rb-4.1.0&q=45&auto=format&w=1356&h=668&fit=crop"
+                    alt="">
+            </div>
+            <!-- about blog -->
+            <div class="max-w-7xl mx-auto">
+                <!-- blog heading  -->
+                <div class="py-5">
+                    <p class="font-semibold text-4xl text-blue-900 ">Why Swift UI Should Be on the Radar of Every Mobile
+                        Developer</p>
+                </div>
+
+                <!-- blog content -->
+                <div class="text-gray-600  text-xl">
+                    <p class="mt-4">TOTC is a platform that allows educators to create online classes whereby they can
+                        store the
+                        course
+                        materials online; manage assignments, quizzes and exams; monitor due dates; grade results and
+                        provide
+                        students with feedback all in one place.</p>
+                    <p class="my-4">TOTC is a platform that allows educators to create online classes whereby they can
+                        store the
+                        course
+                        materials online; manage assignments, quizzes and exams; monitor due dates; grade results and
+                        provide
+                        students with feedback all in one place.
+                        TOTC is a platform that allows educators to create online classes whereby they can store the
+                        course
+                        materials online; manage assignments, quizzes and exams; monitor due dates; grade results and
+                        provide
+                        students with feedback all in one place.
+                        TOTC is a platform </p>
+                    <p class="mb-4">TOTC is a platform that allows educators to create online classes whereby they can
+                        store the
+                        course
+                        materials online; manage assignments, quizzes and exams; monitor due dates; grade results and
+                        provide
+                        students with feedback all in one place.
+                        TOTC is a platform that allows educators to create online classes whereby they can store the
+                        course
+                        materials online; manage </p>
 
 
-    
+                </div>
+                <!-- blog tags -->
+                <div class="flex gap-4 my-4">
+                    <a href="#"
+                        class="px-4 py-2 bg-cyan-100 text-gray-600 border border-gray-200 font-medium tracking-tight rounded-2xl  ">affordable
+                    </a>
+                    <a href="#"
+                        class="px-4 py-2 bg-cyan-100 text-gray-600 border border-gray-200 font-medium tracking-tight rounded-2xl  ">making
+                    </a>
+                    <a href="#"
+                        class="px-4 py-2 bg-cyan-100 text-gray-600 border border-gray-200 font-medium tracking-tight rounded-2xl  ">desgine
+                    </a>
+                    <a href="#"
+                        class="px-4 py-2 bg-cyan-100 text-gray-600 border border-gray-200 font-medium tracking-tight rounded-2xl  ">affordable
+                    </a>
+                </div>
+                <hr>
+                <!-- blog Writter -->
+                <div class="flex items-center justify-between my-4">
+                    <div class="flex items-center gap-3">
+                        <!-- writter img -->
+                        <div class="size-12 rounded-md overflow-hidden ">
+                            <img src="https://tse1.mm.bing.net/th/id/OET.7252da000e8341b2ba1fb61c275c1f30?w=594&h=594&c=7&rs=1&o=5&pid=1.9"
+                                alt="img">
+                        </div>
+                        <div class="text-gray-700 m-0">
+                            <p class="text-gray-400">Written by</p>
+                            <p class="text-gray-600 font-bold">Ravi gahire</p>
+                        </div>
+                    </div>
+                    <!-- follow btn -->
+                  <div class="">
+                    <a href="#" class="px-10 py-2 border border-cyan-500 rounded-md font-medium">Follow</a>
+                  </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="bg-[#9dccff6f]">
+  <div class="max-w-7xl mx-auto">
+    <!-- heading -->
+    <div class="py-12 flex justify-between">
+      <p class="text-3xl font-bold">Related Blog </p> <a href="#" class="text-gray-700 underline">See all</a>
+    </div>
+    <div class="flex gap-10 overflow-x-hidden snap-x snap-mandatory scroll-smooth pb-5">
+      <!-- card-1 -->
+      <div class="w-[48%] shadow-md shrink-0 flex-col items-center py-8 px-4 bg-white rounded-2xl  
+              min-w-[320px] snap-start">
+        <div class="rounded-2xl overflow-hidden">
+          <img class="w-full h-full"
+            src="https://www.adorama.com/alc/wp-content/uploads/2020/10/abstract-photography-design-feature-825x465.jpg"
+            alt="photography" />
+        </div>
+
+        <div class="mt-4">
+          <p class="text-2xl font-medium">
+            Class adds $30 million to its balance sheet for a Zoom-friendly edtech solution
+          </p>
+
+          <div class="mt-4">
+            <div class="flex items-center gap-5">
+              <div class="size-8 rounded-full overflow-hidden">
+                <img class="w-full h-full"
+                  src="https://www.adorama.com/alc/wp-content/uploads/2020/10/abstract-photography-design-feature-825x465.jpg" />
+              </div>
+              <p>Ravi</p>
+            </div>
+
+            <p class="mt-4">
+              Class, launched less than a year ago by Blackboard co-founder Michael Chasen, integrates exclusively...
+            </p>
+
+            <div class="flex justify-between mt-5 items-center">
+              <a href="#" class="underline">Read more</a>
+              <div class="flex items-center gap-3">
+                <svg width="23" height="15" viewBox="0 0 23 15" fill="none">
+                  <path
+                    d="M22.3438 6.95312C22.4219 7.10938 22.4609 7.30469 22.4609 7.53906C22.4609 7.73438 22.4219 7.92969 22.3438 8.08594C20.2344 12.2266 16.0156 15 11.25 15C6.44531 15 2.22656 12.2266 0.117188 8.08594C0.0390625 7.92969 0 7.73438 0 7.5C0 7.30469 0.0390625 7.10938 0.117188 6.95312C2.22656 2.8125 6.44531 0 11.25 0C16.0156 0 20.2344 2.8125 22.3438 6.95312ZM11.25 13.125V13.1641C14.3359 13.1641 16.875 10.625 16.875 7.53906V7.5C16.875 4.41406 14.3359 1.875 11.25 1.875C8.125 1.875 5.625 4.41406 5.625 7.5C5.625 10.625 8.125 13.125 11.25 13.125ZM11.25 3.75V3.78906C13.3203 3.78906 15 5.42969 15 7.5C15 9.57031 13.3203 11.25 11.25 11.25C9.17969 11.25 7.5 9.57031 7.5 7.5C7.5 7.1875 7.53906 6.83594 7.61719 6.52344C7.92969 6.75781 8.32031 6.875 8.75 6.875C9.76562 6.875 10.5859 6.05469 10.5859 5.03906C10.5859 4.60938 10.4688 4.21875 10.2344 3.90625C10.5469 3.82812 10.8984 3.78906 11.25 3.75Z"
+                    fill="#49BBBD"></path>
+                </svg>
+                <span>250,244</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- card-2 -->
+      <div class="w-[48%] shadow-md shrink-0 flex flex-col items-center py-8 px-4 bg-white rounded-2xl  
+              min-w-[320px] snap-start">
+        <div class="rounded-2xl overflow-hidden">
+          <img class="w-full h-full"
+            src="https://www.adorama.com/alc/wp-content/uploads/2020/10/abstract-photography-design-feature-825x465.jpg"
+            alt="photography" />
+        </div>
+
+        <div class="mt-4">
+          <p class="text-2xl font-medium">
+            Class adds $30 million to its balance sheet for a Zoom-friendly edtech solution
+          </p>
+
+          <div class="mt-4">
+            <div class="flex items-center gap-5">
+              <div class="size-8 rounded-full overflow-hidden">
+                <img class="w-full h-full"
+                  src="https://www.adorama.com/alc/wp-content/uploads/2020/10/abstract-photography-design-feature-825x465.jpg" />
+              </div>
+              <p>Ravi</p>
+            </div>
+
+            <p class="mt-4">
+              Class, launched less than a year ago by Blackboard co-founder Michael Chasen, integrates exclusively...
+            </p>
+
+            <div class="flex justify-between mt-5 items-center">
+              <a href="#" class="underline">Read more</a>
+              <div class="flex items-center gap-3">
+                <svg width="23" height="15" viewBox="0 0 23 15" fill="none">
+                  <path
+                    d="M22.3438 6.95312C22.4219 7.10938 22.4609 7.30469 22.4609 7.53906C22.4609 7.73438 22.4219 7.92969 22.3438 8.08594C20.2344 12.2266 16.0156 15 11.25 15C6.44531 15 2.22656 12.2266 0.117188 8.08594C0.0390625 7.92969 0 7.73438 0 7.5C0 7.30469 0.0390625 7.10938 0.117188 6.95312C2.22656 2.8125 6.44531 0 11.25 0C16.0156 0 20.2344 2.8125 22.3438 6.95312ZM11.25 13.125V13.1641C14.3359 13.1641 16.875 10.625 16.875 7.53906V7.5C16.875 4.41406 14.3359 1.875 11.25 1.875C8.125 1.875 5.625 4.41406 5.625 7.5C5.625 10.625 8.125 13.125 11.25 13.125ZM11.25 3.75V3.78906C13.3203 3.78906 15 5.42969 15 7.5C15 9.57031 13.3203 11.25 11.25 11.25C9.17969 11.25 7.5 9.57031 7.5 7.5C7.5 7.1875 7.53906 6.83594 7.61719 6.52344C7.92969 6.75781 8.32031 6.875 8.75 6.875C9.76562 6.875 10.5859 6.05469 10.5859 5.03906C10.5859 4.60938 10.4688 4.21875 10.2344 3.90625C10.5469 3.82812 10.8984 3.78906 11.25 3.75Z"
+                    fill="#49BBBD"></path>
+                </svg>
+                <span>250,244</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- card-3 -->
+      <div class="w-[48%] shadow-md shrink-0  flex flex-col items-center py-8 px-4 bg-white rounded-2xl  
+              min-w-[320px] snap-start">
+        <div class="rounded-2xl overflow-hidden">
+          <img class="w-full h-full"
+            src="https://www.adorama.com/alc/wp-content/uploads/2020/10/abstract-photography-design-feature-825x465.jpg"
+            alt="photography" />
+        </div>
+
+        <div class="mt-4">
+          <p class="text-2xl font-medium">
+            Class adds $30 million to its balance sheet for a Zoom-friendly edtech solution
+          </p>
+
+          <div class="mt-4">
+            <div class="flex items-center gap-5">
+              <div class="size-8 rounded-full overflow-hidden">
+                <img class="w-full h-full"
+                  src="https://www.adorama.com/alc/wp-content/uploads/2020/10/abstract-photography-design-feature-825x465.jpg" />
+              </div>
+              <p>Ravi</p>
+            </div>
+
+            <p class="mt-4">
+              Class, launched less than a year ago by Blackboard co-founder Michael Chasen, integrates exclusively...
+            </p>
+
+            <div class="flex justify-between mt-5 items-center">
+              <a href="#" class="underline">Read more</a>
+              <div class="flex items-center gap-3">
+                <svg width="23" height="15" viewBox="0 0 23 15" fill="none">
+                  <path
+                    d="M22.3438 6.95312C22.4219 7.10938 22.4609 7.30469 22.4609 7.53906C22.4609 7.73438 22.4219 7.92969 22.3438 8.08594C20.2344 12.2266 16.0156 15 11.25 15C6.44531 15 2.22656 12.2266 0.117188 8.08594C0.0390625 7.92969 0 7.73438 0 7.5C0 7.30469 0.0390625 7.10938 0.117188 6.95312C2.22656 2.8125 6.44531 0 11.25 0C16.0156 0 20.2344 2.8125 22.3438 6.95312ZM11.25 13.125V13.1641C14.3359 13.1641 16.875 10.625 16.875 7.53906V7.5C16.875 4.41406 14.3359 1.875 11.25 1.875C8.125 1.875 5.625 4.41406 5.625 7.5C5.625 10.625 8.125 13.125 11.25 13.125ZM11.25 3.75V3.78906C13.3203 3.78906 15 5.42969 15 7.5C15 9.57031 13.3203 11.25 11.25 11.25C9.17969 11.25 7.5 9.57031 7.5 7.5C7.5 7.1875 7.53906 6.83594 7.61719 6.52344C7.92969 6.75781 8.32031 6.875 8.75 6.875C9.76562 6.875 10.5859 6.05469 10.5859 5.03906C10.5859 4.60938 10.4688 4.21875 10.2344 3.90625C10.5469 3.82812 10.8984 3.78906 11.25 3.75Z"
+                    fill="#49BBBD"></path>
+                </svg>
+                <span>250,244</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- btns -->
+    <div class="text-end mt-5">
+      <button class="size-8 bg-[#49bbbdc9] inline-flex items-center justify-center rounded-sm cursor-pointer"><svg
+          width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path id="1683d47a"
+            d="M0.421875 6.79688C0 7.26562 0 7.96875 0.421875 8.39062L6.79688 14.7656C7.26562 15.2344 7.96875 15.2344 8.39062 14.7656L9.46875 13.7344C9.89062 13.2656 9.89062 12.5625 9.46875 12.1406L4.92188 7.59375L9.46875 3.09375C9.89062 2.67188 9.89062 1.92188 9.46875 1.5L8.39062 0.421875C7.96875 0 7.26562 0 6.79688 0.421875L0.421875 6.79688Z"
+            fill="white"></path>
+        </svg> </button>
+      <button class="size-8 bg-[#49BBBD] inline-flex items-center justify-center rounded-sm cursor-pointer"><svg
+          width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path id="d5e13064"
+            d="M9.46875 8.39062C9.89062 7.96875 9.89062 7.26562 9.46875 6.79688L3.09375 0.421875C2.625 0 1.92188 0 1.5 0.421875L0.421875 1.5C0 1.96875 0 2.67188 0.421875 3.09375L4.96875 7.64062L0.421875 12.1406C0 12.5625 0 13.2656 0.421875 13.7344L1.5 14.7656C1.92188 15.2344 2.625 15.2344 3.09375 14.7656L9.46875 8.39062Z"
+            fill="white"></path>
+        </svg> </button>
+    </div>
+  </div>
 </section>
+</body>
+
+</html>
