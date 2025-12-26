@@ -35,7 +35,7 @@
                         <!-- Welcome Header -->
                         <div class="text-center mb-8">
                             <h2 class="text-3xl font-bold text-gray-800 mb-6">
-                                Welcome to lorem..!
+                                Welcome to MasterTrack 
                             </h2>
 
                             <!-- Login/Register Tabs -->
@@ -59,12 +59,14 @@
 
                         <!-- Form Fields -->
                         <div class="space-y-6">
-                            <!-- Email Address -->
+                          <form action="/register_user" method="post">
+
+                              <!-- Email Address -->
                             <div>
                                 <label class="block text-gray-800 text-sm font-semibold mb-3">
                                     Email Address
                                 </label>
-                                <input type="email" placeholder="Enter your Email Address"
+                                <input type="email" name="email" placeholder="Enter your Email Address" required
                                     class="w-full px-6 py-3 border-2 border-cyan-200 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-400 text-sm bg-gray-50" />
                             </div>
 
@@ -73,7 +75,7 @@
                                 <label class="block text-gray-800 text-sm font-semibold mb-3">
                                     User name
                                 </label>
-                                <input type="text" placeholder="Enter your User name"
+                                <input type="text" name="userName" placeholder="Enter your User name" required
                                     class="w-full px-6 py-3 border-2 border-cyan-200 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-400 text-sm bg-gray-50" />
                             </div>
 
@@ -83,7 +85,7 @@
                                     Password
                                 </label>
                                 <div class="relative">
-                                    <input type="password" id="password" placeholder="Enter your Password"
+                                    <input type="password" id="password" name="password" placeholder="Enter your Password" required
                                         class="w-full px-6 py-3 border-2 border-cyan-200 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-400 text-sm bg-gray-50 pr-14" />
                                     <button type="button" onclick="togglePassword()"
                                         class="absolute right-4 top-8 -translate-y-1/2 text-gray-500 hover:text-gray-700">
@@ -100,10 +102,11 @@
                             </div>
 
                             <!-- Register Button -->
-                            <button
+                            <button type="submit"
                                 class="w-full bg-cyan-500 text-white py-3 rounded-full font-bold text-lg hover:bg-cyan-600 transition mt-10">
                                 Register
                             </button>
+                          </form>
                         </div>
                     </div>
                 </div>
