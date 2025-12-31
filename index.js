@@ -13,6 +13,9 @@ app.use(express.static("public/"));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+
+
+
 // post method data handling - middleware
 app.use(express.urlencoded({ extended: true }));
 
@@ -38,6 +41,8 @@ app.get("/register", (req, res) => {
 const { registerUser } = require('./controller/users_controllers/register')
 app.post("/register_user", registerUser);
 
+
+
 // login user route
 app.get("/login", (req, res) => {
   res.render("auth/login");
@@ -47,7 +52,11 @@ const {loginUser} = require('./controller/users_controllers/login')
 // User login auth 
 app.post('/login_user',loginUser )
 
-
+// // for checking user is logedin or not 
+// app.use((req, res, next) => {
+//    res.locals.isLoggedIn = req.session.isLoggedIn || false;
+//   next();
+// });
 
 
 app.get("/courses", (req, res) => {

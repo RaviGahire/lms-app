@@ -7,24 +7,22 @@ const userSchema = new mongoose.Schema({
     // Schema with validation
     "userName": {
         type: String,
-        required: true
-
+        unique: true,
     },
 
     "email": {
         type: String,
-        // required: true,
-        // unique: true,
+        unique: true,
         lowercase: true,
-        Date: new Date()
+
     },
     "password": {
         type: String,
-        required: true,
-        minlength: 8,
+        minlength: 5,
 
     },
-    date: { type: Date, default: Date.now },
+
+    'createdAt': { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model("LMS_APP", userSchema, "LMS_APP_DATA")
