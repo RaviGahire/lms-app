@@ -1,19 +1,27 @@
 const express = require("express");
+const session = require('express-session')
+// const bcrypt = require('bcrypt')
 const app = express();
 const path = require("path");
-const url = require("url");
+// const url = require("url");
 require("dotenv").config();
 
 
 // All Middlerwares
-// use all files from public folder
+// Use all files from public folder
 app.use(express.static("public/"));
 
 // EJS
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-
+// Session 
+const SECRET_KEY = process.env.SECRET_KEY
+app.use(session({
+ resave:false,
+ saveUninitialized:false,
+secret:SECRET_KEY
+}))
 
 
 // post method data handling - middleware
@@ -21,9 +29,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // DB connection imported
 const connectionDB = require("./config/connectDB");
-
-// import user model
-const userSchema = require("./model/userSchema");
 
 
 // All routes 
@@ -48,15 +53,28 @@ app.get("/login", (req, res) => {
   res.render("auth/login");
 });
 // login controller
-const {loginUser} = require('./controller/users_controllers/login')
+const {loginUser} = require('./controller/users_controllers/login');
 // User login auth 
 app.post('/login_user',loginUser )
 
-// // for checking user is logedin or not 
-// app.use((req, res, next) => {
-//    res.locals.isLoggedIn = req.session.isLoggedIn || false;
-//   next();
-// });
+
+//user profile 
+
+const {upload} = require('./middlewares/multer.middlerware');
+
+app.get('/edit_profile',(req,res)=>{
+
+res.render('profile/update_profile.ejs')
+
+})
+
+//Edit Profile
+const {EditProfile} = require('./controller/users_controllers/editProfile')
+
+app.post('/save_edited_profile',upload.single('profileImage'), EditProfile)
+
+
+
 
 
 app.get("/courses", (req, res) => {

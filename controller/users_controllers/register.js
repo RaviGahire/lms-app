@@ -23,7 +23,10 @@ exports.registerUser = async (req, res) => {
         const register_user = new userSchema({ userName, email, password: hash_pass })
         await register_user.save()
 
-        console.log('User registered successfully!');
+        res.send(`<script>
+                alert('User registered successfully!');
+          window.location.href = '/login'
+                </script>`)
         res.redirect('/login');
 
 

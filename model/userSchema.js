@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema({
         minlength: 5,
 
     },
+    "profileImage": String,
+    "profession": String,
+    "college": String,
+    "phone": Number,
 
     'createdAt': { type: Date, default: Date.now },
 });
