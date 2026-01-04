@@ -11,13 +11,8 @@
 
 <body>
     <%- include('../partials/header') %>
-        <!-- <h1>This is a profile page </h1>
-    <p>User Name <%-data.userName%></p>
-    <p>User Id <%-token._id%></p> -->
-
-        <div class="max-w-7xl mx-auto mt-8 p-6 font-sans bg-slate-50 rounded-3xl shadow-2xl border border-white">
+                <div class="max-w-7xl mx-auto mt-8 p-6 font-sans bg-slate-50 rounded-3xl shadow-2xl border border-white">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-
                 <div class="lg:col-span-4 space-y-6">
                     <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full -mr-16 -mt-16"></div>
@@ -28,26 +23,11 @@
                                 <img class="w-32 h-32 rounded-full object-cover border-4 border-white"
                                     src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=200"
                                     alt="Student">
-
-                                <label for="profileImage"
-                                    class="absolute bottom-1 right-1 bg-white text-indigo-600 p-2 rounded-full shadow-lg cursor-pointer hover:scale-110 transition-transform">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path fill="currentColor"
-                                            d="M11.5 8C14 8 16 10 16 12.5S14 17 11.5 17S7 15 7 12.5S9 8 11.5 8m0 1A3.5 3.5 0 0 0 8 12.5a3.5 3.5 0 0 0 3.5 3.5a3.5 3.5 0 0 0 3.5-3.5A3.5 3.5 0 0 0 11.5 9M5 5h2l2-2h5l2 2h2a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3m4.41-1l-2 2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-2.41l-2-2z" />
-                                    </svg>
-                                </label>
-                                <form action="/upload_profile" method="POST" enctype="multipart/form-data">
-                                    <input type="file" name="profileImage" id="profileImage" accept="image/*"
-                                        class="hidden" />
-                                </form>
-                          
                             </div>
-
+<!-- User Name -->
                             <h2 class="mt-5 text-2xl font-black text-slate-800"><%-data.userName%></h2>
                             <span
-                                class="mt-2 px-4 py-1 bg-indigo-50 text-indigo-600 text-xs font-bold rounded-full border border-indigo-100"><%-data.profession
-                                    ? data.profession : 'Update Profession' %></span>
+                                class="mt-2 px-4 py-1 bg-indigo-50 text-indigo-600 text-xs font-bold rounded-full border border-indigo-100"><%-data.profession%></span>
 
                             <div class="w-full mt-8 space-y-4">
                                 <div class="flex items-center gap-4 group">
@@ -62,8 +42,7 @@
                                     <div>
                                         <p class="text-[10px] uppercase font-bold text-slate-400 tracking-widest">
                                             Institution</p>
-                                        <p class="text-sm font-semibold text-slate-700"><%- data.college ? data.college
-                                                : 'Update College' %></p>
+                                        <p class="text-sm font-semibold text-slate-700"><%-data.college%></p>
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-4 group">
@@ -77,8 +56,8 @@
                                     <div>
                                         <p class="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Mobile
                                         </p>
-                                        <p class="text-sm font-semibold text-slate-700"><%- data.phone ? data.phone
-                                                : 'Update Phone' %>
+                                        <p class="text-sm font-semibold text-slate-700">
+                                            <%-data.phone%>
                                         </p>
                                     </div>
                                 </div>
@@ -100,10 +79,10 @@
                             </div>
 
                             <div class="w-full mt-10 grid grid-cols-2 gap-3">
-                                <a href="/edit_profile"
+                                <a href="/update_profile/<%= data._id %>"
                                     class="flex items-center justify-center gap-2 py-3 bg-slate-900 text-white text-xs font-bold rounded-2xl hover:bg-black transition-all shadow-xl shadow-slate-200">
                                     Complete / Edit Profile
-                            </a>
+                                </a>
                                 <button
                                     class="flex items-center justify-center gap-2 py-3 bg-white border border-slate-200 text-red-500 text-xs font-bold rounded-2xl hover:bg-red-50 transition-all">
                                     Logout
@@ -181,7 +160,7 @@
                         <h3 class="text-lg font-black text-slate-800 mb-4 px-2">Next Steps for your Career</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div
-                                class="group bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-3xl text-white hover:scale-[1.02] transition-transform cursor-pointer overflow-hidden relative">
+                                class="group bg-linear-to-br from-slate-800 to-slate-900 p-6 rounded-3xl text-white hover:scale-[1.02] transition-transform cursor-pointer overflow-hidden relative">
                                 <div
                                     class="absolute -bottom-4 -right-4 text-6xl opacity-10 font-black group-hover:scale-125 transition-transform">
                                     AI</div>

@@ -1,10 +1,8 @@
 const express = require("express");
-const session = require('express-session')
-// const bcrypt = require('bcrypt')
 const app = express();
 const path = require("path");
-// const url = require("url");
 require("dotenv").config();
+const mongoose = require('mongoose')
 
 
 // All Middlerwares
@@ -16,13 +14,8 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 // Session 
-const SECRET_KEY = process.env.SECRET_KEY
-app.use(session({
- resave:false,
- saveUninitialized:false,
-secret:SECRET_KEY
-}))
-
+const sessionMiddleware = require('./middlewares/session.middlerware');
+app.use(sessionMiddleware);
 
 // post method data handling - middleware
 app.use(express.urlencoded({ extended: true }));
@@ -53,25 +46,86 @@ app.get("/login", (req, res) => {
   res.render("auth/login");
 });
 // login controller
-const {loginUser} = require('./controller/users_controllers/login');
+const { upload } = require('./middlewares/multer.middlerware');
+const { loginUser } = require('./controller/users_controllers/login');
 // User login auth 
-app.post('/login_user',loginUser )
+app.post('/login_user', loginUser)
 
 
-//user profile 
+//user profile update ops
+const userSchema = require("./model/userSchema");
 
-const {upload} = require('./middlewares/multer.middlerware');
-
-app.get('/edit_profile',(req,res)=>{
-
-res.render('profile/update_profile.ejs')
-
+app.get('/update_profile', (req, res) => {
+  res.render('profile/profile.ejs')
 })
 
-//Edit Profile
-const {EditProfile} = require('./controller/users_controllers/editProfile')
+app.get('/update_profile/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    console.log(id);
 
-app.post('/save_edited_profile',upload.single('profileImage'), EditProfile)
+    const findLoggedInUser = await userSchema.findById(id);
+    console.log(findLoggedInUser)
+
+    res.render('profile/update_profile', { data: findLoggedInUser })
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Server error");
+  }
+});
+
+
+app.post(
+  '/save_updated_profile/:id',
+  upload.single('profileImage'),
+  async (req, res) => {
+    try {
+      const id = req.params.id;
+
+      // validate ObjectId 
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).send("Invalid User ID");
+      }
+
+      const { profession, college, phone } = req.body;
+
+      // ✅ prepare update object
+      const updateData = {
+        profession,
+        college,
+        phone
+      };
+
+      // ✅ only add image if uploaded
+      if (req.file) {
+        updateData.profileImage = req.file.filename;
+      }
+
+      const updateUser = await userSchema.findByIdAndUpdate(
+        id,
+        updateData,);
+
+      if (!updateUser) {
+        return res.status(404).send("User not found");
+      }
+
+      // res.send(`<script>
+      //   alert('Profile updated successfully')
+      //   window.location.href('/')
+      //   <script>`)
+      res.redirect('/')
+
+
+    } catch (error) {
+      console.log(error);
+      res.status(500).send("Server error");
+    }
+  }
+);
+
+
+
 
 
 
@@ -93,9 +147,9 @@ app.get("/about", (req, res) => {
 });
 
 // fallback route
-app.use((req, res) => {
-  res.status(404).render("partials/pageerror");
-});
+// app.use((req, res) => {
+//   res.status(404).render("partials/pageerror");
+// });
 
 // server listening
 const Host = 3001;

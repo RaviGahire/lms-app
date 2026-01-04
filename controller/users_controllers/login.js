@@ -26,7 +26,7 @@ exports.loginUser = async (req, res) => {
       req.session.userID = isUserExist._id
 
       if (req.session.userID) {
-        return res.render('profile/profile.ejs', { data: isUserExist, token: req.session.userID })
+        return res.render('profile/profile.ejs',{data:isUserExist,token: req.session.userID})
       }
       else {
         res.send(`<script>
@@ -36,11 +36,7 @@ exports.loginUser = async (req, res) => {
       }
 
     }
-
     // res.redirect("/");
-
-
-
   } catch (error) {
     console.log("Something went wrong while login", error);
     res.status(500).send("Server error");

@@ -14,18 +14,16 @@ const userSchema = new mongoose.Schema({
         type: String,
         unique: true,
         lowercase: true,
-
     },
     "password": {
         type: String,
         minlength: 5,
-
     },
+
     "profileImage": String,
     "profession": String,
     "college": String,
     "phone": Number,
-
     'createdAt': { type: Date, default: Date.now },
 });
 
