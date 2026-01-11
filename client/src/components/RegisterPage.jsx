@@ -47,9 +47,14 @@ const RegisterPage = () => {
 
               <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold text-gray-100 mb-6">Welcome to MasterTrack</h2>
-                <div className="flex gap-4 mb-8 md:w-80 justify-center bg-cyan-400 rounded-full p-2 mx-auto">
-                  <a href="/login" className="px-8 py-2 text-white rounded-full font-semibold hover:bg-cyan-500 transition">Login</a>
-                  <button className="px-8 py-2 bg-cyan-500 text-white rounded-full font-semibold hover:bg-cyan-600 transition shadow-md">Register</button>
+             <div className="inline-flex p-1 bg-cyan-400/20 rounded-full">
+              
+                  <a href="/register" className="px-10 py-2.5 text-cyan-600 rounded-full font-semibold hover:bg-cyan-500/10 transition-all">
+                    Login
+                  </a>
+                      <button className="px-10 py-2.5 bg-cyan-500 text-white rounded-full font-semibold shadow-md transition-all">
+                     Register
+                  </button>
                 </div>
               </div>
 
