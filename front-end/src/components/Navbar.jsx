@@ -88,11 +88,6 @@ export const Navbar = () => {
                         </div>
                     )
                     }
-
-
-
-
-
                 </div>
             </nav>
             {/* Mobile menu backdrop */}
