@@ -82,3 +82,64 @@ exports.registerUser = async (req, res) => {
 
 
 }
+
+
+exports.updateProfileGet = async (req, res) => {
+  try {
+    const id = req.params.id;
+    console.log(id);
+
+    const findLoggedInUser = await userSchema.findById(id);
+    console.log(findLoggedInUser)
+
+    res.render('profile/update_profile', { data: findLoggedInUser })
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Server error");
+  }
+}
+
+exports.saveUpdatedProfilePost =   async (req, res) => {
+    try {
+      const id = req.params.id;
+
+      // validate ObjectId 
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).send("Invalid User ID");
+      }
+
+      const { profession, college, phone } = req.body;
+
+      // ✅ prepare update object
+      const updateData = {
+        profession,
+        college,
+        phone
+      };
+
+      // ✅ only add image if uploaded
+      if (req.file) {
+        updateData.profileImage = req.file.filename;
+      }
+
+      const updateUser = await userSchema.findByIdAndUpdate(
+        id,
+        updateData,);
+
+      if (!updateUser) {
+        return res.status(404).send("User not found");
+      }
+
+      // res.send(`<script>
+      //   alert('Profile updated successfully')
+      //   window.location.href('/')
+      //   <script>`)
+      res.redirect('/')
+
+
+    } catch (error) {
+      console.log(error);
+      res.status(500).send("Server error");
+    }
+  }

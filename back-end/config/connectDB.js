@@ -9,8 +9,8 @@ const connectionDB = async () => {
         console.log('Database connected successfully',mongoose.connection.readyState);
 
     } catch (error) {
-        console.error('Database connection failed:', mongoose.connection.readyState );
-        console.error('Database connection failed:', error.message);
+        console.log('Database connection failed:', mongoose.connection.readyState );
+        console.log(error.message);
 
     }
 

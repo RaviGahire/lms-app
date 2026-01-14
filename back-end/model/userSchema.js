@@ -13,18 +13,23 @@ const userSchema = new mongoose.Schema({
     "email": {
         type: String,
         unique: true,
-        lowercase: true,
+       
     },
     "password": {
         type: String,
-        minlength: 5,
+     
+    },
+    "role": {
+        type: String,
+        enum: ['student', 'instructor', 'admin'],
+        default: 'student',
     },
 
     "profileImage": String,
     "profession": String,
     "college": String,
     "phone": Number,
-    'createdAt': { type: Date, default: Date.now },
+    'createdAt': { type: Date, default: Date.now() },
 });
 
 module.exports = mongoose.model("LMS_APP", userSchema, "LMS_APP_DATA")
