@@ -7,6 +7,10 @@ const userSchema = require('../model/userSchema');
 // Import bcrypt for password hashing
 const bcrypt = require('bcrypt');
 
+// email transporter 
+// const gmailOTP = require('../partials/gmail');
+// const otp = require('../partials/otp');
+
 
 // Example route for authentication
 router.get('/', (req, res) => {
@@ -20,42 +24,54 @@ router.get('/', (req, res) => {
 
 })
 
+// auth-controllers 
+const { userRegister, } = require('../controllers/authControllers')
 
 // create user route
-router.post('/users/register', async (req, res) => {
+router.post('/users/register', userRegister);
+
+//verfiy OTP 
+
+// otp middleware 
+const { sendOtp, verifyOtp } = require('../middlewares/otp.middleware')
+
+
+router.post('/generate-opt', sendOtp, (req, res) => {
     try {
-        // check if user already exists
-        const { email, password, userName, } = req.body;
-        const isExistingUser = await userSchema.findOne({ email: req.body.email });
-        // if user exists, return error
-        if (!isExistingUser) {
-            return res.status(400).json({ message: "User already exists" });
-        }
-        // password hashing
-        const hashedPassword = await bcrypt.hash(password, 10);
-        // create new user
-        const newUser = new userSchema({
-            email,
-            password: hashedPassword,
-            userName,
-        });
-
-        // save user to database
-        await newUser.save();
-
         return res.status(200).json({
             success: true,
-            message: "Registration successful",
-            data: newUser
-        });
+            message: "OTP send sucessfully"
+
+        })
+
+    } catch (error) {
+
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error",
+            error: error.message
+        })
+
+    }
+})
+
+router.post('/verify-otp', verifyOtp, async (req, res) => {
+
+    try {
+        return res.status(200).json({
+            success: true,
+            message: "verify otp working",
+            data: req.body.otp
+        })
     } catch (error) {
         return res.status(500).json({
             success: false,
-            error: error.message,
-            message: "Internal server error"
-        });
+            message: "verify otp working",
+            error: error
+        })
     }
-});
+
+})
 
 
 // login user route
