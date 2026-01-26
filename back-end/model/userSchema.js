@@ -1,13 +1,11 @@
-
 const mongoose = require('mongoose')
 
-//create schema instance 
+//create user schema instance 
 const userSchema = new mongoose.Schema({
-
     // Schema with validation
     "userName": {
         type: String,
-        unique: true,
+        // unique: true,
     },
 
     "email": {
@@ -32,4 +30,5 @@ const userSchema = new mongoose.Schema({
     'createdAt': { type: Date, default: Date.now() },
 });
 
+// exported schema
 module.exports = mongoose.model("LMS_APP", userSchema, "LMS_APP_DATA")
