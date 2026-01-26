@@ -6,73 +6,25 @@ const userSchema = require('../model/userSchema');
 
 // Import bcrypt for password hashing
 const bcrypt = require('bcrypt');
-
-// email transporter 
-// const gmailOTP = require('../partials/gmail');
-// const otp = require('../partials/otp');
-
+// auth-controllers 
+const { userRegister, sendUersOtp } = require('../controllers/authControllers')
+// otp middleware 
+const { generateUserOTP, verifyOtp } = require('../middlewares/otp.middleware')
 
 // Example route for authentication
 router.get('/', (req, res) => {
+    return res.status(200).json({ message: "Auth route is working" });
+});
 
-    try {
-        return res.status(200).json({ message: "Auth route is working" });
 
-    } catch (error) {
-        return res.status(500).json({ message: "Internal server error" });
-    }
+//generate-opt 
+router.post('/generate-opt', generateUserOTP);
 
-})
-
-// auth-controllers 
-const { userRegister, } = require('../controllers/authControllers')
+//verify-opt
+router.post('/verify-otp', verifyOtp)
 
 // create user route
-router.post('/users/register', userRegister);
-
-//verfiy OTP 
-
-// otp middleware 
-const { sendOtp, verifyOtp } = require('../middlewares/otp.middleware')
-
-
-router.post('/generate-opt', sendOtp, (req, res) => {
-    try {
-        return res.status(200).json({
-            success: true,
-            message: "OTP send sucessfully"
-
-        })
-
-    } catch (error) {
-
-        return res.status(500).json({
-            success: false,
-            message: "Internal server error",
-            error: error.message
-        })
-
-    }
-})
-
-router.post('/verify-otp', verifyOtp, async (req, res) => {
-
-    try {
-        return res.status(200).json({
-            success: true,
-            message: "verify otp working",
-            data: req.body.otp
-        })
-    } catch (error) {
-        return res.status(500).json({
-            success: false,
-            message: "verify otp working",
-            error: error
-        })
-    }
-
-})
-
+router.post('/users/register', sendUersOtp, userRegister);
 
 // login user route
 router.post('/users/login', async (req, res) => {
