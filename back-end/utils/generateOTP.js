@@ -1,9 +1,9 @@
 const generateOTP = async () => {
   try {
-    const otp = Math.floor(100000 + Math.random() * 900000);
+    const otp = Math.floor(1000 + Math.random() * 9000);
     return otp;
   } catch (error) {
-    console.error('Error generating OTP:', error);
+    console.error('Error Generating OTP:', error);
     throw error;
   }
 };

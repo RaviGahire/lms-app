@@ -18,10 +18,9 @@ const transporter = nodemailer.createTransport({
 const gmailOTP = async (userEmail,otp) => {
 console.log('from email otp',userEmail)
 
-
     try {
         await transporter.verify();
-        console.log('Email transporter is ready to send emails');
+        // console.log('Email transporter is ready to send emails');
 
         const info = await transporter.sendMail({
             from: `"LMS App" <${EMAIL_USER}>`,
@@ -30,7 +29,7 @@ console.log('from email otp',userEmail)
             text: 'This is a ' + otp + ' for your MasterTrack account verification.',
             html: '<h3>Your OTP is: ' + otp + '</h3>'
         });
-        console.log('Test email sent:', info.messageId);
+        // console.log('Test email sent:', info.messageId);
 
 
     } catch (error) {
