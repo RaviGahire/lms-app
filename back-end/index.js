@@ -1,11 +1,17 @@
 const express = require('express');
 const app = express();
 require('dotenv').config();
+const cors = require('cors')
 
 // middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public/'));
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+
+}));
 
 // db connection
 const connectDB = require('./config/connectDB');
@@ -16,7 +22,7 @@ const userSchema = require('./model/userSchema');
 // routes
 app.get('/', async (req, res) => {
   try {
-   return res.status(200).json({
+    return res.status(200).json({
       success: true,
       massage: 'API is working....'
     })
