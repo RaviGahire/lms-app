@@ -7,7 +7,7 @@ const userSchema = require('../model/userSchema');
 // Import bcrypt for password hashing
 const bcrypt = require('bcrypt');
 // auth-controllers 
-const { userRegister, sendUersOtp } = require('../controllers/authControllers')
+const { userRegister } = require('../controllers/authControllers')
 // otp middleware 
 const { generateUserOTP, verifyOtp } = require('../middlewares/otp.middleware')
 
@@ -16,17 +16,16 @@ router.get('/', (req, res) => {
     return res.status(200).json({ message: "Auth route is working" });
 });
 
-
 //generate-opt 
-router.post('/generate-opt', generateUserOTP);
+router.post('/generate-otp', generateUserOTP);
 
 //verify-opt
 router.post('/verify-otp', verifyOtp)
 
-// create user route
-router.post('/users/register', sendUersOtp, userRegister);
+//register user 
+router.post('/users/register', userRegister);
 
-// login user route
+// login user 
 router.post('/users/login', async (req, res) => {
 
     try {
@@ -62,7 +61,7 @@ router.post('/users/login', async (req, res) => {
     }
 });
 
-// find all users route
+// find all users 
 router.get('/users', async (req, res) => {
     try {
         const users = await userSchema.find();
@@ -80,7 +79,7 @@ router.get('/users', async (req, res) => {
     }
 });
 
-// find user by id route
+// find user by id 
 router.get('/users/:id', async (req, res) => {
     try {
         const user = await userSchema.findById(req.params.id);
@@ -146,7 +145,6 @@ router.delete('/users/:id', async (req, res) => {
         });
     }
 });
-
 
 
 module.exports = router;
