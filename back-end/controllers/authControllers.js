@@ -2,29 +2,31 @@ const userSchema = require("../model/userSchema");
 const bcrypt = require('bcrypt')
 
 
-exports.sendUersOtp = async (req, res) => {
-    try {
-        return res.status(200).json({
-            success: true,
-            message: "OTP send sucessfully"
+// exports.sendUersOtp = async (req, res,next) => {
+//     try {
+//         return res.status(200).json({
+//             success: true,
+//             message: "OTP send sucessfully"
 
-        })
+//         })
 
-    } catch (error) {
+//         next()
+//     } catch (error) {
 
-        return res.status(500).json({
-            success: false,
-            message: "Internal server error",
-            error: error.message
-        })
+//         return res.status(500).json({
+//             success: false,
+//             message: "Internal server error",
+//             error: error.message
+//         })
 
-    }
-}
+//     }
+// }
 exports.userRegister = async (req, res) => {
   try {
     // check if user already exists
     const { email, password, userName, } = req.body;
-    const isExistingUser = await userSchema.findOne({ email: req.body.email });
+    const isExistingUser = await userSchema.findOne({email:email });
+
     // if user exists, return error
     if (isExistingUser) {
       return res.status(400).json({ message: "User already exists" });
