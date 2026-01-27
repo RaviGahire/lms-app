@@ -105,8 +105,8 @@ exports.verifyOtp = async (req, res, next) => {
     findUserOtp.isVerified = true;
     await findUserOtp.save();
 
-    // OTP is correct then go next
-    next();
+    // // OTP is correct then go next
+    // next();
 
   } catch (error) {
     return res.status(500).json({
