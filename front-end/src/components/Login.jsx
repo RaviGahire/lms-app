@@ -50,7 +50,7 @@ export const Login = () => {
                   <Link to={'/login'} className="px-10 py-2.5 bg-cyan-500 text-white rounded-full font-semibold shadow-md transition-all">
                     Login
                   </Link>
-                  <Link to="/signin" className="px-10 py-2.5 text-cyan-600 rounded-full font-semibold hover:bg-cyan-500/10 transition-all">
+                  <Link to="/signup" className="px-10 py-2.5 text-cyan-600 rounded-full font-semibold hover:bg-cyan-500/10 transition-all">
                     Register
                   </Link>
                 </div>
