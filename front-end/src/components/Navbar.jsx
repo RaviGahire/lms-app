@@ -34,7 +34,6 @@ export const Navbar = () => {
                 <div
                     onClick={toggleMenu}
                     className="flex md:hidden flex-col gap-1.5 cursor-pointer group z-50" aria-label="Hamburger Menu">
-
                     <span className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
                     <span className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`}></span>
                     <span className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
@@ -69,9 +68,9 @@ export const Navbar = () => {
 
                             </div>
                             <div>
-                                <Link to={'/signin'}
+                                <Link to={'/signup'}
                                     className="px-4 py-1.5 text-sm bg-white text-black rounded-full font-semibold border border-cyan-500 hover:shadow-md transition duration-300"
-                                >SignIn</Link>
+                                >SignUp</Link>
                             </div>
                         </div>) : (
                         <div className="flex gap-2 lg:gap-4">
