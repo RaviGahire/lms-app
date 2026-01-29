@@ -10,7 +10,7 @@ const BlogTag = ({ label }) => (
   </a>
 );
 
-const BlogPage = () => {
+export const BlogPage = () => {
   const tags = ["affordable", "making", "design", "affordable"];
 
   return (
@@ -127,5 +127,3 @@ const BlogPage = () => {
     </main>
   );
 };
-
-export default BlogPage;
