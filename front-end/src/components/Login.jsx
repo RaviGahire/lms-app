@@ -1,13 +1,18 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    rememberMe: false
+    // rememberMe: false
   });
+
+
+  // for navigate 
+  const navigate = useNavigate()
 
   const togglePassword = () => setShowPassword(!showPassword);
 
@@ -19,9 +24,36 @@ export const Login = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
+
+    try {
+      const response = await axios.post('http://localhost:3000/api/users/login', formData)
+
+      if (response.data.success === true) { // Give alert to the user
+        alert(response.data.message)
+
+        navigate("/user_profile", {
+          state: { userId: response.data.data.userID },
+        });
+        setFormData({
+          email: '',
+          password: '',
+          // rememberMe: false
+        });
+
+
+      }
+
+
+    } catch (error) {
+
+      console.log(error)
+
+    }
+
+
+
   };
 
   const handleGoogleLogin = () => {
