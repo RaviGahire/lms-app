@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+/* for all input tag */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px rgb(17 24 39) inset;
+  -webkit-text-fill-color: white;
+}
+/* for otp pop up */
+  @keyframes gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  .animate-gradient { animation: gradient 6s ease infinite; }

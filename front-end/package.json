@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tabler/icons-react": "^3.36.1",
     "@tailwindcss/vite": "^4.1.18",
+    "axios": "^1.13.3",
     "framer-motion": "^12.26.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
