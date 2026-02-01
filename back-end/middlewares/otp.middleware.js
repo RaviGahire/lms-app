@@ -58,7 +58,6 @@ exports.generateUserOTP = async (req, res, next) => {
   }
 };
 
-
 exports.verifyOtp = async (req, res, next) => {
   try {
 
@@ -103,10 +102,10 @@ exports.verifyOtp = async (req, res, next) => {
 
     // change the isverified in true by deafult is false
     findUserOtp.isVerified = true;
-    await findUserOtp.save();
+    const savedOtp = await findUserOtp.save();
 
-    // // OTP is correct then go next
-    // next();
+    // OTP is correct then go next
+    next();
 
   } catch (error) {
     return res.status(500).json({
