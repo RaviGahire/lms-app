@@ -7,9 +7,12 @@ const userSchema = require('../model/userSchema');
 // Import bcrypt for password hashing
 const bcrypt = require('bcrypt');
 // auth-controllers 
-const { userRegister } = require('../controllers/authControllers')
+const { userRegister, userLogin, adminDashboard,studentDashboard } = require('../controllers/authControllers')
 // otp middleware 
-const { generateUserOTP, verifyOtp } = require('../middlewares/otp.middleware')
+const { generateUserOTP, verifyOtp } = require('../middlewares/otp.middleware');
+// verify token middleware 
+const { verifyJwtToken } = require('../middlewares/auth.middleware');
+
 
 // Example route for authentication
 router.get('/', (req, res) => {
@@ -20,46 +23,23 @@ router.get('/', (req, res) => {
 router.post('/generate-otp', generateUserOTP);
 
 //verify-opt
-router.post('/verify-otp', verifyOtp)
+router.post('/verify-otp', verifyOtp, (req, res) => {
+    return res.status(200).json({ success: true, message: 'OTP verification Done Please Login' })
+})
 
 //register user 
 router.post('/users/register', userRegister);
 
 // login user 
-router.post('/users/login', async (req, res) => {
+router.post('/users/login',userLogin);
 
-    try {
-        const { email, password } = req.body;
+//admin dashboard 
 
-        const user = await userSchema.findOne({ email: email });
+const authorizedRoles = require('../middlewares/authorized.role');
 
-        console.log(user);
+router.get('/student-dashboard',verifyJwtToken ,authorizedRoles('student'),studentDashboard);
 
-        // if user does not exist, return error
-        if (!user) {
-            return res.status(400).json({ message: "User does not exist" });
-        }
-        // compare password
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
-            return res.status(400).json({ message: "Invalid password" });
-        }
-        return res.status(200).json({
-            success: true,
-            message: "Login successful",
-            data: user
-        });
-
-
-    } catch (error) {
-
-        return res.status(500).json({
-            success: false,
-            error: error.message,
-            message: "Internal server error"
-        });
-    }
-});
+router.get('/admin-dashboard',verifyJwtToken ,authorizedRoles('admin'),adminDashboard);
 
 // find all users 
 router.get('/users', async (req, res) => {
