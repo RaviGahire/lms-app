@@ -1,4 +1,4 @@
-export const AdminProfile = () => {
+export const SuperAdmin = () => {
     return (
         <>
             {/* <!-- Top Navigation Bar -->

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { LogoutButton, UpdateButton } from "./ActionButtons";
 
-export const UserProfile = () => {
+export const Student = () => {
 
     const [user, setUser] = useState({});
     const [error, setError] = useState('User not fetched may be ur account deleted')
