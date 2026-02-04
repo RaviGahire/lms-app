@@ -1,17 +1,38 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom'
+import { useContext } from 'react';
+import ContextData from '../utils/Context';
+import { IconBellRinging, IconMessageDots } from '@tabler/icons-react';
 
 export const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [isloggedIn, setIsLoggedIn] = useState(true);
+    const [isloggedIn, setIsLoggedIn] = useState(false);
+
+    const context = useContext(ContextData) // geting logged in state from login component 
+    const { user } = context // destructured context
+    // console.log('context value', user)
+
+
+    //dynamic route function
+    const routeUserRole = (userRole) => {
+        if (userRole?.role === "student") return "/student";
+        if (userRole?.role === "admin") return "/admin";
+        if (userRole?.role === "super-admin") return "/super-admin";
+
+        return "/login"; // fallback 
+    };
+
+    const link = routeUserRole(user);
+
+
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     }
+
     const closeMenu = () => {
         setIsOpen(false);
     }
-
 
 
     // Navitems to navigate to different routes
@@ -21,6 +42,16 @@ export const Navbar = () => {
         { name: 'Blogs', path: '/blogs' },
         { name: 'About Us', path: '/aboutus' },
     ]
+
+    useEffect(() => {
+        if (user?.verified) { // set the setIsLoggedIn true after the verified user fined 
+            setIsLoggedIn(true)
+
+        }
+
+
+
+    }, [user])
 
 
     return (
@@ -50,8 +81,7 @@ export const Navbar = () => {
                                     className={({ isActive }) =>
                                         `transition-all duration-300 hover:text-cyan-600 ${isActive ? 'text-cyan-600 font-bold' : ''
                                         }`
-                                    }
-                                >
+                                    }>
                                     {item.name}
                                 </NavLink>
                             </div>
@@ -60,6 +90,28 @@ export const Navbar = () => {
 
                     {/* Login and signin btns with condition */}
                     {isloggedIn ? (
+                        <div className="flex items-center gap-4 lg:gap-6">
+                            {/* Notification Icons */}
+                            <div className="flex items-center gap-3 text-gray-400">
+                                {/* Profile Link */}
+                                <Link
+                                    to={`${link}`}
+                                    className="flex items-center gap-2 p-1 pr-3 rounded-full border border-gray-200 hover:border-cyan-500 hover:bg-gray-50 transition-all"
+                                >
+                                    {/* User Image */}
+                                    <img
+                                        src="https://ui-avatars.com/api/?name=User+Name&background=06b6d4&color=fff"
+                                        alt="User profile"
+                                        className="w-7 h-7 rounded-full object-cover"
+                                    />
+                                    {/* User Name */}
+                                    <span className="text-sm font-medium text-gray-700">John Doe</span>
+                                </Link>
+                                <IconBellRinging size={20} stroke={1.5} className="cursor-pointer hover:text-cyan-500 transition-colors" />
+                                <IconMessageDots size={20} stroke={1.5} className="cursor-pointer hover:text-cyan-500 transition-colors" />
+                            </div>
+                        </div>
+                    ) : (
                         <div className="flex gap-2 lg:gap-4">
                             <div>
                                 <Link to={'/login'}
@@ -72,20 +124,7 @@ export const Navbar = () => {
                                     className="px-4 py-1.5 text-sm bg-white text-black rounded-full font-semibold border border-cyan-500 hover:shadow-md transition duration-300"
                                 >SignUp</Link>
                             </div>
-                        </div>) : (
-                        <div className="flex gap-2 lg:gap-4">
-                            {/* <div>
-                                <Link to={'/dashboard'}
-                                    className="px-4 py-1.5 text-sm bg-cyan-600 text-white rounded-full font-semibold border border-cyan-500 hover:bg-white hover:text-black transition duration-300"
-                                >Dashboard</Link>
-                            </div> */}
-                            <div>
-                                <Link to={'/profile'}
-                                    className="px-4 py-1.5 text-sm bg-white text-black rounded-full font-semibold border border-cyan-500 hover:shadow-md transition duration-300"
-                                >Profile</Link>
-                            </div>
-                        </div>
-                    )
+                        </div>)
                     }
                 </div>
             </nav>
@@ -99,25 +138,25 @@ export const Navbar = () => {
                 <div className="flex flex-col ">
                     {/* User Profile Mobile Section */}
                     <div className="border-b border-gray-200 bg-gray-50/50">
-                        {!isloggedIn ? (
+                        {isloggedIn ? (
                             /* Logged In State */
-                            <Link to="/profile" className="flex items-center justify-between px-6 py-5 active:bg-gray-100 transition-colors">
+                            <Link to={`${link}`} className="flex items-center justify-between px-6 py-5 active:bg-gray-100 transition-colors">
                                 <div className="flex items-center gap-4">
                                     <div className="w-12 h-12 rounded-full bg-linear-to-tr from-cyan-600 to-cyan-500 text-white flex items-center justify-center font-bold shadow-md">
                                         RG
                                     </div>
                                     <div className="flex flex-col">
-                                        <p className="font-bold text-gray-900 leading-tight">Ravi Gahire</p>
-                                        <p className="text-xs text-gray-500">ravi@example.com</p>
+                                        <span className="font-bold text-gray-900 leading-tight">Ravi Gahire</span>
+                                        <span className="text-xs text-gray-500">ravi@example.com</span>
                                     </div>
                                 </div>
-                                {/* Small chevron to indicate it's clickable */}
+                                {/* Small chevron  */}
                                 <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="9 5l7 7-7 7" />
                                 </svg>
                             </Link>
                         ) : (
-                            /* Logged Out State */
+                            /* signUp btn */
                             <div className="px-6 py-6">
                                 <p className="text-sm font-medium text-gray-700 mb-1">Welcome Guest</p>
                                 <p className="text-xs text-gray-500 mb-4">
