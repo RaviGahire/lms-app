@@ -11,22 +11,31 @@ const userSchema = new mongoose.Schema({
     "email": {
         type: String,
         unique: true,
-       
+
     },
     "password": {
         type: String,
-     
+
     },
     "role": {
         type: String,
-        enum: ['student', 'admin','super-admin'],
+        enum: ['student', 'admin', 'super-admin'],
         default: 'student',
     },
 
     "profileImage": String,
-    "profession": String,
     "college": String,
     "phone": Number,
+    "location": String,
+    "gender": String,
+    "college": String,
+    "Qualification": String,
+    "nationality": String,
+    "dob": String,
+    isVerified: {
+        type: Boolean,
+        default: false
+    },
     'createdAt': { type: Date, default: Date.now() },
 });
 
