@@ -4,15 +4,16 @@ import { UpdateButton } from './ActionButtons'
 
 
 export const UpdateUser = () => {
-    const [update, setUpdate] = useState({userName: 'ravi',email:'',college:'',phone:'',location:'',gender:'',qualification:'',nationality:'',dob:''})
+    const [update, setUpdate] = useState({ userName: '', email: '', college: '', phone: '', location: '', gender: '', qualification: '', nationality: '', dob: '' })
 
     const { id } = useParams() // user id get from student profile
-    const api = `http://localhost:3000/api/users/`
+    const api = `http://localhost:3000/api/users`
 
     // console.log(id)
 
     const handleChange = (e) => {
-
+        const { name, value } = e.target
+        setUpdate({ ...update, [name]: value })
     }
 
     return (
@@ -146,9 +147,11 @@ export const UpdateUser = () => {
 
                     {/* Submit */}
                     <div className="flex justify-between"> <UpdateButton componetRoute='/student'
-                        apiUrl={`${api}`}
-                        userId={`${id}`}
-                        updatedData={`${update}`} /> <button type='reset'>Reset</button></div>
+                        apiUrl={api}
+                        userId={id}
+                        updatedData={update} 
+                      
+                        /> <button type='reset'>Reset</button></div>
 
                 </form>
 
