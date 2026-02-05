@@ -2,41 +2,37 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { OtpPopup } from '../utils/OtpPopup';
 
+//Main component
 export const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('')
-
-  const nav = useNavigate()
-
-  const [formData, setFormData] = useState({
+  const API_URL = import.meta.env.VITE_API_URL // API URL
+  const nav = useNavigate() // for navigation 
+  const [formData, setFormData] = useState({ // initial empty
     userName: '',
     email: '',
     password: '',
     confirmPassword: ''
   });
-
-
-  const handleInputChange = (e) => {
+  const handleInputChange = (e) => { // handle input change
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
-
-  const togglePassword = () => {
+// toggle pass
+  const togglePassword = () => { 
     setShowPassword(!showPassword);
   };
-
   //generate OTP function
   const generateUserOtp = async (email) => {
     try {
-      const res = await axios.post(`http://localhost:3000/api/generate-otp`, { email });
+      const res = await axios.post(`${API_URL}/generate-otp`, { email });
 
       if (res.data.success) {
-        alert('Please check your email for otp.');
+        alert('Please check your email.');
         return true;
       } else {
         setError('Failed to send OTP. Please try again.');
@@ -47,39 +43,29 @@ export const SignUp = () => {
       return false;
     }
   };
-
   // register User
   const handleSignUp = async (e) => {
     e.preventDefault();
-
     try {
       setLoading(true);
-      const res = await axios.post(`http://localhost:3000/api/users/register`, formData);
-      if (res.data.success) {
-
-        const otpSuccess = await generateUserOtp(formData.email);//called otp generated function and passed email
-
-        if (otpSuccess) { // if otpSuccess then show modal to enter otp
-          nav('/otp_pop_up', { state: { email: formData.email, } }) // passed email to otp popup
-
-        }
+      const otpSuccess = await generateUserOtp(formData.email); //OTP generated function and passed email
+      if (otpSuccess) {
+        nav('/otp_pop_up', { state: { email: formData.email, user: formData } }) // passe user data and email for otp
       }
-
     } catch (error) {
-      console.log(error.response?.data?.message || 'Registration failed. Please try again.');
+      alert(error.response?.data?.message || 'Please try again');
       setError(error.response?.data?.message)
     } finally {
       setLoading(false);
-
     }
   };
-
 
   //google login
   const handleGoogleLogin = () => {
     console.log('Initiating Google Login...');
   };
 
+  //FORM UI
   return (
     <div className="min-h-screen bg-gray-900 bg-[url('https://t4.ftcdn.net/jpg/05/39/10/47/360_F_539104776_BchIZKRhIUXDY0ZaVHxaoIDvRa2eAG3d.jpg')] bg-blend-soft-light  bg-cover bg-center bg-no-repeat ">
       <div className="p-4 md:p-10">
@@ -87,12 +73,10 @@ export const SignUp = () => {
           {/* Right Side - Form */}
           <div className="w-full lg:w-1/2 flex items-center justify-center p-4 md:p-8">
             <div className="w-full max-w-md">
-
               <div className="text-center mb-8">
-
                 <h2 className="text-3xl font-bold text-gray-100 mb-6">Welcome to MasterTrack</h2>
+                {/* Btns */}
                 <div className="inline-flex p-1 bg-cyan-400/20 rounded-full">
-
                   <Link to="/login" className="px-10 py-2.5 text-cyan-600 rounded-full font-semibold hover:bg-cyan-500/10 transition-all">
                     Login
                   </Link>
@@ -161,7 +145,7 @@ export const SignUp = () => {
                   </div>
                 </div>
                 {/* 4. Confirm Password (Added) */}
-                <div>
+                <div className='relative'>
                   <label className="block text-gray-100 text-sm font-semibold mb-2 ml-4">Confirm Password</label>
                   <input
                     type={showPassword ? "text" : "password"}
@@ -172,14 +156,14 @@ export const SignUp = () => {
                     required
                     className="w-full px-6 py-3 border-2 border-cyan-200 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100 text-sm text-white bg-gray-900/90 transition-colors"
                   />
-                </div>
-
-                {/* send otp on email */}
+                  </div>
+                {/* send otp on email loading btn */}
                 <button
                   type="submit"
                   disabled={loading}
                   className="w-full cursor-pointer bg-cyan-500 text-white py-3 rounded-full font-bold text-lg hover:bg-cyan-600 active:scale-[0.98] transition mt-4 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
+                  {/* loading svg */}
                   {loading ? (
                     <span className="flex items-center justify-center gap-2">
                       <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
@@ -190,8 +174,6 @@ export const SignUp = () => {
                     </span>
                   ) : "Sign Up"}
                 </button>
-
-
                 {/*5. devider */}
                 <div className=" flex items-center justify-around gap-1  my-4">
                   <div className=" w-1/2 border-t border-cyan-100"></div>
