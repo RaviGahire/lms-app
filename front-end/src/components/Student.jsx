@@ -1,43 +1,39 @@
 import { IconAlertTriangle, IconAward, IconBooks, IconBuilding, IconCalendar, IconClock, IconDeviceMobile, IconExternalLink, IconExternalLinkOff, IconFile, IconInfoCircle, IconMail, IconMapPin, IconSchool, IconSettingsCode, IconStar, IconUser, IconWorld } from "@tabler/icons-react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { LogoutButton, UpdateButton } from "./ActionButtons";
+import { LogoutButton } from "./ActionButtons";
+import ContextData from "../utils/Context"
 
 export const Student = () => {
-
-    const [user, setUser] = useState({});
+    const [data, setData] = useState({});
     const [error, setError] = useState('User not fetched may be ur account deleted')
+    const context = useContext(ContextData)
+    const { user } = context
 
-    const location = useLocation();
-    // const userId = location.state?.userId; // for user detials
+    //console.log(data)
+    const fetcUserDetails = async () => {
+        try {
+            const res = await axios.get(`http://localhost:3000/api/users/${user.userID}`,) // fetching user detials using id 
+            //checking API response 
+            if (res.data.success) {
+                alert(res.data.message)
+            }
+            //  console.log(res.data.data)
+            const userData = res.data.data
+            setData(userData)
 
-    // const fetcUserDetails = async () => {
-    //     try {
-    //         const res = await axios.get(`http://localhost:3000/api/users/${userId}`,) // fetching user detials using id 
-    //         //checking API is response 
-    //         if (res.data.success) {
-    //             alert(res.data.message)
-    //         } else {
-    //             setError(res.data.message)
-    //         }
+        } catch (error) {
+            console.log(error)
+            // setError(res.data.message)
+        }
 
-
-
-    //         setUser(userDetails)
-
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-
-    // }
-
-
+    }
 
     // useEffect for data
     useEffect(() => {
-        // fetcUserDetails()
-    }, [])
+        fetcUserDetails()
+    }, [user])
 
     return (
         <div className="main-container bg-cyan-700">
@@ -48,7 +44,7 @@ export const Student = () => {
                         <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah"
                             alt="Student"
                             className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white shadow-lg" />
-                        <h2 className="text-2xl font-bold mb-1">Sarah Johnson</h2>
+                        <h2 className="text-2xl font-bold mb-1">{data?.userName}</h2>
                         <p className="text-purple-100">STU-2023-4567</p>
                     </div>
 
@@ -59,28 +55,28 @@ export const Student = () => {
                                 <IconMail size={24} stroke={2} />
                                 <div>
                                     <p className="text-xs text-purple-200 font-bold tracking-wide">Email</p>
-                                    <p className="text-sm">sarah.johnson@university.edu</p>
+                                    <p className="text-sm">{data?.email}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3 mb-3">
                                 <IconDeviceMobile size={24} stroke={2} />
                                 <div>
                                     <p className="text-xs text-purple-200 font-bold tracking-wide">Phone</p>
-                                    <p className="text-sm">+1 (555) 123-4567</p>
+                                    <p className="text-sm">{data?.phone || 'Update phone'}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3 mb-3">
                                 <IconMapPin size={24} stroke={2} />
                                 <div>
                                     <p className="text-xs text-purple-200 font-bold tracking-wide">Location</p>
-                                    <p className="text-sm">New York, USA</p>
+                                    <p className="text-sm">{data?.location || 'Update location'}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3">
                                 <IconCalendar size={24} stroke={2} />
                                 <div>
                                     <p className="text-xs text-purple-200 font-bold tracking-wide">Enrolled</p>
-                                    <p className="text-sm">Sept 2023</p>
+                                    <p className="text-sm">{data?.createdAt || "NA"}</p>
                                 </div>
                             </div>
                         </div>
@@ -91,35 +87,35 @@ export const Student = () => {
                                     stroke={2} />
                                 <div>
                                     <p className="text-xs text-purple-200 font-bold tracking-wide">Gender</p>
-                                    <p className="text-sm">Female</p>
+                                    <p className="text-sm">{data?.gender || "Update Gender"}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3 mb-3">
                                 <IconBuilding stroke={2} />
                                 <div>
-                                    <p className="text-xs text-purple-200 font-bold tracking-wide">College</p>
-                                    <p className="text-sm">XYZ college</p>
+                                    <p className="text-xs text-purple-200 font-bold tracking-wide">School / College</p>
+                                    <p className="text-sm">{data?.college || "Update college"}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3 mb-3">
                                 <IconSchool size={24} stroke={2} />
                                 <div>
                                     <p className="text-xs text-purple-200 font-bold tracking-wide">Qualification</p>
-                                    <p className="text-sm">New York, USA</p>
+                                    <p className="text-sm">{data?.qualification || "Update qualification"}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3 mb-3">
                                 <IconWorld stroke={2} />
                                 <div>
                                     <p className="text-xs text-purple-200 font-bold tracking-wide">Nationality</p>
-                                    <p className="text-sm">New York, USA</p>
+                                    <p className="text-sm">{data?.nationality || "Update Nationality "}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3">
                                 <IconCalendar size={24} stroke={2} />
                                 <div>
                                     <p className="text-xs text-purple-200  font-bold tracking-wide">Date of Birth</p>
-                                    <p className="text-sm">Sept 2023</p>
+                                    <p className="text-sm">{data?.dob || "Update Date of Birth"}</p>
                                 </div>
                             </div>
 
@@ -146,8 +142,8 @@ export const Student = () => {
 
                         {/* upadte btn and logout btn */}
                         <div className="flex justify-between mt-8">
-                            <Link to={'/update_user/:id'} class="px-4 py-2 rounded-md cursor-pointer bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition">
-                                Update
+                            <Link to={`/update_user_data/${data._id}`} class="px-4 py-2 rounded-md cursor-pointer bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition">
+                                Update / Edit
                             </Link>
                             <LogoutButton />
                         </div>
@@ -155,7 +151,7 @@ export const Student = () => {
                 </div>
 
                 {/* <!-- Main Content --> */}
-                {/* */}
+                {/*Headings */}
                 <div className="flex-1 p-8">
                     <div className="mb-8">
                         <h2 className="text-3xl font-bold text-white mb-2">Learning Journey</h2>
@@ -347,7 +343,7 @@ export const Student = () => {
                                     "Research Assistant",
                                     "Open Source Contributor"
                                 ].map((award, idx) => (
-                                    <div key={idx} className="flex items-center gap-4 bg-gradient-to-r from-amber-500/10 to-transparent border border-amber-500/20 p-4 rounded-xl">
+                                    <div key={idx} className="flex items-center gap-4 bg-linear-to-r from-amber-500/10 to-transparent border border-amber-500/20 p-4 rounded-xl">
                                         <div className="bg-amber-500/20 p-2 rounded-lg">
                                             <IconStar className="w-5 h-5 text-amber-500" />
                                         </div>
