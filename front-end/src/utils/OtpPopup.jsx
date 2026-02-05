@@ -3,48 +3,45 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios'; // ADD THIS
 
 
-export const OtpPopup = () => { // Fixed props
+export const OtpPopup = () => {
     const [timer, setTimer] = useState(59); // Start at 59
     const [canResend, setCanResend] = useState(false);
     const [otp, setOtp] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-
     const nav = useNavigate(); // for redirect to one route to targeted route
-
+    const API_URL = import.meta.env.VITE_API_URL
     const { state } = useLocation(); // accessing the email 
 
-    //check email is there in state
-    if (!state?.email) {
+    //check email and user signup data in state
+    if (!state?.email && !state?.user) {
         nav("/signup");
         return null
     }
 
-    const handleverifyOtp = async (e) => {
+    const handleverifyOtp = async (e) => { // handle otp and user registration 
         e.preventDefault();
-
-        if (!otp || otp.length !== 4) { // to check a otp is 4 digit or not 
-            setError('Please enter a valid 4-digit OTP');
-            return;
-        }
-
         try {
             setLoading(true);
             setError('');
-
+            //call verify otp api
             const response = await axios.post(
-                'http://localhost:3000/api/verify-otp',
+                `${API_URL}/verify-otp`,
                 { email: state?.email, otp } //passed email for verification
             );
-
-            console.log('Verify OTP response:', response.data);
-
-            if (response.data.success === true) { // if response is ok 
+            
+            if (response.data.success === true) { // if response is ok  
                 alert('OTP verified successfully!');
-                nav('/login')
+                const res = await axios.post(`${API_URL}/users/register`, state?.user); // store user in db after otp verfication successfull
+                if (res.data.success === true) {
+                    alert(res.data.message)
+                    nav('/login') // navigate to login page 
+                }
 
             } else {
+                alert(res.data.message)
                 setError(response.data.message || 'Invalid OTP');
+
             }
 
         } catch (error) {
@@ -55,19 +52,20 @@ export const OtpPopup = () => { // Fixed props
         }
     };
 
-    // resend otp
+    // resend otp function
     const handleResend = async () => {
+
         if (!canResend) return;
 
         try {
             setError('');
-            const response = await axios.post(`http://localhost:3000/api/generate-otp`, { email });
+            const response = await axios.post(`${API_URL}/generate-otp`, { email });
 
             if (response.data.success) {
                 setTimer(59);
                 setCanResend(false); // FIX: Should be false
-                setOtp(''); // Clear existing OTP
-                alert('New OTP sent to your email');
+                setOtp(''); // Clear existing OTP 
+                alert('New OTP sent to your email'); // 
             } else {
                 setError('Failed to resend OTP');
             }
@@ -78,8 +76,8 @@ export const OtpPopup = () => { // Fixed props
     };
 
     useEffect(() => {
-        if (timer <= 0) {
-            setCanResend(true);
+        if (timer <= 0) { // time finish
+            setCanResend(true); 
             return;
         }
 
@@ -87,7 +85,7 @@ export const OtpPopup = () => { // Fixed props
             setTimer((prev) => prev - 1);
         }, 1000);
 
-        return () => clearInterval(countdown);
+        return () => clearInterval(countdown); // when otp pop open then start countdown
     }, [timer]);
 
     return (
