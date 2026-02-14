@@ -1,30 +1,23 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom'
 import { useContext } from 'react';
-import ContextData from '../utils/Context';
+import ContextData from '../Contexts/Context';
 import { IconBellRinging, IconMessageDots } from '@tabler/icons-react';
 
-export const Navbar = () => {
+export const Navbar = ({ data }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isloggedIn, setIsLoggedIn] = useState(false);
 
-    const context = useContext(ContextData) // geting logged in state from login component 
-    const { user } = context // destructured context
-    // console.log('context value', user)
-
+    const { IS_VERIFIED, USER_EMAIL, USER_ID, USER_NAME, USER_ROLE } = data
 
     //dynamic route function
     const routeUserRole = (userRole) => {
-        if (userRole?.role === "student") return "/student";
-        if (userRole?.role === "admin") return "/admin";
-        if (userRole?.role === "super-admin") return "/super-admin";
-
-        return "/login"; // fallback 
+        if (userRole === "student") return "/student";
+        if (userRole === "admin") return "/admin";
+        if (userRole === "super-admin") return "/super-admin";
+        return "/login";
     };
-
-    const link = routeUserRole(user);
-
-
+    const link = routeUserRole(USER_ROLE); //Role Base route
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -44,14 +37,13 @@ export const Navbar = () => {
     ]
 
     useEffect(() => {
-        if (user?.verified) { // set the setIsLoggedIn true after the verified user fined 
-            setIsLoggedIn(true)
-
+        if (IS_VERIFIED === true) {
+            setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
         }
+    }, [IS_VERIFIED]);
 
-
-
-    }, [user])
 
 
     return (
@@ -105,7 +97,7 @@ export const Navbar = () => {
                                         className="w-7 h-7 rounded-full object-cover"
                                     />
                                     {/* User Name */}
-                                    <span className="text-sm font-medium text-gray-700">John Doe</span>
+                                    <span className="text-sm font-medium text-gray-700">{USER_NAME}</span>
                                 </Link>
                                 <IconBellRinging size={20} stroke={1.5} className="cursor-pointer hover:text-cyan-500 transition-colors" />
                                 <IconMessageDots size={20} stroke={1.5} className="cursor-pointer hover:text-cyan-500 transition-colors" />
