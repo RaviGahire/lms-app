@@ -1,8 +1,11 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-export const Login = () => {
+import { jwtDecode } from 'jwt-decode'
+import ContextData from '../Contexts/Context';
+
+export const Login = ({ loggedInUser }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -10,6 +13,7 @@ export const Login = () => {
     // rememberMe: false
   });
 
+const {fetchUserProfile} = useContext(ContextData)
 
   // for navigate 
   const navigate = useNavigate()
@@ -30,12 +34,28 @@ export const Login = () => {
     try {
       const response = await axios.post('http://localhost:3000/api/users/login', formData)
 
-      if (response.data.success === true) { // Give alert to the user
-        alert(response.data.message)
+      // if user not exist 
+      if (response.data.success === false) {
+        alert("May be user not exists")
+      }
 
-        navigate("/user_profile", {
-          state: { userId: response.data.data.userID },
-        });
+      if (response.data.success === true) { // Give alert to the user
+
+        alert(response.data.message) // alert for user
+
+        const token = response.data.token // got token from backend
+
+        const decode = jwtDecode(token) // decode the token
+
+        loggedInUser(decode) // sending to in app route component
+
+        // console.log(decode)
+
+        localStorage.setItem('token', token) //to localstorage
+
+        await fetchUserProfile(); //Tell context to go fetch the user now
+
+        navigate("/student") //navigate 
         setFormData({
           email: '',
           password: '',
@@ -44,17 +64,15 @@ export const Login = () => {
 
 
       }
-
-
     } catch (error) {
 
       console.log(error)
 
+
     }
 
-
-
   };
+
 
   const handleGoogleLogin = () => {
     console.log("Initiating Google Login...");
@@ -63,11 +81,8 @@ export const Login = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 bg-[url('https://t4.ftcdn.net/jpg/05/39/10/47/360_F_539104776_BchIZKRhIUXDY0ZaVHxaoIDvRa2eAG3d.jpg')] bg-blend-soft-light  bg-cover bg-center bg-no-repeat">
-
-
       <div className="p-6 md:p-10">
         <div className="flex flex-col lg:flex-row justify-center items-stretch gap-0 lg:gap-10 max-w-7xl mx-auto">
-
 
           {/* login Form */}
           <div className="w-full lg:w-1/2 flex items-center justify-center p-4">
@@ -107,7 +122,6 @@ export const Login = () => {
                     className="w-full px-6 py-3 border-2 border-cyan-200 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100 text-sm text-white bg-gray-900/90 transition-colors"
                   />
                 </div>
-
                 <div>
                   <label className="block text-gray-100 text-sm font-bold mb-2 ml-4">
                     Password
