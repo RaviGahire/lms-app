@@ -1,32 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom'
-import { useContext } from 'react';
-import ContextData from '../Contexts/Context';
 import { IconBellRinging, IconMessageDots } from '@tabler/icons-react';
+import ContextData from '../Contexts/Context';
 
-export const Navbar = ({ data }) => {
+
+export const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [isloggedIn, setIsLoggedIn] = useState(false);
 
-    const { IS_VERIFIED, USER_EMAIL, USER_ID, USER_NAME, USER_ROLE } = data
+    const { loggedInUser, userLogout } = useContext(ContextData); //Get both the user and the logout function from context
 
+    const { USER_NAME, USER_ROLE } = loggedInUser || {} //destructuring
+
+    console.log(loggedInUser)
     //dynamic route function
-    const routeUserRole = (userRole) => {
-        if (userRole === "student") return "/student";
-        if (userRole === "admin") return "/admin";
-        if (userRole === "super-admin") return "/super-admin";
+    const getDashboardLink = (role) => {
+        if (role === "student") return "/student";
+        if (role === "admin") return "/admin";
+        if (role === "super-admin") return "/super-admin";
         return "/login";
     };
-    const link = routeUserRole(USER_ROLE); //Role Base route
 
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    }
-
-    const closeMenu = () => {
-        setIsOpen(false);
-    }
-
+    const dashboardPath = getDashboardLink(USER_ROLE); //Role Base dynamic links
+    const toggleMenu = () => { setIsOpen(!isOpen) }
+    const closeMenu = () => { setIsOpen(false) }
 
     // Navitems to navigate to different routes
     const navItems = [
@@ -36,13 +32,7 @@ export const Navbar = ({ data }) => {
         { name: 'About Us', path: '/aboutus' },
     ]
 
-    useEffect(() => {
-        if (IS_VERIFIED === true) {
-            setIsLoggedIn(true);
-        } else {
-            setIsLoggedIn(false);
-        }
-    }, [IS_VERIFIED]);
+
 
 
 
@@ -81,13 +71,13 @@ export const Navbar = ({ data }) => {
                     </div>
 
                     {/* Login and signin btns with condition */}
-                    {isloggedIn ? (
+                    {loggedInUser ? (
                         <div className="flex items-center gap-4 lg:gap-6">
                             {/* Notification Icons */}
                             <div className="flex items-center gap-3 text-gray-400">
                                 {/* Profile Link */}
                                 <Link
-                                    to={`${link}`}
+                                    to={`${dashboardPath}`}
                                     className="flex items-center gap-2 p-1 pr-3 rounded-full border border-gray-200 hover:border-cyan-500 hover:bg-gray-50 transition-all"
                                 >
                                     {/* User Image */}
@@ -130,9 +120,9 @@ export const Navbar = ({ data }) => {
                 <div className="flex flex-col ">
                     {/* User Profile Mobile Section */}
                     <div className="border-b border-gray-200 bg-gray-50/50">
-                        {isloggedIn ? (
+                        {loggedInUser ? (
                             /* Logged In State */
-                            <Link to={`${link}`} className="flex items-center justify-between px-6 py-5 active:bg-gray-100 transition-colors">
+                            <Link to={`${dashboardPath}`} className="flex items-center justify-between px-6 py-5 active:bg-gray-100 transition-colors">
                                 <div className="flex items-center gap-4">
                                     <div className="w-12 h-12 rounded-full bg-linear-to-tr from-cyan-600 to-cyan-500 text-white flex items-center justify-center font-bold shadow-md">
                                         RG
