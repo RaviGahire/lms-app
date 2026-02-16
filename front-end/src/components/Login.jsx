@@ -7,11 +7,8 @@ import ContextData from '../Contexts/Context';
 
 export const Login = ({ loggedInUser }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    // rememberMe: false
-  });
+  const [formData, setFormData] = useState({email: '',password: '',// rememberMe: false
+});
 
 const {fetchUserProfile} = useContext(ContextData)
 
