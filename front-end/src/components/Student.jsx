@@ -1,39 +1,37 @@
-import { IconAlertTriangle, IconAward, IconBooks, IconBuilding, IconCalendar, IconClock, IconDeviceMobile, IconExternalLink, IconExternalLinkOff, IconFile, IconInfoCircle, IconMail, IconMapPin, IconSchool, IconSettingsCode, IconStar, IconUser, IconWorld } from "@tabler/icons-react";
+import { IconAward, IconBooks, IconBuilding, IconCalendar, IconDeviceMobile, IconInfoCircle, IconMail, IconMapPin, IconSchool, IconSettingsCode, IconStar, IconUser, IconWorld } from "@tabler/icons-react";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { LogoutButton } from "./ActionButtons";
-import ContextData from "../utils/Context"
+import { Link } from "react-router-dom";
+import { LogoutButton } from "../utils/LogoutUser";
+import ContextData from "../Contexts/Context";
+
 
 export const Student = () => {
     const [data, setData] = useState({});
-    const [error, setError] = useState('User not fetched may be ur account deleted')
-    const context = useContext(ContextData)
-    const { user } = context
+    const [error, setError] = useState('')
+    const { loggedInUser, userLogout } = useContext(ContextData)
 
-    //console.log(data)
-    const fetcUserDetails = async () => {
+    console.log(loggedInUser)
+
+
+
+    const fetchUserDetails = async () => {
         try {
-            const res = await axios.get(`http://localhost:3000/api/users/${user.userID}`,) // fetching user detials using id 
-            //checking API response 
-            if (res.data.success) {
-                alert(res.data.message)
-            }
+            const res = await axios.get(`http://localhost:3000/api/users/${user.userID}`,) // fetching user detials using ID
+
             //  console.log(res.data.data)
             const userData = res.data.data
+
             setData(userData)
 
         } catch (error) {
+
             console.log(error)
-            // setError(res.data.message)
+
         }
 
     }
 
-    // useEffect for data
-    useEffect(() => {
-        fetcUserDetails()
-    }, [user])
 
     return (
         <div className="main-container bg-cyan-700">
@@ -142,7 +140,7 @@ export const Student = () => {
 
                         {/* upadte btn and logout btn */}
                         <div className="flex justify-between mt-8">
-                            <Link to={`/update_user_data/${data._id}`} class="px-4 py-2 rounded-md cursor-pointer bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition">
+                            <Link to={`/update_user_data/${data._id}`} className="px-4 py-2 rounded-md cursor-pointer bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition">
                                 Update / Edit
                             </Link>
                             <LogoutButton />
@@ -156,6 +154,8 @@ export const Student = () => {
                     <div className="mb-8">
                         <h2 className="text-3xl font-bold text-white mb-2">Learning Journey</h2>
                         <p className="text-white/80">Manage your active modules and recognized milestones</p>
+                        {/* Error text */}
+                        <div className="absolute top-20 bg-red-500 text-white">{error}</div>
                     </div>
 
                     {/* Cards*/}
