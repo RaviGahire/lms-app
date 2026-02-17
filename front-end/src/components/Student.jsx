@@ -9,15 +9,16 @@ import ContextData from "../Contexts/Context";
 export const Student = () => {
     const [data, setData] = useState({});
     const [error, setError] = useState('')
-    const { loggedInUser, userLogout } = useContext(ContextData)
+    const { loggedInUser } = useContext(ContextData);
 
-    console.log(loggedInUser)
+    const { USER_ID } = loggedInUser || {}
+    const API_URL = import.meta.env.VITE_API_URL
 
 
-
+    console.log(data)
     const fetchUserDetails = async () => {
         try {
-            const res = await axios.get(`http://localhost:3000/api/users/${user.userID}`,) // fetching user detials using ID
+            const res = await axios.get(`${API_URL}/users/${USER_ID}`,) // fetching user detials 
 
             //  console.log(res.data.data)
             const userData = res.data.data
@@ -31,6 +32,12 @@ export const Student = () => {
         }
 
     }
+
+    useEffect(() => {
+        fetchUserDetails()
+    }, [])
+
+
 
 
     return (
@@ -140,7 +147,7 @@ export const Student = () => {
 
                         {/* upadte btn and logout btn */}
                         <div className="flex justify-between mt-8">
-                            <Link to={`/update_user_data/${data._id}`} className="px-4 py-2 rounded-md cursor-pointer bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition">
+                            <Link to={`/update_student/${USER_ID}`} state={{ currentUser: data }} className="px-4 py-2 rounded-md cursor-pointer bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition">
                                 Update / Edit
                             </Link>
                             <LogoutButton />
@@ -401,9 +408,6 @@ export const Student = () => {
 
                     </div>
                 </div>
-
-
-
             </div>
         </div>
     );
