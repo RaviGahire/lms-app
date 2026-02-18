@@ -7,10 +7,13 @@ import ContextData from '../Contexts/Context';
 
 export const Login = ({ loggedInUser }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({email: '',password: '',// rememberMe: false
-});
+  const [formData, setFormData] = useState({
+    email: '', password: '',// rememberMe: false
+  });
+  const [error, setError] = useState("")
+  const { fetchUserProfile } = useContext(ContextData)
 
-const {fetchUserProfile} = useContext(ContextData)
+const API_URL = import.meta.env.VITE_API_URL
 
   // for navigate 
   const navigate = useNavigate()
@@ -26,21 +29,15 @@ const {fetchUserProfile} = useContext(ContextData)
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
+        e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/users/login', formData)
+      const res = await axios.post(`${API_URL}/users/login`, formData)
+      
+      if (res.data.success === true) { // Give alert to the user
 
-      // if user not exist 
-      if (response.data.success === false) {
-        alert("May be user not exists")
-      }
+        alert(res.data.message) // alert for user
 
-      if (response.data.success === true) { // Give alert to the user
-
-        alert(response.data.message) // alert for user
-
-        const token = response.data.token // got token from backend
+        const token = res.data.token // got token from backend
 
         const decode = jwtDecode(token) // decode the token
 
@@ -63,9 +60,8 @@ const {fetchUserProfile} = useContext(ContextData)
       }
     } catch (error) {
 
-      console.log(error)
-
-
+      console.log(error.message)
+      setError(error.response?.data?.message)
     }
 
   };
@@ -100,10 +96,15 @@ const {fetchUserProfile} = useContext(ContextData)
                 </div>
               </div>
 
-              <p className="text-gray-100 text-center text-sm mb-10 leading-relaxed">
+              <p className="text-gray-100 text-center text-sm mb-5 leading-relaxed">
                 Lorem ipsum is simply dummy text of the printing and typesetting industry.
               </p>
-
+              {/* ERRORS */}
+              {error && (
+                <div className="text-white mb-2 w-100 mx-auto text-center p-2 bg-red-500/40 border border-red-500 rounded-lg font-semibold text-sm">
+                  {error}
+                </div>
+              )}
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="block text-gray-100 text-sm font-bold mb-2 ml-4">
