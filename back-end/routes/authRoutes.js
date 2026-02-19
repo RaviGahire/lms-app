@@ -7,12 +7,11 @@ const userSchema = require('../model/userSchema');
 // Import bcrypt for password hashing
 const bcrypt = require('bcrypt');
 // auth-controllers 
-const { userRegister, userLogin, adminDashboard,studentDashboard } = require('../controllers/authControllers')
+const { userRegister, userLogin, adminDashboard,studentDashboard, getProfile } = require('../controllers/authControllers')
 // otp middleware 
 const { generateUserOTP, verifyOtp } = require('../middlewares/otp.middleware');
 // verify token middleware 
 const { verifyJwtToken } = require('../middlewares/auth.middleware');
-
 
 // Example route for authentication
 router.get('/', (req, res) => {
@@ -33,13 +32,14 @@ router.post('/users/register', userRegister);
 // login user 
 router.post('/users/login',userLogin);
 
-//admin dashboard 
-
+// dashboard 
 const authorizedRoles = require('../middlewares/authorized.role');
 
 router.get('/student-dashboard',verifyJwtToken ,authorizedRoles('student'),studentDashboard);
 
 router.get('/admin-dashboard',verifyJwtToken ,authorizedRoles('admin'),adminDashboard);
+
+router.get('/profile',verifyJwtToken,getProfile)
 
 // find all users 
 router.get('/users', async (req, res) => {
@@ -125,6 +125,5 @@ router.delete('/users/:id', async (req, res) => {
         });
     }
 });
-
 
 module.exports = router;

@@ -25,11 +25,11 @@ const userSchema = new mongoose.Schema({
 
     "profileImage": String,
     "college": String,
-    "phone": Number,
-    "location": String,
+    "phone": String,
+    "address": String,
     "gender": String,
     "college": String,
-    "Qualification": String,
+    "qualification": String,
     "nationality": String,
     "dob": String,
     isVerified: {
