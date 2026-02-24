@@ -137,7 +137,7 @@ export const AppRoutes = () => {
             <Route path="/update_super_admin/:id" element={<UpdateAdmin />} />
 
             {/* notification route */}
-            <Route path="/notification" element={<Notifications />} />
+            {/* <Route path="/notification" element={<Notifications />} /> */}
          
 
             {/* Fallback Route */}

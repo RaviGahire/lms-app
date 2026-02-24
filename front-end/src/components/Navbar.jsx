@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import {  useState, useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom'
 import { IconBellRinging, IconMessageDots } from '@tabler/icons-react';
 import ContextData from '../Contexts/Context';
@@ -7,7 +7,7 @@ import ContextData from '../Contexts/Context';
 export const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const { loggedInUser, userLogout } = useContext(ContextData); //Get both the user and the logout function from context
+    const { loggedInUser } = useContext(ContextData); //Get both the user and the logout function from context
 
     const { USER_NAME, USER_ROLE } = loggedInUser || {} //destructuring
 
