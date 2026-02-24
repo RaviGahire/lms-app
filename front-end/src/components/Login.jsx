@@ -55,13 +55,12 @@ const API_URL = import.meta.env.VITE_API_URL
           password: '',
           // rememberMe: false
         });
-
-
-      }
+       }
     } catch (error) {
 
       console.log(error.message)
       setError(error.response?.data?.message)
+     
     }
 
   };

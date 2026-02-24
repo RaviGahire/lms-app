@@ -11,7 +11,7 @@ export const Navbar = () => {
 
     const { USER_NAME, USER_ROLE } = loggedInUser || {} //destructuring
 
-    console.log(loggedInUser)
+    // console.log(loggedInUser)
     //dynamic route function
     const getDashboardLink = (role) => {
         if (role === "student") return "/student";

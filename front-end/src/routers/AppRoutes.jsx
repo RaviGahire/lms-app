@@ -13,7 +13,6 @@ import { ProtectedRoute } from "../components/ProtectedRoute";
 import  {UpdateStudent} from "../components/UpdateStudent"
 import { UpdateAdmin } from "../components/UpdateAdmin";
 import { useEffect, useState } from "react";
-import { Notifications } from "../utils/Notifications";
 import { getStoredToken } from "../utils/getStoredToken";
 import axios from "axios";
 

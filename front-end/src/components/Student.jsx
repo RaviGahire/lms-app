@@ -14,8 +14,6 @@ export const Student = () => {
     const { USER_ID } = loggedInUser || {}
     const API_URL = import.meta.env.VITE_API_URL
 
-
-    console.log(data)
     const fetchUserDetails = async () => {
         try {
             const res = await axios.get(`${API_URL}/users/${USER_ID}`,) // fetching user detials 

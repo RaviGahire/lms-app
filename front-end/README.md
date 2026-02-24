@@ -14,3 +14,9 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+Primary: #14B8A6 (Teal) - similar to current
+Secondary: #A855F7 (Purple) - for grades
+Accent: #FCD34D (Yellow) - for achievements
+Dark Background: #064E3B (Dark teal)
+Card Background: #065F46 (Medium teal)

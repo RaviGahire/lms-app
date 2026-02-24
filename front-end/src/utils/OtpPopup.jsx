@@ -29,7 +29,7 @@ export const OtpPopup = () => {
                 `${API_URL}/verify-otp`,
                 { email: state?.email, otp } //passed email for verification
             );
-            
+
             if (response.data.success === true) { // if response is ok  
                 alert('OTP verified successfully!');
                 const res = await axios.post(`${API_URL}/users/register`, state?.user); // store user in db after otp verfication successfull
@@ -77,7 +77,7 @@ export const OtpPopup = () => {
 
     useEffect(() => {
         if (timer <= 0) { // time finish
-            setCanResend(true); 
+            setCanResend(true);
             return;
         }
 
@@ -177,8 +177,7 @@ export const OtpPopup = () => {
                                 className={`transition-colors duration-300 ${canResend
                                     ? 'text-orange-500 hover:text-orange-400 underline cursor-pointer'
                                     : 'text-zinc-100 cursor-not-allowed opacity-50'
-                                    }`}
-                            >
+                                    }`}>
                                 Resend Code
                             </button>
                         </p>
