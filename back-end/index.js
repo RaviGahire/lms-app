@@ -43,5 +43,5 @@ app.use('/api', authRoutes);
 
 //Server Listening
 app.listen(process.env.PORT || 5000, process.env.HOST, () => {
-  console.log(`Server is running on port http://${process.env.HOST}:${process.env.PORT || 5000}`);
+  console.log(`Server is running on port ${process.env.PORT || 5000}`);
 });
