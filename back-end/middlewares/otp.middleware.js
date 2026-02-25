@@ -43,8 +43,8 @@ exports.generateUserOTP = async (req, res, next) => {
 
     return res.status(200).json({
       success: true,
-      message: "OTP generated successfully",
-      otp: otp
+      message: "OTP Generated Successfully",
+      
     });
 
     next()
