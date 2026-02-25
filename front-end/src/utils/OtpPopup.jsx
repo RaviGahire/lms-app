@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from 'axios'; // ADD THIS
+import axios from 'axios';
 
 
 export const OtpPopup = () => {
@@ -9,44 +9,39 @@ export const OtpPopup = () => {
     const [otp, setOtp] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const nav = useNavigate(); // for redirect to one route to targeted route
-    const API_URL = import.meta.env.VITE_API_URL
-    const { state } = useLocation(); // accessing the email 
+    const [success, setSuccess] = useState('');
 
-    //check email and user signup data in state
-    if (!state?.email && !state?.user) {
-        nav("/signup");
-        return null
-    }
+    const navigate = useNavigate(); // for redirect to one route to targeted route
+    const { state } = useLocation(); // geting email from signup component
+    const API_URL = import.meta.env.VITE_API_URL
+
+    useEffect(() => { if (!state?.email && !state?.user) { navigate("/signup"); } }) //check email and user signup data in state
 
     const handleverifyOtp = async (e) => { // handle otp and user registration 
         e.preventDefault();
+
+        if (otp.length !== 4) return; // initial checking of otp
+
+
         try {
             setLoading(true);
             setError('');
-            //call verify otp api
-            const response = await axios.post(
-                `${API_URL}/verify-otp`,
-                { email: state?.email, otp } //passed email for verification
-            );
+            setSuccess('');
 
-            if (response.data.success === true) { // if response is ok  
-                alert('OTP verified successfully!');
-                const res = await axios.post(`${API_URL}/users/register`, state?.user); // store user in db after otp verfication successfull
-                if (res.data.success === true) {
-                    alert(res.data.message)
-                    nav('/login') // navigate to login page 
-                }
-
-            } else {
-                alert(res.data.message)
-                setError(response.data.message || 'Invalid OTP');
-
+            //calling verify OTP API
+            const response = await axios.post(`${API_URL}/verify-otp`, { email: state?.email, otp }); //passed email for verification 
+            if (!response.data.success) {
+                return setError(response.data.message || "Invalid OTP")
             }
-
+            const registerRes = await axios.post(`${API_URL}/users/register`, state?.user);
+            if (registerRes.data.success) {
+                setSuccess("Account created successfully!");
+                setTimeout(() => navigate('/login'), 1000);
+            } else {
+                setError(registerRes.data.message);
+            }
         } catch (error) {
-            console.error('OTP verification error:', error);
-            setError(error.response?.data?.message || 'Server error');
+            setError(error.response?.data?.message || "Server error");
         } finally {
             setLoading(false);
         }
@@ -54,58 +49,54 @@ export const OtpPopup = () => {
 
     // resend otp function
     const handleResend = async () => {
-
         if (!canResend) return;
 
         try {
             setError('');
-            const response = await axios.post(`${API_URL}/generate-otp`, { email });
+            setSuccess('');
+            const response = await axios.post(`${API_URL}/generate-otp`, { email: state.email });
 
             if (response.data.success) {
                 setTimer(59);
-                setCanResend(false); // FIX: Should be false
+                setCanResend(false);
                 setOtp(''); // Clear existing OTP 
-                alert('New OTP sent to your email'); // 
+                setSuccess("New OTP sent successfully!");
             } else {
-                setError('Failed to resend OTP');
+                setError(err.response?.data?.message || "Server error");
             }
         } catch (error) {
-            console.error('Resend OTP error:', error);
-            setError('Failed to resend OTP');
+            setError(error.response?.data?.message || "Server error");
         }
     };
 
     useEffect(() => {
-        if (timer <= 0) { // time finish
+        if (timer <= 0) { // time finished
             setCanResend(true);
             return;
         }
 
-        const countdown = setInterval(() => {
-            setTimer((prev) => prev - 1);
+        const timeout = setTimeout(() => {
+            setTimer(prev => prev - 1);
         }, 1000);
 
-        return () => clearInterval(countdown); // when otp pop open then start countdown
+        return () => clearTimeout(timeout); // when otp pop open then start countdown
     }, [timer]);
 
     return (
-        <div className="fixed left-0 bottom-0 top-0 right-0 z-50 flex items-center justify-center p-4">
-            {/* Blurred Backdrop */}
-            <div
-                className="fixed left-0 bottom-0 top-0 right-0 bg-gray-500/30 backdrop-blur-md"
-            // Allow closing by clicking backdrop
-            ></div>
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+            {/* Blurred Backdrop:- Allow closing by clicking backdrop*/}
+            <div className="fixed inset-0 bg-cyan-500/10 backdrop-blur-[2px]"></div>
 
             {/* The Modal Container */}
-            <div className="relative p-px rounded-3xl overflow-hidden w-full max-w-sm">
+            <div className="relative p-1.5 rounded-md  overflow-hidden w-full max-w-sm">
                 {/* Moving Gradient Border */}
-                <div className="absolute inset-0 bg-linear-to-r from-orange-500 via-zinc-900 to-orange-500 bg-size-[400%_400%] animate-gradient"></div>
+                <div className="absolute inset-0 bg-linear-to-r from-cyan-900 via-zinc-900 to-cyan-950 bg-size-[400%_400%] animate-gradient"></div>
                 {/* Content Area */}
-                <div className="relative bg-zinc-950 px-8 py-10 rounded-[23px] text-center">
+                <div className="relative border border-zinc-50/50 bg-zinc-950/50 px-8 py-10 backdrop-blur-5xl rounded-md text-center">
                     {/* Close Button */}
                     <button
-
-                        className="absolute cursor-pointer top-4 right-4 text-zinc-400 hover:text-white transition-colors"
+                        onClick={() => { navigate('/signup') }}
+                        className="absolute cursor-pointer top-4 right-4 text-zinc-200 hover:text-white transition-colors"
                         aria-label="Close">
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -116,17 +107,21 @@ export const OtpPopup = () => {
                     <p className="text-zinc-300 text-sm mb-4 uppercase tracking-widest">
                         Enter the code sent to email
                     </p>
-                    <p className="text-orange-500 text-xs font-mono my-2">
+                    <p className="text-gray-200 text-sm font-mono my-2">
                         {state?.email}
                     </p>
-
+                    {/* success Message */}
+                    {success && (
+                        <div className="mb-4 p-2 bg-green-500/20 border border-green-500 rounded-md uppercase text-white text-sm">
+                            {success}
+                        </div>
+                    )}
                     {/* Error Message */}
                     {error && (
-                        <div className="mb-4 p-3 bg-red-500/20 border border-red-500 rounded-lg text-red-200 text-sm">
+                        <div className="mb-4 p-2 bg-red-500/20 border border-red-500 rounded-md uppercase text-white text-sm">
                             {error}
                         </div>
                     )}
-
                     {/* OTP Input Form */}
                     <form onSubmit={handleverifyOtp} className="mb-10">
                         <input
@@ -139,14 +134,14 @@ export const OtpPopup = () => {
                                 setError(''); // Clear error on input
                             }}
                             placeholder="Enter 4-digit OTP"
-                            className="w-full h-14 text-center text-2xl font-bold text-orange-500 bg-black border-2 border-zinc-800 rounded-2xl focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 outline-none transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] placeholder:text-zinc-700 placeholder:text-base"
+                            className="w-full h-14 text-center text-2xl font-bold text-white bg-black border-2 border-zinc-800 rounded-md focus:border-zinc-50/50 focus:ring-1 focus:ring-zinc-50/10 outline-none transition-all duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] placeholder:text-zinc-500 placeholder:text-base"
                             autoFocus
                             disabled={loading}
                         />
                         <button
                             type="submit"
                             disabled={loading || otp.length !== 4}
-                            className="w-full mt-5 bg-orange-500 cursor-pointer text-zinc-900 font-black py-4 rounded-2xl hover:bg-orange-400 active:scale-95 transition-all uppercase tracking-widest shadow-lg shadow-orange-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full mt-5 bg-cyan-800 cursor-pointer text-white font-black py-4 rounded-md  active:scale-95 transition-all uppercase tracking-widest  disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {loading ? (
                                 <span className="flex items-center justify-center gap-2">
@@ -164,7 +159,7 @@ export const OtpPopup = () => {
                     <div className="space-y-6">
                         <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-zinc-900/50 rounded-full border border-zinc-800">
                             <div className={`w-2 h-2 rounded-full ${timer > 0 ? 'bg-orange-500 animate-pulse' : 'bg-zinc-700'}`}></div>
-                            <span className="text-orange-500 font-mono font-medium">
+                            <span className="text-cyan-500 font-mono font-medium">
                                 00:{timer < 10 ? `0${timer}` : timer}
                             </span>
                         </div>
@@ -175,7 +170,7 @@ export const OtpPopup = () => {
                                 onClick={handleResend}
                                 disabled={!canResend}
                                 className={`transition-colors duration-300 ${canResend
-                                    ? 'text-orange-500 hover:text-orange-400 underline cursor-pointer'
+                                    ? 'text-cyan-500 hover:text-orange-400 underline cursor-pointer'
                                     : 'text-zinc-100 cursor-not-allowed opacity-50'
                                     }`}>
                                 Resend Code

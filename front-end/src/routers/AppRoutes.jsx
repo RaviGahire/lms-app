@@ -83,11 +83,10 @@ export const AppRoutes = () => {
 
             {/* Auth Routes */}
             <Route path="/signup" element={<SignUp />} />
+
             <Route path="/otp_pop_up" element={<OtpPopup />} />
-            <Route
-              path="/login"
-              element={<Login loggedInUser={setLoggedInUser} />}
-            />
+
+            <Route path="/login" element={<Login loggedInUser={setLoggedInUser}/>}/>
 
             {/* Dashboard routes */}
             <Route
