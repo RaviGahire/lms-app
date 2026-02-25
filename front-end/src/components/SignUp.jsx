@@ -7,54 +7,70 @@ import { useNavigate } from 'react-router-dom';
 export const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('')
-  const API_URL = import.meta.env.VITE_API_URL // API URL
-  const nav = useNavigate() // for navigation 
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('')
+
   const [formData, setFormData] = useState({ // initial empty
     userName: '',
     email: '',
     password: '',
     confirmPassword: ''
   });
-  const handleInputChange = (e) => { // handle input change
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-// toggle pass
-  const togglePassword = () => { 
-    setShowPassword(!showPassword);
-  };
-  //generate OTP function
-  const generateUserOtp = async (email) => {
-    try {
-      const res = await axios.post(`${API_URL}/generate-otp`, { email });
 
-      if (res.data.success) {
-        alert('Please check your email.');
+  const API_URL = import.meta.env.VITE_API_URL
+  const navigate = useNavigate()
+
+  // Generate OTP function
+  const generateUserOtp = async (email) => {
+
+    try {
+      const { data } = await axios.post(`${API_URL}/generate-otp`, { email });
+
+      // When user generated otp successfully 
+      if (data.success) {
+        setSuccess(data.message);
+        setTimeout(() => { setSuccess("") }, 4000);
         return true;
+
       } else {
-        setError('Failed to send OTP. Please try again.');
+        setError(data.message);
         return false;
       }
+
     } catch (error) {
-      console.log(error.response?.data?.message || 'Error sending OTP');
+      setError(error.response?.data?.message || error.message);
       return false;
     }
   };
+
+  // Handle Input Change
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value, });
+  };
+
+  // Toggle Password
+  const togglePassword = () => { setShowPassword(!showPassword); };
+
   // register User
   const handleSignUp = async (e) => {
     e.preventDefault();
+    setError('');
+    setSuccess('');
+    // Password Validation
+    if (formData.password !== formData.confirmPassword) {
+      return setError("Passwords do not match");
+    }
     try {
       setLoading(true);
-      const otpSuccess = await generateUserOtp(formData.email); //OTP generated function and passed email
-      if (otpSuccess) {
-        nav('/otp_pop_up', { state: { email: formData.email, user: formData } }) // passe user data and email for otp
-      }
+      const otpSuccess = await generateUserOtp(formData.email); //OTP generated function
+      if (!otpSuccess) { return; };
+      setTimeout(() => { setSuccess("Redirecting to OTP verification...") }, 6000);
+      setTimeout(() => {
+        navigate('/otp_pop_up', { state: { email: formData.email, user: formData } }) //passed state to OTP Popup component
+      }, 8000)
+
     } catch (error) {
-      alert(error.response?.data?.message || 'Please try again');
-      setError(error.response?.data?.message)
+      setError(err.response?.data?.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -85,6 +101,11 @@ export const SignUp = () => {
                   </Link>
                 </div>
               </div>
+              {success && (
+                <div className="text-white mb-2 text-center p-2 bg-green-500/40 border border-green-500 rounded-lg font-semibold text-sm">
+                  {success}
+                </div>
+              )}
               {/* ERRORS */}
               {error && (
                 <div className="text-white mb-2 w-100 mx-auto text-center p-2 bg-red-500/40 border border-red-500 rounded-lg font-semibold text-sm">
@@ -156,7 +177,7 @@ export const SignUp = () => {
                     required
                     className="w-full px-6 py-3 border-2 border-cyan-200 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100 text-sm text-white bg-gray-900/90 transition-colors"
                   />
-                  </div>
+                </div>
                 {/* send otp on email loading btn */}
                 <button
                   type="submit"
@@ -170,7 +191,7 @@ export const SignUp = () => {
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                       </svg>
-                      Sending OTP...
+                      Sending OTP to your email...
                     </span>
                   ) : "Sign Up"}
                 </button>

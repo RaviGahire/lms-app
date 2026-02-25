@@ -30,10 +30,13 @@ export const OtpPopup = () => {
 
             //calling verify OTP API
             const response = await axios.post(`${API_URL}/verify-otp`, { email: state?.email, otp }); //passed email for verification 
+
             if (!response.data.success) {
                 return setError(response.data.message || "Invalid OTP")
             }
+
             const registerRes = await axios.post(`${API_URL}/users/register`, state?.user);
+
             if (registerRes.data.success) {
                 setSuccess("Account created successfully!");
                 setTimeout(() => navigate('/login'), 1000);
@@ -122,6 +125,7 @@ export const OtpPopup = () => {
                             {error}
                         </div>
                     )}
+
                     {/* OTP Input Form */}
                     <form onSubmit={handleverifyOtp} className="mb-10">
                         <input
