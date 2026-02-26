@@ -1,6 +1,6 @@
 import {  useState, useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom'
-import { IconBellRinging, IconMessageDots } from '@tabler/icons-react';
+import { IconBellRinging, IconChevronRight, IconMessageDots } from '@tabler/icons-react';
 import ContextData from '../Contexts/Context';
 
 
@@ -133,9 +133,7 @@ export const Navbar = () => {
                                     </div>
                                 </div>
                                 {/* Small chevron  */}
-                                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="9 5l7 7-7 7" />
-                                </svg>
+                               <IconChevronRight stroke={2} />
                             </Link>
                         ) : (
                             /* signUp btn */
