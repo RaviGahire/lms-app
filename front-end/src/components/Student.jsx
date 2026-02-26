@@ -1,4 +1,4 @@
-import { IconAward, IconBooks, IconBuilding, IconCalendar, IconDeviceMobile, IconInfoCircle, IconMail, IconMapPin, IconSchool, IconSettingsCode, IconStar, IconUser, IconWorld } from "@tabler/icons-react";
+import { IconAward, IconBooks, IconBuilding, IconCalendar, IconCirclePlus, IconClockHour2, IconDeviceMobile, IconInfoCircle, IconMail, IconMapPin, IconSchool, IconSettingsCode, IconStar, IconUser, IconWorld } from "@tabler/icons-react";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -388,15 +388,13 @@ export const Student = () => {
                                                 <span className="text-[10px] uppercase tracking-wider text-yellow-100 font-bold">{course.level}</span>
                                                 <h4 className="font-semibold text-gray-200 mt-1 group-hover:text-white transition-colors">{course.name}</h4>
                                                 <div className="flex items-center gap-2 mt-1">
-                                                    <svg className="w-3 h-3 text-gray-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                                  <IconClockHour2 className={'size-4 text-white'} />
                                                     <p className="text-xs text-gray-100">{course.duration}</p>
                                                 </div>
                                             </div>
 
                                             <button className="p-2 rounded-full bg-white/5 group-hover:bg-white cursor-pointer text-white group-hover:text-black transition-all duration-300 shadow-xl">
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                                                </svg>
+                                             <IconCirclePlus className={'w-5 h-5'} />
                                             </button>
                                         </div>
                                     </div>
