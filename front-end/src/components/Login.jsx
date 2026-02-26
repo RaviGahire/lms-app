@@ -33,9 +33,9 @@ const API_URL = import.meta.env.VITE_API_URL
     try {
       const res = await axios.post(`${API_URL}/users/login`, formData)
       
-      if (res.data.success === true) { // Give alert to the user
+      if (res.data.success) { //if success is true
 
-        alert(res.data.message) // alert for user
+        alert(res.data.message) 
 
         const token = res.data.token // got token from backend
 

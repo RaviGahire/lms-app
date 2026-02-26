@@ -4,16 +4,16 @@ import { getStoredToken } from "../utils/getStoredToken";
 import axios from "axios";
 
 const ContextProvider = ({ children }) => {
-
-  const [loggedInUser, setLoggedInUser] = useState(null);// getting data of user to use in any component
+  const [loggedInUserProfile, setLoggedInUserProfile] = useState(null);// set the loggedIn user data to use globally
   const [loading, setLoading] = useState(!!getStoredToken());
-
   const API_URL = import.meta.env.VITE_API_URL
 
-  // user profile function 
-  const fetchUserProfile = useCallback(async () => {
-    const token = getStoredToken() // get token from localstorage
+  // console.log(loggedInUserProfile)
 
+  // fetch user profile function
+  const fetchUserProfile = useCallback(async () => {
+
+    const token = getStoredToken() // get token from localstorage
     if (!token) {
       setLoading(false)
       return;
@@ -21,18 +21,22 @@ const ContextProvider = ({ children }) => {
     setLoading(true);
 
     try {
-      const res = await axios.get(`${API_URL}/profile`, {
+      const response = await axios.get(`${API_URL}/profile`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
-      const { _id, userName, email, role, isVerified } = res.data.data || {};
-      setLoggedInUser({
-        USER_ID: _id,
-        USER_NAME: userName,
-        USER_EMAIL: email,
-        USER_ROLE: role,
-        
+      const profile = response.data?.data || {}
+
+      setLoggedInUserProfile({
+        userId: profile?._id,
+        userName: profile?.userName,
+        email: profile?.email,
+        role: profile?.role,
+        isVerified: profile?.isVerified
       });
+
+      return profile || {}
+     
 
     } catch (error) {
       console.error("Profile Fetch Error:", err);
@@ -42,6 +46,8 @@ const ContextProvider = ({ children }) => {
       setLoading(false);
     }
   }, [API_URL])
+
+
 
   // handle logout globally
   const userLogout = () => {
@@ -57,7 +63,7 @@ const ContextProvider = ({ children }) => {
 
 
   return (
-    <ContextData.Provider value={{ loggedInUser, loading, userLogout, fetchUserProfile }}>
+    <ContextData.Provider value={{ loggedInUserProfile, loading, userLogout, fetchUserProfile }}>
       {children}
     </ContextData.Provider>
   );

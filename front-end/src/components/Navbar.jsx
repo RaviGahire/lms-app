@@ -7,9 +7,10 @@ import ContextData from '../Contexts/Context';
 export const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const { loggedInUser } = useContext(ContextData); //Get both the user and the logout function from context
+    const { loggedInUserProfile } = useContext(ContextData); //Get both the user and the logout function from context
+// console.log(loggedInUserProfile)
 
-    const { USER_NAME, USER_ROLE } = loggedInUser || {} //destructuring
+    const { userName, role,email } = loggedInUserProfile || {} //destructuring
 
     // console.log(loggedInUser)
     //dynamic route function
@@ -20,7 +21,8 @@ export const Navbar = () => {
         return "/login";
     };
 
-    const dashboardPath = getDashboardLink(USER_ROLE); //Role Base dynamic links
+    const dashboardPath = getDashboardLink(role); //Role Base dynamic links
+
     const toggleMenu = () => { setIsOpen(!isOpen) }
     const closeMenu = () => { setIsOpen(false) }
 
@@ -71,7 +73,7 @@ export const Navbar = () => {
                     </div>
 
                     {/* Login and signin btns with condition */}
-                    {loggedInUser ? (
+                    {loggedInUserProfile ? (
                         <div className="flex items-center gap-4 lg:gap-6">
                             {/* Notification Icons */}
                             <div className="flex items-center gap-3 text-gray-400">
@@ -87,7 +89,7 @@ export const Navbar = () => {
                                         className="w-7 h-7 rounded-full object-cover"
                                     />
                                     {/* User Name */}
-                                    <span className="text-sm font-medium text-gray-700">{USER_NAME}</span>
+                                    <span className="text-sm font-medium text-gray-700">{userName}</span>
                                 </Link>
                                 <IconBellRinging size={20} stroke={1.5} className="cursor-pointer hover:text-cyan-500 transition-colors" />
                                 <IconMessageDots size={20} stroke={1.5} className="cursor-pointer hover:text-cyan-500 transition-colors" />
@@ -120,7 +122,7 @@ export const Navbar = () => {
                 <div className="flex flex-col ">
                     {/* User Profile Mobile Section */}
                     <div className="border-b border-gray-200 bg-gray-50/50">
-                        {loggedInUser ? (
+                        {loggedInUserProfile ? (
                             /* Logged In State */
                             <Link to={`${dashboardPath}`} className="flex items-center justify-between px-6 py-5 active:bg-gray-100 transition-colors">
                                 <div className="flex items-center gap-4">
@@ -128,8 +130,8 @@ export const Navbar = () => {
                                         RG
                                     </div>
                                     <div className="flex flex-col">
-                                        <span className="font-bold text-gray-900 leading-tight">Ravi Gahire</span>
-                                        <span className="text-xs text-gray-500">ravi@example.com</span>
+                                        <span className="font-bold text-gray-900 leading-tight">{userName}</span>
+                                        <span className="text-xs text-gray-500">{email}</span>
                                     </div>
                                 </div>
                                 {/* Small chevron  */}

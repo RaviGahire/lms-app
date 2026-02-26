@@ -10,12 +10,12 @@ export const ProtectedRoute = ({ loading, user, allowedUserRoles, children }) =>
     }
 
     if (!user) {
-        return <Navigate to='/login'></Navigate>
+        return <Navigate to='/login' replace />
     }
 
     if (allowedUserRoles && !allowedUserRoles.includes(user.role)) {
 
-        return <Navigate to='/unauthorized'></Navigate>
+        return <Navigate to='/unauthorized' replace/>
 
     }
 

@@ -10,23 +10,28 @@ import { Student } from "../components/Student";
 import { Admin } from "../components/Admin";
 import { SuperAdmin } from "../components/SuperAdmin";
 import { ProtectedRoute } from "../components/ProtectedRoute";
-import  {UpdateStudent} from "../components/UpdateStudent"
+import { UpdateStudent } from "../components/UpdateStudent"
 import { UpdateAdmin } from "../components/UpdateAdmin";
 import { useEffect, useState } from "react";
 import { getStoredToken } from "../utils/getStoredToken";
+import ContextData from "../Contexts/Context";
+import { useContext } from "react";
 import axios from "axios";
 
+
 export const AppRoutes = () => {
-  const [loggedInUser, setLoggedInUser] = useState(""); // getting loggedin user data from login component
+
+  const [loggedInUser, setLoggedInUser] = useState(null); // getting loggedin user data from login component
+
   const [loading, setLoading] = useState(true);
 
-  const API_URL = import.meta.env.VITE_API_URL;
+  const {  fetchUserProfile } = useContext(ContextData)
 
   // console.log(loggedInUser)
-  
+
   const handleAuthentication = async () => {
 
-    const token = getStoredToken(); // get token from local storage
+    const token = getStoredToken(); // get token from local-storage
 
     if (!token) { // if not avilable
       setLoggedInUser(null);
@@ -34,28 +39,21 @@ export const AppRoutes = () => {
       return;
     }
 
-    //userprofile data
+
     try {
-      const response = await axios.get(`${API_URL}/profile`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
 
-      const API_DATA = response.data.data;
-      
-      //map user profile data
-      const mapUserProfile = (apiData) => {
-        return {
-       id: apiData?._id,
-       userName: apiData?.userName,
-       email: apiData?.email,
-       role: apiData?.role,
-       isVerified: Boolean(apiData?.isVerified),
-        };
-      };
-      
-      const userProfileData = mapUserProfile(API_DATA);
+    const profile  = await fetchUserProfile();
 
-      setLoggedInUser(userProfileData);
+      const user = {
+      userId: profile?.userId,
+      userName: profile?.userName,
+      email: profile?.email,
+      role: profile?.role,
+      isVerified: profile?.isVerified,
+    };
+
+     setLoggedInUser(user);
+    
 
     } catch (error) {
       console.error("Auth error:", error);
@@ -86,7 +84,7 @@ export const AppRoutes = () => {
 
             <Route path="/otp_pop_up" element={<OtpPopup />} />
 
-            <Route path="/login" element={<Login loggedInUser={setLoggedInUser}/>}/>
+            <Route path="/login" element={<Login loggedInUser={setLoggedInUser} />} />
 
             {/* Dashboard routes */}
             <Route
@@ -107,31 +105,31 @@ export const AppRoutes = () => {
                 <ProtectedRoute
                   loading={loading}
                   user={loggedInUser}
-                  allowedUserRoles={["admin", "super-admin"]}
+                  allowedUserRoles={["admin"]}
                 >
                   <Admin />
                 </ProtectedRoute>
               }
             />
-           <Route
+            <Route
               path="/student"
               element={<ProtectedRoute loading={loading} user={loggedInUser} allowedUserRoles={["student"]}> <Student /> </ProtectedRoute>
               }
-            /> 
+            />
             {/* unauthorized user route */}
 
             <Route path="/unauthorized" element={<h1>Unauthorized</h1>} />
 
             {/* Update route */}
             <Route path="/update_student/:id" element={<UpdateStudent />} />
-            
+
             <Route path="/update_admin/:id" element={<UpdateAdmin />} />
 
             <Route path="/update_super_admin/:id" element={<UpdateAdmin />} />
 
             {/* notification route */}
             {/* <Route path="/notification" element={<Notifications />} /> */}
-         
+
 
             {/* Fallback Route */}
             {/* <Route

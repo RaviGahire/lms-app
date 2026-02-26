@@ -1,5 +1,3 @@
-
-
 export const Admin = () => {
     return (
         <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden">
