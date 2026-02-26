@@ -22,14 +22,13 @@ export const AppRoutes = () => {
 
   const API_URL = import.meta.env.VITE_API_URL;
 
-//   console.log(loggedInUser);
-
-  // get user token from localStorage
+  // console.log(loggedInUser)
   
-
   const handleAuthentication = async () => {
-    const token = getStoredToken();
-    if (!token) {
+
+    const token = getStoredToken(); // get token from local storage
+
+    if (!token) { // if not avilable
       setLoggedInUser(null);
       setLoading(false);
       return;
@@ -44,19 +43,20 @@ export const AppRoutes = () => {
       const API_DATA = response.data.data;
       
       //map user profile data
-      const mapUserProfile = (apiData, currentStateData) => {
+      const mapUserProfile = (apiData) => {
         return {
-          USER_ID: apiData?._id ?? currentStateData?.USER_ID,
-          USER_NAME: apiData?.userName ?? currentStateData?.USER_NAME,
-          USER_EMAIL: apiData?.email ?? currentStateData?.USER_EMAIL,
-          USER_ROLE: apiData?.role ?? currentStateData?.USER_ROLE,
-          IS_VERIFIED: Boolean(
-            apiData?.isVerified || currentStateData?.IS_VERIFIED,
-          ),
+       id: apiData?._id,
+       userName: apiData?.userName,
+       email: apiData?.email,
+       role: apiData?.role,
+       isVerified: Boolean(apiData?.isVerified),
         };
       };
-      const userProfileData = mapUserProfile(API_DATA, loggedInUser);
+      
+      const userProfileData = mapUserProfile(API_DATA);
+
       setLoggedInUser(userProfileData);
+
     } catch (error) {
       console.error("Auth error:", error);
       localStorage.removeItem("token");
@@ -90,12 +90,12 @@ export const AppRoutes = () => {
 
             {/* Dashboard routes */}
             <Route
-              path="/super_admin"
+              path="/super-admin"
               element={
                 <ProtectedRoute
                   loading={loading}
                   user={loggedInUser}
-                  allowedRoles={["super-admin"]}
+                  allowedUserRoles={["super-admin"]}
                 >
                   <SuperAdmin />
                 </ProtectedRoute>
@@ -107,25 +107,19 @@ export const AppRoutes = () => {
                 <ProtectedRoute
                   loading={loading}
                   user={loggedInUser}
-                  allowedRoles={["admin", "super-admin"]}
+                  allowedUserRoles={["admin", "super-admin"]}
                 >
                   <Admin />
                 </ProtectedRoute>
               }
             />
-            <Route
+           <Route
               path="/student"
-              element={
-                <ProtectedRoute
-                  loading={loading}
-                  user={loggedInUser}
-                  allowedRoles={["student", "admin"]}
-                >
-                  <Student />{" "}
-                </ProtectedRoute>
+              element={<ProtectedRoute loading={loading} user={loggedInUser} allowedUserRoles={["student"]}> <Student /> </ProtectedRoute>
               }
-            />
+            /> 
             {/* unauthorized user route */}
+
             <Route path="/unauthorized" element={<h1>Unauthorized</h1>} />
 
             {/* Update route */}
@@ -140,14 +134,14 @@ export const AppRoutes = () => {
          
 
             {/* Fallback Route */}
-            <Route
+            {/* <Route
               path="*"
               element={
                 <>
                   <h1>Fallbackroute</h1>
                 </>
               }
-            />
+            /> */}
           </Routes>
         </MainLayout>
       </Router>
