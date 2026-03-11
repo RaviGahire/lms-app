@@ -23,10 +23,10 @@ const userSchema = mongoose.Schema({
         required: [true, "Password is required"]
 
     },
-    role: {
+    roles: {
         type: String,
-        enum: ["'user','student', 'instructor', 'admin'"],
-        default: 'user',
+        enum: ['user','student', 'instructor', 'admin'],
+        default:"user",
         trim: true
     },
     
