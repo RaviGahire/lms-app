@@ -1,43 +1,82 @@
 const mongoose = require('mongoose')
 
-//create user schema instance 
+//created user schema instance 
 const userSchema = new mongoose.Schema({
-    // Schema with validation
-    "userName": {
+
+    userName: {
         type: String,
-        // unique: true,
+        required: [true, "Username is required"],
+        unique:true,
+        trim: true,
+        lowercase: true
+
     },
 
-    "email": {
+    email: {
         type: String,
+        required: [true, "Email is required"],
         unique: true,
+        lowercase: true,
+        trim: true
 
     },
-    "password": {
+    password: {
         type: String,
+        required: [true, "Password is required"]
 
     },
-    "role": {
+    role: {
         type: String,
         enum: ['student', 'admin', 'super-admin'],
         default: 'student',
+        trim: true
     },
 
-    "profileImage": String,
-    "college": String,
-    "phone": String,
-    "address": String,
-    "gender": String,
-    "college": String,
-    "qualification": String,
-    "nationality": String,
-    "dob": String,
+    avatar: {
+        type: String,
+        trim: true
+    },
+
+    college: {
+        type: String,
+        trim: true
+    },
+    phone: {
+        type: String,
+        trim: true
+    },
+    address: {
+        type: String,
+        trim: true
+    },
+    gender: {
+        type: String,
+        trim: true
+    },
+    college: {
+        type: String,
+        trim: true
+    },
+    qualification: {
+        type: String,
+        trim: true
+    },
+    nationality: {
+        type: String,
+        trim: true
+    },
+    dob: {
+        type: String,
+        trim: true
+    },
     isVerified: {
         type: Boolean,
         default: false
     },
-    'createdAt': { type: Date, default: Date.now() },
-});
 
-// exported schema
+},
+    { timestamps: true }
+);
+
+// exported user_schema
 module.exports = mongoose.model("LMS_APP", userSchema, "LMS_APP_DATA")
