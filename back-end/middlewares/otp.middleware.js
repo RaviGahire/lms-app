@@ -1,68 +1,12 @@
-const userSchema = require('../model/userSchema')
-const generateOTP = require('../utils/generateOTP')
-const gmailOTP = require('../utils/gmailOTP')
-const otpSchema = require('../model/otpSchema')
+const OTP = require("../model/otp.model")
+const User = require("../model/user.model")
+const verifyUser = require("../utils/verifyUser")
 
-exports.generateUserOTP = async (req, res, next) => {
+exports.verifyUserOtp = async (req, res, next) => {
   try {
-
-    // user email 
-    const { email } = req.body
-
-    //check user email
-    if (!email) {
-      return res.status(400).json({ message: "Email is required" });
-    }
-
-    // called generateOTP function for otp
-    const otp = await generateOTP();
-
-    //if any error while generating otp
-    if (!otp) {
-      return res.status(400).json({
-        success: false,
-        message: "Failed to generate OTP"
-      });
-    }
-    // Expiry time 5 minutes
-    const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
-
-    // Delete old OTP if exists
-    await otpSchema.deleteMany({ email });
-
-
-    // save otp in db for veriftication 
-    await otpSchema.create({
-      email,
-      otp,
-      expiresAt
-    });
-
-    // Send OTP to Gmail 
-    await gmailOTP(req.body.email, otp);
-
-    return res.status(200).json({
-      success: true,
-      message: "OTP Generated Successfully",
-      
-    });
-
-    next()
-
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: "Failed to generate OTP",
-      error: error.message
-    });
-  }
-};
-
-exports.verifyOtp = async (req, res, next) => {
-  try {
-
     //check from user
     const { email, otp } = req.body;
+    console.log(email, otp)
 
     // check email and otp in body user given or not 
     if (!email || !otp) {
@@ -73,7 +17,7 @@ exports.verifyOtp = async (req, res, next) => {
     }
 
     //find user email in schema
-    const findUserOtp = await otpSchema.findOne({ email });
+    const findUserOtp = await OTP.findOne({ email });
 
     //user is in otp schema or not 
     if (!findUserOtp) {
@@ -85,7 +29,7 @@ exports.verifyOtp = async (req, res, next) => {
 
     // Check expiry of otp
     if (findUserOtp.expiresAt < new Date()) {
-      await otpSchema.deleteOne({ email });
+      await OTP.deleteOne({ email });
       return res.status(400).json({
         success: false,
         message: "OTP has expired"
@@ -100,10 +44,10 @@ exports.verifyOtp = async (req, res, next) => {
       });
     }
 
-    // change the isverified in true by deafult is false
-    findUserOtp.isVerified = true;
-    const savedOtp = await findUserOtp.save();
+    //set user isverifed=true
+    await verifyUser(email)
 
+    await findUserOtp.save();
     // OTP is correct then go next
     next();
 
