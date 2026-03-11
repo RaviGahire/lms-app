@@ -1,0 +1,52 @@
+const mongoose = require('mongoose')
+
+//created user schema instance 
+const studentSchema = new mongoose.Schema({
+    studentDetails: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },
+
+    avatar: {
+        type: String,
+        trim: true
+    },
+
+    college: {
+        type: String,
+        trim: true
+    },
+    phone: {
+        type: String,
+        trim: true
+    },
+    address: {
+        type: String,
+        trim: true
+    },
+    gender: {
+        type: String,
+        trim: true
+    },
+   
+    qualification: {
+        type: String,
+        trim: true
+    },
+    nationality: {
+        type: String,
+        trim: true
+    },
+    dob: {
+        type: String,
+        trim: true
+    },
+ 
+
+},
+    { timestamps: true }
+);
+
+// exported user_schema
+const Student = mongoose.model("User", studentSchema);
+module.exports = Student
