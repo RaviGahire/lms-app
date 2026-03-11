@@ -1,9 +1,19 @@
-const User = require("../model/user.model")
+const User = require("../model/user.model");
 
- const verifyUser = async (id) => {
-    const verifiedUser = await User.findByIdAndUpdate(id, { $set:{isVerified: true} }, { new: true })
-    // console.log(verifiedUser)
-    return verifiedUser
+const verifyUser = async (email) => {
+    try {
+        const verifiedUser = await User.findOneAndUpdate({ email }, { isVerified: true }, { new: true })
+        
+        if (!verifiedUser) {
+            throw new Error("User not found");
+        }
+
+        return verifiedUser
+
+    } catch (error) {
+        throw error;
+    }
+
 }
 
-module.exports = verifyUser ;
+module.exports = verifyUser;
