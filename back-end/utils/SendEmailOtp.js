@@ -1,34 +1,32 @@
 const nodemailer = require('nodemailer');
 
-const { EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASS,HTTPS_PROXY } = process.env;
+const { EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASS, HTTPS_PROXY } = process.env;
 
+// gmail transporter
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    host: EMAIL_HOST,
-    port: EMAIL_PORT,
-    secure: false,
-    proxy:HTTPS_PROXY,
-    requireTLS: true,
-    auth: {
-        user: EMAIL_USER,
-        pass: EMAIL_PASS
-    }
+  service: 'gmail',
+  host: EMAIL_HOST,
+  port: EMAIL_PORT,
+  secure: false,
+  // proxy:HTTPS_PROXY,
+  requireTLS: true,
+  auth: {
+    user: EMAIL_USER,
+    pass: EMAIL_PASS
+  }
 
 });
 
-const gmailOTP = async (userEmail,otp) => {
-// console.log('from email otp',userEmail)
-
-    try {
-        await transporter.verify();
-        // console.log('Email transporter is ready to send emails');
-
-    const info = await transporter.sendMail({
-  from: `"MasterTrack Account Verification" <${EMAIL_USER}>`,
-  to: userEmail,
-  subject: "🔐 Verify Your Account - OTP Code",
-  text: `Your OTP is ${otp}. It will expire in 5 minutes.`,
-  html: `
+//Email OTP sender
+const SendEmailOtp = async (email, otp) => {
+   try {
+    await transporter.verify();
+      const info = await transporter.sendMail({
+      from: `"MasterTrack Account Verification" <${EMAIL_USER}>`,
+      to: email,
+      subject: "🔐 Verify Your Account - OTP Code",
+      text: `Your OTP is ${otp}. It will expire in 5 minutes.`,
+      html: `
     <div style="font-family: Arial, sans-serif; background-color: #f4f6f8; padding: 30px;">
       <div style="max-width: 500px; margin: auto; background: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
                 <h2 style="text-align: center; color: #4f46e5; margin-bottom: 20px;">
@@ -57,20 +55,20 @@ const gmailOTP = async (userEmail,otp) => {
         <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;" />
 
         <p style="font-size: 12px; color: #aaa; text-align: center;">
-          © ${new Date().getFullYear()} MasterTrack LMS. All rights reserved.
+          © ${new Date().getFullYear()} MasterTrack.com All rights reserved.
         </p>
-
       </div>
     </div>
-  `
-});
-        // console.log('Test email sent:', info.messageId);
+  `});
+   
+   // console.log('Test email sent:', info.messageId);
+    return info
 
-
-    } catch (error) {
-        console.error('Error with email transporter:', error);
-    }
+  } catch (error) {
+    console.error("Email send error:", error);
+    throw new Error("Failed to send OTP email");
+  }
 }
 
 
-module.exports = gmailOTP;
+module.exports = SendEmailOtp;
