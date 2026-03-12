@@ -114,12 +114,21 @@ exports.generateEmailVerificationOtp = async (req, res) => {
 //login user
 exports.userLogin = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email: email });
+    const { email, password, role } = req.body;
+    // const user = await User.findOne({ email: email });
+const user =  await User.findOneAndUpdate(
+      { email: email },
+      { $set: { roles: role } },
+      { new: true }
+    )
 
     if (!user) {  // if user does not exist, return error
       return res.status(401).json({ success: false, message: "User not exist" });
     }
+
+    // updating user role based on user selection
+   
+
     const isPasswordValid = await bcrypt.compare(password, user.password);  // compare password
 
     if (!isPasswordValid) {//if password is invalid
@@ -380,14 +389,14 @@ exports.forgotPassword = async (req, res) => {
     const user = await User.findOne({ $or: [{ email }, { userName }] })
 
     if (!user) {
-      return res.status(401).json({ message: "We are unable to find out ur account" })
+      return res.status(401).json({ message: "We are unable to findout your account" })
     }
 
     const hashPass = await bcrypt.hash(newPassword, 10)
 
-    const updatedPass = await User.findByIdAndUpdate(user._id, { $set: { password: hashPass } }, { new: true })
+    await User.findByIdAndUpdate(user._id, { $set: { password: hashPass } }, { new: true })
 
-    return res.status(200).json({ success: true, message: ' succesfully', data: updatedPass })
+    return res.status(200).json({ success: true, message: 'Your password changed successfully' })
 
   }
   catch (error) {
