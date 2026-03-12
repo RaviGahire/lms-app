@@ -35,7 +35,7 @@ exports.userRegister = async (req, res) => {
 
     // save user to database
     await newUser.save();
-        return res.status(201).json({
+    return res.status(201).json({
       success: true,
       message: "User created successfully",
       data: newUser
@@ -49,7 +49,7 @@ exports.userRegister = async (req, res) => {
       message: "Internal server error"
     });
   }
-}
+};
 
 // email verification otp
 exports.generateEmailVerificationOtp = async (req, res) => {
@@ -125,18 +125,18 @@ exports.userLogin = async (req, res) => {
     if (!isPasswordValid) {//if password is invalid
       return res.status(401).json({ success: false, message: "Invalid password" });
     }
-  
+
     if (user && isPasswordValid) { //verifying if both condition true then create jwt token
-     
+
       // generate jwt token and payload
       const token = jwt.sign({
-         _id: user._id, 
-         userName: user.userName, 
-         email: user.email, 
-         role:user.roles, 
-         isVerified:user.isVerified
-        }, process.env.JWT_SECRET, 
-        { expiresIn: process.env.JWT_EXPIRES_IN }) 
+        _id: user._id,
+        userName: user.userName,
+        email: user.email,
+        role: user.roles,
+        isVerified: user.isVerified
+      }, process.env.JWT_ACCESS_TOKEN_SECRET,
+        { expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRES })
 
 
       return res.status(200).json({ //sending user data 
@@ -153,5 +153,255 @@ exports.userLogin = async (req, res) => {
       message: "Internal server error"
     });
   }
+};
+
+//current user pass the token 
+exports.getCurrentUser = async (req, res) => {
+
+  const loggedInUserId = req.user._id
+
+  if (!loggedInUserId) {
+    return res.status(400).json({ message: 'Current user not found' })
+  }
+
+  try {
+    const user = await User.findById(loggedInUserId).select("-password")
+
+    if (!user) {
+      return res.status(401).json({ success: false, message: "User not found" })
+    }
+
+
+    return res.status(200).json({
+      success: true,
+      message: "Current user fetched successfully",
+      data: user
+    })
+
+  } catch (error) {
+    return res.status(500)
+      .json({
+        success: false,
+        message: "Error accourd while fetching user profile",
+        error: error.message
+      })
+  }
+};
+
+exports.getAllUsers = async (_, res) => {
+  try {
+    const users = await User.find().select("-password")
+
+    if (users) {
+      return res.status(200)
+        .json({
+          success: true,
+          message: "Fetched all users successfully",
+          user: users
+        })
+    }
+
+  } catch (error) {
+    return res.status(500)
+      .json({
+        success: false,
+        message: "Internal server error",
+        error: error.message
+      })
+  }
+
+};
+
+
+// CRUD OPS FOR ADMIN
+//delete user 
+exports.deleteUser = async (req, res) => {
+  const userId = req.params.id
+  // console.log(userId)
+  try {
+
+    const deletedUser = await User.findByIdAndDelete(userId);
+
+    if (!deletedUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found"
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "User deleted successfully",
+      data: deletedUser
+    });
+  }
+  catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
+
+// user account deletion request
+exports.userAccountDeleteRequest = async (req, res) => {
+  const userId = req.user._id
+  // console.log(userId)
+  try {
+    //find the user 
+    const user = await User.findById(userId)
+      .select("-password -isVerified -roles -createdAt -updatedAt -_id")
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "We are unable to process your deletion request at this time"
+      })
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Your request has been submitted successfully",
+      data: user
+    })
+  }
+  catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
+
+//update user details TODO : save in db deletion request
+exports.updateUserAccountDetails = async (req, res) => {
+  const userId = req.params.id
+  const updatedData = req.body
+
+  if (!(userId && updatedData)) {
+    return res.status(401).json({ message: "Please provide required details" })
+  }
+
+  try {
+
+    const user = await User.findByIdAndUpdate(userId, updatedData, { new: true })
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found while updating data" })
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "User updated successfully",
+      data: user
+    })
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: error.message,
+      message: "Internal server error"
+    });
+  }
+
+
+};
+
+//change current password
+exports.changeCurrentUserPassword = async (req, res) => {
+  const userId = req.user._id
+  const { oldPassword, newPassword } = req.body
+
+  if (!(userId && oldPassword && newPassword)) {
+
+    return res.status(400).json({ success: false, message: "All fields are required" })
+  }
+  try {
+
+    const user = await User.findById(userId)
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found"
+      })
+    }
+
+    const isCorrectPassword = await bcrypt.compare(
+      oldPassword,
+      user.password
+    )
+
+    if (!isCorrectPassword) {
+      return res.status(401).json({
+        success: false,
+        message: "Old password is incorrect"
+      })
+    }
+
+    // hash newpassword 
+    const hashPass = await bcrypt.hash(newPassword, 10)
+
+    const updatedPass = await User.findByIdAndUpdate(user._id, { $set: { password: hashPass } }, { new: true })
+
+    return res.status(200).json({
+      success: true,
+      message: "Password changed successfully",
+      data: updatedPass
+    })
+
+  }
+  catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+      error: error.message
+    })
+  }
+};
+
+//forgot password 
+exports.forgotPassword = async (req, res) => {
+
+  const { email, userName, newPassword } = req.body
+
+  if (!email && !userName) {
+    return res.status(404).json({ success: false, message: "Username or email is required" })
+  }
+
+  if (!newPassword) {
+    return res.status(404).json({ success: false, message: "Please provide password" })
+  }
+
+  try {
+
+    const user = await User.findOne({ $or: [{ email }, { userName }] })
+
+    if (!user) {
+      return res.status(401).json({ message: "We are unable to find out ur account" })
+    }
+
+    const hashPass = await bcrypt.hash(newPassword, 10)
+
+    const updatedPass = await User.findByIdAndUpdate(user._id, { $set: { password: hashPass } }, { new: true })
+
+    return res.status(200).json({ success: true, message: ' succesfully', data: updatedPass })
+
+  }
+  catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+      error: error.message
+    })
+  }
+
 }
+
+
+
+
+
 
