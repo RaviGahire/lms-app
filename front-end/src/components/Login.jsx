@@ -8,7 +8,7 @@ import ContextData from '../Contexts/Context';
 export const Login = ({ loggedInUser }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: '', password: '', rememberMe: false
+    email: '', password: '', role: '', rememberMe: false
   });
   const [error, setError] = useState("")
   const { fetchUserProfile } = useContext(ContextData)
@@ -27,12 +27,19 @@ export const Login = ({ loggedInUser }) => {
       [name]: type === 'checkbox' ? checked : value
     }));
   };
-
+ 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+
+    if (!formData.role) {
+      setError("Please select your role (Student or Instructor) to continue.");
+      return; // Stop the function here
+    }
+
     try {
+
 
       const { data } = await axios.post(`${API_URL}/login`, formData);
 
@@ -42,13 +49,21 @@ export const Login = ({ loggedInUser }) => {
 
       const decodedUser = jwtDecode(token) // decode the token
 
+      if (formData.rememberMe) {
+        localStorage.setItem('rememberedEmail', formData.email);
+        localStorage.setItem('rememberedRole', formData.role);
+      } else {
+        localStorage.removeItem('rememberedEmail');
+        localStorage.removeItem('rememberedRole');
+      }
+
       loggedInUser(decodedUser) // sending to in app route component
       localStorage.setItem('token', token) //to localstorage
 
       await fetchUserProfile(); //Tell context to go fetch the user now
 
       navigate("/student") //navigate to student dashboard 
- 
+
     } catch (error) {
       setError(error?.response?.data?.message || "Login failed");
     }
@@ -57,14 +72,14 @@ export const Login = ({ loggedInUser }) => {
 
 
 
-// Placeholder for Google Login
+  // Placeholder for Google Login
   const handleGoogleLogin = () => {
     console.log("Initiating Google Login...");
     // Logic for Google OAuth goes here
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 bg-[url('https://t4.ftcdn.net/jpg/05/39/10/47/360_F_539104776_BchIZKRhIUXDY0ZaVHxaoIDvRa2eAG3d.jpg')] bg-blend-soft-light  bg-cover bg-center bg-no-repeat">
+    <div className="min-h-screen bg-gray-900 bg-[url('https://t4.ftcdn.net/jpg/05/39/10/47/360_F_539104776_BchIZKRhIUXDY0ZaVHxaoIDvRa2eAG3d.jpg')] bg-blend-soft-light bg-cover bg-center bg-no-repeat">
       <div className="p-6 md:p-10">
         <div className="flex flex-col lg:flex-row justify-center items-stretch gap-0 lg:gap-10 max-w-7xl mx-auto">
 
@@ -87,16 +102,47 @@ export const Login = ({ loggedInUser }) => {
                 </div>
               </div>
 
-              <p className="text-gray-100 text-center text-sm mb-5 leading-relaxed">
-                Lorem ipsum is simply dummy text of the printing and typesetting industry.
-              </p>
-              {/* ERRORS */}
+              <div className="mb-8 px-4 py-3 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-xl backdrop-blur-sm animate-pulse-slow">
+                <div className="flex items-center gap-3">
+                  <span className="text-xl">⚠️</span>
+                  <p className="text-gray-100 text-sm leading-relaxed">
+                    <span className="font-bold text-yellow-500 uppercase tracking-tight mr-1 animate-pulse">Attention:</span>
+                    For your first login, please select your role to customize your experience.
+                  </p>
+                </div>
+              </div>
+
               {error && (
                 <div className="text-white mb-2 w-100 mx-auto text-center p-2 bg-red-500/40 border border-red-500 rounded-lg font-semibold text-sm">
                   {error}
                 </div>
               )}
+
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* ROLE SELECTION FIELD */}
+                <div className="flex gap-4 mb-6">
+                  <button
+                    type="button"
+                    onClick={() => setFormData({ ...formData, role: 'student' })}
+                    className={`flex-1 py-3 cursor-pointer rounded-2xl border-2 transition-all font-semibold ${formData.role === 'student'
+                      ? 'border-cyan-500 bg-cyan-500/20 text-white shadow-[0_0_15px_rgba(6,182,212,0.4)]'
+                      : 'border-cyan-200/30 text-gray-400 hover:border-cyan-200'
+                      }`}
+                  >
+                    Student
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setFormData({ ...formData, role: 'instructor' })}
+                    className={`flex-1 py-3 cursor-pointer rounded-2xl border-2 transition-all font-semibold ${formData.role === 'instructor'
+                      ? 'border-cyan-500 bg-cyan-500/20 text-white shadow-[0_0_15px_rgba(6,182,212,0.4)]'
+                      : 'border-cyan-200/30 text-gray-400 hover:border-cyan-200'
+                      }`}
+                  >
+                    Instructor
+                  </button>
+                </div>
+
                 <div>
                   <label className="block text-gray-100 text-sm font-bold mb-2 ml-4">
                     Email Address
@@ -111,6 +157,7 @@ export const Login = ({ loggedInUser }) => {
                     className="w-full px-6 py-3 border-2 border-cyan-200 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100 text-sm text-white bg-gray-900/90 transition-colors"
                   />
                 </div>
+
                 <div>
                   <label className="block text-gray-100 text-sm font-bold mb-2 ml-4">
                     Password
@@ -168,9 +215,9 @@ export const Login = ({ loggedInUser }) => {
                 </button>
 
                 {/* Divider */}
-                <div className=" flex items-center justify-around gap-1  my-4">
+                <div className=" flex items-center justify-around gap-1 my-4">
                   <div className=" w-1/2 border-t border-cyan-100"></div>
-                  <div className="  text-white text-xs uppercase  font-bold tracking-wider">OR</div>
+                  <div className=" text-white text-xs uppercase font-bold tracking-wider">OR</div>
                   <div className="w-1/2 border-t border-cyan-100"></div>
                 </div>
 
