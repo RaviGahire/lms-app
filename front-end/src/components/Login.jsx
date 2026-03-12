@@ -8,12 +8,12 @@ import ContextData from '../Contexts/Context';
 export const Login = ({ loggedInUser }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: '', password: '',// rememberMe: false
+    email: '', password: '', rememberMe: false
   });
   const [error, setError] = useState("")
   const { fetchUserProfile } = useContext(ContextData)
 
-const API_URL = import.meta.env.VITE_API_URL
+  const API_URL = import.meta.env.VITE_API_URL
 
   // for navigate 
   const navigate = useNavigate()
@@ -28,44 +28,36 @@ const API_URL = import.meta.env.VITE_API_URL
     }));
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
-        e.preventDefault();
+    e.preventDefault();
+    setError("");
     try {
-      const res = await axios.post(`${API_URL}/users/login`, formData)
-      
-      if (res.data.success) { //if success is true
 
-        alert(res.data.message) 
+      const { data } = await axios.post(`${API_URL}/login`, formData);
 
-        const token = res.data.token // got token from backend
+      if (!data.success) return;
 
-        const decode = jwtDecode(token) // decode the token
+      const token = data.token // got token from backend
 
-        loggedInUser(decode) // sending to in app route component
+      const decodedUser = jwtDecode(token) // decode the token
 
-        // console.log(decode)
+      loggedInUser(decodedUser) // sending to in app route component
+      localStorage.setItem('token', token) //to localstorage
 
-        localStorage.setItem('token', token) //to localstorage
+      await fetchUserProfile(); //Tell context to go fetch the user now
 
-        await fetchUserProfile(); //Tell context to go fetch the user now
-
-        navigate("/student") //navigate 
-        setFormData({
-          email: '',
-          password: '',
-          // rememberMe: false
-        });
-       }
+      navigate("/student") //navigate to student dashboard 
+ 
     } catch (error) {
-
-      console.log(error.message)
-      setError(error.response?.data?.message)
-     
+      setError(error?.response?.data?.message || "Login failed");
     }
 
   };
 
 
+
+// Placeholder for Google Login
   const handleGoogleLogin = () => {
     console.log("Initiating Google Login...");
     // Logic for Google OAuth goes here
@@ -163,9 +155,9 @@ const API_URL = import.meta.env.VITE_API_URL
                     />
                     <span className="ml-2 text-sm text-gray-100 group-hover:text-gray-800 transition-colors">Remember me</span>
                   </label>
-                  <a href="#" className="text-gray-100 hover:text-cyan-700 text-sm font-semibold transition-colors">
+                  <Link to={'/forgot-password'} className="text-gray-100 hover:text-cyan-700 text-sm font-semibold transition-colors">
                     Forgot Password?
-                  </a>
+                  </Link>
                 </div>
 
                 <button

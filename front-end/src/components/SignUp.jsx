@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 //Main component
 export const SignUp = () => {
@@ -10,7 +10,7 @@ export const SignUp = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('')
 
-  const [formData, setFormData] = useState({ // initial empty
+  const [formData, setFormData] = useState({
     userName: '',
     email: '',
     password: '',
@@ -20,28 +20,7 @@ export const SignUp = () => {
   const API_URL = import.meta.env.VITE_API_URL
   const navigate = useNavigate()
 
-  // Generate OTP function
-  const generateUserOtp = async (email) => {
 
-    try {
-      const { data } = await axios.post(`${API_URL}/generate-otp`, { email });
-
-      // When user generated otp successfully 
-      if (data.success) {
-        setSuccess(data.message);
-        setTimeout(() => { setSuccess("") }, 4000);
-        return true;
-
-      } else {
-        setError(data.message);
-        return false;
-      }
-
-    } catch (error) {
-      setError(error.response?.data?.message || error.message);
-      return false;
-    }
-  };
 
   // Handle Input Change
   const handleInputChange = (e) => {
@@ -51,26 +30,36 @@ export const SignUp = () => {
   // Toggle Password
   const togglePassword = () => { setShowPassword(!showPassword); };
 
+
   // register User
   const handleSignUp = async (e) => {
     e.preventDefault();
-    setError('');
-    setSuccess('');
-    // Password Validation
-    if (formData.password !== formData.confirmPassword) {
+
+    const { userName, email, password, confirmPassword } = formData;
+
+    setError("");
+    setSuccess("");
+    setLoading(true);
+
+    // validate password match
+    if (password !== confirmPassword) {
+      setLoading(false);
       return setError("Passwords do not match");
     }
     try {
-      setLoading(true);
-      const otpSuccess = await generateUserOtp(formData.email); //OTP generated function
-      if (!otpSuccess) { return; };
-      setTimeout(() => { setSuccess("Redirecting to OTP verification...") }, 6000);
-      setTimeout(() => {
-        navigate('/otp_pop_up', { state: { email: formData.email, user: formData } }) //passed state to OTP Popup component
-      }, 8000)
+      //API call to register user
+      const { data } = await axios.post(`${API_URL}/register`, {
+        userName,
+        email,
+        password
+      });
+
+      setSuccess(data.message || "Registration successful!");
+
+      setTimeout(() => navigate("/login"), 2000);
 
     } catch (error) {
-      setError(err.response?.data?.message || "Something went wrong");
+      setError(error?.response?.data?.message || "Something went wrong during registration.");
     } finally {
       setLoading(false);
     }
@@ -177,23 +166,20 @@ export const SignUp = () => {
                     required
                     className="w-full px-6 py-3 border-2 border-cyan-200 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100 text-sm text-white bg-gray-900/90 transition-colors"
                   />
+                  <button type="button" onClick={togglePassword} className="absolute right-5 top-13 -translate-y-1/2 text-gray-500">
+                    {showPassword ? (
+                      <svg className="w-5 h-5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.956 9.956 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg>
+                    ) : (
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                    )}
+                  </button>
                 </div>
                 {/* send otp on email loading btn */}
                 <button
                   type="submit"
-                  disabled={loading}
                   className="w-full cursor-pointer bg-cyan-500 text-white py-3 rounded-full font-bold text-lg hover:bg-cyan-600 active:scale-[0.98] transition mt-4 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {/* loading svg */}
-                  {loading ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                      </svg>
-                      Sending OTP to your email...
-                    </span>
-                  ) : "Sign Up"}
+                  Sign Up
                 </button>
                 {/*5. devider */}
                 <div className=" flex items-center justify-around gap-1  my-4">
