@@ -115,7 +115,7 @@ exports.generateEmailVerificationOtp = async (req, res) => {
 exports.userLogin = async (req, res) => {
   try {
     const { email, password, role } = req.body;
-    // const user = await User.findOne({ email: email });
+  
 const user =  await User.findOneAndUpdate(
       { email: email },
       { $set: { roles: role } },
