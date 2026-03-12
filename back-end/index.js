@@ -2,44 +2,21 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const cors = require('cors')
+const upload = require("./middlewares/multer.middlerware")
+
 
 // middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public/'));
-app.use(cors({
-  origin: process.env.CORS_ORIGIN,
-  credentials: true
-
-}));
+app.use(cors({origin: process.env.CORS_ORIGIN,credentials: true}));
 
 // db connection
 const connectDB = require('./config/connectDB');
 
-//importing user schema
-const userSchema = require('./model/userSchema');
-
-// routes
-app.get('/', async (req, res) => {
-  try {
-    return res.status(200).json({
-      success: true,
-      massage: 'API is working....'
-    })
-
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      massage: 'Internal server error....'
-    })
-
-  }
-});
-
+//All routes
 const authRoutes = require('./routes/authRoutes');
-app.use('/api', authRoutes);
-
-
+app.use('/api/v1/users', authRoutes);
 
 //Server Listening
 app.listen(process.env.PORT || 5000, process.env.HOST, () => {

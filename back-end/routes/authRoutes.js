@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // auth-controllers 
-const { userRegister ,generateEmailVerificationOtp, userLogin, getCurrentUser, getAllUsers, deleteUser, userAccountDeleteRequest, changeCurrentUserPassword, forgotPassword } = require('../controllers/auth.controller');
+const { userRegister ,generateEmailVerificationOtp, userLogin, getCurrentUser, getAllUsers, deleteUser, userAccountDeleteRequest, changeCurrentUserPassword, forgotPassword, updateUserAccountDetails } = require('../controllers/auth.controller');
 const { verifyUserOtp } = require('../middlewares/otp.middleware');
 const { verifyJwtToken } = require('../middlewares/auth.middleware');
 
@@ -25,6 +25,9 @@ router.get('/current-user',verifyJwtToken,getCurrentUser)
 router.get('/all/users',getAllUsers)
 
 //CRUD OPS ROUTES ON USER 
+
+// update user details
+router.post('/update-details',verifyJwtToken, updateUserAccountDetails)
 
 //Admin can deleted user using id 
 router.delete('/delete/u/:id',deleteUser)

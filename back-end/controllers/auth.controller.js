@@ -277,7 +277,7 @@ exports.userAccountDeleteRequest = async (req, res) => {
 
 //update user details TODO : save in db deletion request
 exports.updateUserAccountDetails = async (req, res) => {
-  const userId = req.params.id
+  const userId = req.user._id
   const updatedData = req.body
 
   if (!(userId && updatedData)) {
