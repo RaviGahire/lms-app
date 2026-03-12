@@ -21,7 +21,7 @@ const ContextProvider = ({ children }) => {
     setLoading(true);
 
     try {
-      const response = await axios.get(`${API_URL}/profile`, {
+      const response = await axios.get(`${API_URL}/current-user`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -40,7 +40,7 @@ const ContextProvider = ({ children }) => {
 
     } catch (error) {
       console.error("Profile Fetch Error:", err);
-      setLoggedInUser(null);
+      setLoggedInUserProfile(null);
       localStorage.removeItem('token');
     } finally {
       setLoading(false);
@@ -52,7 +52,7 @@ const ContextProvider = ({ children }) => {
   // handle logout globally
   const userLogout = () => {
     localStorage.removeItem("token");
-    setLoggedInUser(null);
+    setLoggedInUserProfile(null);
   }
 
   useEffect(() => {
