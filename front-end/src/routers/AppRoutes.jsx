@@ -17,6 +17,8 @@ import { getStoredToken } from "../utils/getStoredToken";
 import ContextData from "../Contexts/Context";
 import { useContext } from "react";
 import axios from "axios";
+import { LogoutButton } from "../utils/LogoutUser";
+import { ForgotPassword } from "../utils/ForgotPassword";
 
 
 export const AppRoutes = () => {
@@ -25,7 +27,7 @@ export const AppRoutes = () => {
 
   const [loading, setLoading] = useState(true);
 
-  const {  fetchUserProfile } = useContext(ContextData)
+  const { fetchUserProfile } = useContext(ContextData)
 
   // console.log(loggedInUser)
 
@@ -42,18 +44,18 @@ export const AppRoutes = () => {
 
     try {
 
-    const profile  = await fetchUserProfile();
+      const profile = await fetchUserProfile();
 
       const user = {
-      userId: profile?.userId,
-      userName: profile?.userName,
-      email: profile?.email,
-      role: profile?.role,
-      isVerified: profile?.isVerified,
-    };
+        userId: profile?.userId,
+        userName: profile?.userName,
+        email: profile?.email,
+        role: profile?.role,
+        isVerified: profile?.isVerified,
+      };
 
-     setLoggedInUser(user);
-    
+      setLoggedInUser(user);
+
 
     } catch (error) {
       console.error("Auth error:", error);
@@ -95,7 +97,11 @@ export const AppRoutes = () => {
                   user={loggedInUser}
                   allowedUserRoles={["super-admin"]}
                 >
-                  <SuperAdmin />
+                  {/* <SuperAdmin /> */}
+                 <div className="flex flex-col justify-center items-center gap-10 ">
+                    <h1 className="text-center text-5xl font-bold">Super-Admin Page</h1>
+                    <LogoutButton />
+                  </div>
                 </ProtectedRoute>
               }
             />
@@ -105,15 +111,19 @@ export const AppRoutes = () => {
                 <ProtectedRoute
                   loading={loading}
                   user={loggedInUser}
-                  allowedUserRoles={["admin"]}
+                  allowedUserRoles={["admin","super-admin"]}
                 >
-                  <Admin />
+                  {/* <Admin /> */}
+                  <div className="flex flex-col justify-center items-center gap-10 ">
+                    <h1 className="text-center text-5xl font-bold">Admin Page</h1>
+                    <LogoutButton />
+                  </div>
                 </ProtectedRoute>
               }
             />
             <Route
               path="/student"
-              element={<ProtectedRoute loading={loading} user={loggedInUser} allowedUserRoles={["student"]}> <Student /> </ProtectedRoute>
+              element={<ProtectedRoute loading={loading} user={loggedInUser} allowedUserRoles={["student","admin"]}> <Student /> </ProtectedRoute>
               }
             />
             {/* unauthorized user route */}
@@ -126,6 +136,9 @@ export const AppRoutes = () => {
             <Route path="/update_admin/:id" element={<UpdateAdmin />} />
 
             <Route path="/update_super_admin/:id" element={<UpdateAdmin />} />
+
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+
 
             {/* notification route */}
             {/* <Route path="/notification" element={<Notifications />} /> */}
