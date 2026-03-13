@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 //created user schema instance 
 const studentSchema = new mongoose.Schema({
-    studentDetails: {
+    student: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
@@ -48,5 +48,5 @@ const studentSchema = new mongoose.Schema({
 );
 
 // exported user_schema
-const Student = mongoose.model("User", studentSchema);
+const Student = mongoose.model("Student", studentSchema);
 module.exports = Student

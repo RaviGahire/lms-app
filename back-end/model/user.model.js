@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
     userName: {
         type: String,
         required: [true, "Username is required"],
@@ -37,5 +37,5 @@ const userSchema = mongoose.Schema({
 
 }, { timestamps: true })
 
-const User = mongoose.model("User", userSchema)
+const User = mongoose.models.User || mongoose.model('User', userSchema); // preventing OverwriteModelError
 module.exports = User
