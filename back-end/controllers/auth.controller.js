@@ -115,8 +115,8 @@ exports.generateEmailVerificationOtp = async (req, res) => {
 exports.userLogin = async (req, res) => {
   try {
     const { email, password, role } = req.body;
-  
-const user =  await User.findOneAndUpdate(
+
+    const user = await User.findOneAndUpdate(
       { email: email },
       { $set: { roles: role } },
       { new: true }
@@ -127,7 +127,7 @@ const user =  await User.findOneAndUpdate(
     }
 
     // updating user role based on user selection
-   
+
 
     const isPasswordValid = await bcrypt.compare(password, user.password);  // compare password
 
