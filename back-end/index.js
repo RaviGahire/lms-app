@@ -16,7 +16,9 @@ const connectDB = require('./config/connectDB');
 
 //All routes
 const authRoutes = require('./routes/authRoutes');
+const  studentRoutes = require('./routes/studentRoutes')
 app.use('/api/v1/users', authRoutes);
+app.use('/api/v1/students' , studentRoutes)
 
 //Server Listening
 app.listen(process.env.PORT || 5000, process.env.HOST, () => {
