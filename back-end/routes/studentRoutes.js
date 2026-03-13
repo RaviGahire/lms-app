@@ -3,11 +3,16 @@ const router = express.Router();
 
 
 
-const { getAllStudents, getCurrentStudent } = require('../controllers/student.controller');
+const { getAllStudents, getStudentProfile, updateStudentDetails } = require('../controllers/student.controller');
 const { verifyJwtToken } = require('../middlewares/auth.middleware');
+const createStudentProfile = require('../middlewares/student.middleware')
 
 router.get('/all-studs', getAllStudents)
-router.get('/current-studs', verifyJwtToken, getCurrentStudent)
+
+router.get('/current-studs', verifyJwtToken, createStudentProfile,  getStudentProfile)
+
+router.post('/update-studs/:id', verifyJwtToken, updateStudentDetails)
+
 
 
 

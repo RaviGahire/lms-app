@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 //created user schema instance 
 const studentSchema = new mongoose.Schema({
-    student: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
