@@ -28,14 +28,14 @@ const ContextProvider = ({ children }) => {
       const profile = response.data?.data || {}
 
       setLoggedInUserProfile({
-        userId: profile?._id,
+        id: profile?._id,
         userName: profile?.userName,
         email: profile?.email,
-        role: profile?.role,
+        role: profile?.roles,
         isVerified: profile?.isVerified
       });
 
-      return profile || {}
+      // return profile || {}
      
 
     } catch (error) {
