@@ -49,7 +49,7 @@ export const ForgotPassword = () => {
             console.log(data)
 
             setMessage(
-                data?.message || "Password reset request submitted successfully."
+                data?.message || "Password reset successfully."
             );
 
             setFormData({
@@ -70,26 +70,32 @@ export const ForgotPassword = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
+      <>
+        <div className="min-h-screen flex items-center justify-center bg-cyan-800 p-4">
+            <div className="w-full max-w-md bg-cyan-950 p-4 md:p-8 text-white rounded shadow-cyan-300 cursor-pointer hover:shadow-md transition-all duration-200 ">
 
-                <h2 className="text-2xl font-bold mb-6 text-center">
+                <h2 className="text-2xl font-bold mb-6 text-center ">
                     Forgot Password
                 </h2>
 
                 {message && (
-                    <p className="text-green-600 text-sm mb-3">{message}</p>
+                <div className="bg-green-500/80 text-white text-center p-2 rounded mb-2 border border-white/40">
+                        <p className=" text-sm  font-bold tracking-wide">{message}</p>
+                    </div>
                 )}
 
                 {error && (
-                    <p className="text-red-600 text-sm mb-3">{error}</p>
+                    
+                    <div className="bg-red-500/80 text-white text-center p-2 rounded mb-2 border border-white/40">
+                        <p className=" text-sm  font-bold tracking-wide">{error}</p>
+                    </div>
                 )}
 
                 <form onSubmit={handleForgotPassword}>
 
                     <div className="mb-4">
                         <label className="block text-sm font-bold mb-2">
-                           Username / Email
+                            Username / Email
                         </label>
 
                         <input
@@ -102,7 +108,7 @@ export const ForgotPassword = () => {
                             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring"
                         />
                     </div>
-               
+
                     <div className="mb-4">
                         <label className="block text-sm font-bold mb-2">
                             New Password
@@ -138,13 +144,15 @@ export const ForgotPassword = () => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition-colors disabled:bg-gray-400"
+                        className="w-full bg-blue-500 cursor-pointer text-white font-bold tracking-wide py-2 rounded hover:bg-blue-600 transition-colors disabled:bg-cyan-600"
                     >
-                        {loading ? "Processing..." : "Submit"}
+                        {loading ? "Processing..." : "Change"}
                     </button>
 
                 </form>
             </div>
         </div>
+      
+      </>
     );
 };
