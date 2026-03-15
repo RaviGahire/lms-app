@@ -70,8 +70,6 @@ export const Login = ({ loggedInUser }) => {
 
   };
 
-
-
   // Placeholder for Google Login
   const handleGoogleLogin = () => {
     console.log("Initiating Google Login...");
@@ -145,8 +143,6 @@ export const Login = ({ loggedInUser }) => {
                   </button>
                 </div>
 
-
-
                 <div>
                   <label className="block text-gray-100 text-sm font-bold mb-2 ml-2 md:ml-4">
                     Email Address
@@ -158,7 +154,7 @@ export const Login = ({ loggedInUser }) => {
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="Enter your Email Address"
-                    className="w-full px-3 py-1.5  md:px-6 md:py-3 border md:border-2 border-cyan-200/50 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100 text-sm text-white bg-gray-900/90 transition-colors"
+                    className="w-full text-xs md:text-sm  px-3 py-1.5 md:px-6 md:py-3 border md:border-2 border-cyan-200/50 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100 text-white bg-gray-900/90 transition-colors"
                   />
                 </div>
 
@@ -174,7 +170,7 @@ export const Login = ({ loggedInUser }) => {
                       value={formData.password}
                       onChange={handleInputChange}
                       placeholder="Enter your Password"
-                      className="w-full px-3 py-1.5  md:px-6 md:py-3 border md:border-2 border-cyan-200/50  rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100 text-sm text-white bg-gray-900/90 transition-colors"
+                      className="w-full text-xs md:text-sm  px-3 py-1.5  md:px-6 md:py-3 border md:border-2 border-cyan-200/50  rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100  text-white bg-gray-900/90 transition-colors"
                     />
                     <button
                       type="button"
@@ -213,7 +209,7 @@ export const Login = ({ loggedInUser }) => {
 
                 <button
                   type="submit"
-                  className="w-full bg-cyan-500 md:mt-6 cursor-pointer text-white py-2 md:py-4 rounded-full font-bold md:text-lg hover:bg-cyan-600 hover:shadow-lg active:scale-[0.98] transition-all"
+                  className="w-full bg-cyan-500 md:mt-6 cursor-pointer text-white py-2 md:py-4 rounded-full shadow-lg font-bold md:text-lg hover:bg-cyan-600 hover:shadow-lg active:scale-[0.98] transition disabled:cursor-not-allowed"
                 >
                   Login
                 </button>
