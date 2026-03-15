@@ -27,7 +27,7 @@ export const Login = ({ loggedInUser }) => {
       [name]: type === 'checkbox' ? checked : value
     }));
   };
- 
+
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -80,19 +80,19 @@ export const Login = ({ loggedInUser }) => {
 
   return (
     <div className="min-h-screen bg-gray-900 bg-[url('https://t4.ftcdn.net/jpg/05/39/10/47/360_F_539104776_BchIZKRhIUXDY0ZaVHxaoIDvRa2eAG3d.jpg')] bg-blend-soft-light bg-cover bg-center bg-no-repeat">
-      <div className="p-6 md:p-10">
+      <div className="p-4 md:p-8">
         <div className="flex flex-col lg:flex-row justify-center items-stretch gap-0 lg:gap-10 max-w-7xl mx-auto">
 
           {/* login Form */}
-          <div className="w-full lg:w-1/2 flex items-center justify-center p-4">
+          <div className="w-full lg:w-1/2 flex items-center justify-center ">
             <div className="w-full max-w-md">
-
-              <div className="text-center mb-10">
-                <h2 className="text-3xl font-bold text-gray-100 mb-8">
+              {/* Heading and btns */}
+              <div className="text-center mb-4 md:mb-8">
+                <h2 className="text-lg md:text-4xl font-bold text-gray-100 mb-4">
                   Welcome back..!
                 </h2>
-
-                <div className="inline-flex p-1 bg-cyan-400/20 rounded-full">
+                {/* btns */}
+                <div className="inline-flex p-1 gap-2 bg-cyan-400/20 rounded-full text-xs md:text-[16px]">
                   <Link to={'/login'} className="px-10 py-2.5 bg-cyan-500 text-white rounded-full font-semibold shadow-md transition-all">
                     Login
                   </Link>
@@ -101,30 +101,32 @@ export const Login = ({ loggedInUser }) => {
                   </Link>
                 </div>
               </div>
-
-              <div className="mb-8 px-4 py-3 bg-yellow-500/10 border-l-4 border-yellow-500 rounded-r-xl backdrop-blur-sm animate-pulse-slow">
-                <div className="flex items-center gap-3">
-                  <span className="text-xl">⚠️</span>
-                  <p className="text-gray-100 text-sm leading-relaxed">
-                    <span className="font-bold text-yellow-500 uppercase tracking-tight mr-1 animate-pulse">Attention:</span>
-                    For your first login, please select your role to customize your experience.
+              {/* Attention */}
+              <div className="mb-4 md:mb-8 px-4 py-2 bg-yellow-500/10 border-l-2 border-yellow-500 rounded-r-xl backdrop-blur-sm animate-pulse-slow">
+                <div className="flex items-center gap-2 md:gap-3">
+                  <span className="text-xs md:text-xl animate-pulse">⚠️</span>
+                  <p className="text-gray-100 text-xs md:text-sm leading-relaxed text-shadow-md tracking-tight">
+                    <span className="font-bold text-yellow-500 tracking-tight">Attention: </span>
+                    Please select your role to customize your experience.
                   </p>
                 </div>
               </div>
 
-              {error && (
-                <div className="text-white mb-2 w-100 mx-auto text-center p-2 bg-red-500/40 border border-red-500 rounded-lg font-semibold text-sm">
+              <div className='max-w-md relative h-5 mb-4'>
+                {error && (
+                <div className="absolute text-white mx-auto text-center p-1 w-full bg-red-500/40 border border-red-500 rounded-lg font-semibold text-xs md:text-sm">
                   {error}
                 </div>
               )}
+              </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-3 md:space-y-6">
                 {/* ROLE SELECTION FIELD */}
                 <div className="flex gap-4 mb-6">
                   <button
                     type="button"
                     onClick={() => setFormData({ ...formData, role: 'student' })}
-                    className={`flex-1 py-3 cursor-pointer rounded-2xl border-2 transition-all font-semibold ${formData.role === 'student'
+                    className={`flex-1 py-1 md:py-3 cursor-pointer text-xs md:text-[16px] rounded-md border-2 transition-all font-semibold ${formData.role === 'student'
                       ? 'border-cyan-500 bg-cyan-500/20 text-white shadow-[0_0_15px_rgba(6,182,212,0.4)]'
                       : 'border-cyan-200/30 text-gray-400 hover:border-cyan-200'
                       }`}
@@ -134,7 +136,7 @@ export const Login = ({ loggedInUser }) => {
                   <button
                     type="button"
                     onClick={() => setFormData({ ...formData, role: 'instructor' })}
-                    className={`flex-1 py-3 cursor-pointer rounded-2xl border-2 transition-all font-semibold ${formData.role === 'instructor'
+                    className={`flex-1 py-1 md:py-3 cursor-pointer text-xs md:text-[16px] rounded-md border-2 transition-all font-semibold ${formData.role === 'instructor'
                       ? 'border-cyan-500 bg-cyan-500/20 text-white shadow-[0_0_15px_rgba(6,182,212,0.4)]'
                       : 'border-cyan-200/30 text-gray-400 hover:border-cyan-200'
                       }`}
@@ -143,8 +145,10 @@ export const Login = ({ loggedInUser }) => {
                   </button>
                 </div>
 
+
+
                 <div>
-                  <label className="block text-gray-100 text-sm font-bold mb-2 ml-4">
+                  <label className="block text-gray-100 text-sm font-bold mb-2 ml-2 md:ml-4">
                     Email Address
                   </label>
                   <input
@@ -154,12 +158,12 @@ export const Login = ({ loggedInUser }) => {
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="Enter your Email Address"
-                    className="w-full px-6 py-3 border-2 border-cyan-200 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100 text-sm text-white bg-gray-900/90 transition-colors"
+                    className="w-full px-3 py-1.5  md:px-6 md:py-3 border md:border-2 border-cyan-200/50 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100 text-sm text-white bg-gray-900/90 transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-gray-100 text-sm font-bold mb-2 ml-4">
+                  <label className="block text-gray-100 text-sm font-bold mb-2 ml-2 md:ml-4">
                     Password
                   </label>
                   <div className="relative group">
@@ -170,7 +174,7 @@ export const Login = ({ loggedInUser }) => {
                       value={formData.password}
                       onChange={handleInputChange}
                       placeholder="Enter your Password"
-                      className="w-full px-6 py-3 border-2 border-cyan-200 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100 text-sm text-white bg-gray-900/90 transition-colors"
+                      className="w-full px-3 py-1.5  md:px-6 md:py-3 border md:border-2 border-cyan-200/50  rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100 text-sm text-white bg-gray-900/90 transition-colors"
                     />
                     <button
                       type="button"
@@ -178,11 +182,11 @@ export const Login = ({ loggedInUser }) => {
                       className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-cyan-500 transition-colors"
                     >
                       {showPassword ? (
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="size-4 md:size-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.956 9.956 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
                         </svg>
                       ) : (
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="size-4 md:size-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                         </svg>
@@ -198,24 +202,24 @@ export const Login = ({ loggedInUser }) => {
                       name="rememberMe"
                       checked={formData.rememberMe}
                       onChange={handleInputChange}
-                      className="w-4 h-4 text-cyan-500 border-cyan-300 rounded focus:ring-cyan-500 accent-cyan-500"
+                      className=" md:size-4 text-cyan-500 border-cyan-300 rounded focus:ring-cyan-500 accent-cyan-500"
                     />
-                    <span className="ml-2 text-sm text-gray-100 group-hover:text-gray-800 transition-colors">Remember me</span>
+                    <span className="ml-2 text-xs md:text-sm text-gray-100 group-hover:text-cyan-700 font-semibold transition-colors">Remember me</span>
                   </label>
-                  <Link to={'/forgot-password'} className="text-gray-100 hover:text-cyan-700 text-sm font-semibold transition-colors">
+                  <Link to={'/forgot-password'} className="text-gray-100 hover:text-cyan-700 text-xs md:text-sm font-semibold transition-colors">
                     Forgot Password?
                   </Link>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-cyan-500 cursor-pointer text-white py-4 rounded-full font-bold text-lg hover:bg-cyan-600 hover:shadow-lg active:scale-[0.98] transition-all mt-6"
+                  className="w-full bg-cyan-500 md:mt-6 cursor-pointer text-white py-2 md:py-4 rounded-full font-bold md:text-lg hover:bg-cyan-600 hover:shadow-lg active:scale-[0.98] transition-all"
                 >
                   Login
                 </button>
 
                 {/* Divider */}
-                <div className=" flex items-center justify-around gap-1 my-4">
+                <div className=" flex items-center justify-around gap-1 md:my-4">
                   <div className=" w-1/2 border-t border-cyan-100"></div>
                   <div className=" text-white text-xs uppercase font-bold tracking-wider">OR</div>
                   <div className="w-1/2 border-t border-cyan-100"></div>
@@ -225,9 +229,9 @@ export const Login = ({ loggedInUser }) => {
                 <button
                   type="button"
                   onClick={handleGoogleLogin}
-                  className="w-full flex items-center cursor-pointer justify-center gap-3 bg-white border-2 border-gray-100 text-gray-700 py-3.5 rounded-full font-semibold text-md hover:bg-gray-50 hover:border-gray-200 transition-all active:scale-[0.98] shadow-sm"
+                  className="w-full flex items-center cursor-pointer justify-center md:text-lg gap-1.5 md:gap-3 bg-white border-2 border-gray-100 text-gray-700 py-1.5 md:py-3.5 rounded-full font-semibold hover:bg-gray-50 hover:border-gray-200 transition-all active:scale-[0.98]"
                 >
-                  <svg className="w-5 h-5" viewBox="0 0 24 24">
+                  <svg className="size-3 md:size-5" viewBox="0 0 24 24">
                     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
                     <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
                     <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
