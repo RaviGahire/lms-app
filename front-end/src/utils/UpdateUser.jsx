@@ -2,6 +2,7 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { useContext } from "react"
 import ContextData from "../Contexts/Context"
+import { getStoredToken } from "./getStoredToken"
 
 
 export const UpdateButton = ({ userId, updatedData }) => {
@@ -13,13 +14,15 @@ export const UpdateButton = ({ userId, updatedData }) => {
     const handleUpdate = async (e) => {
         e.preventDefault();
 
+        const  token = getStoredToken()
+
         try {
 
-            const response = await axios.put(`${API_URL}/users/${userId}`, updatedData);
+            const response = await axios.post(`${API_URL}/update-details`, updatedData,{headers :{Authorization : `Bearer ${token}` }})
 
             await fetchUserProfile(); 
 
-            alert(response.data?.message || "Profile updated successfully! 🎉");
+            alert(response.data?.message || "Profile updated successfully..!");
 
             nav('/student');
 
