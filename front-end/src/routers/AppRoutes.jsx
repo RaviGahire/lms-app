@@ -7,8 +7,6 @@ import { SignUp } from "../components/SignUp";
 import { BlogPage } from "../pages/BlogPage";
 import { CourseCard } from "../pages/CourseCard";
 import { Student } from "../components/Student";
-import { Admin } from "../components/Admin";
-import { SuperAdmin } from "../components/SuperAdmin";
 import { ProtectedRoute } from "../components/ProtectedRoute";
 import { UpdateStudent } from "../components/UpdateStudent"
 import { UpdateAdmin } from "../components/UpdateAdmin";
@@ -16,7 +14,6 @@ import { useEffect, useState } from "react";
 import { getStoredToken } from "../utils/getStoredToken";
 import ContextData from "../Contexts/Context";
 import { useContext } from "react";
-import axios from "axios";
 import { LogoutButton } from "../utils/LogoutUser";
 import { ForgotPassword } from "../utils/ForgotPassword";
 
@@ -27,47 +24,12 @@ export const AppRoutes = () => {
 
   const [loading, setLoading] = useState(true);
 
-  const { fetchUserProfile } = useContext(ContextData)
+  const { loggedInUserProfile, fetchUserProfile } = useContext(ContextData)
 
-  // console.log(loggedInUser)
-
-  const handleAuthentication = async () => {
-
-    const token = getStoredToken(); // get token from local-storage
-
-    if (!token) { // if not avilable
-      setLoggedInUser(null);
-      setLoading(false);
-      return;
-    }
-
-
-    try {
-
-      const profile = await fetchUserProfile();
-
-      const user = {
-        userId: profile?.userId,
-        userName: profile?.userName,
-        email: profile?.email,
-        role: profile?.role,
-        isVerified: profile?.isVerified,
-      };
-
-      setLoggedInUser(user);
-
-
-    } catch (error) {
-      console.error("Auth error:", error);
-      localStorage.removeItem("token");
-      setLoggedInUser(null);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // console.log(loggedInUserProfile)
 
   useEffect(() => {
-    handleAuthentication();
+    fetchUserProfile()
   }, []);
 
   return (
@@ -98,7 +60,7 @@ export const AppRoutes = () => {
                   allowedUserRoles={["super-admin"]}
                 >
                   {/* <SuperAdmin /> */}
-                 <div className="flex flex-col justify-center items-center gap-10 ">
+                  <div className="flex flex-col justify-center items-center gap-10 ">
                     <h1 className="text-center text-5xl font-bold">Super-Admin Page</h1>
                     <LogoutButton />
                   </div>
@@ -111,7 +73,7 @@ export const AppRoutes = () => {
                 <ProtectedRoute
                   loading={loading}
                   user={loggedInUser}
-                  allowedUserRoles={["admin","super-admin"]}
+                  allowedUserRoles={["admin"]}
                 >
                   {/* <Admin /> */}
                   <div className="flex flex-col justify-center items-center gap-10 ">
@@ -123,7 +85,7 @@ export const AppRoutes = () => {
             />
             <Route
               path="/student"
-              element={<ProtectedRoute loading={loading} user={loggedInUser} allowedUserRoles={["student","admin"]}> <Student /> </ProtectedRoute>
+              element={<ProtectedRoute loading={loading} user={loggedInUserProfile} allowedUserRoles={["student"]}> <Student /> </ProtectedRoute>
               }
             />
             {/* unauthorized user route */}
