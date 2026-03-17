@@ -2,10 +2,10 @@ const mongoose = require('mongoose')
 
 //created user schema instance 
 const studentSchema = new mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
+    user: [{
+      type: mongoose.Schema.Types.ObjectId,
         ref: "User"
-    },
+    }],
 
     avatar: {
         type: String,

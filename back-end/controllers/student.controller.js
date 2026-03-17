@@ -63,7 +63,7 @@ exports.updateStudentDetails = async (req, res) => {
 
     const studId = req.params.id 
 
-    console.log(studId)
+    // console.log(studId)
 
     const updatedData = req.body
 
@@ -76,7 +76,7 @@ exports.updateStudentDetails = async (req, res) => {
     try {
 
 
-        const student = await Student.findByIdAndUpdate(studId,  updatedData , { new: true })
+        const student = await Student.findByIdAndUpdate(studId,  updatedData , { new: true }).populate('user','email roles fullName')
 
         if (!student) {
             return res.status(404).json({
