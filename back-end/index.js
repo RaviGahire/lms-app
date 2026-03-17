@@ -1,26 +1,29 @@
-const express = require('express');
-const app = express();
-require('dotenv').config();
+const express = require('express')
+const app = express()
+require('dotenv').config()
 const cors = require('cors')
 const upload = require("./middlewares/multer.middlerware")
 
 
 // middlewares
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public/'));
-app.use(cors({origin: process.env.CORS_ORIGIN,credentials: true}));
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(express.static('public/'))
+app.use(cors({origin: process.env.CORS_ORIGIN,credentials: true}))
 
 // db connection
-const connectDB = require('./config/connectDB');
+const connectDB = require('./config/connectDB')
 
 //All routes
-const authRoutes = require('./routes/authRoutes');
+const authRoutes = require('./routes/authRoutes')
 const  studentRoutes = require('./routes/studentRoutes')
-app.use('/api/v1/users', authRoutes);
+const courseRoutes = require('./routes/courseRoutes')
+//APi endpoints
+app.use('/api/v1/users', authRoutes)
 app.use('/api/v1/students' ,studentRoutes)
+app.use('/api/v1/courses' , courseRoutes)
 
 //Server Listening
 app.listen(process.env.PORT || 5000, process.env.HOST, () => {
-  console.log(`Server is running on port ${process.env.PORT || 5000}`);
+  console.log(`Server is running on port ${process.env.PORT || 5000}`)
 });
