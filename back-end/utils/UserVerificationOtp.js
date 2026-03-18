@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport({
 });
 
 //Email OTP sender
-const SendEmailOtp = async (email, otp) => {
+const UserVerificationOtp = async (email, otp) => {
    try {
     await transporter.verify();
       const info = await transporter.sendMail({
@@ -71,4 +71,4 @@ const SendEmailOtp = async (email, otp) => {
 }
 
 
-module.exports = SendEmailOtp;
+module.exports = UserVerificationOtp;

@@ -2,7 +2,7 @@ const User = require("../model/user.model")
 const bcrypt = require('bcrypt');
 const OTP = require('../model/otp.model')
 const OtpGenerator = require("../utils/OtpGenerator")
-const SendEmailOtp = require("../utils/SendEmailOtp")
+const SendEmailOtp = require("../utils/UserVerificationOtp")
 const jwt = require('jsonwebtoken');
 
 //user signup

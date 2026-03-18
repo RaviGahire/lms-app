@@ -6,6 +6,9 @@ const { verifyJwtToken } = require("../middlewares/auth.middleware")
 
 const authorizeRoles = require("../middlewares/authorized.role")
 
+//Admin can deleted user using id 
+router.delete('/delete/u/:id',deleteUser)
+
 router.patch("/courses/:courseId/publish", verifyJwtToken, authorizeRoles("admin"))
 
 router.patch("/courses/:courseId/unpublish", verifyJwtToken, authorizeRoles("admin"))
