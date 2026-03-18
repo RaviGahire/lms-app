@@ -9,19 +9,21 @@ const upload = require("./middlewares/multer.middlerware")
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public/'))
-app.use(cors({origin: process.env.CORS_ORIGIN,credentials: true}))
+app.use(cors({ origin: process.env.CORS_ORIGIN, credentials: true }))
 
 // db connection
 const connectDB = require('./config/connectDB')
 
 //All routes
 const authRoutes = require('./routes/authRoutes')
-const  studentRoutes = require('./routes/studentRoutes')
+const studentRoutes = require('./routes/studentRoutes')
 const courseRoutes = require('./routes/courseRoutes')
+const instructorRoutes = require('./routes/instructorRoutes')
 //APi endpoints
 app.use('/api/v1/users', authRoutes)
-app.use('/api/v1/students' ,studentRoutes)
-app.use('/api/v1/courses' , courseRoutes)
+app.use('/api/v1/students', studentRoutes)
+app.use('/api/v1/courses', courseRoutes)
+app.use('/api/v1/instructor', instructorRoutes)
 
 //Server Listening
 app.listen(process.env.PORT || 5000, process.env.HOST, () => {
