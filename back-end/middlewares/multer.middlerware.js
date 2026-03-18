@@ -1,17 +1,18 @@
-const multer = require('multer');
+const multer = require('multer')
 
 const storage = multer.diskStorage({
 
-    destination:'public/uploads/',
+    destination: (req, file, callback) => {
 
-    filename:(req,file,cb)=>{
+        callback(null, '/public/uploads')
+    },
+
+    filename: (req, file, callback) => {
         
-        cb(null,Date.now() +"_"+file.originalname)
+        callback(null, file.originalname)
     }
 })
 
-exports.upload = multer({
-  storage: storage,
-  // limits: { fileSize: 1024 * 1024 * 1 } // optional: 5MB
-});
+const upload = multer({ storage: storage })
 
+exports.module = upload
