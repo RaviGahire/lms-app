@@ -1,27 +1,20 @@
-const authorizedRoles = (...roles) => {
+const authorizeRoles = (...allowedRoles) => {
 
   return (req, res, next) => {
- 
-    if (!req.user || !req.user.role) { // safety check
-      return res.status(401).json({
-        success: false,
-        message: "User not authenticated"
-      });
-    }
+    const userRole = req.user?.role;
 
-    const userRole = req.user.role;
-
-    
-    if (!roles.includes(userRole)) { // role check
+    if (!userRole || !allowedRoles.includes(userRole)) {
       return res.status(403).json({
         success: false,
-        message: "Access denied"
-      });
+        message: "Access denied: You are not allowed to perform this action",
+      })
+
     }
 
+
     next();
-  };
+  }
 
-};
+}
 
-module.exports = authorizedRoles;
+module.exports = authorizeRoles;

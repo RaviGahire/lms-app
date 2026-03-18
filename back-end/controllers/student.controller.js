@@ -1,3 +1,4 @@
+const Course = require('../model/coures.model')
 const Student = require('../model/student.model')
 const User = require('../model/user.model')
 
@@ -9,7 +10,7 @@ const User = require('../model/user.model')
 exports.getAllStudents = async (req, res) => {
 
     try {
-        const students = await Student.find().populate('user','userName email roles')
+        const students = await Student.find().populate('user', 'userName email roles')
 
         if (!students || students.length === 0) {
             return res.status(404).json({
@@ -43,8 +44,8 @@ exports.getStudentProfile = async (req, res) => {
     try {
         const studId = req.user._id;
 
-        const student = await Student.findOne({ user: studId }).populate('user','userName roles email isVerified')
-           
+        const student = await Student.findOne({ user: studId }).populate('user', 'userName roles email isVerified')
+
         if (!student) {
             return res.status(404).json({ success: false, message: "Student not found" });
         }
@@ -52,7 +53,7 @@ exports.getStudentProfile = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: "Student and User data fetched",
-            student 
+            student
         });
     } catch (error) {
         return res.status(500).json({ success: false, error: error.message });
@@ -61,7 +62,7 @@ exports.getStudentProfile = async (req, res) => {
 
 exports.updateStudentDetails = async (req, res) => {
 
-    const studId = req.params.id 
+    const studId = req.params.id
 
     // console.log(studId)
 
@@ -76,7 +77,7 @@ exports.updateStudentDetails = async (req, res) => {
     try {
 
 
-        const student = await Student.findByIdAndUpdate(studId,  updatedData , { new: true }).populate('user','email roles fullName')
+        const student = await Student.findByIdAndUpdate(studId, updatedData, { new: true }).populate('user', 'email roles fullName')
 
         if (!student) {
             return res.status(404).json({
@@ -101,3 +102,45 @@ exports.updateStudentDetails = async (req, res) => {
         })
     }
 }
+
+exports.getEnrolledCourses = async (req, res) => {
+    const userId = req.user?._id;
+
+    try {
+
+        if (!userId) {
+            return res.status(401).json({
+                success: false,
+                message: "Unauthorized user",
+            })
+        }
+
+       
+        const enrollments = await Student.find({ student: userId })
+            .populate("course"); 
+
+
+        if (!enrollments || enrollments.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "No enrolled courses found",
+            });
+        }
+
+  
+        const courses = enrollments.map(item => item.course);
+
+        return res.status(200).json({
+            success: true,
+            message: "Enrolled courses fetched successfully",
+            courses,
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Error while fetching enrolled courses",
+            error: error.message,
+        });
+    }
+};
