@@ -1,5 +1,6 @@
 const express = require('express');
 const { verifyJwtToken } = require('../middlewares/auth.middleware');
+const authorizeRoles = require('../middlewares/authorized.role')
 
 const router = express.Router()
 

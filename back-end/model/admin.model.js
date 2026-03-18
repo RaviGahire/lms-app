@@ -1,10 +1,9 @@
 const mongoose = require("mongoose")
 
 const adminSchema = mongoose.Schema({
-    adminDetails: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        required: true
     },
     avatar: {
         type: String,
@@ -16,7 +15,7 @@ const adminSchema = mongoose.Schema({
     },
     permissions: {
         type: [String],
-        default: []
+        default: ['edit','update','delete']
     },
 
 }, { timestamps: true })
