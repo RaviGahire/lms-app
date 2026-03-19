@@ -1,42 +1,15 @@
-import { IconAward, IconBooks, IconBuilding, IconCalendar, IconCirclePlus, IconClockHour2, IconDeviceMobile, IconInfoCircle, IconMail, IconMapPin, IconSchool, IconSettingsCode, IconStar, IconUser, IconWorld } from "@tabler/icons-react";
+import { IconAward, IconBooks, IconBuilding, IconCalendar, IconCircleDashedCheck, IconCirclePlus, IconClockHour2, IconDeviceMobile, IconInfoCircle, IconMail, IconMapPin, IconSchool, IconSettingsCode, IconStar, IconUser, IconWorld } from "@tabler/icons-react";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { LogoutButton } from "../utils/LogoutUser";
 import ContextData from "../Contexts/Context";
+import { VerificationStatus } from "../utils/VerificationStatus";
 
 
 export const Student = () => {
-    const [data, setData] = useState({});
     const [error, setError] = useState('')
-    const { loggedInUser } = useContext(ContextData);
-
-    const { USER_ID } = loggedInUser || {}
-    const API_URL = import.meta.env.VITE_API_URL
-
-    const fetchUserDetails = async () => {
-        try {
-            const res = await axios.get(`${API_URL}/users/${USER_ID}`,) // fetching user detials 
-
-            //  console.log(res.data.data)
-            const userData = res.data.data
-
-            setData(userData)
-
-        } catch (error) {
-
-            console.log(error)
-
-        }
-
-    }
-
-    useEffect(() => {
-        fetchUserDetails()
-    }, [])
-
-
-
+    const { loggedInUserProfile, fetchUserProfile } = useContext(ContextData);
 
     return (
         <div className="main-container bg-cyan-700">
@@ -47,8 +20,19 @@ export const Student = () => {
                         <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah"
                             alt="Student"
                             className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white shadow-lg" />
-                        <h2 className="text-2xl font-bold mb-1">{data?.userName}</h2>
-                        <p className="text-purple-100">STU-2023-4567</p>
+                        <h2 className="text-2xl font-bold mb-1">{loggedInUserProfile?.userName}</h2>
+                        <p className="text-purple-100 mb-1 uppercase">{loggedInUserProfile?.role} </p>
+
+                        {/* to access course and blogs need to verify */}
+                        <VerificationStatus
+                        labelOne='Verify your profile'
+                        labelTwo= 'Profile Verified'
+                        isUserVerified={loggedInUserProfile.isVerified}
+                        userEmail={loggedInUserProfile.email}
+                        Error={setError}
+                        />
+
+
                     </div>
 
                     {/* registred information */}
@@ -58,28 +42,29 @@ export const Student = () => {
                                 <IconMail size={24} stroke={2} />
                                 <div>
                                     <p className="text-xs text-purple-200 font-bold tracking-wide">Email</p>
-                                    <p className="text-sm">{data?.email}</p>
+                                    <p className="text-sm">{loggedInUserProfile?.email} </p>
+
                                 </div>
                             </div>
                             <div className="flex items-center gap-3 mb-3">
                                 <IconDeviceMobile size={24} stroke={2} />
                                 <div>
                                     <p className="text-xs text-purple-200 font-bold tracking-wide">Phone</p>
-                                    <p className="text-sm">{data?.phone || 'Update phone'}</p>
+                                    <p className="text-sm">{loggedInUserProfile?.phone || 'Update phone'}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3 mb-3">
                                 <IconMapPin size={24} stroke={2} />
                                 <div>
                                     <p className="text-xs text-purple-200 font-bold tracking-wide">Location</p>
-                                    <p className="text-sm">{data?.location || 'Update location'}</p>
+                                    <p className="text-sm">{loggedInUserProfile?.location || 'Update location'}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3">
                                 <IconCalendar size={24} stroke={2} />
                                 <div>
                                     <p className="text-xs text-purple-200 font-bold tracking-wide">Enrolled</p>
-                                    <p className="text-sm">{data?.createdAt || "NA"}</p>
+                                    <p className="text-sm">{loggedInUserProfile?.createdAt || "NA"}</p>
                                 </div>
                             </div>
                         </div>
@@ -90,35 +75,35 @@ export const Student = () => {
                                     stroke={2} />
                                 <div>
                                     <p className="text-xs text-purple-200 font-bold tracking-wide">Gender</p>
-                                    <p className="text-sm">{data?.gender || "Update Gender"}</p>
+                                    <p className="text-sm">{loggedInUserProfile?.gender || "Update Gender"}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3 mb-3">
                                 <IconBuilding stroke={2} />
                                 <div>
                                     <p className="text-xs text-purple-200 font-bold tracking-wide">School / College</p>
-                                    <p className="text-sm">{data?.college || "Update college"}</p>
+                                    <p className="text-sm">{loggedInUserProfile?.college || "Update college"}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3 mb-3">
                                 <IconSchool size={24} stroke={2} />
                                 <div>
                                     <p className="text-xs text-purple-200 font-bold tracking-wide">Qualification</p>
-                                    <p className="text-sm">{data?.qualification || "Update qualification"}</p>
+                                    <p className="text-sm">{loggedInUserProfile?.qualification || "Update qualification"}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3 mb-3">
                                 <IconWorld stroke={2} />
                                 <div>
                                     <p className="text-xs text-purple-200 font-bold tracking-wide">Nationality</p>
-                                    <p className="text-sm">{data?.nationality || "Update Nationality "}</p>
+                                    <p className="text-sm">{loggedInUserProfile?.nationality || "Update Nationality "}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3">
                                 <IconCalendar size={24} stroke={2} />
                                 <div>
                                     <p className="text-xs text-purple-200  font-bold tracking-wide">Date of Birth</p>
-                                    <p className="text-sm">{data?.dob || "Update Date of Birth"}</p>
+                                    <p className="text-sm">{loggedInUserProfile?.dob || "Update Date of Birth"}</p>
                                 </div>
                             </div>
 
@@ -145,7 +130,7 @@ export const Student = () => {
 
                         {/* upadte btn and logout btn */}
                         <div className="flex justify-between mt-8">
-                            <Link to={`/update_student/${USER_ID}`} state={{ currentUser: data }} className="px-4 py-2 rounded-md cursor-pointer bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition">
+                            <Link to={`/update_student/${loggedInUserProfile?.id}`} state={{ currentUser: loggedInUserProfile }} className="px-4 py-2 rounded-md cursor-pointer bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition">
                                 Update / Edit
                             </Link>
                             <LogoutButton />
@@ -388,13 +373,13 @@ export const Student = () => {
                                                 <span className="text-[10px] uppercase tracking-wider text-yellow-100 font-bold">{course.level}</span>
                                                 <h4 className="font-semibold text-gray-200 mt-1 group-hover:text-white transition-colors">{course.name}</h4>
                                                 <div className="flex items-center gap-2 mt-1">
-                                                  <IconClockHour2 className={'size-4 text-white'} />
+                                                    <IconClockHour2 className={'size-4 text-white'} />
                                                     <p className="text-xs text-gray-100">{course.duration}</p>
                                                 </div>
                                             </div>
 
                                             <button className="p-2 rounded-full bg-white/5 group-hover:bg-white cursor-pointer text-white group-hover:text-black transition-all duration-300 shadow-xl">
-                                             <IconCirclePlus className={'w-5 h-5'} />
+                                                <IconCirclePlus className={'w-5 h-5'} />
                                             </button>
                                         </div>
                                     </div>
