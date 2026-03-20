@@ -62,7 +62,7 @@ exports.getStudentProfile = async (req, res) => {
 
 exports.updateStudentDetails = async (req, res) => {
 
-    const studId = req.params.id
+    const studId = req.params.id || req.user._id
 
     // console.log(studId)
 

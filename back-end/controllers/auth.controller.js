@@ -1,9 +1,10 @@
 const User = require("../model/user.model")
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt')
 const OTP = require('../model/otp.model')
 const OtpGenerator = require("../utils/OtpGenerator")
-const SendEmailOtp = require("../utils/UserVerificationOtp")
-const jwt = require('jsonwebtoken');
+const userVerificationOtp = require("../utils/UserVerificationOtp")
+const jwt = require('jsonwebtoken')
+const uploadOnCloudinary = require('../utils/Cloudinary')
 
 //user signup
 exports.userRegister = async (req, res) => {
@@ -20,9 +21,10 @@ exports.userRegister = async (req, res) => {
 
     // if user exists, return error
     if (isExistingUser) {
-      return res.status(409).json({ 
-        success:false,
-        message: "Email or username already exists" });
+      return res.status(409).json({
+        success: false,
+        message: "Email or username already exists"
+      });
     }
     // password hashing
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -86,7 +88,7 @@ exports.generateEmailVerificationOtp = async (req, res) => {
     await OTP.create({ email, otp: generatedOtp, expiresAt });
 
     // Send OTP to Gmail 
-    const sending = await SendEmailOtp(email, generatedOtp);
+    const sending = await userVerificationOtp(email, generatedOtp);
     // console.log(sending)
 
     if (!sending) {
@@ -117,8 +119,8 @@ exports.generateEmailVerificationOtp = async (req, res) => {
 exports.userLogin = async (req, res) => {
   try {
     const { email, password, role } = req.body;
-  
-const user =  await User.findOneAndUpdate(
+
+    const user = await User.findOneAndUpdate(
       { email: email },
       { $set: { roles: role } },
       { new: true }
@@ -127,9 +129,6 @@ const user =  await User.findOneAndUpdate(
     if (!user) {  // if user does not exist, return error
       return res.status(401).json({ success: false, message: "User not exist" });
     }
-
-    // updating user role based on user selection
-   
 
     const isPasswordValid = await bcrypt.compare(password, user.password);  // compare password
 
@@ -297,7 +296,14 @@ exports.updateUserAccountDetails = async (req, res) => {
 
   try {
 
-    const user = await User.findByIdAndUpdate(userId, updatedData, { new: true })
+    let avatarUrl = "";
+    if (req.file && req.file.path) {
+      const avatar = await uploadOnCloudinary(req.file.path);
+      avatarUrl = avatar?.secure_url;
+      updatedData.avatar = avatarUrl;
+    }
+
+    const user = await User.findByIdAndUpdate(userId, updatedData, { new: true }).select("-password")
 
     if (!user) {
       return res.status(404).json({ success: false, message: "User not found while updating data" })
