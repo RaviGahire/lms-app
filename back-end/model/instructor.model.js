@@ -9,10 +9,6 @@ const instructorSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    avatar: {
-        type: String,
-        trim: true
-    },
     experience: {
         type: Number, 
         default: 0

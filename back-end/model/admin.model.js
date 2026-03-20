@@ -5,10 +5,6 @@ const adminSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     },
-    avatar: {
-        type: String,
-        trim: true
-    },
     phone: {
         type: String,
         trim: true

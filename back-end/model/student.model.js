@@ -7,11 +7,6 @@ const studentSchema = new mongoose.Schema({
         ref: "User"
     }],
 
-    avatar: {
-        type: String,
-        trim: true
-    },
-
     college: {
         type: String,
         trim: true
