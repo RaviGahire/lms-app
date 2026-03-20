@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 //created user schema instance 
 const studentSchema = new mongoose.Schema({
     user: [{
-      type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     }],
 
@@ -15,15 +15,25 @@ const studentSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    address: {
+
+    city: {
+        type: String,
+        trim: true
+
+    },
+    pincode: {
+        type:Number
+    },
+    state: {
         type: String,
         trim: true
     },
+    
     gender: {
         type: String,
         trim: true
     },
-   
+
     qualification: {
         type: String,
         trim: true
@@ -36,7 +46,7 @@ const studentSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
- 
+
 
 },
     { timestamps: true }

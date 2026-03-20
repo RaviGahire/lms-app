@@ -144,7 +144,8 @@ exports.userLogin = async (req, res) => {
         userName: user.userName,
         email: user.email,
         role: user.roles,
-        isVerified: user.isVerified
+        isVerified: user.isVerified,
+        avatar:user.avatar
       }, process.env.JWT_ACCESS_TOKEN_SECRET,
         { expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRES })
 

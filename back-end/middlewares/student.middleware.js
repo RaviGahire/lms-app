@@ -2,14 +2,14 @@ const Student = require('../model/student.model')
 
 const createStudentProfile = async (req, res, next) => {
     try {
-        const userId = req.user._id;
-
-        let student = await Student.findOne({ user: userId });
+        const userId = req.user._id
+       
+        let student = await Student.findOne({ user: userId })
 
         if (!student) {
             await Student.findOneAndUpdate(
                 { user: userId },
-                { $setOnInsert: { user: userId } }, //ensures that the 'user' field is only set on the FIRST creation
+                { $setOnInsert: { user:userId } }, //ensures that the 'user' field is only set on the FIRST creation
                 { upsert: true, new: true } //creates it if it doesn't exist.
 
             );
@@ -19,7 +19,7 @@ const createStudentProfile = async (req, res, next) => {
         next()
 
     } catch (error) {
-        return res.status(500).json({ success: false, error: error.message });
+        return res.status(500).json({ success: false, error: error.message })
     }
 };
 

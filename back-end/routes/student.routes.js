@@ -11,9 +11,9 @@ router.get('/all-studs', getAllStudents)
 
 router.get('/current-studs', verifyJwtToken, createStudentProfile, getStudentProfile)
 
-router.post('/update-studs', verifyJwtToken, authorizeRoles('student', 'admin'), updateStudentDetails)
+router.post('/update-studs/:id', verifyJwtToken, authorizeRoles('student', 'admin'), updateStudentDetails)
 
-router.get('/my-courses', verifyJwtToken, authorizeRoles('student', 'admin'), getEnrolledCourses)
+router.get('/my-courses/:id',  getEnrolledCourses)
 
 
 

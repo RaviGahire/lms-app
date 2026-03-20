@@ -1,6 +1,6 @@
 const Course = require('../model/coures.model')
 const Student = require('../model/student.model')
-const User = require('../model/user.model')
+// const User = require('../model/user.model')
 
 
 
@@ -44,7 +44,7 @@ exports.getStudentProfile = async (req, res) => {
     try {
         const studId = req.user._id;
 
-        const student = await Student.findOne({ user: studId }).populate('user', 'userName roles email isVerified')
+        const student = await Student.findOne({ user: studId }).populate('user', 'userName roles email isVerified avatar')
 
         if (!student) {
             return res.status(404).json({ success: false, message: "Student not found" });
@@ -76,8 +76,7 @@ exports.updateStudentDetails = async (req, res) => {
     }
     try {
 
-
-        const student = await Student.findByIdAndUpdate(studId, updatedData, { new: true }).populate('user', 'email roles fullName')
+        const student = await Student.findByIdAndUpdate(studId, updatedData, { new: true }).populate('user', 'userName roles email isVerified avatar')
 
         if (!student) {
             return res.status(404).json({
