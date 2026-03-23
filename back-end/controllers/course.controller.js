@@ -1,4 +1,6 @@
 const Course = require('../model/coures.model')
+const Student = require('../model/student.model')
+const uploadOnCloudinary = require('../utils/Cloudinary')
 
 exports.getAllCoureses = async (req, res) => {
     try {
@@ -33,13 +35,21 @@ exports.getAllCoureses = async (req, res) => {
 exports.addNewCoureses = async (req, res) => {
     const userId = req.user?._id
     const data = req.body
-
+    const file = req.file;
+    // console.log(file);
     try {
+
+        if (!file) {
+            return res.status(400).json({
+                success: false,
+                message: "Cover image is required"
+            });
+        }
 
         if (!userId) {
             return res.status(401).json({
                 success: false,
-                message: "Unauthorized: User not found",
+                message: "Unauthorized: or user not found",
             })
         }
 
@@ -49,8 +59,9 @@ exports.addNewCoureses = async (req, res) => {
                 message: "Course data is required",
             })
         }
+        data.createdBy = userId;
+        const { title, description, duration, createdBy } = data;
 
-        const { title, description } = data;
 
         if (!title || !description) {
             return res.status(400).json({
@@ -59,8 +70,27 @@ exports.addNewCoureses = async (req, res) => {
             });
         }
 
-        data.createdBy = userId;
-        const newCourse = await Course.create(data)
+
+        let imageUrl = "";
+
+        if (file && file.path) {
+            const filePath = file.path.replace(/\\/g, "/");
+
+            const uploaded = await uploadOnCloudinary(filePath);
+            imageUrl = uploaded.secure_url;
+        }
+
+
+
+
+
+        const newCourse = await Course.create({
+            title,
+            createdBy,
+            description,
+            duration,
+            coverImage: imageUrl
+        });
 
 
 
@@ -84,15 +114,24 @@ exports.addNewCoureses = async (req, res) => {
 }
 
 exports.updateCourses = async (req, res) => {
-    const courseId = req.params.id
-    const updatedData = req.body
+    const { courseId } = req.params;
+    const { title, description, duration } = req.body;
+    const file = req.file;
 
     try {
 
-        if (!courseId || !updatedData || Object.keys(updatedData).length === 0) {
+        if (!courseId) {
             return res.status(400).json({
                 success: false,
-                message: "Course ID and update data are required",
+                message: "Course ID ",
+            })
+        }
+
+        if (!title || !description || !file) {
+
+            return res.status(400).json({
+                success: false,
+                message: "All fields are required",
             })
         }
 
@@ -106,16 +145,22 @@ exports.updateCourses = async (req, res) => {
             })
         }
 
-        const updatedCourse = await Course.findByIdAndUpdate(
-            courseId,
-            updatedData,
-            { new: true }
-        );
+
+        if (title) course.title = title;
+        if (description) course.description = description;
+        if (duration) course.duration = duration;
+
+        if (file && file.path) {
+            const uploaded = await uploadOnCloudinary(file.path);
+            course.coverImage = uploaded.secure_url;
+        }
+
+        await course.save()
 
         return res.status(200).json({
             success: true,
             message: "Course updated successfully",
-            course: updatedCourse,
+            course
         })
 
     } catch (error) {
@@ -133,7 +178,8 @@ exports.updateCourses = async (req, res) => {
 }
 
 exports.deleteCourses = async (req, res) => {
-    const courseId = req.params.id;
+    const { courseId } = req.params;
+    const userId = req.user?._id;
     try {
         if (!courseId) {
             return res.status(400).json({
@@ -141,6 +187,14 @@ exports.deleteCourses = async (req, res) => {
                 message: "Course ID is required",
             })
         }
+
+        if (!userId) {
+            return res.status(400).json({
+                message: false,
+                message: "Please login to delete course"
+            })
+        }
+
 
         const course = await Course.findById(courseId);
 
@@ -171,43 +225,44 @@ exports.deleteCourses = async (req, res) => {
 }
 
 exports.enrollCourses = async (req, res) => {
+    const { courseId } = req.params;
     const userId = req.user?._id;
-    const courseId = req.params.courseId;
 
     try {
         if (!userId) {
             return res.status(401).json({
                 success: false,
                 message: "Unauthorized user",
-            })
+            });
         }
 
         if (!courseId) {
             return res.status(400).json({
                 success: false,
                 message: "Course ID is required",
-            })
+            });
         }
 
         const course = await Course.findById(courseId);
+
         if (!course) {
             return res.status(404).json({
                 success: false,
                 message: "Course not found",
-            })
+            });
         }
 
         if (course.createdBy.toString() === userId.toString()) {
             return res.status(400).json({
                 success: false,
                 message: "You cannot enroll in your own course",
-            })
+            });
         }
 
         const alreadyEnrolled = await Student.findOne({
             student: userId,
             course: courseId,
-        })
+        });
 
         if (alreadyEnrolled) {
             return res.status(400).json({
@@ -216,25 +271,28 @@ exports.enrollCourses = async (req, res) => {
             });
         }
 
+        // Create enrollment
         const enrollment = await Student.create({
             student: userId,
             course: courseId,
         });
 
+        // Update course students array
+        course.students.push(userId)
+
+        await course.save();
 
         return res.status(200).json({
             success: true,
             message: "Enrolled successfully",
             enrollment,
-        })
+        });
 
     } catch (error) {
         return res.status(500).json({
             success: false,
             message: "Error while enrolling",
             error: error.message,
-        })
+        });
     }
-
-
 }

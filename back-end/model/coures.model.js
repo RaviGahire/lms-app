@@ -1,11 +1,11 @@
 const mongoose = require("mongoose")
 
 const courseSchema = new mongoose.Schema({
-    name: {
+    title: {
         type: String,
         required: true,
         trim: true,
-        unique: true
+
     },
     description: {
         type: String,
@@ -15,18 +15,29 @@ const courseSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    thumbnail: {
+    coverImage: {
         type: String,
-        trim: true,
+        required: true,
+        trim: true
+
     },
-    instructor: [{
-        type: mongoose.Types.ObjectId,
-        ref: "Instructor"
-    }],
-    students: [{
+
+    createdBy: {
         type: mongoose.Types.ObjectId,
         ref: "Student"
-    }]
+    },
+    deletedBy: {
+        type: mongoose.Types.ObjectId,
+        ref: "User"
+    },
+    students: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: "Student"
+        }
+    ]
+
+
 
 }, { timestamps: true })
 

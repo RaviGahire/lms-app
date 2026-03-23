@@ -1,22 +1,26 @@
 const express = require("express")
 const router = express.Router()
+const upload = require('../middlewares/multer.middlerware')
 
-const {getAllCoureses, addNewCoureses, updateCourses, deleteCourses, enrollCourses} = require('../controllers/course.controller')
+const { getAllCoureses, addNewCoureses, updateCourses, deleteCourses, enrollCourses } = require('../controllers/course.controller')
 
 const authorizedRoles = require('../middlewares/authorized.role')
 const { verifyJwtToken } = require("../middlewares/auth.middleware")
+const authorizeRoles = require("../middlewares/authorized.role")
+
+
 
 
 router.get('/all-courses', getAllCoureses)
-
 //crud ops
-router.post('/create-courses', verifyJwtToken,authorizedRoles('instructor','admin'), addNewCoureses )
+router.post('/create-courses',verifyJwtToken,authorizeRoles("student","admin"), upload.single("coverImage"), addNewCoureses)
+   
+router.put('/update-courses/:courseId',authorizeRoles("student","admin"),upload.single("coverImage"),updateCourses)
 
-router.put('/update-course/:courseId',verifyJwtToken,authorizedRoles('instructor','admin'),updateCourses)
 
-router.delete('/delete-course/:id', verifyJwtToken,authorizedRoles('instructor', 'admin'),deleteCourses)
+router.delete('/delete-courses/:courseId',  deleteCourses)
 
-router.post( '/:courseId/enroll', verifyJwtToken, authorizedRoles('student'),enrollCourses)
+router.post('/:courseId/enroll', verifyJwtToken, enrollCourses)
 
 
 module.exports = router;

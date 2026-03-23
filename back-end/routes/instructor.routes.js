@@ -11,5 +11,4 @@ router.get('/check-rating', verifyJwtToken, authorizeRoles("instructor"))
 router.get('/most-popular-courses', verifyJwtToken, authorizeRoles("instructor"))
 
 
-
 module.exports = router

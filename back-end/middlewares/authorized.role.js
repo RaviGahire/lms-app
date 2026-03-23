@@ -4,7 +4,7 @@ const authorizeRoles = (...allowedRoles) => {
     
     const userRole = req.user?.roles;
 
-    console.log(userRole)
+    // console.log(userRole)
 
     if (!userRole || !allowedRoles.includes(userRole)) {
       return res.status(403).json({
