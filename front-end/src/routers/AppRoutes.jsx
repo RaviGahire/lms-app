@@ -21,7 +21,7 @@ export const AppRoutes = () => {
 
   const [loggedInUser, setLoggedInUser] = useState(null); // getting loggedin user data from login component
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const { loggedInUserProfile, fetchUserProfile } = useContext(ContextData)
 
@@ -53,17 +53,17 @@ export const AppRoutes = () => {
             {/* Dashboard routes */}
             <Route
               path="/admin"
-              element={<ProtectedRoute loading={loading} user={loggedInUser} allowedUserRoles={["admin"]}><h1>Admin</h1></ProtectedRoute>
+              element={<ProtectedRoute loading={loading} user={loggedInUser} allowedUserRoles={"admin"}><h1>Admin</h1></ProtectedRoute>
               }
             />
             <Route
               path="/instructor"
-              element={<ProtectedRoute loading={loading} user={loggedInUser} allowedUserRoles={["instructor"]}> <h1>Instructer</h1> </ProtectedRoute>
+              element={<ProtectedRoute loading={loading} user={loggedInUser} allowedUserRoles={"instructor"}> <h1>Instructer</h1> </ProtectedRoute>
               }
             />
             <Route
               path="/student"
-              element={<ProtectedRoute loading={loading} user={loggedInUserProfile} allowedUserRoles={["student"]}> <Student /> </ProtectedRoute>
+              element={<ProtectedRoute loading={loading} user={loggedInUserProfile} allowedUserRoles={"student"}> <Student /> </ProtectedRoute>
               }
             />
 
