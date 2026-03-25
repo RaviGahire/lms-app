@@ -196,17 +196,9 @@ export const UpdateStudent = () => {
               placeholder='Enter your qualification'
               value={update.qualification}
               onChange={handleChange}
-            />
-            {/* Avatar/profile image */}
-            <Input
-              label='Profile Image'
-              type='file'
-              name='avatar'
-              id='profile-image'
-              value={update.avatar}
-              onChange={handleChange}
               className={'md:col-span-2'}
             />
+           
             <div>
               <UpdateUserDetails
                 label='Save Changes'

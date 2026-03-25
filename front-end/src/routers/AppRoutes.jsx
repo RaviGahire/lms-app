@@ -15,6 +15,7 @@ import ContextData from "../Contexts/Context";
 import { useContext } from "react";
 import { LogoutButton } from "../utils/LogoutUser";
 import { ForgotPassword } from "../utils/ForgotPassword";
+import { ChangeProfileAvatar } from "../components/ChangeProfileAvatar";
 
 
 export const AppRoutes = () => {
@@ -36,6 +37,7 @@ export const AppRoutes = () => {
       <Router>
         <MainLayout>
           <Routes>
+
             {/* Pages routes */}
             <Route path="/" element={<Home />} />
             <Route path="/courses" element={<CourseCard />} />
@@ -51,35 +53,13 @@ export const AppRoutes = () => {
 
             {/* Dashboard routes */}
             <Route
-              path="/super-admin"
-              element={
-                <ProtectedRoute
-                  loading={loading}
-                  user={loggedInUser}
-                  allowedUserRoles={["super-admin"]}
-                >
-                  {/* <SuperAdmin /> */}
-                  <div className="flex flex-col justify-center items-center gap-10 ">
-                    <h1 className="text-center text-5xl font-bold">Super-Admin Page</h1>
-                    <LogoutButton />
-                  </div>
-                </ProtectedRoute>
+              path="/admin"
+              element={<ProtectedRoute loading={loading} user={loggedInUser} allowedUserRoles={["admin"]}><h1>Admin</h1></ProtectedRoute>
               }
             />
             <Route
-              path="/admin"
-              element={
-                <ProtectedRoute
-                  loading={loading}
-                  user={loggedInUser}
-                  allowedUserRoles={["admin"]}
-                >
-                  {/* <Admin /> */}
-                  <div className="flex flex-col justify-center items-center gap-10 ">
-                    <h1 className="text-center text-5xl font-bold">Admin Page</h1>
-                    <LogoutButton />
-                  </div>
-                </ProtectedRoute>
+              path="/instructor"
+              element={<ProtectedRoute loading={loading} user={loggedInUser} allowedUserRoles={["instructor"]}> <h1>Instructer</h1> </ProtectedRoute>
               }
             />
             <Route
@@ -87,32 +67,23 @@ export const AppRoutes = () => {
               element={<ProtectedRoute loading={loading} user={loggedInUserProfile} allowedUserRoles={["student"]}> <Student /> </ProtectedRoute>
               }
             />
-            {/* unauthorized user route */}
-            <Route path="/unauthorized" element={<h1>Unauthorized</h1>} />
 
-            {/* Update route */}
+            {/* CRUD route */}
             <Route path="/update_student" element={<UpdateStudent />} />
 
-            <Route path="/update_admin/:id" element={<UpdateAdmin />} />
+            <Route path="/change-profile/:id" element={<ChangeProfileAvatar />} />
 
-            {/* <Route path="/update_super_admin/:id" element={<UpdateAdmin />} /> */}
+            <Route path="/update_admin/:id" element={<UpdateAdmin />} />
 
             <Route path="/forgot-password" element={<ForgotPassword />} />
 
 
-            {/* notification route */}
-            {/* <Route path="/notification" element={<Notifications />} /> */}
 
 
+            {/* unauthorized user route */}
+            <Route path="/unauthorized" element={<h1>Unauthorized</h1>} />
             {/* Fallback Route */}
-            <Route
-              path="*"
-              element={
-                <>
-                  <h1>Fallbackroute</h1>
-                </>
-              }
-            />
+            <Route path="*" element={<><h1>Fallbackroute</h1></>}/>
           </Routes>
         </MainLayout>
       </Router>

@@ -8,7 +8,6 @@ import {
     IconDeviceMobile,
     IconInfoCircle,
     IconMail,
-    IconMapPin,
     IconSchool,
     IconSettingsCode,
     IconStar,
@@ -22,21 +21,26 @@ import ContextData from "../Contexts/Context";
 import { VerificationStatus } from "../utils/VerificationStatus";
 
 
+
+
 export const Student = () => {
     const [error, setError] = useState('')
-    const { loggedInUserProfile, student } = useContext(ContextData);
-
-
+    const { loggedInUserProfile, student } = useContext(ContextData)
 
     return (
         <div className="main-container bg-cyan-700">
             <div className="flex flex-col md:flex-row">
                 {/* <!-- Sidebar --> */}
                 <div className="w-full md:w-80 bg-cyan-800 p-8 text-white">
-                    <div className="text-center mb-6">
-                        <img src={loggedInUserProfile.avatar}
-                            alt={loggedInUserProfile.role}
-                            className="w-25 h-25 object-cover rounded-full mx-auto mb-4 border-4 border-white shadow-lg" />
+                    <div className="text-center mb-6 ">
+                        <div>
+                            <img src={loggedInUserProfile.avatar}
+                                alt={loggedInUserProfile.role}
+                                className="w-25 h-25 object-cover rounded-full mx-auto mb-4 border-4 border-white shadow-lg" />
+                        </div>
+                        {/* change profile */}
+                        <Link to={`/change-profile/${loggedInUserProfile?.id}`} className="text-sm">Change profile</Link>
+
                         <h2 className="text-2xl font-bold mb-1">{loggedInUserProfile?.userName}</h2>
                         <p className="text-purple-100 mb-1 uppercase">{loggedInUserProfile?.role} </p>
 
@@ -68,13 +72,7 @@ export const Student = () => {
                                     <p className="text-sm">{student?.phone || 'Update phone'}</p>
                                 </div>
                             </div>
-                            {/* <div className="flex items-center gap-3 mb-3">
-                                <IconMapPin size={24} stroke={2} />
-                                <div>
-                                    <p className="text-xs text-purple-200 font-bold tracking-wide">Location</p>
-                                    <p className="text-sm">{student?.location || 'Update location'}</p>
-                                </div>
-                            </div> */}
+
                             <div className="flex items-center gap-3">
                                 <IconCalendar size={24} stroke={2} />
                                 <div>

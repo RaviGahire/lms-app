@@ -13,7 +13,7 @@ const ContextProvider = ({ children }) => {
 
   const [loading, setLoading] = useState(!!getStoredToken())
 
-  console.log(student)
+  // console.log(student)
   // fetch user profile 
   const fetchUserProfile = useCallback(async () => {
 
