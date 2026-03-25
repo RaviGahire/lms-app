@@ -1,19 +1,18 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { MainLayout } from "../layout/MainLayout";
-import { Home } from "../pages/Home";
+import { Home } from "../pages/Home"; 
 import { Login } from "../components/Login";
 import { OtpVerification } from "../utils/OtpVerification";
 import { SignUp } from "../components/SignUp";
 import { BlogPage } from "../pages/BlogPage";
 import { CourseCard } from "../pages/CourseCard";
-import { Student } from "../components/Student";
+import { Student } from "../components/Students/Student";
 import { ProtectedRoute } from "../components/ProtectedRoute";
-import { UpdateStudent } from "../components/UpdateStudent"
-import { UpdateAdmin } from "../components/UpdateAdmin";
+import { UpdateStudent } from "../components/Students/UpdateStudent"
+import { UpdateAdmin } from "../components/Admin/UpdateAdmin";
 import { useEffect, useState } from "react";
 import ContextData from "../Contexts/Context";
 import { useContext } from "react";
-import { LogoutButton } from "../utils/LogoutUser";
 import { ForgotPassword } from "../utils/ForgotPassword";
 import { ChangeProfileAvatar } from "../components/ChangeProfileAvatar";
 

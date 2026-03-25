@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react'
-import { UpdateUserDetails } from "../utils/UpdateUserDetails"
+import { UpdateUserDetails } from "../../utils/UpdateUserDetails"
 import { useLocation } from 'react-router-dom'
-import { Input } from './Input'
-import ContextData from "../Contexts/Context"
+import { Input } from '../Input'
+import ContextData from "../../Contexts/Context"
 
 
 export const UpdateStudent = () => {

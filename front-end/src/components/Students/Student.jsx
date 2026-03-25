@@ -16,9 +16,9 @@ import {
 } from "@tabler/icons-react";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { LogoutButton } from "../utils/LogoutUser";
-import ContextData from "../Contexts/Context";
-import { VerificationStatus } from "../utils/VerificationStatus";
+import { LogoutButton } from "../../utils/LogoutUser";
+import ContextData from "../../Contexts/Context";
+import { VerificationStatus } from "../../utils/VerificationStatus";
 
 
 
