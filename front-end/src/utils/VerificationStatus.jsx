@@ -2,31 +2,36 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { IconCircleDashedCheck } from "@tabler/icons-react";
 
-export const VerificationStatus = ({labelOne,labelTwo, isUserVerified, userEmail, Error }) => {
-    const API_URL = import.meta.env.VITE_API_URL
+export const VerificationStatus = ({ labelOne, labelTwo, isUserVerified, userEmail, Error }) => {
+  const API_URL = import.meta.env.VITE_API_URL
 
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
-    const verifyMe = async () => {
-        try {
-            const res = await axios.post(`${API_URL}/send-email-otp`, {
-                email: userEmail,
-            });
+  const verifyMe = async () => {
+    try {
+      const res = await axios.post(`${API_URL}/send-email-otp`, {
+        email: userEmail,
+      });
 
-            if (res?.data?.success) {
-                alert('Please check your email')
-                navigate("/otp_pop_up");
-            } else {
-                console.log("Verification failed");
-                alert('Verification failed')
-            }
-        } catch (error) {
-            console.error("Error while verifying:", error);
-        }
-    };
+      if (res?.data?.success) {
+        navigate("/otp_pop_up", {
+          state: {
+            email: userEmail
+          }
+        })
+        alert('Please check your email')
 
-    return (
-        <div className="w-full text-center"> 
+      } else {
+        console.log("Verification failed");
+        alert('Verification failed')
+      }
+    } catch (error) {
+      console.error("Error while verifying:", error);
+    }
+  };
+
+  return (
+    <div className="w-full text-center">
       {isUserVerified ? (
         // Already Verified (Badge)
         <div
@@ -47,5 +52,5 @@ export const VerificationStatus = ({labelOne,labelTwo, isUserVerified, userEmail
         </button>
       )}
     </div>
-    );
+  );
 };

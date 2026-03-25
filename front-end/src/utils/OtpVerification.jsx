@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 
-export const OtpPopup = () => {
+export const OtpVerification = () => {
     const [timer, setTimer] = useState(59); // Start at 59
     const [canResend, setCanResend] = useState(false);
     const [otp, setOtp] = useState('');
@@ -12,10 +12,10 @@ export const OtpPopup = () => {
     const [success, setSuccess] = useState('');
 
     const navigate = useNavigate(); // for redirect to one route to targeted route
-    const { state } = useLocation(); // geting email from signup component
+    const { state } = useLocation(); // got email from verification status component
     const API_URL = import.meta.env.VITE_API_URL
 
-    useEffect(() => { if (!state?.email && !state?.user) { navigate("/signup"); } }) //check email and user signup data in state
+    
 
     const handleverifyOtp = async (e) => { // handle otp and user registration 
         e.preventDefault();
@@ -35,14 +35,8 @@ export const OtpPopup = () => {
                 return setError(response.data.message || "Invalid OTP")
             }
 
-            const registerRes = await axios.post(`${API_URL}/users/register`, state?.user);
+            alert("Account verified successfull")
 
-            if (registerRes.data.success) {
-                setSuccess("Account created successfully!");
-                setTimeout(() => navigate('/login'), 1000);
-            } else {
-                setError(registerRes.data.message);
-            }
         } catch (error) {
             setError(error.response?.data?.message || "Server error");
         } finally {
@@ -57,7 +51,7 @@ export const OtpPopup = () => {
         try {
             setError('');
             setSuccess('');
-            const response = await axios.post(`${API_URL}/generate-otp`, { email: state.email });
+            const response = await axios.post(`${API_URL}/send-email-otp`, { email: state?.email });
 
             if (response.data.success) {
                 setTimer(59);

@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { MainLayout } from "../layout/MainLayout";
 import { Home } from "../pages/Home";
 import { Login } from "../components/Login";
-import { OtpPopup } from "../utils/OtpPopup";
+import { OtpVerification } from "../utils/OtpVerification";
 import { SignUp } from "../components/SignUp";
 import { BlogPage } from "../pages/BlogPage";
 import { CourseCard } from "../pages/CourseCard";
@@ -11,7 +11,6 @@ import { ProtectedRoute } from "../components/ProtectedRoute";
 import { UpdateStudent } from "../components/UpdateStudent"
 import { UpdateAdmin } from "../components/UpdateAdmin";
 import { useEffect, useState } from "react";
-import { getStoredToken } from "../utils/getStoredToken";
 import ContextData from "../Contexts/Context";
 import { useContext } from "react";
 import { LogoutButton } from "../utils/LogoutUser";
@@ -46,7 +45,7 @@ export const AppRoutes = () => {
             {/* Auth Routes */}
             <Route path="/signup" element={<SignUp />} />
 
-            <Route path="/otp_pop_up" element={<OtpPopup />} />
+            <Route path="/otp_pop_up" element={<OtpVerification />} />
 
             <Route path="/login" element={<Login loggedInUser={setLoggedInUser} />} />
 
@@ -89,15 +88,14 @@ export const AppRoutes = () => {
               }
             />
             {/* unauthorized user route */}
-
             <Route path="/unauthorized" element={<h1>Unauthorized</h1>} />
 
             {/* Update route */}
-            <Route path="/update_student/:id" element={<UpdateStudent />} />
+            <Route path="/update_student" element={<UpdateStudent />} />
 
             <Route path="/update_admin/:id" element={<UpdateAdmin />} />
 
-            <Route path="/update_super_admin/:id" element={<UpdateAdmin />} />
+            {/* <Route path="/update_super_admin/:id" element={<UpdateAdmin />} /> */}
 
             <Route path="/forgot-password" element={<ForgotPassword />} />
 
@@ -107,14 +105,14 @@ export const AppRoutes = () => {
 
 
             {/* Fallback Route */}
-            {/* <Route
+            <Route
               path="*"
               element={
                 <>
                   <h1>Fallbackroute</h1>
                 </>
               }
-            /> */}
+            />
           </Routes>
         </MainLayout>
       </Router>
