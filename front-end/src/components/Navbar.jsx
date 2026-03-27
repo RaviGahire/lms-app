@@ -1,6 +1,6 @@
 import React, { useState, useContext, useMemo } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import  ContextData  from '../Contexts/Context'; // Adjust path
+import ContextData from '../Contexts/Context'; // Adjust path
 import { IconBellRinging, IconMessageDots, IconChevronRight } from '@tabler/icons-react'; // Adjust if using different library
 
 const NAV_ITEMS = [
@@ -13,7 +13,8 @@ const NAV_ITEMS = [
 const ROLE_PATHS = {
     student: "/student",
     admin: "/admin",
-    "super-admin": "/super-admin",
+    instructor: "/instructor"
+
 };
 
 export const Navbar = () => {
@@ -23,9 +24,7 @@ export const Navbar = () => {
     const { userName, role, email } = loggedInUserProfile || {};
 
     // Calculate path safely
-    const dashboardPath = useMemo(() => {
-        return ROLE_PATHS[role] || "/login";
-    }, [role]);
+   const dashboardPath = ROLE_PATHS[role?.toLowerCase()] || "/login"
 
     // Helper to get initials for the avatar
     const getInitials = (name) => {
@@ -99,7 +98,7 @@ export const Navbar = () => {
             </nav>
 
             {/* Mobile menu backdrop */}
-            <div 
+            <div
                 className={`fixed inset-0 bg-black/50 md:hidden z-40 transition-opacity duration-300 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
                 onClick={closeMenu}
             />

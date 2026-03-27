@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom"
 
 export const ProtectedRoute = ({ loading, user, allowedUserRoles, children }) => {
 
+    // console.log(user)
    
        if (loading || (user === null && !user)) {
         return  (

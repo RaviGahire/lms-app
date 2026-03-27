@@ -10,6 +10,9 @@ const ContextProvider = ({ children }) => {
   const [loggedInUserProfile, setLoggedInUserProfile] = useState(null) // set the loggedIn user data to use globally
 
   const [student, setStudent] = useState(null) // get current student data
+  const [instructor, setInstructor] = useState(null) // get current student data
+  const [admin, setAdmin] = useState(null) // get current student data
+  
 
   const [loading, setLoading] = useState(!!getStoredToken())
 
@@ -24,6 +27,8 @@ const ContextProvider = ({ children }) => {
     }
 
     const student = await fetchStudentData(token)
+    const instructor = await fetchInsrtuctorData(token)
+    // const admin = await fetchAdminData(token)
 
 
     setStudent({
@@ -40,6 +45,22 @@ const ContextProvider = ({ children }) => {
       joined: student.student?.createdAt
 
     })
+
+    setInstructor({
+      id: student.student?._id,
+      phone: student.student?.phone,
+      college: student.student?.college,
+      dob: student.student?.dob,
+      state: student.student?.state,
+      city: student.student?.city,
+      pincode: student.student?.pincode,
+      gender: student.student?.gender,
+      nationality: student.student?.nationality,
+      qualification: student.student?.qualification,
+      joined: student.student?.createdAt
+
+    })
+
 
     setLoading(true);
 
@@ -84,7 +105,7 @@ const ContextProvider = ({ children }) => {
 
 
   return (
-    <ContextData.Provider value={{ loggedInUserProfile, loading, userLogout,student, fetchUserProfile }}>
+    <ContextData.Provider value={{ loggedInUserProfile, loading, userLogout,student, instructor,admin, fetchUserProfile }}>
       {children}
     </ContextData.Provider>
   );
@@ -118,4 +139,54 @@ export const fetchStudentData = async (token) => {
 
 }
 
+export const fetchInsrtuctorData = async (token)=>{
+  try {
 
+    if (!token) {
+      console.error("Fetch aborted: No authentication token provided.");
+      return null;
+    }
+    const student = await axios.get(`${API_URL}students/current-studs`, { headers: { Authorization: `Bearer ${token}` } })
+
+    if (!student) {
+      console.error("Student not found yet");
+      return null;
+    }
+
+    return student?.data
+
+  } catch (error) {
+    const errorMessage = error.response?.data?.message || error.message;
+    console.error(`Error fetching student data: ${errorMessage}`)
+    throw error
+  }
+
+
+
+}
+
+export const fetchAdminData = async (token)=>{
+  try {
+
+    if (!token) {
+      console.error("Fetch aborted: No authentication token provided.");
+      return null;
+    }
+    const student = await axios.get(`${API_URL}students/current-studs`, { headers: { Authorization: `Bearer ${token}` } })
+
+    if (!student) {
+      console.error("Student not found yet");
+      return null;
+    }
+
+    return student?.data
+
+  } catch (error) {
+    const errorMessage = error.response?.data?.message || error.message;
+    console.error(`Error fetching student data: ${errorMessage}`)
+    throw error
+  }
+
+
+
+}

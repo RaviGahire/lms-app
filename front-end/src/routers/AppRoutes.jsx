@@ -15,6 +15,7 @@ import ContextData from "../Contexts/Context";
 import { useContext } from "react";
 import { ForgotPassword } from "../utils/ForgotPassword";
 import { ChangeProfileAvatar } from "../components/ChangeProfileAvatar";
+import { InstructorDashboard } from "../components/Instructor/InstructorDashboard";
 
 
 export const AppRoutes = () => {
@@ -53,12 +54,12 @@ export const AppRoutes = () => {
             {/* Dashboard routes */}
             <Route
               path="/admin"
-              element={<ProtectedRoute loading={loading} user={loggedInUser} allowedUserRoles={"admin"}><h1>Admin</h1></ProtectedRoute>
+              element={<ProtectedRoute loading={loading} user={loggedInUserProfile} allowedUserRoles={"admin"}><h1>Admin</h1></ProtectedRoute>
               }
             />
             <Route
               path="/instructor"
-              element={<ProtectedRoute loading={loading} user={loggedInUser} allowedUserRoles={"instructor"}> <h1>Instructer</h1> </ProtectedRoute>
+              element={<ProtectedRoute loading={loading} user={loggedInUserProfile} allowedUserRoles={"instructor"}> <InstructorDashboard/> </ProtectedRoute>
               }
             />
             <Route
