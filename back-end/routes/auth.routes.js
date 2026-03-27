@@ -10,7 +10,8 @@ const { userRegister ,
   userAccountDeleteRequest, 
   changeCurrentUserPassword, 
   forgotPassword, 
-  updateUserAccountDetails } = require('../controllers/auth.controller')
+  updateUserAccountDetails, 
+  getUserById} = require('../controllers/auth.controller')
 
 const { verifyUserOtp } = require('../middlewares/otp.middleware')
 const { verifyJwtToken } = require('../middlewares/auth.middleware')
@@ -36,6 +37,8 @@ router.post('/login' , userLogin)
 router.get('/current-user',verifyJwtToken,getCurrentUser)
 //all users
 router.get('/all/users',getAllUsers)
+
+router.get('/:id',getUserById)
 
 //CRUD OPS ROUTES ON USER 
 

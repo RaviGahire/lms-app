@@ -22,15 +22,18 @@ const courseSchema = new mongoose.Schema({
 
     },
 
-    createdBy: {
-        type: mongoose.Types.ObjectId,
-        ref: "Student"
-    },
-    deletedBy: {
-        type: mongoose.Types.ObjectId,
+    createdBy: [{
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User"
-    },
-    students: [
+    }],
+
+
+    deletedBy: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }],
+   
+    enrolledBy: [
         {
             type: mongoose.Types.ObjectId,
             ref: "Student"

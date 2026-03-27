@@ -4,23 +4,18 @@ const upload = require('../middlewares/multer.middlerware')
 
 const { getAllCoureses, addNewCoureses, updateCourses, deleteCourses, enrollCourses } = require('../controllers/course.controller')
 
-const authorizedRoles = require('../middlewares/authorized.role')
 const { verifyJwtToken } = require("../middlewares/auth.middleware")
 const authorizeRoles = require("../middlewares/authorized.role")
 
-
-
-
 router.get('/all-courses', getAllCoureses)
-//crud ops
-router.post('/create-courses',verifyJwtToken,authorizeRoles("student","admin"), upload.single("coverImage"), addNewCoureses)
-   
-router.put('/update-courses/:courseId',authorizeRoles("student","admin"),upload.single("coverImage"),updateCourses)
 
+//crud ops
+router.post('/create-courses',verifyJwtToken,authorizeRoles("instructor"), upload.single("coverImage"), addNewCoureses)
+   
+router.put('/update-courses/:courseId',authorizeRoles("instructor"),upload.single("coverImage"),updateCourses)
 
 router.delete('/delete-courses/:courseId',  deleteCourses)
 
 router.post('/:courseId/enroll', verifyJwtToken, enrollCourses)
-
 
 module.exports = router;
