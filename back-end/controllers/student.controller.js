@@ -2,10 +2,6 @@ const Course = require('../model/coures.model')
 const Student = require('../model/student.model')
 // const User = require('../model/user.model')
 
-
-
-
-
 //get all user role is student
 exports.getAllStudents = async (req, res) => {
 
@@ -61,12 +57,9 @@ exports.getStudentProfile = async (req, res) => {
 };
 
 exports.updateStudentDetails = async (req, res) => {
-
     const studId = req.params.id || req.user._id
-
-    // console.log(studId)
-
     const updatedData = req.body
+    // console.log(studId)
 
     if (!studId || Object.keys(updatedData).length === 0) {
         return res.status(400).json({
@@ -114,9 +107,9 @@ exports.getEnrolledCourses = async (req, res) => {
             })
         }
 
-       
+
         const enrollments = await Student.find({ student: userId })
-            .populate("course"); 
+            .populate("course");
 
 
         if (!enrollments || enrollments.length === 0) {
@@ -126,7 +119,7 @@ exports.getEnrolledCourses = async (req, res) => {
             });
         }
 
-  
+
         const courses = enrollments.map(item => item.course);
 
         return res.status(200).json({
