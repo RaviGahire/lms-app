@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { IconCamera, IconLogout, IconUserEdit, IconPlus, IconSettings, IconUsers } from '@tabler/icons-react'
 import ContextData  from '../../Contexts/Context'; 
 import { CreateCourseView } from './CreateCourseView';
+import { UpdateCourse } from './UpdateCourse';
 
 export const InstructorDashboard = () => {
 
@@ -111,9 +112,9 @@ export const InstructorDashboard = () => {
                     </nav>
 
                     {/* Dynamic Rendering Area */}
-                    <div className="bg-white border border-gray-200 rounded-4xl p-8 min-h-150 shadow-sm">
+                    <div className="bg-white border border-gray-200 rounded-4xl p-4 min-h-100 shadow-sm ">
                         {activeTab === 'create' && <CreateCourseView />}
-                        {activeTab === 'update' && <div className="text-center py-20 text-gray-400">Select a course to edit...</div>}
+                        {activeTab === 'update' && <UpdateCourse/>}
                         {activeTab === 'students' && <div className="text-center py-20 text-gray-400">Viewing enrolled students list...</div>}
                     </div>
                 </main>

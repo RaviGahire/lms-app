@@ -37,7 +37,7 @@ export const CreateCourseView = () => {
                 }
             })
 
-            console.log(response.data);
+            // console.log(response.data);
 
           
 
@@ -52,7 +52,7 @@ export const CreateCourseView = () => {
 
         setCourseData({ ...courseData, [name]: files ? files[0] : value })
     }
-    console.log(courseData)
+    // console.log(courseData)
 
     return (
         <div className="max-w-3xl animate-in fade-in duration-500">
