@@ -12,6 +12,7 @@ import {
     IconSettingsCode,
     IconStar,
     IconUser,
+    IconUserEdit,
     IconWorld
 } from "@tabler/icons-react";
 import { useContext, useState } from "react";
@@ -146,9 +147,11 @@ export const Student = () => {
                         </div>
 
                         {/* upadte btn and logout btn */}
-                        <div className="flex justify-between mt-8">
-                            <Link to={`/update_student`} className="px-4 py-2 rounded-md cursor-pointer bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition">
-                                Update / Edit
+                        <div className="flex flex-col justify-between gap-1.5 mt-8">
+                            <Link
+                                to={`/update_student`}
+                                className="flex items-center justify-center gap-2 w-full py-3 bg-white border border-gray-200 rounded-xl font-bold text-gray-700 hover:bg-gray-50 transition active:scale-95">
+                                <IconUserEdit size={20} /> Update Profile
                             </Link>
                             <LogoutButton />
                         </div>
