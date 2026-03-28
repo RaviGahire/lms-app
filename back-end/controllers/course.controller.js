@@ -5,7 +5,7 @@ const uploadOnCloudinary = require('../utils/Cloudinary')
 exports.getAllCoureses = async (req, res) => {
     try {
 
-        const courses = await Course.find()
+        const courses = await Course.find().populate("createdBy",'userName')
 
         if (!courses.length === 0) {
             return res.status(404).json({
@@ -32,7 +32,7 @@ exports.getAllCoureses = async (req, res) => {
     }
 }
 
-exports.addNewCoureses = async (req, res) => {
+exports.addNewCourses = async (req, res) => {
     const userId = req.user?._id
     const data = req.body
     const file = req.file;
@@ -60,6 +60,7 @@ exports.addNewCoureses = async (req, res) => {
             })
         }
         data.createdBy = userId;
+        
         const { title, description, duration, createdBy } = data;
 
 
