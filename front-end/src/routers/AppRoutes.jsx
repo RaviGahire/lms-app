@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { MainLayout } from "../layout/MainLayout";
-import { Home } from "../pages/Home"; 
+import { Home } from "../pages/Home";
 import { Login } from "../components/Login";
 import { OtpVerification } from "../utils/OtpVerification";
 import { SignUp } from "../components/SignUp";
@@ -16,6 +16,9 @@ import { useContext } from "react";
 import { ForgotPassword } from "../utils/ForgotPassword";
 import { ChangeProfileAvatar } from "../components/ChangeProfileAvatar";
 import { InstructorDashboard } from "../components/Instructor/InstructorDashboard";
+import { CourseLayout } from "../components/Courses/CourseLayout";
+import { UpdateCourse } from "../components/Courses/UpdateCourse";
+import { CreateCourseView } from "../components/Courses/CreateCourseView";
 
 
 export const AppRoutes = () => {
@@ -59,7 +62,7 @@ export const AppRoutes = () => {
             />
             <Route
               path="/instructor"
-              element={<ProtectedRoute loading={loading} user={loggedInUserProfile} allowedUserRoles={"instructor"}> <InstructorDashboard/> </ProtectedRoute>
+              element={<ProtectedRoute loading={loading} user={loggedInUserProfile} allowedUserRoles={"instructor"}> <InstructorDashboard /> </ProtectedRoute>
               }
             />
             <Route
@@ -77,13 +80,19 @@ export const AppRoutes = () => {
 
             <Route path="/forgot-password" element={<ForgotPassword />} />
 
+            {/* Courses Routes */}
+            <Route path="/create/courses" element={<CreateCourseView />} />
+            <Route path="/update/course" element={<CourseLayout><UpdateCourse /></CourseLayout>} />
+            <Route path="/all/course" element={<CourseLayout />} />
+            <Route path="/enrolled/students" element={<CourseLayout />} />
+
 
 
 
             {/* unauthorized user route */}
             <Route path="/unauthorized" element={<h1>Unauthorized</h1>} />
             {/* Fallback Route */}
-            <Route path="*" element={<><h1>Fallbackroute</h1></>}/>
+            <Route path="*" element={<><h1>Fallbackroute</h1></>} />
           </Routes>
         </MainLayout>
       </Router>
