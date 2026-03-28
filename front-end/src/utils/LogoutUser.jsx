@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import ContextData from "../Contexts/Context"
+import { IconLogout } from "@tabler/icons-react"
 
 
 export const LogoutButton = () => {
@@ -18,8 +19,11 @@ export const LogoutButton = () => {
 
     }
     return (
-        <button onClick={handlelogout} className="px-4 py-2 rounded-md cursor-pointer bg-red-600 text-white text-sm font-medium hover:bg-red-700 transition">
-            Logout
+        <button
+            onClick={handlelogout}
+            className="flex items-center cursor-pointer justify-center gap-2 w-full py-3 bg-red-50 text-red-600 rounded-xl font-bold hover:bg-red-100 transition active:scale-95"
+        >
+            <IconLogout size={20} /> Logout
         </button>
     )
 }
