@@ -9,10 +9,7 @@ const adminSchema = mongoose.Schema({
         type: String,
         trim: true
     },
-    permissions: {
-        type: [String],
-        default: ['edit','update','delete']
-    },
+  
 
 }, { timestamps: true })
 
