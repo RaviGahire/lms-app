@@ -9,8 +9,11 @@ const instructorSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
+    price: {
+        type: Number,
+    },
     experience: {
-        type: Number, 
+        type: Number,
         default: 0
     },
     expertise: {
@@ -22,18 +25,15 @@ const instructorSchema = new mongoose.Schema({
         trim: true
     },
     rating: {
-        type: Number,
-        default: 0
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     },
-
     courses: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Course"
         }
     ],
-
-
 }, { timestamps: true })
 const Instructor = mongoose.model("Instructor", instructorSchema);
 

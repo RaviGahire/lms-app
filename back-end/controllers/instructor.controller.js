@@ -49,22 +49,20 @@ exports.getInstructorProfile = async (req, res) => {
 //update 
 exports.updateInstructorProfile = async (req, res) => {
 
+    const instructorId = req.user?._id || req.params.id
+    const updatedData = req.body
+
+    if (!instructorId || Object.keys(updatedData).length === 0) {
+        return res.status(400).json({
+            success: false,
+            message: "Instructor ID or update data is missing"
+        })
+    }
+
+
     try {
-        const instructorId = req.instructor?._id;
-        const formData = req.body;
-
-        if (!instructorId) {
-            return res.status(401).json({
-                success: false,
-                message: "Unauthorized: Instructor ID not found",
-            })
-        }
-
-        const instructor = await Instructor.findByIdAndUpdate(
-            instructorId,
-            { $set: formData },
-            { new: true, runValidators: true }
-        )
+        const instructor = await Instructor.findByIdAndUpdate(instructorId, updatedData, { new: true })
+            .populate('user', 'userName roles email isVerified avatar')
 
         if (!instructor) {
             return res.status(404).json({
@@ -91,7 +89,7 @@ exports.updateInstructorProfile = async (req, res) => {
 //checkEarnings
 exports.checkEarnings = async (req, res) => {
     try {
-        const instructorId = req.instructor?._id;
+        const instructorId = req.user?._id;
 
         if (!instructorId) {
             return res.status(401).json({
