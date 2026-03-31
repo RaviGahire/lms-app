@@ -53,9 +53,4 @@ router.patch('/change/p' , verifyJwtToken , changeCurrentUserPassword)
 
 router.patch("/forgot-password",forgotPassword)
 
-
-
-
-
-
 module.exports = router;

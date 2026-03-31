@@ -1,12 +1,9 @@
 const express = require('express')
-
 const router = express.Router()
-
 const { verifyJwtToken } = require("../middlewares/auth.middleware")
-
 const authorizeRoles = require("../middlewares/authorized.role")
-
 const {deleteUser} = require('../controllers/auth.controller')
+
 
 //Admin can deleted user using id 
 router.route('/delete/u/:id').delete(deleteUser)
