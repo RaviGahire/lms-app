@@ -4,7 +4,7 @@ const createStudentProfile = async (req, res, next) => {
     try {
         const userId = req.user._id
        
-        let student = await Student.findOne({ user: userId })
+        let student = await Student.findOne({ user: userId }).populate('user', 'userName roles email isVerified avatar')
 
         if (!student) {
             await Student.findOneAndUpdate(
@@ -12,7 +12,7 @@ const createStudentProfile = async (req, res, next) => {
                 { $setOnInsert: { user:userId } }, //ensures that the 'user' field is only set on the FIRST creation
                 { upsert: true, new: true } //creates it if it doesn't exist.
 
-            );
+            )
  
         }
 

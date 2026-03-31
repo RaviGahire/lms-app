@@ -48,7 +48,7 @@ exports.getStudentProfile = async (req, res) => {
 
         return res.status(200).json({
             success: true,
-            message: "Student and User data fetched",
+            message: "Student data fetched",
             student
         });
     } catch (error) {

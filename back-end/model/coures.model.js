@@ -15,11 +15,15 @@ const courseSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    price: {
+        type: Number,
+        default: 0
+
+    },
     coverImage: {
         type: String,
         required: true,
         trim: true
-
     },
 
     createdBy: [{
@@ -32,15 +36,13 @@ const courseSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     }],
-   
+
     enrolledBy: [
         {
             type: mongoose.Types.ObjectId,
             ref: "Student"
         }
     ]
-
-
 
 }, { timestamps: true })
 
