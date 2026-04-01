@@ -14,7 +14,6 @@ export const Student = () => {
             <div className="flex flex-col md:flex-row">
                 {/* <!-- Sidebar --> */}
                 <StudentSidebar />
-
                 {/* <!-- Main Content --> */}
                 {/*Headings */}
                 <div className="flex-1 p-8">

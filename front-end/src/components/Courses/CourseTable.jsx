@@ -4,7 +4,7 @@ import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 
 
-export const CourseTable = ({ courses }) => {
+export const CourseTable = ({ courses,onEditCourse  }) => {
 
     const [search, setSearch] = useState({ query: '' })
     const [filter, setFilter] = useState([])
@@ -26,8 +26,8 @@ export const CourseTable = ({ courses }) => {
     }
 
 
-    const handleEdit = () => {
-        alert("hello")
+    const handleEdit = (course) => {
+      onEditCourse(course)
 
     }
 
@@ -90,9 +90,9 @@ export const CourseTable = ({ courses }) => {
                                     <td className="py-3 px-6">{course.createdBy[0].userName}</td>
                                     <td className="py-3 px-6 text-center">
                                         <div className="flex item-center justify-center gap-3">
-                                            <Link to={`/edit/course`} className="text-blue-500 hover:text-blue-700 font-medium cursor-pointer">
+                                            <button onClick={() => handleEdit(course)} className="text-blue-500 hover:text-blue-700 font-medium cursor-pointer">
                                                 <IconEdit stroke={2} />
-                                            </Link>
+                                            </button>
                                             <span className="text-gray-300 hidden">|</span>
                                             <button  hidden className="text-red-500 hover:text-red-700 font-medium cursor-pointer">
                                                 <IconTrash stroke={2} />

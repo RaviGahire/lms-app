@@ -1,7 +1,7 @@
 export const SuperAdmin = () => {
     return (
         <>
-            {/* <!-- Top Navigation Bar -->
+          
             <nav className="bg-white ">
                 <div className="max-w-7xl mx-auto ">
                     <div className="flex justify-between h-16">
@@ -28,7 +28,7 @@ export const SuperAdmin = () => {
                         </div>
                     </div>
                 </div>
-            </nav> */}
+            </nav>
 
             <div className="flex">
                 {/* <!-- Sidebar --> */}

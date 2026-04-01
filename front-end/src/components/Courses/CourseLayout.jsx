@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { getAllCourses } from "../../utils/GetCouresDetails"
 import { CourseTable } from "./CourseTable"
 
-export const CourseLayout = ({ childern }) => {
+export const CourseLayout = ({onEditCourse , childern }) => {
     const [courses, setCourses] = useState([])
 
 
@@ -17,7 +17,7 @@ export const CourseLayout = ({ childern }) => {
 
     return (
         <>
-            <CourseTable courses={courses} />
+            <CourseTable courses={courses} onEditCourse={onEditCourse}/>
             <div className="bg-gray-400">{childern}</div>
         </>
     )

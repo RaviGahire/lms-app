@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react'
 import { Link } from "react-router-dom";
 import { LogoutButton } from "../../utils/LogoutUser";
 import { VerificationStatus } from "../../utils/VerificationStatus"
-
 import ContextData from "../../Contexts/Context"
 import {
     IconBuilding,
@@ -21,7 +20,7 @@ export const StudentSidebar = () => {
     const { loggedInUserProfile, student } = useContext(ContextData)
 
     return (
-        <div className="w-full md:w-80 bg-cyan-800 p-8 text-white">
+        <aside className="w-full md:w-80 bg-cyan-800 p-8 text-white">
             <div className="text-center mb-6 ">
                 <div>
                     <img src={loggedInUserProfile.avatar}
@@ -138,13 +137,13 @@ export const StudentSidebar = () => {
                 {/* upadte btn and logout btn */}
                 <div className="flex flex-col justify-between gap-1.5 mt-8">
                     <Link
-                        to={`/update_student`}
+                        to={`/update-student`}
                         className="flex items-center justify-center gap-2 w-full py-3 bg-white border border-gray-200 rounded-xl font-bold text-gray-700 hover:bg-gray-50 transition active:scale-95">
                         <IconUserEdit size={20} /> Update Profile
                     </Link>
                     <LogoutButton />
                 </div>
             </div>
-        </div>
+        </aside>
     )
 }

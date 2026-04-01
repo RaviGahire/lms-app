@@ -6,17 +6,16 @@ import axios from "axios"
 const API_URL = import.meta.env.VITE_API_URL
 
 const ContextProvider = ({ children }) => {
-
   const [loggedInUserProfile, setLoggedInUserProfile] = useState(null) // set the loggedIn user data to use globally
 
+ const [loading, setLoading] = useState(!!getStoredToken())
   const [student, setStudent] = useState(null) // get current student data
-  const [instructor, setInstructor] = useState(null) // get current student data
-  const [admin, setAdmin] = useState(null) // get current student data
+  const [instructor, setInstructor] = useState(null)
+  const [admin, setAdmin] = useState(null) 
   
+ 
 
-  const [loading, setLoading] = useState(!!getStoredToken())
-
-  // console.log(student)
+  // console.log(instructor)
   // fetch user profile 
   const fetchUserProfile = useCallback(async () => {
 
@@ -30,6 +29,7 @@ const ContextProvider = ({ children }) => {
     const instructor = await fetchInsrtuctorData(token)
     // const admin = await fetchAdminData(token)
 
+    console.log(instructor)
 
     setStudent({
       id: student.student?._id,
@@ -46,20 +46,20 @@ const ContextProvider = ({ children }) => {
 
     })
 
-    setInstructor({
-      id: student.student?._id,
-      phone: student.student?.phone,
-      college: student.student?.college,
-      dob: student.student?.dob,
-      state: student.student?.state,
-      city: student.student?.city,
-      pincode: student.student?.pincode,
-      gender: student.student?.gender,
-      nationality: student.student?.nationality,
-      qualification: student.student?.qualification,
-      joined: student.student?.createdAt
+    // setInstructor({
+    //   id: student.student?._id,
+    //   phone: student.student?.phone,
+    //   college: student.student?.college,
+    //   dob: student.student?.dob,
+    //   state: student.student?.state,
+    //   city: student.student?.city,
+    //   pincode: student.student?.pincode,
+    //   gender: student.student?.gender,
+    //   nationality: student.student?.nationality,
+    //   qualification: student.student?.qualification,
+    //   joined: student.student?.createdAt
 
-    })
+    // })
 
 
     setLoading(true);
@@ -105,7 +105,7 @@ const ContextProvider = ({ children }) => {
 
 
   return (
-    <ContextData.Provider value={{ loggedInUserProfile, loading, userLogout,student, instructor,admin, fetchUserProfile }}>
+    <ContextData.Provider value={{ loggedInUserProfile, loading, userLogout, student, instructor,admin, fetchUserProfile }}>
       {children}
     </ContextData.Provider>
   );

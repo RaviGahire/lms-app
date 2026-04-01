@@ -19,6 +19,7 @@ import { InstructorDashboard } from "../components/Instructor/InstructorDashboar
 import { CourseLayout } from "../components/Courses/CourseLayout";
 import { UpdateCourse } from "../components/Courses/UpdateCourse";
 import { CreateCourseView } from "../components/Courses/CreateCourseView";
+import { InstructorUpdate } from "../components/Instructor/InstructorUpdate";
 
 
 export const AppRoutes = () => {
@@ -72,11 +73,12 @@ export const AppRoutes = () => {
             />
 
             {/* CRUD route */}
-            <Route path="/update_student" element={<UpdateStudent />} />
+            <Route path="/update-student" element={<UpdateStudent />} />
+            <Route path="/update-instructor" element={<InstructorUpdate />} />
 
             <Route path="/change-profile/:id" element={<ChangeProfileAvatar />} />
 
-            <Route path="/update_admin/:id" element={<UpdateAdmin />} />
+            <Route path="/update-admin/" element={<UpdateAdmin />} />
 
             <Route path="/forgot-password" element={<ForgotPassword />} />
 
