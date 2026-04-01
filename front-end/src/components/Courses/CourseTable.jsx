@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { SelectInput, Input } from "../Input"
+import { Input } from "../Input"
 import { IconEdit, IconTrash } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+
 
 
 export const CourseTable = ({ courses,onEditCourse  }) => {
@@ -30,9 +30,6 @@ export const CourseTable = ({ courses,onEditCourse  }) => {
       onEditCourse(course)
 
     }
-
-
-
 
     useEffect(() => {
         setFilter(courses)
