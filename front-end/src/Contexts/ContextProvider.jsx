@@ -42,7 +42,8 @@ const ContextProvider = ({ children }) => {
       gender: student.student?.gender,
       nationality: student.student?.nationality,
       qualification: student.student?.qualification,
-      joined: student.student?.createdAt
+      joined: student.student?.createdAt,
+      course: student.student?.course
 
     })
 

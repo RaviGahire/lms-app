@@ -1,12 +1,16 @@
-import { useState } from "react"
+import { useContext} from "react"
 import {
     IconAward,
     IconBooks,
     IconSettingsCode,
 } from "@tabler/icons-react";
+import ContextData from "../../Contexts/Context";
 export const StudentCurriculumCards = () => {
-    
-    const [error, setError] = useState('')
+
+    const {student}=useContext(ContextData)
+
+    console.log(student)
+  
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             {/* Card-1 */}
@@ -23,7 +27,7 @@ export const StudentCurriculumCards = () => {
 
                 {/* Main Metric */}
                 <div className="flex items-baseline gap-2 mb-6">
-                    <h2 className="text-5xl font-bold text-white tracking-tighter">12</h2>
+                    <h2 className="text-5xl font-bold text-white tracking-tighter">{Array.isArray(student?.course)? ('0'+ student.course.length) : 0}</h2>
                     <div className="flex flex-col">
                         <span className="text-white/80 text-xs font-medium leading-none">Total</span>
                         <span className="text-emerald-400 text-xs font-bold uppercase tracking-tighter">Active</span>
