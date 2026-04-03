@@ -8,7 +8,6 @@ export const CourseLayout = ({onEditCourse , childern }) => {
     const { loggedInUserProfile } = useContext(ContextData)
     const [courses, setCourses] = useState([])
 
-
      useEffect(() => {
         const getCourseData = async () => {
             const data = await getAllCourses()

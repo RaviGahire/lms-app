@@ -3,6 +3,9 @@ import { IconPlus, IconSettings, IconUsers } from '@tabler/icons-react'
 import { CreateCourseView } from '../Courses/CreateCourseView'
 import { CourseLayout } from '../Courses/CourseLayout'
 import { UpdateCourse } from '../Courses/UpdateCourse'
+import { EnrolledStudents } from '../Courses/EnrolledStudents'
+
+
 
 
 export const InstructorNavbar = () => {
@@ -22,7 +25,7 @@ export const InstructorNavbar = () => {
                     { id: 'create', name: 'Create Course', icon: <IconPlus size={18} /> },
                     { id: 'update', name: 'Update Course', icon: <IconSettings size={18} /> },
                     { id: 'courses', name: 'All Courses', icon: <IconSettings size={18} /> },
-                    { id: 'students', name: 'Students Enrolled', icon: <IconUsers size={18} /> },
+                    { id: 'students', name: 'Enrolled Students', icon: <IconUsers size={18} /> },
                 ].map((tab) => (
                     <button
                         key={tab.id}
@@ -41,7 +44,7 @@ export const InstructorNavbar = () => {
                 {activeTab === 'create' && <CreateCourseView />}
                 {activeTab === 'update' && <UpdateCourse course={selectedCourseId} />}
                 {activeTab === 'courses' && <CourseLayout onEditCourse={handleEditCourse} />}
-                {activeTab === 'students' && <div className="text-center py-20 text-gray-400">Viewing enrolled students list...</div>}
+                {activeTab === 'students' && <div className="text-center py-20 text-gray-400"><EnrolledStudents/></div>}
             </div>
         </>
 

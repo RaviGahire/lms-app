@@ -46,20 +46,20 @@ const ContextProvider = ({ children }) => {
 
     })
 
-    // setInstructor({
-    //   id: student.student?._id,
-    //   phone: student.student?.phone,
-    //   college: student.student?.college,
-    //   dob: student.student?.dob,
-    //   state: student.student?.state,
-    //   city: student.student?.city,
-    //   pincode: student.student?.pincode,
-    //   gender: student.student?.gender,
-    //   nationality: student.student?.nationality,
-    //   qualification: student.student?.qualification,
-    //   joined: student.student?.createdAt
+    setInstructor({
+      id: student.student?._id,
+      phone: student.student?.phone,
+      college: student.student?.college,
+      dob: student.student?.dob,
+      state: student.student?.state,
+      city: student.student?.city,
+      pincode: student.student?.pincode,
+      gender: student.student?.gender,
+      nationality: student.student?.nationality,
+      qualification: student.student?.qualification,
+      joined: student.student?.createdAt
 
-    // })
+    })
 
 
     setLoading(true);

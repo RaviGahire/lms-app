@@ -44,7 +44,7 @@ export const AppRoutes = () => {
 
             {/* Pages routes */}
             <Route path="/" element={<Home />} />
-            <Route path="/courses" element={<CourseCard />} />
+            <Route path="/courses" element={<ProtectedRoute loading={loading} user={loggedInUserProfile} allowedUserRoles={"student"}><CourseCard /></ProtectedRoute>} />
             <Route path="/blogs" element={<BlogPage />} />
             <Route path="/aboutus" element={<div>aboutus Page</div>} />
 
@@ -95,6 +95,10 @@ export const AppRoutes = () => {
             <Route path="/unauthorized" element={<h1>Unauthorized</h1>} />
             {/* Fallback Route */}
             <Route path="*" element={<><h1>Fallbackroute</h1></>} />
+
+            <Route path="/verify-profile" element={<><h1>Please verify your profile to access this page</h1></>} />
+
+
           </Routes>
         </MainLayout>
       </Router>
