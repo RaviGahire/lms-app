@@ -2,10 +2,10 @@ const mongoose = require('mongoose')
 
 //created user schema instance 
 const studentSchema = new mongoose.Schema({
-    user: [{
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
-    }],
+    },
 
     college: {
         type: String,
@@ -22,13 +22,13 @@ const studentSchema = new mongoose.Schema({
 
     },
     pincode: {
-        type:Number
+        type: Number
     },
     state: {
         type: String,
         trim: true
     },
-    
+
     gender: {
         type: String,
         trim: true
@@ -46,7 +46,13 @@ const studentSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-
+    course: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Course",
+            required: true
+        }
+    ]
 
 },
     { timestamps: true }

@@ -5,7 +5,7 @@ const uploadOnCloudinary = require('../utils/Cloudinary')
 exports.getAllCoureses = async (req, res) => {
     try {
 
-        const courses = await Course.find().populate("createdBy",'userName')
+        const courses = await Course.find().populate("createdBy", 'userName')
 
         if (!courses.length === 0) {
             return res.status(404).json({
@@ -60,7 +60,7 @@ exports.addNewCourses = async (req, res) => {
             })
         }
         data.createdBy = userId;
-        
+
         const { title, description, duration, createdBy } = data;
 
 
@@ -226,44 +226,51 @@ exports.deleteCourses = async (req, res) => {
 }
 
 exports.enrollCourses = async (req, res) => {
-    const { courseId } = req.params;
-    const userId = req.user?._id;
+    const courseId = req.params?.courseId
+    const userId = req.user?._id
+
+    // console.log(courseId)
+    if (!userId) {
+        return res.status(401).json({
+            success: false,
+            message: "Unauthorized user",
+        })
+    }
+
+    if (!courseId) {
+        return res.status(400).json({
+            success: false,
+            message: "Course ID is required",
+        })
+    }
 
     try {
-        if (!userId) {
-            return res.status(401).json({
-                success: false,
-                message: "Unauthorized user",
-            });
-        }
 
-        if (!courseId) {
-            return res.status(400).json({
-                success: false,
-                message: "Course ID is required",
-            });
-        }
 
-        const course = await Course.findById(courseId);
+        const course = await Course.findById(courseId)
+
+        // console.log(course)
 
         if (!course) {
             return res.status(404).json({
                 success: false,
                 message: "Course not found",
-            });
+            })
         }
 
         if (course.createdBy.toString() === userId.toString()) {
             return res.status(400).json({
                 success: false,
                 message: "You cannot enroll in your own course",
-            });
+            })
         }
 
         const alreadyEnrolled = await Student.findOne({
-            student: userId,
+            user: userId,
             course: courseId,
-        });
+        })
+
+        // console.log(alreadyEnrolled)
 
         if (alreadyEnrolled) {
             return res.status(400).json({
@@ -273,15 +280,17 @@ exports.enrollCourses = async (req, res) => {
         }
 
         // Create enrollment
-        const enrollment = await Student.create({
-            student: userId,
-            course: courseId,
-        });
+        const enrollment = await Student.findOneAndUpdate(
+            { user: userId },
+            { $addToSet: { course: courseId } },
+            { upsert: true, new: true }
+        )
 
-        // Update course students array
-        course.students.push(userId)
-
-        await course.save();
+        //prevent duplicates
+        await Course.findByIdAndUpdate(courseId, {
+            $addToSet: { enrolledBy: enrollment._id }
+        })
+        
 
         return res.status(200).json({
             success: true,
