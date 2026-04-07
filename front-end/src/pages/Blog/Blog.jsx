@@ -3,6 +3,7 @@ import { BlogHero } from './BlogHero';
 import { BlogDetails } from './BlogDetails';
 import BlogPlatform from './BlogPlatform';
 import { RelatedBlog } from './RelatedBlog';
+import { Footer } from '../../components/Footer';
 
 
 
@@ -21,6 +22,7 @@ export const Blog = () => {
       <RelatedBlog />
       <BlogPlatform />
 
+      <Footer />
     </>
 
 
