@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Footer = () => {
+export const Footer = () => {
     const [email, setEmail] = useState("");
 
     const handleSubscribe = (e) => {
@@ -82,4 +82,4 @@ const Footer = () => {
     );
 };
 
-export default Footer;
+ 
