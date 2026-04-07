@@ -37,7 +37,7 @@ export const HomeHero = () => {
                         MasterTrack is an interactive platform designed to make learning feel like an experience, not a chore.
                     </p>
                     <div className="mt-10 md:mt-14 flex flex-col sm:flex-row items-center justify-center gap-5 md:gap-8">
-                        <Link to={'/signup'} className="w-full sm:w-auto px-12 py-4 md:py-5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-full transition-all active:scale-95 shadow-2xl shadow-cyan-500/20 text-lg">
+                        <Link to={'/signup'} className="w-full sm:w-auto px-12 py-4 md:py-5 bg-cyan-500 hover:bg-cyan-400 text-white font-bold rounded-full transition-all active:scale-95 shadow-2xl shadow-cyan-500/20 text-lg">
                             Join for free
                         </Link>
                         <Link to={'/signup'} className="flex items-center gap-3 text-white font-bold hover:text-cyan-300 transition-colors group py-2">

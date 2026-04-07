@@ -32,7 +32,7 @@ export const SuccessSectionStats = ({ heading, sub_heading }) => {
     { value: "16", label: "Years of experience", color: "text-blue-500", suffix: "+" },
   ];
   return (
-    <section className="py-20 px-6">
+    <section className="py-10 md:py-20 px-3 md:px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -41,14 +41,14 @@ export const SuccessSectionStats = ({ heading, sub_heading }) => {
           className="text-center mb-16"
         >
           {/* Main Heading */}
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6">{heading}</h2>
+          <h2 className="text-2xl md:text-5xl font-black text-slate-900 md:mb-6">{heading}</h2>
           {/* Sub Heading */}
-          <p className="text-slate-500 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+          <p className="text-slate-500 text-md md:text-xl max-w-3xl mx-auto md:leading-relaxed">
             {sub_heading}
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-8">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
@@ -58,7 +58,7 @@ export const SuccessSectionStats = ({ heading, sub_heading }) => {
               viewport={{ once: true }}
               className="text-center"
             >
-              <p className={`text-4xl md:text-6xl font-black ${stat.color} mb-2 tracking-tighter`}>
+              <p className={`text-2xl md:text-6xl font-black ${stat.color} mb-2 tracking-tighter`}>
                 {stat.value}
                 <span className="opacity-70 ml-1">{stat.suffix}</span>
               </p>
@@ -111,7 +111,7 @@ export const FeatureSection = ({ heading, sub_heading }) => {
   ];
 
   return (
-    <section className="bg-white py-20 px-6">
+    <section className="py-4 md:py-20 px-3 md:px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0 }}
@@ -119,29 +119,29 @@ export const FeatureSection = ({ heading, sub_heading }) => {
           className="text-center mb-20"
         >
           {/* Heading */}
-          <h2 className="text-4xl md:text-6xl font-black mb-6 leading-tight">
+          <h2 className="text-2xl md:text-5xl font-black md:mb-6 md:leading-tight">
 
-            <span className="text-cyan-500 italic">{heading}</span>
+            <span className="text-cyan-500 ">{heading}</span>
           </h2>
-          <p className="text-slate-500 text-lg md:text-xl max-w-3xl mx-auto">
+          <p className="text-slate-500 text-md md:text-xl max-w-3xl mx-auto">
             {sub_heading}
           </p>
         </motion.div>
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-10 lg:gap-16">
           {features.map((feature, index) => (
             <motion.div
               key={index}
               whileHover={{ y: -10 }}
-              className="group cursor-pointer text-center flex flex-col items-center bg-white p-8 rounded-4xl shadow-[0_10px_40px_rgba(0,0,0,0.04)] hover:shadow-2xl hover:shadow-indigo-100 transition-all duration-300 border border-slate-50"
+              className="group cursor-pointer text-center flex flex-col items-center bg-white p-4 md:p-8 rounded-md shadow-[0_10px_40px_rgba(0,0,0,0.04)] hover:shadow-2xl hover:shadow-indigo-100 transition-all duration-300 border border-slate-500/50"
             >
               {/* Icon Circle */}
-              <div className={`${feature.bgColor} rounded-full w-20 h-20 md:w-24 md:h-24 flex items-center justify-center mb-8 shadow-xl transform group-hover:rotate-12 transition-transform`}>
+              <div className={`${feature.bgColor} rounded-full size-20  md:size-24 flex items-center justify-center mb-4 md:mb-8 shadow-xl transform group-hover:rotate-12 transition-transform`}>
                 {feature.icon}
               </div>
 
               {/* Title */}
-              <h3 className="text-xl md:text-2xl font-black text-indigo-900 mb-5 leading-snug">
+              <h3 className="text-xl md:text-2xl font-black text-indigo-900 md:mb-5 leading-snug">
                 {feature.title}
               </h3>
 
