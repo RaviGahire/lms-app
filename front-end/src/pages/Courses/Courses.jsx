@@ -1,6 +1,5 @@
 import React from 'react'
 import { CourseCategories } from './CourseCategories'
-import { CourseCard } from './CourseCard'
 import { CourseHero } from './CourseHero'
 import {Footer} from '../../components/Footer'
 import RecommendedCarousel from './RecommendedCarousel '

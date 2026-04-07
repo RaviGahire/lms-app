@@ -1,41 +1,43 @@
 import { useRef } from "react"
 import { motion } from "framer-motion"
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react"
+import { Link } from "react-router-dom"
 
 const courses = [
     {
         id: 1,
         title: "React for Beginners",
-        image: "https://source.unsplash.com/400x300/?coding",
+        image: "https://plus.unsplash.com/premium_photo-1720287601920-ee8c503af775?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         price: 499
     },
     {
         id: 2,
         title: "Full Stack Development",
-        image: "https://source.unsplash.com/400x300/?developer",
+        image: "https://plus.unsplash.com/premium_photo-1685086785054-d047cdc0e525?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         price: 999
     },
     {
         id: 3,
         title: "UI/UX Design Mastery",
-        image: "https://source.unsplash.com/400x300/?design",
+        image: "https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         price: 699
     },
     {
         id: 4,
         title: "JavaScript Advanced",
-        image: "https://source.unsplash.com/400x300/?javascript",
+        image: "https://images.unsplash.com/photo-1562813733-b31f71025d54?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         price: 599
     },
     {
         id: 5,
         title: "Node.js Backend",
-        image: "https://source.unsplash.com/400x300/?backend",
+              image: "https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+
         price: 799
     },
 ]
 
-const RecommendedCarousel = () => {
+const RecommendedCarousel = ({course , heading}) => {
     const scrollRef = useRef()
 
     const scroll = (direction) => {
@@ -48,7 +50,7 @@ const RecommendedCarousel = () => {
     }
 
     return (
-        <div className="max-w-7xl py-10 mx-auto  px-4 bg-gray-100">
+        <div className="max-w-7xl py-10 mx-auto  px-3 ">
 
             {/* Heading */}
             <h2 className="text-xl md:text-2xl font-semibold mb-6">
@@ -60,15 +62,15 @@ const RecommendedCarousel = () => {
                 {/* Left Button */}
                 <button
                     onClick={() => scroll("left")}
-                    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full"
+                    className="absolute left-0 top-1/2 cursor-pointer -translate-y-1/2 z-10 bg-cyan-500 shadow p-2 rounded-full"
                 >
-                    <IconChevronLeft />
+                    <IconChevronLeft className="text-white" />
                 </button>
 
                 {/* Carousel */}
                 <div
                     ref={scrollRef}
-                    className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide"
+                    className="flex gap-6 overflow-x-auto py-8 scroll-smooth scrollbar-hide"
                 >
                     {courses.map((course, i) => (
                         <motion.div
@@ -89,9 +91,14 @@ const RecommendedCarousel = () => {
                                     {course.title}
                                 </h3>
 
-                                <p className="text-blue-600 font-bold">
+                             <div className="flex items-center justify-between">
+                                   <p className="text-blue-600 font-bold">
                                     ₹{course.price}
                                 </p>
+                                <Link to={'/'} className=" bg-green-600 px-3 py-1 rounded-2xl text-white font-bold">
+                                Buy Now
+                                </Link>
+                             </div>
                             </div>
                         </motion.div>
                     ))}
@@ -100,9 +107,9 @@ const RecommendedCarousel = () => {
                 {/* Right Button */}
                 <button
                     onClick={() => scroll("right")}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full"
+                    className="absolute right-0 top-1/2 cursor-pointer -translate-y-1/2 z-10 bg-cyan-500 shadow p-2 rounded-full"
                 >
-                    <IconChevronRight />
+                    <IconChevronRight className="text-white" />
                 </button>
 
             </div>

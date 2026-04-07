@@ -1,6 +1,8 @@
 import { motion } from "framer-motion"
+import { Link, useNavigate } from "react-router-dom"
 
 export const CourseHero = ({ course }) => {
+  const navigate = useNavigate()
   return (
     <div className="w-full bg-[#2C2F4A] text-white py-12 px-4">
       
@@ -39,10 +41,11 @@ export const CourseHero = ({ course }) => {
           </div>
 
           {/* Button */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
+          <motion.button 
+          onClick={()=>{navigate('/')}}
+                      whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-teal-400 hover:bg-teal-500 text-white px-6 py-3 rounded-lg font-medium"
+            className="bg-teal-400 cursor-pointer hover:bg-teal-500 text-white px-6 py-3 rounded-lg font-medium"
           >
             Enroll Now
           </motion.button>
@@ -70,9 +73,9 @@ export const CourseHero = ({ course }) => {
                 ₹{course?.price || "999"}
               </h3>
 
-              <button className="w-full bg-teal-400 hover:bg-teal-500 text-white py-2 rounded-lg">
+              <Link to={'/'} className="w-full cursor-pointer bg-teal-400 hover:bg-teal-500 text-white py-2 px-2 rounded-lg">
                 Buy Now
-              </button>
+              </Link>
             </div>
           </div>
         </motion.div>
