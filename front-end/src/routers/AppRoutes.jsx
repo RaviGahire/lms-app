@@ -1,11 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { MainLayout } from "../layout/MainLayout";
-import { Home } from "../pages/Home";
+import { Home } from "../pages/Home/Home";
 import { Login } from "../components/Login";
 import { OtpVerification } from "../utils/OtpVerification";
 import { SignUp } from "../components/SignUp";
-import { BlogPage } from "../pages/BlogPage";
-import { CourseCard } from "../pages/CourseCard";
+import { Blog } from "../pages/Blog/Blog";
 import { Student } from "../components/Students/Student";
 import { ProtectedRoute } from "../components/ProtectedRoute";
 import { UpdateStudent } from "../components/Students/UpdateStudent"
@@ -20,6 +19,8 @@ import { CourseLayout } from "../components/Courses/CourseLayout";
 import { UpdateCourse } from "../components/Courses/UpdateCourse";
 import { CreateCourseView } from "../components/Courses/CreateCourseView";
 import { InstructorUpdate } from "../components/Instructor/InstructorUpdate";
+import { Courses } from "../pages/Courses/Courses";
+import {  AboutUs } from "../pages/About/About";
 
 
 export const AppRoutes = () => {
@@ -44,9 +45,9 @@ export const AppRoutes = () => {
 
             {/* Pages routes */}
             <Route path="/" element={<Home />} />
-            <Route path="/courses" element={<ProtectedRoute loading={loading} user={loggedInUserProfile} allowedUserRoles={"student"}><CourseCard /></ProtectedRoute>} />
-            <Route path="/blogs" element={<BlogPage />} />
-            <Route path="/aboutus" element={<div>aboutus Page</div>} />
+            <Route path="/courses" element={<ProtectedRoute loading={loading} user={loggedInUserProfile} allowedUserRoles={"student"}><Courses /></ProtectedRoute>} />
+            <Route path="/blogs" element={<Blog />} />
+            <Route path="/aboutus" element={<AboutUs/>} />
 
             {/* Auth Routes */}
             <Route path="/signup" element={<SignUp />} />
