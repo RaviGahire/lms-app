@@ -8,7 +8,7 @@ export const Banner = ({
     link_href = '/'
 }) => {
     return (
-        <div className="w-full flex justify-center items-center py-16 px-4 bg-gray-100">
+        <div className="w-full flex justify-center items-center py-16 px-4">
 
             <motion.div
                 initial={{ opacity: 0, y: 60 }}
