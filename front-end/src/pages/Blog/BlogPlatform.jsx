@@ -1,8 +1,4 @@
-
 import { BlogCategory } from './BlogCategory';
-
-// --- Sub-Components for Cleanliness ---
-
 
 
 const MarketingCard = ({ title, author, price, oldPrice, img }) => (
@@ -12,11 +8,11 @@ const MarketingCard = ({ title, author, price, oldPrice, img }) => (
     </div>
     <div className="flex justify-between px-2 py-2">
       <div className="flex items-center gap-1">
-        <svg width="18" height="18" viewBox="0 0 21 21" fill="none" className="stroke-gray-400"><rect x="0.5" y="0.5" width="9" height="9" rx="1.5"/><rect x="0.5" y="11.5" width="9" height="9" rx="1.5"/><rect x="11.5" y="11.5" width="9" height="9" rx="1.5"/><rect x="11.5" y="0.5" width="9" height="9" rx="1.5"/></svg>
+        <svg width="18" height="18" viewBox="0 0 21 21" fill="none" className="stroke-gray-400"><rect x="0.5" y="0.5" width="9" height="9" rx="1.5" /><rect x="0.5" y="11.5" width="9" height="9" rx="1.5" /><rect x="11.5" y="11.5" width="9" height="9" rx="1.5" /><rect x="11.5" y="0.5" width="9" height="9" rx="1.5" /></svg>
         <p className="font-semibold text-gray-500 text-xs uppercase">Design</p>
       </div>
       <div className="flex items-center gap-1">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="fill-gray-300"><path d="M11.625 0C18.0469 0 23.25 5.20312 23.25 11.625C23.25 18.0469 18.0469 23.25 11.625 23.25C5.20312 23.25 0 18.0469 0 11.625C0 5.20312 5.20312 0 11.625 0ZM11.625 21C16.7812 21 21 16.8281 21 11.625C21 6.46875 16.7812 2.25 11.625 2.25C6.42188 2.25 2.25 6.46875 2.25 11.625C2.25 16.8281 6.42188 21 11.625 21Z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="fill-gray-300"><path d="M11.625 0C18.0469 0 23.25 5.20312 23.25 11.625C23.25 18.0469 18.0469 23.25 11.625 23.25C5.20312 23.25 0 18.0469 0 11.625C0 5.20312 5.20312 0 11.625 0ZM11.625 21C16.7812 21 21 16.8281 21 11.625C21 6.46875 16.7812 2.25 11.625 2.25C6.42188 2.25 2.25 6.46875 2.25 11.625C2.25 16.8281 6.42188 21 11.625 21Z" /></svg>
         <p className="font-semibold text-gray-500 text-xs">3 Month</p>
       </div>
     </div>
@@ -42,12 +38,9 @@ const MarketingCard = ({ title, author, price, oldPrice, img }) => (
 const BlogPlatform = () => {
   return (
     <div className="w-full bg-white overflow-hidden">
-      
-      {/* 2. CATEGORY LIST */}
-     <BlogCategory/>
 
-      {/* 3. RELATED BLOG CAROUSEL */}
-     
+      {/* 2. CATEGORY LIST */}
+      <BlogCategory />
 
       {/* 4. MARKETING ARTICLES GRID */}
       <section className="bg-gray-100 py-16 px-4">

@@ -1,20 +1,19 @@
 
 
-export const BlogHero = () => {
+export const BlogHero = ({blog}) => {
   return (
-    
-      <section aria-label="blog page hero" className="bg-[#9dccff67]">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-center py-12 gap-8">
+       <section aria-label="blog page hero" className="bg-[#030406f4]">
+        <div className="max-w-7xl mx-auto px-3 ">
+          <div className="flex flex-col md:flex-row items-center justify-center py-6 md:py-12 gap-8">
             {/* Content side */}
-            <div className="md:w-1/2">
-              <p className="text-md text-gray-500">
-                By the mad-brains in <span className="text-cyan-800 font-medium cursor-pointer">inspiration</span>
+            <div className="md:w-1/2 text-white">
+              <p className="text-md">
+                By the mad-brains in <span className="text-cyan-500 font-medium cursor-pointer">inspiration</span>
               </p>
-              <h1 className="text-3xl md:text-4xl py-5 font-semibold text-gray-800 leading-tight">
+              <h1 className="text-2xl md:text-4xl py-2.5 md:py-5 font-semibold leading-tight">
                 Why Swift UI Should Be on the <br className="hidden md:block" /> Radar of Every Mobile <br className="hidden md:block" /> Developer
               </h1>
-              <p className="text-xl text-gray-700 leading-relaxed">
+              <p className=" text-md md:text-xl text-gray-400 leading-relaxed">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. 
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
               </p>
