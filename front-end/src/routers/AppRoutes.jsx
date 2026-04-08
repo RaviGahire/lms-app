@@ -23,6 +23,14 @@ import { AboutUs } from "../pages/About/About";
 import { Unauthorized } from "../pages/Partials/Unauthorized"
 import { NotFound } from "../pages/Partials/NotFound"
 import { VerifyProfile } from "../pages/Partials/VerifyProfile";
+import { Development } from "../pages/Courses/Course-Category/Development";
+import { Design } from "../pages/Courses/Course-Category/Design";
+import { Business } from "../pages/Courses/Course-Category/Business";
+import { PersonalDevelopment } from "../pages/Courses/Course-Category/PersonalDevelopment";
+import { ITSoftware } from "../pages/Courses/Course-Category/ITAndSoftware";
+import { DataAI } from "../pages/Courses/Course-Category/DataAndAI";
+import { Creative } from "../pages/Courses/Course-Category/Creative";
+import { LanguageLearning } from "../pages/Courses/Course-Category/LanguageLearning";
 import ContextData from "../Contexts/Context";
 
 
@@ -87,10 +95,20 @@ export const AppRoutes = () => {
             <Route path="/all/course" element={<CourseLayout />} />
             <Route path="/enrolled/students" element={<CourseLayout />} />
 
-            {/* unauthorized user route */}
-            <Route path="/unauthorized" element={<Unauthorized  />} />
+            {/* Course category routes */}
+            <Route path="/development" element={<Development />} />
+            <Route path="/design" element={<Design />} />
+            <Route path="/business" element={<Business />} />
+            <Route path="/personal-development" element={<PersonalDevelopment />} />
+            <Route path="/it-software" element={<ITSoftware />} />
+            <Route path="/data-ai" element={<DataAI />} />
+            <Route path="/creative" element={<Creative />} />
+            <Route path="/language-learning" element={<LanguageLearning />} />
+
+            {/* Unauthorized user route */}
+            <Route path="/unauthorized" element={<Unauthorized />} />
             <Route path="*" element={<NotFound />} />  {/* Fallback Route */}
-            <Route path="/verify-profile" element={<VerifyProfile/>} />
+            <Route path="/verify-profile" element={<VerifyProfile />} />
           </Routes>
         </MainLayout>
       </Router>
