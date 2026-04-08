@@ -14,9 +14,9 @@ import { UpdateAdmin } from "../components/Admin/UpdateAdmin";
 import { ForgotPassword } from "../utils/ForgotPassword";
 import { ChangeProfileAvatar } from "../components/ChangeProfileAvatar";
 import { InstructorDashboard } from "../components/Instructor/InstructorDashboard";
-import { CourseLayout } from "../components/Courses/CourseLayout";
-import { UpdateCourse } from "../components/Courses/UpdateCourse";
-import { CreateCourseView } from "../components/Courses/CreateCourseView";
+// import { CourseLayout } from "../components/Courses/CourseLayout";
+// import { UpdateCourse } from "../components/Courses/UpdateCourse";
+// import { CreateCourseView } from "../components/Courses/CreateCourseView";
 import { InstructorUpdate } from "../components/Instructor/InstructorUpdate";
 import { Courses } from "../pages/Courses/Courses";
 import { AboutUs } from "../pages/About/About";
@@ -56,7 +56,7 @@ export const AppRoutes = () => {
 
             {/* Pages routes */}
             <Route path="/" element={<Home />} />
-            <Route path="/courses" element={<ProtectedRoute loading={loading} user={loggedInUserProfile} allowedUserRoles={["student","instructor","admin"]}><Courses /></ProtectedRoute>} />
+            <Route path="/courses" element={<ProtectedRoute loading={loading} user={loggedInUserProfile} allowedUserRoles={["student", "instructor", "admin"]}><Courses /></ProtectedRoute>} />
             <Route path="/blogs" element={<Blog />} />
             <Route path="/aboutus" element={<AboutUs />} />
 
