@@ -27,8 +27,8 @@ import { Development } from "../pages/Courses/Course-Category/Development";
 import { Design } from "../pages/Courses/Course-Category/Design";
 import { Business } from "../pages/Courses/Course-Category/Business";
 import { PersonalDevelopment } from "../pages/Courses/Course-Category/PersonalDevelopment";
-import { ITSoftware } from "../pages/Courses/Course-Category/ITAndSoftware";
-import { DataAI } from "../pages/Courses/Course-Category/DataAndAI";
+import { ITAndSoftware } from "../pages/Courses/Course-Category/ITAndSoftware";
+import { DataAndAI } from "../pages/Courses/Course-Category/DataAndAI";
 import { Creative } from "../pages/Courses/Course-Category/Creative";
 import { LanguageLearning } from "../pages/Courses/Course-Category/LanguageLearning";
 import ContextData from "../Contexts/Context";
@@ -100,8 +100,8 @@ export const AppRoutes = () => {
             <Route path="/design" element={<Design />} />
             <Route path="/business" element={<Business />} />
             <Route path="/personal-development" element={<PersonalDevelopment />} />
-            <Route path="/it-software" element={<ITSoftware />} />
-            <Route path="/data-ai" element={<DataAI />} />
+            <Route path="/it-software" element={<ITAndSoftware />} />
+            <Route path="/data-ai" element={<DataAndAI />} />
             <Route path="/creative" element={<Creative />} />
             <Route path="/language-learning" element={<LanguageLearning />} />
 
