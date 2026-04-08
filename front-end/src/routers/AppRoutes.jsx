@@ -88,7 +88,7 @@ export const AppRoutes = () => {
             <Route path="/enrolled/students" element={<CourseLayout />} />
 
             {/* unauthorized user route */}
-            <Route path="/unauthorized" element={<VerifyProfile />} />
+            <Route path="/unauthorized" element={<Unauthorized  />} />
             <Route path="*" element={<NotFound />} />  {/* Fallback Route */}
             <Route path="/verify-profile" element={<VerifyProfile/>} />
           </Routes>
