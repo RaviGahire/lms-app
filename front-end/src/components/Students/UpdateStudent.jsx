@@ -198,6 +198,16 @@ export const UpdateStudent = () => {
               onChange={handleChange}
               className={'md:col-span-2'}
             />
+            <Input
+              label='Nationality'
+              type='text'
+              name='nationality'
+              id='nationality'
+              placeholder='Enter your nationality'
+              value={update.nationality}
+              onChange={handleChange}
+              className={'md:col-span-2'}
+            />
            
             <div>
               <UpdateUserDetails

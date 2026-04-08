@@ -9,7 +9,7 @@ export const StudentCurriculumCards = () => {
 
     const {student}=useContext(ContextData)
 
-    console.log(student)
+    // console.log(student)
   
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
