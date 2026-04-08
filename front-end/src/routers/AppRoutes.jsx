@@ -56,7 +56,7 @@ export const AppRoutes = () => {
 
             {/* Pages routes */}
             <Route path="/" element={<Home />} />
-            <Route path="/courses" element={<ProtectedRoute loading={loading} user={loggedInUserProfile} allowedUserRoles={"student"}><Courses /></ProtectedRoute>} />
+            <Route path="/courses" element={<ProtectedRoute loading={loading} user={loggedInUserProfile} allowedUserRoles={["student","instructor","admin"]}><Courses /></ProtectedRoute>} />
             <Route path="/blogs" element={<Blog />} />
             <Route path="/aboutus" element={<AboutUs />} />
 
@@ -89,11 +89,11 @@ export const AppRoutes = () => {
             <Route path="/update-admin/" element={<UpdateAdmin />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
 
-            {/* Courses Routes */}
+            {/* Courses Routes
             <Route path="/create/courses" element={<CreateCourseView />} />
             <Route path="/update/course" element={<CourseLayout><UpdateCourse /></CourseLayout>} />
             <Route path="/all/course" element={<CourseLayout />} />
-            <Route path="/enrolled/students" element={<CourseLayout />} />
+            <Route path="/enrolled/students" element={<CourseLayout />} /> */}
 
             {/* Course category routes */}
             <Route path="/development" element={<Development />} />
