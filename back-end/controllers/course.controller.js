@@ -61,13 +61,13 @@ exports.addNewCourses = async (req, res) => {
         }
         data.createdBy = userId;
 
-        const { title, description, duration, createdBy } = data;
+        const { title, description,category,price, duration, createdBy } = data;
 
 
-        if (!title || !description) {
+        if (!(title&& description && category && price && duration && createdBy )) {
             return res.status(400).json({
                 success: false,
-                message: "Title and description are required",
+                message: "All details are required",
             });
         }
 
@@ -82,14 +82,13 @@ exports.addNewCourses = async (req, res) => {
         }
 
 
-
-
-
         const newCourse = await Course.create({
             title,
             createdBy,
             description,
             duration,
+            price,
+            category,
             coverImage: imageUrl
         });
 
