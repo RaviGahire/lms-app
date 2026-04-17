@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom"
 export const CourseHero = ({ course }) => {
   const navigate = useNavigate()
   return (
+<>
     <div className="w-full bg-[#2C2F4A] text-white py-12 px-4">
       
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
@@ -82,6 +83,8 @@ export const CourseHero = ({ course }) => {
 
       </div>
     </div>
+ 
+</>
   )
 }
 
