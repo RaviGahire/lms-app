@@ -1,49 +1,53 @@
 import { useState } from "react"
 import { DescriptionInput, Input, SelectInput } from "../Input"
 import { getStoredToken } from "../../utils/getStoredToken"
+import { toast } from "react-toastify"
 import axios from "axios"
 
 const API_URL = import.meta.env.VITE_API_URL
 
 export const CreateCourseView = () => {
-
+    const [error, setError] = useState({})
     const [courseData, setCourseData] = useState({
         title: '',
         duration: '',
         description: '',
         coverImage: '',
         category: '',
-        price:''
+        price: ''
     });
 
     // console.log(courseData)
-    
-    const [error, setError] = useState()
+
+
 
     // form Validation
 
-    const formValidation = (courseData)=>{
-        const errorData ={} // empty obj for hold error
+    const formValidation = (courseData) => {
+        const errorData = {} // empty obj for hold error
         //conditions for the inputs 
-        if(!courseData.title) return errorData.title = "Title is required"
-        if(!courseData.duration) return errorData.duration = "Duration is required"
-        if(!courseData.description) return errorData.description = "Description is required"
-        if(!courseData.coverImage) return errorData.coverImage = "Cover image is required"
-        if(!courseData.category) return errorData.category = "Category is required"
-        if(!courseData.price) return errorData.price = "Price is required"
+        if (!courseData.title) errorData.title = "Title is required"
+        if (!courseData.duration) errorData.duration = "Duration is required"
+        if (!courseData.description) errorData.description = "Description is required"
+        if (!courseData.coverImage) errorData.coverImage = "Cover image is required"
+        if (!courseData.category) errorData.category = "Category is required"
+        if (!courseData.price) errorData.price = "Price is required"
+
         setError(errorData) // set the error data
+
         return errorData
-    } 
+    }
 
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        //called from validation function
-     const validationErrors = formValidation(courseData);
-    //  console.log(validationErrors)
-// console.log(Object.keys({validationErrors}))
+        //called from validation function 
+        const validationErrors = formValidation(courseData)
+        //if error array length is 0 
+        if (Object.keys(validationErrors).length) return
+
 
 
         const token = getStoredToken()
@@ -64,6 +68,13 @@ export const CreateCourseView = () => {
                     Authorization: `Bearer ${token}`
                 }
             })
+            // console.log(response)
+
+            if (!response) {
+                toast(error.response?.data.message)
+            }
+
+
             // console.log(response.data)
         } catch (error) {
             // setError(error.response?.data.message)
@@ -76,15 +87,17 @@ export const CreateCourseView = () => {
         const { name, files, value } = e.target
 
         setCourseData({ ...courseData, [name]: files ? files[0] : value })
+
+        setError({}) // While typing remove the all errors
     }
     // console.log(courseData)
 
     return (
-        <div className="max-w-3xl animate-in fade-in duration-500">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Course Details</h2>
+        <div className="max-w-3xl animate-in fade-in duration-500 ">
+            <h2 className="text-xl md:text-2xl font-semibold tracking-tight text-gray-800 mb-6 underline">Course Details</h2>
             {/* Form */}
             <form className="space-y-6" method="post" onSubmit={handleSubmit}  >
-                <div className="grid grid-cols-1 md:grid-cols-1 gap-6 ">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
                     {/* Course Title */}
                     <div className="space-y-2">
                         <Input
@@ -95,7 +108,7 @@ export const CreateCourseView = () => {
                             placeholder='Please Enter Title'
                             onChange={handleChange}
                             value={courseData.title}
-                            Error={error }
+                            error={error.title}
                         />
                     </div>
                     {/* Course Duration in Hr */}
@@ -108,7 +121,7 @@ export const CreateCourseView = () => {
                             placeholder='Please Enter duration'
                             onChange={handleChange}
                             value={courseData.duration}
-                            Error={error }
+                            error={error.duration}
                         />
                     </div>
 
@@ -121,7 +134,7 @@ export const CreateCourseView = () => {
                             options={['development', 'design', 'business', 'personal-development', 'it-software', 'data-ai', 'creative', 'language-learning']}
                             value={courseData.category}
                             onChange={handleChange}
-                            Error={error }
+                            error={error.category}
 
                         />
                     </div>
@@ -136,7 +149,8 @@ export const CreateCourseView = () => {
                             placeholder='Please Enter price'
                             onChange={handleChange}
                             value={courseData.price}
-                        
+                            error={error.price}
+
                         />
                     </div>
 
@@ -150,7 +164,7 @@ export const CreateCourseView = () => {
                             placeholder={'Write Course Description'}
                             onChange={handleChange}
                             value={courseData.description}
-                            Error={error }
+                            error={error.description}
 
                         />
                     </div>
@@ -163,7 +177,7 @@ export const CreateCourseView = () => {
                             id='coverImage'
                             onChange={handleChange}
                             value={courseData.coverImage}
-                            Error={error }
+                            error={error.coverImage}
 
                         />
                     </div>
@@ -172,7 +186,9 @@ export const CreateCourseView = () => {
                 <button type="submit" className="bg-cyan-600 cursor-pointer text-white px-10 py-4 rounded-2xl font-bold hover:bg-cyan-700 transition-all shadow-xl shadow-cyan-100 active:scale-95">
                     Save & Continue
                 </button>
+
             </form>
+
         </div>
     )
 }
