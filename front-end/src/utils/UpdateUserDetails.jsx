@@ -51,7 +51,7 @@ export const UpdateUserDetails = ({ label, endpoint, payload, redirectTo }) => {
         <button
             type="submit"
             onClick={handleUpdate}
-            className={`w-full sm:w-max px-10 py-3 font-bold rounded-xl transition-all shadow-lg 
+            className={`w-full sm:w-max cursor-pointer px-10 py-3 font-bold rounded-xl transition-all shadow-lg 
         ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 text-white active:scale-95 shadow-blue-200'}
       `}        >
             {loading ? "Processing..." : label}
