@@ -10,7 +10,7 @@ export const ActiveCurriculum = ({ enrolled_courses }) => {
 
     const filterCourses = ActiveCurriculum.filter((data) => courses.includes(data?._id))
 
-    console.log(filterCourses)
+    // console.log(filterCourses)
 
     useEffect(() => {
         async function AllCourses() {
