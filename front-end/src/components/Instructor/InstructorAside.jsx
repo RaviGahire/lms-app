@@ -21,7 +21,7 @@ const {loggedInUserProfile} =  useContext(ContextData)
 
 
     return (
-        <aside className="w-full md:w-80 bg-white rounded-3xl border border-gray-200 p-2 flex flex-col shadow-sm">
+        <aside className="w-full md:w-80 bg-white rounded-md border border-gray-200 p-2 flex flex-col shadow-sm">
             {/* Profile Image Section */}
             <div className="flex flex-col items-center py-4 border-b border-gray-100">
                 <div className="relative group">
