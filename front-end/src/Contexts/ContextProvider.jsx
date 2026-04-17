@@ -29,7 +29,7 @@ const ContextProvider = ({ children }) => {
     const instructor = await fetchInsrtuctorData(token)
     // const admin = await fetchAdminData(token)
 
-    console.log(instructor)
+    // console.log(instructor)
 
     setStudent({
       id: student.student?._id,
