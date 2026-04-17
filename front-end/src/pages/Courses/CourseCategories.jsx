@@ -1,4 +1,4 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const categories = [
   {
@@ -29,20 +29,20 @@ const categories = [
     path: "M18.75 17.8125V15H30V23.4375C30 24.9609 28.6523 26.25 27.1875 26.25H2.8125C1.28906 26.25 0 24.9609 0 23.4375V15H11.25V17.8125C11.25 18.3398 11.6602 18.75 12.1875 18.75H17.8125C18.2812 18.75 18.75 18.3398 18.75 17.8125ZM27.1875 5.625C28.6523 5.625 30 6.97266 30 8.4375V13.125H0V8.4375C0 6.97266 1.28906 5.625 2.8125 5.625H7.5V2.8125C7.5 1.34766 8.78906 0 10.3125 0H19.6875C21.1523 0 22.5 1.34766 22.5 2.8125V5.625H27.1875ZM18.75 5.625V3.75H11.25V5.625H18.75Z",
     viewBox: "0 0 30 27"
   },
-    {
+  {
     title: "IT & Softwaren",
     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam quam quisquam ullam libero.",
     iconColor: "#00CBB8",
     path: "M18.75 17.8125V15H30V23.4375C30 24.9609 28.6523 26.25 27.1875 26.25H2.8125C1.28906 26.25 0 24.9609 0 23.4375V15H11.25V17.8125C11.25 18.3398 11.6602 18.75 12.1875 18.75H17.8125C18.2812 18.75 18.75 18.3398 18.75 17.8125ZM27.1875 5.625C28.6523 5.625 30 6.97266 30 8.4375V13.125H0V8.4375C0 6.97266 1.28906 5.625 2.8125 5.625H7.5V2.8125C7.5 1.34766 8.78906 0 10.3125 0H19.6875C21.1523 0 22.5 1.34766 22.5 2.8125V5.625H27.1875ZM18.75 5.625V3.75H11.25V5.625H18.75Z",
     viewBox: "0 0 30 27"
-  },  {
+  }, {
     title: "Data & AI",
     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam quam quisquam ullam libero.",
     iconColor: "#00CBB8",
     path: "M18.75 17.8125V15H30V23.4375C30 24.9609 28.6523 26.25 27.1875 26.25H2.8125C1.28906 26.25 0 24.9609 0 23.4375V15H11.25V17.8125C11.25 18.3398 11.6602 18.75 12.1875 18.75H17.8125C18.2812 18.75 18.75 18.3398 18.75 17.8125ZM27.1875 5.625C28.6523 5.625 30 6.97266 30 8.4375V13.125H0V8.4375C0 6.97266 1.28906 5.625 2.8125 5.625H7.5V2.8125C7.5 1.34766 8.78906 0 10.3125 0H19.6875C21.1523 0 22.5 1.34766 22.5 2.8125V5.625H27.1875ZM18.75 5.625V3.75H11.25V5.625H18.75Z",
     viewBox: "0 0 30 27"
   },
-   {
+  {
     title: "Creative",
     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam quam quisquam ullam libero.",
     iconColor: "#00CBB8",
@@ -65,7 +65,6 @@ const categories = [
 
 export const CourseCategories = () => {
 
-  
   return (
     <section aria-label="category" className="my-4 bg-white px-4">
       <div className="max-w-7xl py-10 mx-auto">
@@ -84,16 +83,64 @@ export const CourseCategories = () => {
 };
 
 // Category Cards
-const CategoryCard = ({ title, description, iconColor, path, viewBox }) => (
-  <div className="flex flex-col items-center space-y-2 p-5 bg-white shadow-xl rounded-xl border cursor-pointer border-transparent hover:border-gray-200 transition-all duration-300">
-    <div className="size-12.5 flex items-center justify-center rounded-md bg-gray-600 p-2 ">
-      <svg width="24" height="24" viewBox={viewBox} fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d={path} fill={iconColor}></path>
-      </svg>
+const CategoryCard = ({ title, description, iconColor, path, viewBox }) => {
+
+  const navigate = useNavigate()
+
+
+  const HandleCategory = () => {
+
+    switch (title) {
+      case "Development":
+        navigate("/development");
+        break;
+
+      case "Design":
+        navigate("/design");
+        break;
+
+      case "Business":
+        navigate("/business");
+        break;
+
+      case "Personal Development":
+        navigate("/personal-development");
+        break;
+
+      case "IT & Softwaren":
+        navigate("/it-software");
+        break;
+
+      case "Data & AI":
+        navigate("/data-ai");
+        break;
+
+      case "Creative":
+        navigate("/creative");
+        break;
+
+      case "Language Learning":
+        navigate("/language-learning");
+        break;
+
+      default:
+        navigate('*')
+    }
+  }
+
+  return (
+    <div onClick={HandleCategory} className="flex flex-col items-center space-y-2 p-5 bg-white shadow-xl rounded-xl border cursor-pointer border-transparent hover:border-gray-200 transition-all duration-300">
+      <div className="size-12.5 flex items-center justify-center rounded-md bg-gray-600 p-2 ">
+        <svg width="24" height="24" viewBox={viewBox} fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d={path} fill={iconColor}></path>
+        </svg>
+      </div>
+      <p className="text-xl font-bold text-gray-800">{title}</p>
+      <p className="text-center text-gray-600 text-sm leading-relaxed">
+        {description}
+      </p>
     </div>
-    <p className="text-xl font-bold text-gray-800">{title}</p>
-    <p className="text-center text-gray-600 text-sm leading-relaxed">
-      {description}
-    </p>
-  </div>
-);
+  );
+
+}
+
