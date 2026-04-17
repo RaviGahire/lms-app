@@ -1,23 +1,36 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 
+// ─────────────────────────────────────────
+// Student 
+// ─────────────────────────────────────────
+const { 
+  getAllStudents, 
+  getStudentProfile, 
+  updateStudentDetails, 
+  getEnrolledCourses 
+} = require('../controllers/student.controller')
 
-const { getAllStudents, getStudentProfile, updateStudentDetails, getEnrolledCourses } = require('../controllers/student.controller');
-const { verifyJwtToken } = require('../middlewares/auth.middleware');
-const createStudentProfile = require('../middlewares/student.middleware');
-const authorizeRoles = require('../middlewares/authorized.role');
+const { verifyJwtToken } = require('../middlewares/auth.middleware')
+const createStudentProfile = require('../middlewares/student.middleware')
+const authorizeRoles = require('../middlewares/authorized.role')
 
-router.get('/all-studs', getAllStudents)
+// ─────────────────────────────────────────
+// All Student Route
+// ─────────────────────────────────────────
+router.route('/').get(verifyJwtToken, authorizeRoles('admin'), getAllStudents) // get all students
 
-router.get('/current-studs', verifyJwtToken, createStudentProfile, getStudentProfile)
+// ─────────────────────────────────────────
+// Student Profile Routes
+// ─────────────────────────────────────────
+router.route('/me')
+  .get(verifyJwtToken, createStudentProfile, getStudentProfile) 
+  .patch(verifyJwtToken, updateStudentDetails)
 
-router.post('/update-studs/:id',  updateStudentDetails)
-
-router.get('/my-courses/:id',  getEnrolledCourses)
-
-
-
-
+// ─────────────────────────────────────────
+// Student Enrolled Courses Routes
+// ─────────────────────────────────────────
+router.route('/me/courses').get(verifyJwtToken, getEnrolledCourses)
 
 
 module.exports = router;
