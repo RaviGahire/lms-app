@@ -1,56 +1,58 @@
 const express = require('express')
 const router = express.Router()
 
+// ─────────────────────────────────────────
 // auth-controllers 
-const { userRegister ,
-  generateEmailVerificationOtp, 
-  userLogin, 
-  getCurrentUser, 
-  getAllUsers, 
-  userAccountDeleteRequest, 
-  changeCurrentUserPassword, 
-  forgotPassword, 
-  updateUserAccountDetails, 
-  getUserById} = require('../controllers/auth.controller')
+// ─────────────────────────────────────────
+const {
+  userRegister,
+  generateEmailVerificationOtp,
+  userLogin,
+  getCurrentUser,
+  getAllUsers,
+  userAccountDeleteRequest,
+  changeCurrentUserPassword,
+  forgotPassword,
+  updateUserAccountDetails,
+  getUserById
+} = require('../controllers/auth.controller')
 
 const { verifyUserOtp } = require('../middlewares/otp.middleware')
 const { verifyJwtToken } = require('../middlewares/auth.middleware')
 const upload = require('../middlewares/multer.middlerware')
 
-//Email and OTP verification routes
-router.post('/send-email-otp', generateEmailVerificationOtp)
+// ─────────────────────────────────────────
+// OTP Routes
+// ─────────────────────────────────────────
+router.route('/otp/send').post(generateEmailVerificationOtp)
+router.route('/otp/verify').post(verifyUserOtp, (_, res) => {
+  return res.status(200).json({ success: true, message: "OTP verified successfully" })
+})
 
-router.post('/verify-otp', verifyUserOtp,  (_, res) => {
+// ─────────────────────────────────────────
+// Auth Routes
+// ─────────────────────────────────────────
+router.route('/register').post(userRegister)
+router.route('/login').post(userLogin)
 
-  return res.status(200).json({success: true,message: "OTP verified successfully" })
+// ─────────────────────────────────────────
+// User Routes
+// ─────────────────────────────────────────
+router.route('/users').get(verifyJwtToken, getAllUsers)
+router.route('/users/me')
+  .get(verifyJwtToken, getCurrentUser)
+  .patch(verifyJwtToken, upload.single('avatar'), updateUserAccountDetails)
+  .delete(verifyJwtToken, userAccountDeleteRequest)
 
-});
+router.route('/users/:id').get(getUserById)
 
+// ─────────────────────────────────────────
+// Password Routes
+// ─────────────────────────────────────────
+router.route('/password/change').patch(verifyJwtToken, changeCurrentUserPassword)
+router.route('/password/forgot').patch(forgotPassword)
 
-//register user 
-router.post('/register',userRegister);
-
-//login user 
-router.post('/login' , userLogin)
-
-//current user 
-router.get('/current-user',verifyJwtToken,getCurrentUser)
-//all users
-router.get('/all/users',getAllUsers)
-
-router.get('/:id',getUserById)
-
-//CRUD OPS ROUTES ON USER 
-
-// update user details
-router.post('/update-details',verifyJwtToken,upload.single('avatar'),updateUserAccountDetails)
-
-//user request to delete account 
-router.delete('/delete/request',verifyJwtToken, userAccountDeleteRequest)
-
-//change current user password 
-router.patch('/change/p' , verifyJwtToken , changeCurrentUserPassword)
-
-router.patch("/forgot-password",forgotPassword)
-
-module.exports = router;
+// ─────────────────────────────────────────
+// Exported All Routes
+// ─────────────────────────────────────────
+module.exports = router
