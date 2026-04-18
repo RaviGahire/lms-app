@@ -66,7 +66,7 @@ const ContextProvider = ({ children }) => {
     setLoading(true);
 
     try {
-      const response = await axios.get(`${API_URL}users/me`, {
+      const response = await axios.get(`${API_URL}auth/users/me`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -147,7 +147,7 @@ export const fetchInsrtuctorData = async (token)=>{
       console.error("Fetch aborted: No authentication token provided.");
       return null;
     }
-    const student = await axios.get(`${API_URL}instructor/me`, { headers: { Authorization: `Bearer ${token}` } })
+    const student = await axios.get(`${API_URL}instructors/me`, { headers: { Authorization: `Bearer ${token}` } })
 
     if (!student) {
       console.error("Student not found yet");

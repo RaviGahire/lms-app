@@ -212,7 +212,7 @@ export const UpdateStudent = () => {
             <div>
               <UpdateUserDetails
                 label='Save Changes'
-                endpoint={`students/update-studs/${student?.id}`}
+                endpoint={`students/me/${student?.id}`}
                 payload={update}
                 redirectTo='/student'
               />
