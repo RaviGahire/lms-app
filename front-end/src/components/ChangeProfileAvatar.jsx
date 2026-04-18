@@ -34,7 +34,7 @@ export const ChangeProfileAvatar = () => {
         console.log(formData)
         const token = getStoredToken()
         try {
-            const res = await axios.post(
+            const res = await axios.patch(
                 `${API_URL}auth/users/me`,
                 formData,
                 {
