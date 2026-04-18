@@ -2,7 +2,9 @@ const nodemailer = require('nodemailer');
 
 const { EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASS, HTTPS_PROXY } = process.env;
 
-// gmail transporter
+// ─────────────────────────────────────────
+// Gmail Transporter
+// ─────────────────────────────────────────
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   host: EMAIL_HOST,
@@ -17,7 +19,9 @@ const transporter = nodemailer.createTransport({
 
 });
 
-
+// ─────────────────────────────────────────
+// Account Deletion Email Function
+// ─────────────────────────────────────────
 const AccountDeletionEmail = async (adminEmail, userEmail, userDetails) => {
   try {
     const info = await transporter.sendMail({
@@ -46,3 +50,4 @@ const AccountDeletionEmail = async (adminEmail, userEmail, userDetails) => {
 
 
 module.exports = AccountDeletionEmail;
+module.exports = transporter;
