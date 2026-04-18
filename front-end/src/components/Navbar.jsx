@@ -110,7 +110,7 @@ export const Navbar = () => {
                         {loggedInUserProfile ? (
                             <Link to={dashboardPath} onClick={closeMenu} className="flex items-center justify-between px-6 py-5 active:bg-gray-100">
                                 <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-cyan-600 to-cyan-500 text-white flex items-center justify-center font-bold shadow-md">
+                                    <div className="w-12 h-12 rounded-full bg-linear-to-tr from-cyan-600 to-cyan-500 text-white flex items-center justify-center font-bold shadow-md">
                                         {getInitials(userName)}
                                     </div>
                                     <div className="flex flex-col">
