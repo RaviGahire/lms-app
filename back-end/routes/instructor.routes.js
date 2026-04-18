@@ -1,6 +1,9 @@
 const express = require('express')
-const { verifyJwtToken } = require('../middlewares/auth.middleware')
-// const authorizeRoles = require('../middlewares/authorized.role')
+const router = express.Router()
+
+// ─────────────────────────────────────────
+// Instructor controllers
+// ─────────────────────────────────────────
 const {
     getInstructorProfile,
     updateInstructorProfile,
@@ -9,19 +12,22 @@ const {
     getMostPopularCourses
 } = require('../controllers/instructor.controller')
 
+const { verifyJwtToken } = require('../middlewares/auth.middleware')
+const authorizeRoles = require('../middlewares/authorized.role')
 const createInstructorProfile = require('../middlewares/instructor.middleware')
 
-const router = express.Router()
+// ─────────────────────────────────────────
+// Instructor Profile Routes
+// ─────────────────────────────────────────
+router.route('/me')
+    .get(verifyJwtToken, createInstructorProfile, getInstructorProfile)
+    .patch(verifyJwtToken, updateInstructorProfile)
 
-router.get('/current-instructor', verifyJwtToken, createInstructorProfile, getInstructorProfile)
-
-router.post('/update-instructor/:id', updateInstructorProfile)
-
-router.get('/check-earnings', verifyJwtToken, checkEarnings)
-
-router.get('/check-rating', verifyJwtToken, checkRating)
-
-router.get('/most-popular-courses', verifyJwtToken, getMostPopularCourses)
-
+// ─────────────────────────────────────────
+// Instructor Stats Routes
+// ─────────────────────────────────────────
+router.route('/me/earnings').get(verifyJwtToken, checkEarnings)
+router.route('/me/rating').get(verifyJwtToken, checkRating)
+router.route('/me/courses/popular').get(verifyJwtToken, getMostPopularCourses)
 
 module.exports = router
