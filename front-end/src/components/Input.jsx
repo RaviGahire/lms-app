@@ -1,6 +1,6 @@
 
 //form input
-export const Input = ({ label, id, placeholder, name, type, value, onChange, className, isEditable, error }) => {
+export const Input = ({ label,labelStyle, id, placeholder, name, type, value, onChange, className, isEditable, error }) => {
 
   // console.log(error)
   // handle file input
@@ -9,7 +9,7 @@ export const Input = ({ label, id, placeholder, name, type, value, onChange, cla
   return (
     <div className={`flex flex-col gap-2 relative ${className}`} >
       {/* label */}
-      <label htmlFor={id} className="text-sm font-semibold text-slate-700">{label}</label>
+      <label htmlFor={id} className={`text-sm font-semibold text-slate-700 ${labelStyle}`}>{label}</label>
       {/* Input  */}
       <input type={type} id={id} name={name} placeholder={placeholder} disabled={isEditable}
         value={inputValue}
