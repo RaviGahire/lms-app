@@ -48,7 +48,7 @@ export const SignUp = () => {
     }
     try {
       //API call to register user
-      const { data } = await axios.post(`${API_URL}users/register`, {
+      const { data } = await axios.post(`${API_URL}auth/register`, {
         userName,
         email,
         password

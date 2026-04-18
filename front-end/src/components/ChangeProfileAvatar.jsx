@@ -5,24 +5,21 @@ import ContextData from "../Contexts/Context"
 import { useContext } from "react"
 import axios from "axios"
 
+const API_URL = import.meta.env.VITE_API_URL
 
 export const ChangeProfileAvatar = () => {
+    
     const [avatar, setAvatar] = useState(null)
-    const [preview, setPreview] = useState(null)
-
-    const navigate = useNavigate()
+    const [preview, setPreview] = useState(null)   
     const { fetchUserProfile } = useContext(ContextData)
 
-    const API_URL = import.meta.env.VITE_API_URL
-
+    const navigate = useNavigate()
+    
     // console.log(avatar)
 
     const handleChange = (e) => {
-
         const file = e.target.files[0]
-
         setAvatar(file)
-
         if (file) {
             setPreview(URL.createObjectURL(file));
         }
@@ -37,22 +34,16 @@ export const ChangeProfileAvatar = () => {
         console.log(formData)
         const token = getStoredToken()
         try {
-
-
             const res = await axios.post(
-                `${API_URL}users/update-details`,
+                `${API_URL}auth/users/me`,
                 formData,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
-
                     }
                 }
             )
-
             // console.log(res)
-
-
 
             if (res.data.success) {
                 alert("Avatar updated successfully")
@@ -92,15 +83,8 @@ export const ChangeProfileAvatar = () => {
                     onChange={handleChange}
                     className="bg-white p-2 rounded"
                 />
-
                 {/* Submit Button */}
-                <button
-                    type="submit"
-                    className="bg-black text-white py-2 rounded"
-                >
-                    Upload Avatar
-                </button>
-
+                <button type="submit" className="bg-black text-white py-2 rounded">Upload Avatar</button>
             </form>
         </div>
 

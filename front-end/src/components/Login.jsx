@@ -40,8 +40,7 @@ export const Login = ({ loggedInUser }) => {
 
     try {
 
-
-      const { data } = await axios.post(`${API_URL}users/login`, formData);
+      const { data } = await axios.post(`${API_URL}auth/login`, formData);
 
       if (!data.success) return;
 
