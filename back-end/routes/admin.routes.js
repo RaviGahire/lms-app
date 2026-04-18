@@ -1,25 +1,54 @@
 const express = require('express')
 const router = express.Router()
-const { verifyJwtToken } = require("../middlewares/auth.middleware")
-const { createAdminProfile,isAdmin} = require('../middlewares/admin.middleware')
-const authorizeRoles = require("../middlewares/authorized.role")
-const {deleteUser, getAllUsers} = require('../controllers/auth.controller')
+
+// ─────────────────────────────────────────
+// Adim Controller
+// ─────────────────────────────────────────
 const { getAdminProfile } = require('../controllers/admin.controller')
+const { deleteUser, getAllUsers } = require('../controllers/auth.controller')
 
-//Admin can deleted user using id 
-router.route('/me').get(verifyJwtToken,createAdminProfile,isAdmin,authorizeRoles("admin"),getAdminProfile)
+// ─────────────────────────────────────────
+// Middleware
+// ─────────────────────────────────────────
+const { verifyJwtToken } = require("../middlewares/auth.middleware")
+const { createAdminProfile, isAdmin } = require('../middlewares/admin.middleware')
+const authorizeRoles = require("../middlewares/authorized.role")
 
-router.route('/u').get(verifyJwtToken,isAdmin,authorizeRoles("admin"),getAllUsers)
+// ─────────────────────────────────────────
+// Reusable middleware stack for admin
+// ─────────────────────────────────────────
+const adminAccess = [verifyJwtToken, createAdminProfile, isAdmin, authorizeRoles("admin")]
 
-router.route('/delete/u/:id').delete(verifyJwtToken,isAdmin,authorizeRoles("admin"),deleteUser)
+// ─────────────────────────────────────────
+// Admin Profile Routes
+// ─────────────────────────────────────────
+router.route('/me').get(...adminAccess, getAdminProfile)
+
+// ─────────────────────────────────────────
+//  Admin User Management Routes
+// ─────────────────────────────────────────
+router.route('/users').get(...adminAccess, getAllUsers)
+router.route('/users/:id').delete(...adminAccess, deleteUser)
+
+// ─────────────────────────────────────────
+// Admin Course Management Routes
+// ─────────────────────────────────────────
+router.route('/courses/:courseId/publish').patch(...adminAccess)
+router.route('/courses/:courseId/unpublish').patch(...adminAccess)
+
+// ─────────────────────────────────────────
+// Admin Analytics Routes
+// ─────────────────────────────────────────
+router.route('/analytics/overview').get(...adminAccess)
+router.route('/analytics/revenue').get(...adminAccess)
+
+// ─────────────────────────────────────────
+// Admin Review Routes
+// ─────────────────────────────────────────
+router.route('/reviews').get(...adminAccess)
+router.route('/reviews/:reviewId').delete(...adminAccess)
 
 module.exports = router
 
-//Advance routes for admin dashboard
-// router.patch("/courses/:courseId/publish", verifyJwtToken, authorizeRoles("admin"))
-// router.patch("/courses/:courseId/unpublish", verifyJwtToken, authorizeRoles("admin"))
-// router.get("/analytics/overview", verifyJwtToken, authorizeRoles("admin"))
-// router.get("/analytics/revenue", verifyJwtToken, authorizeRoles("admin"))
-// router.get("/reviews", verifyJwtToken, authorizeRoles("admin"))
-// router.delete("/reviews/:reviewId", verifyJwtToken, authorizeRoles("admin"))
+
 
