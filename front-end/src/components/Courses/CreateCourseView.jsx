@@ -2,9 +2,12 @@ import { useState } from "react"
 import { DescriptionInput, Input, SelectInput } from "../Input"
 import { getStoredToken } from "../../utils/getStoredToken"
 import { toast } from "react-toastify"
+import { FormValidationConfigs } from "../../utils/FormValidationConfig"
 import axios from "axios"
 
 const API_URL = import.meta.env.VITE_API_URL
+
+// console.log(FormValidationConfigs())
 
 export const CreateCourseView = () => {
     const [error, setError] = useState({})
@@ -20,18 +23,34 @@ export const CreateCourseView = () => {
     // console.log(courseData)
 
 
+    // validation config 
+    const config = FormValidationConfigs()
+    const courseConfig = config.create_Course_Config
 
-    // form Validation
+    // validate function
 
-    const formValidation = (courseData) => {
+    const validate = (courseData) => {
         const errorData = {} // empty obj for hold error
-        //conditions for the inputs 
-        if (!courseData.title) errorData.title = "Title is required"
-        if (!courseData.duration) errorData.duration = "Duration is required"
-        if (!courseData.description) errorData.description = "Description is required"
-        if (!courseData.coverImage) errorData.coverImage = "Cover image is required"
-        if (!courseData.category) errorData.category = "Category is required"
-        if (!courseData.price) errorData.price = "Price is required"
+
+        Object.entries(courseData).forEach(([key, val]) => {
+            // console.log(key,val)
+            courseConfig[key].map((rule) => {
+                // console.log(rule)
+                if (rule.required && !val) {
+                    errorData[key] = rule.message
+                }
+
+
+            })
+        })
+
+        // //conditions for the inputs 
+        // if (!courseData.title) errorData.title = "Title is required"
+        // if (!courseData.duration) errorData.duration = "Duration is required"
+        // if (!courseData.description) errorData.description = "Description is required"
+        // if (!courseData.coverImage) errorData.coverImage = "Cover image is required"
+        // if (!courseData.category) errorData.category = "Category is required"
+        // if (!courseData.price) errorData.price = "Price is required"
 
         setError(errorData) // set the error data
 
@@ -44,7 +63,7 @@ export const CreateCourseView = () => {
         e.preventDefault()
 
         //called from validation function 
-        const validationErrors = formValidation(courseData)
+        const validationErrors = validate(courseData)
         //if error array length is 0 
         if (Object.keys(validationErrors).length) return
 
@@ -130,7 +149,7 @@ export const CreateCourseView = () => {
                         <SelectInput
                             label={'Category'}
                             name={'category'}
-                            placeholder="Select Category"
+                            defaultOption='Select Category'
                             options={['development', 'design', 'business', 'personal-development', 'it-software', 'data-ai', 'creative', 'language-learning']}
                             value={courseData.category}
                             onChange={handleChange}

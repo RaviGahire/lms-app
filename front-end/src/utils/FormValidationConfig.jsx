@@ -1,5 +1,5 @@
 
-export const FromValidationConfigs = () => {
+export const FormValidationConfigs = () => {
 
     // for create course
     const create_Course_Config = {
