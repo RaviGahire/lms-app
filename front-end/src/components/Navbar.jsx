@@ -1,7 +1,7 @@
 import React, { useState, useContext, useMemo } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import ContextData from '../Contexts/Context'; // Adjust path
-import { IconBellRinging, IconMessageDots, IconChevronRight } from '@tabler/icons-react'; // Adjust if using different library
+import { IconBellRinging, IconMessageDots, IconChevronRight } from '@tabler/icons-react'
 
 const NAV_ITEMS = [
     { name: 'Home', path: '/' },
