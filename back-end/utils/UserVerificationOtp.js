@@ -1,8 +1,9 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer')
+const { EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASS, HTTPS_PROXY } = process.env
 
-const { EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASS, HTTPS_PROXY } = process.env;
-
-// gmail transporter
+// ─────────────────────────────────────────
+// Transporter
+// ─────────────────────────────────────────
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   host: EMAIL_HOST,
@@ -17,11 +18,13 @@ const transporter = nodemailer.createTransport({
 
 });
 
-//Email OTP sender
+// ─────────────────────────────────────────
+// Email OTP Sender
+// ─────────────────────────────────────────
 const userVerificationOtp = async (email, otp) => {
-   try {
+  try {
     await transporter.verify();
-      const info = await transporter.sendMail({
+    const info = await transporter.sendMail({
       from: `"MasterTrack Account Verification" <${EMAIL_USER}>`,
       to: email,
       subject: "🔐 Verify Your Account - OTP Code",
@@ -60,8 +63,8 @@ const userVerificationOtp = async (email, otp) => {
       </div>
     </div>
   `});
-   
-   // console.log('Test email sent:', info.messageId);
+
+    // console.log('Test email sent:', info.messageId);
     return info
 
   } catch (error) {
@@ -69,6 +72,5 @@ const userVerificationOtp = async (email, otp) => {
     throw new Error("Failed to send OTP email");
   }
 }
-
 
 module.exports = userVerificationOtp;
