@@ -23,9 +23,8 @@ router.route('/').get(verifyJwtToken, authorizeRoles('admin'), getAllStudents) /
 // ─────────────────────────────────────────
 // Student Profile Routes
 // ─────────────────────────────────────────
-router.route('/me')
-  .get(verifyJwtToken, createStudentProfile, getStudentProfile) 
-  .patch(verifyJwtToken, updateStudentDetails)
+router.route('/me').get(verifyJwtToken, createStudentProfile, getStudentProfile) 
+router.route('/me/:studentId').patch(verifyJwtToken, updateStudentDetails)
 
 // ─────────────────────────────────────────
 // Student Enrolled Courses Routes
