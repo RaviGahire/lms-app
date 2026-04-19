@@ -4,14 +4,15 @@ import { UpdateUserDetails } from '../../utils/UpdateUserDetails'
 
 export const UpdateCourse = ({ course }) => {
 
-    console.log(course)
+    // console.log(course)
+
     const [formData, setFormData] = useState({
         title: course?.title || '',
         description: course?.description || '',
         duration: course?.duration || '',
         price: course?.price || '',
         category: course?.category || '',
-        coverImage:course?.coverImage || ''
+        coverImage: course?.coverImage || ''
     })
 
     console.log(formData)
@@ -75,8 +76,8 @@ export const UpdateCourse = ({ course }) => {
                     <Input
                         label="Price"
                         type='number'
-                           name="price"
-                           id='price'
+                        name="price"
+                        id='price'
                         placeholder="Enter Course price"
                         value={formData.price}
                         onChange={handleChange}
@@ -93,14 +94,14 @@ export const UpdateCourse = ({ course }) => {
                     />
 
                     <Input
-                    label='Cover Image'
-                    type='file'
-                    name='coverImage'
-                    id='coverImage'
-                    value={formData.coverImage}
-                    onChange={handleChange}
+                        label='Cover Image'
+                        type='file'
+                        name='coverImage'
+                        id='coverImage'
+                        value={formData.coverImage}
+                        onChange={handleChange}
 
-                    
+
                     />
                     {/* Description */}
                     <DescriptionInput
@@ -113,12 +114,12 @@ export const UpdateCourse = ({ course }) => {
                     />
 
                     <div className="flex items-center gap-4 pt-4">
-                     <UpdateUserDetails
-                     label={'save'}
-                     endpoint={`courses/${course?._id}`}
-                     payload={formData}
-                     redirectTo={'/instructor'}
-                     />
+                        <UpdateUserDetails
+                            label={'save'}
+                            endpoint={`courses/${course?._id}`}
+                            payload={formData}
+                            redirectTo={'/instructor'}
+                        />
                         <button
                             type="button"
                             className="px-8 py-3 rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50 transition"
