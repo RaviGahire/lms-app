@@ -4,17 +4,12 @@ import { useLocation } from 'react-router-dom'
 import { Input } from '../Input'
 import ContextData from "../../Contexts/Context"
 
-
 export const UpdateStudent = () => {
-
   const location = useLocation()
-
   const { student } = useContext(ContextData)
-
-  
-
   const { currentUser } = location.state || {};
 
+  // console.log(student?.id)
   const [update, setUpdate] = useState({
     college: student?.college,
     city: student?.city,
@@ -30,7 +25,7 @@ export const UpdateStudent = () => {
 
   })
 
-  console.log(currentUser)
+  // console.log(currentUser)
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -43,8 +38,6 @@ export const UpdateStudent = () => {
     console.log(update)
 
   }
-
-
 
   return (
     <section aria-label='update user profile data' className='max-w-7xl mx-auto py-12 px-4'>

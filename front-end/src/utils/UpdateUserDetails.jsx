@@ -20,9 +20,11 @@ export const UpdateUserDetails = ({ label, endpoint, payload, redirectTo }) => {
         if (!token) return alert("Session expired. Please login again.")
         setLoading(true)
         try {
-            const response = await axios.patch(
-                `${API_URL}${endpoint}`,
-                payload, { headers: { Authorization: `Bearer ${token}` } } )
+            const response = await axios.patch(`${API_URL}${endpoint}`, payload, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             // console.log(response)
             await fetchUserProfile()
             alert(response.data?.message || "Updated successfully!")
@@ -33,17 +35,17 @@ export const UpdateUserDetails = ({ label, endpoint, payload, redirectTo }) => {
             console.error("Update failed:", error);
             alert(`Update Failed: ${errorMessage}`);
         }
-        finally {setLoading(false)}
+        finally { setLoading(false) }
     }
     return (
         <button
             type="submit"
             onClick={handleUpdate}
             className={`w-full sm:w-max cursor-pointer px-10 py-3 font-bold rounded-xl transition-all shadow-lg 
-        ${loading ? 
-            'bg-gray-400 cursor-not-allowed' 
-            : 
-            'bg-blue-600 hover:bg-blue-700 text-white active:scale-95 shadow-blue-200'}`}>
+        ${loading ?
+                    'bg-gray-400 cursor-not-allowed'
+                    :
+                    'bg-blue-600 hover:bg-blue-700 text-white active:scale-95 shadow-blue-200'}`}>
             {loading ? "Processing..." : label}
         </button>
     )
