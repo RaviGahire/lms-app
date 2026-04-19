@@ -82,21 +82,18 @@ export const CreateCourseView = () => {
             formData.append('price', courseData.price);
 
 
-            const response = await axios.post(`${API_URL}courses/create-courses`, formData, {
+            const response = await axios.post(`${API_URL}courses`, formData, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
             // console.log(response)
-
-            if (!response) {
-                toast(error.response?.data.message)
+            if(response){
+                alert(response?.data?.message)
             }
-
-
-            // console.log(response.data)
+           
         } catch (error) {
-            // setError(error.response?.data.message)
+            alert(error.response?.data.message)
             console.log(error.response?.data || error.message);
         }
 
