@@ -112,30 +112,26 @@ exports.addNewCourses = async (req, res) => {
 }
 
 exports.updateCourses = async (req, res) => {
-    const { courseId } = req.params;
-    const { title, description, duration } = req.body;
+    const  courseId  = req.params.courseId;
+    const { title, description, duration, price, category ,coverImage } = req.body;
     const file = req.file;
-
+    // console.log(courseId)
     try {
-
         if (!courseId) {
             return res.status(400).json({
                 success: false,
-                message: "Course ID ",
+                message: "Please select a course before continuing",
             })
         }
 
-        if (!title || !description || !file) {
-
+        if (!(title && description && duration && price && category &&coverImage)) {
             return res.status(400).json({
                 success: false,
                 message: "All fields are required",
             })
         }
 
-
         const course = await Course.findById(courseId);
-
         if (!course) {
             return res.status(404).json({
                 success: false,
@@ -143,10 +139,10 @@ exports.updateCourses = async (req, res) => {
             })
         }
 
-
         if (title) course.title = title;
         if (description) course.description = description;
         if (duration) course.duration = duration;
+        if (price) course.price = price;
 
         if (file && file.path) {
             const uploaded = await uploadOnCloudinary(file.path);
@@ -158,21 +154,16 @@ exports.updateCourses = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: "Course updated successfully",
-            course
+            course : course.title
         })
 
     } catch (error) {
-
         return res.status(500).json({
             success: false,
             message: "Error while updating course",
             error: error.message,
         })
-
-
     }
-
-
 }
 
 exports.deleteCourses = async (req, res) => {
