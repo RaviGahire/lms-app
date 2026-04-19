@@ -19,9 +19,8 @@ const createInstructorProfile = require('../middlewares/instructor.middleware')
 // ─────────────────────────────────────────
 // Instructor Profile Routes
 // ─────────────────────────────────────────
-router.route('/me')
-    .get(verifyJwtToken, createInstructorProfile, getInstructorProfile)
-    .patch(verifyJwtToken, updateInstructorProfile)
+router.route('/me').get(verifyJwtToken, createInstructorProfile, getInstructorProfile)
+router.route('/me/:instructorId').patch(verifyJwtToken, updateInstructorProfile)
 
 // ─────────────────────────────────────────
 // Instructor Stats Routes
