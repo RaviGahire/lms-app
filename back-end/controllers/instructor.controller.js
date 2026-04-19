@@ -49,16 +49,15 @@ exports.getInstructorProfile = async (req, res) => {
 //update 
 exports.updateInstructorProfile = async (req, res) => {
 
-    const instructorId = req.user?._id || req.params.id
+    const instructorId = req.params.instructorId
     const updatedData = req.body
-
+    // console.log(instructorId)
     if (!instructorId || Object.keys(updatedData).length === 0) {
         return res.status(400).json({
             success: false,
             message: "Instructor ID or update data is missing"
         })
     }
-
 
     try {
         const instructor = await Instructor.findByIdAndUpdate(instructorId, updatedData, { new: true })
