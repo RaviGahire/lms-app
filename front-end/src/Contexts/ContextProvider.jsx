@@ -7,18 +7,14 @@ const API_URL = import.meta.env.VITE_API_URL
 
 const ContextProvider = ({ children }) => {
   const [loggedInUserProfile, setLoggedInUserProfile] = useState(null) // set the loggedIn user data to use globally
-
- const [loading, setLoading] = useState(!!getStoredToken())
+  const [loading, setLoading] = useState(!!getStoredToken())
   const [student, setStudent] = useState(null) // get current student data
   const [instructor, setInstructor] = useState(null)
-  const [admin, setAdmin] = useState(null) 
-  
- 
+  const [admin, setAdmin] = useState(null)
 
   // console.log(instructor)
   // fetch user profile 
   const fetchUserProfile = useCallback(async () => {
-
     const token = getStoredToken() // get token from localstorage
     if (!token) {
       setLoading(false)
@@ -26,11 +22,12 @@ const ContextProvider = ({ children }) => {
     }
 
     const student = await fetchStudentData(token)
-    const instructor = await fetchInsrtuctorData(token)
+    const instructors = await fetchInsrtuctorData(token)
     // const admin = await fetchAdminData(token)
 
-    // console.log(instructor)
+    // console.log('instructors data', instructors)
 
+    // Student state
     setStudent({
       id: student.student?._id,
       phone: student.student?.phone,
@@ -47,23 +44,19 @@ const ContextProvider = ({ children }) => {
 
     })
 
+    //instructor state
     setInstructor({
-      id: student.student?._id,
-      phone: student.student?.phone,
-      college: student.student?.college,
-      dob: student.student?.dob,
-      state: student.student?.state,
-      city: student.student?.city,
-      pincode: student.student?.pincode,
-      gender: student.student?.gender,
-      nationality: student.student?.nationality,
-      qualification: student.student?.qualification,
-      joined: student.student?.createdAt
-
+      id: instructors?.data?._id,
+      bio: instructors?.data?.bio,
+      expertise:instructors?.data?.expertise,
+      experience: instructors?.data?.experience,
+      phone: instructors?.data?.phone,
+      updatedAt: instructors?.data?.updatedAt,
+      courses: instructors?.data?.courses,
+      rating: instructors?.data?.rating
     })
 
-
-    setLoading(true);
+    setLoading(true)
 
     try {
       const response = await axios.get(`${API_URL}auth/users/me`, {
@@ -72,6 +65,7 @@ const ContextProvider = ({ children }) => {
 
       const profile = response.data?.data || {}
 
+      //Logged In User Profile State
       setLoggedInUserProfile({
         id: profile?._id,
         userName: profile?.userName,
@@ -102,11 +96,8 @@ const ContextProvider = ({ children }) => {
     fetchUserProfile()
   }, [fetchUserProfile])
 
-
-
-
   return (
-    <ContextData.Provider value={{ loggedInUserProfile, loading, userLogout, student, instructor,admin, fetchUserProfile }}>
+    <ContextData.Provider value={{ loggedInUserProfile, loading, userLogout, student, instructor, admin, fetchUserProfile }}>
       {children}
     </ContextData.Provider>
   );
@@ -114,7 +105,7 @@ const ContextProvider = ({ children }) => {
 
 export default ContextProvider;
 
-
+// student 
 export const fetchStudentData = async (token) => {
   try {
 
@@ -136,37 +127,32 @@ export const fetchStudentData = async (token) => {
     console.error(`Error fetching student data: ${errorMessage}`)
     throw error
   }
-
-
 }
 
-export const fetchInsrtuctorData = async (token)=>{
+// Instructor function
+export const fetchInsrtuctorData = async (token) => {
   try {
-
     if (!token) {
       console.error("Fetch aborted: No authentication token provided.");
       return null;
     }
-    const student = await axios.get(`${API_URL}instructors/me`, { headers: { Authorization: `Bearer ${token}` } })
-
-    if (!student) {
-      console.error("Student not found yet");
+    const instructors = await axios.get(`${API_URL}instructors/me`, { headers: { Authorization: `Bearer ${token}` } })
+    if (!instructors) {
+      console.error("instructor not found yet");
       return null;
     }
 
-    return student?.data
+    return instructors?.data
 
   } catch (error) {
     const errorMessage = error.response?.data?.message || error.message;
     console.error(`Error fetching student data: ${errorMessage}`)
     throw error
   }
-
-
-
 }
 
-export const fetchAdminData = async (token)=>{
+//Admin function
+export const fetchAdminData = async (token) => {
   try {
 
     if (!token) {
