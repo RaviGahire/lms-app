@@ -92,12 +92,10 @@ exports.addNewCourses = async (req, res) => {
             coverImage: imageUrl
         });
 
-
-
         return res.status(201).json({
             success: true,
             message: "Course created successfully",
-            course: newCourse
+            
         })
 
 
