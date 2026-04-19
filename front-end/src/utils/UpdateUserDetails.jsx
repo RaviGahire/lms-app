@@ -10,7 +10,8 @@ export const UpdateUserDetails = ({ label, endpoint, payload, redirectTo }) => {
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
-    console.log(endpoint)
+    // console.log(label, endpoint, payload, redirectTo)
+
     const { fetchUserProfile } = useContext(ContextData)
 
     // Handle Update function 
@@ -41,7 +42,7 @@ export const UpdateUserDetails = ({ label, endpoint, payload, redirectTo }) => {
         <button
             type="submit"
             onClick={handleUpdate}
-            className={`w-full sm:w-max cursor-pointer px-10 py-3 font-bold rounded-xl transition-all shadow-lg 
+            className={`w-full sm:w-max cursor-pointer px-10 py-3 font-bold rounded-md transition-all shadow-lg 
         ${loading ?
                     'bg-gray-400 cursor-not-allowed'
                     :
