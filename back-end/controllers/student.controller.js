@@ -1,8 +1,9 @@
 const Course = require('../model/coures.model')
 const Student = require('../model/student.model')
-// const User = require('../model/user.model')
 
-//get all user role is student
+// ─────────────────────────────────────────
+// Get All student
+// ─────────────────────────────────────────
 exports.getAllStudents = async (req, res) => {
 
     try {
@@ -35,7 +36,47 @@ exports.getAllStudents = async (req, res) => {
 
 }
 
-// get current user whos logged in 
+// ─────────────────────────────────────────
+// Get student by Id
+// ─────────────────────────────────────────
+exports.getStudentById = async (req, res) => {
+    const { studentId } = req.params
+
+    try {
+                
+        if (!studentId) {
+            return res.status(400).json({
+                success: false,
+                message: "Student ID is required",
+            })
+        }
+    
+        const student = await Student.findById(studentId);
+
+        if (!student) {
+            return res.status(404).json({
+                success: false,
+                message: "Student not found",
+            })
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Student fetched successfully",
+            data: student,
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error",
+        })
+    }
+}
+
+// ─────────────────────────────────────────
+// Get student profile for dashboard
+// ─────────────────────────────────────────
 exports.getStudentProfile = async (req, res) => {
     try {
         const studId = req.user._id;
@@ -54,8 +95,11 @@ exports.getStudentProfile = async (req, res) => {
     } catch (error) {
         return res.status(500).json({ success: false, error: error.message });
     }
-};
+}
 
+// ─────────────────────────────────────────
+// Update student details
+// ─────────────────────────────────────────
 exports.updateStudentDetails = async (req, res) => {
     const studId = req.params.studentId
     const updatedData = req.body
@@ -95,6 +139,9 @@ exports.updateStudentDetails = async (req, res) => {
     }
 }
 
+// ─────────────────────────────────────────
+// Helper for enroll to courses
+// ─────────────────────────────────────────
 exports.getEnrolledCourses = async (req, res) => {
     const userId = req.user?._id;
 
@@ -135,4 +182,4 @@ exports.getEnrolledCourses = async (req, res) => {
             error: error.message,
         });
     }
-};
+}
