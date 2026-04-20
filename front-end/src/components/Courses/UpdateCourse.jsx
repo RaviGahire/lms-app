@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
 import { DescriptionInput, Input, SelectInput } from '../Input'
 import { UpdateUserDetails } from '../../utils/UpdateUserDetails'
+import { Link, useNavigate } from 'react-router-dom'
 
-export const UpdateCourse = ({ course }) => {
-
-    // console.log(course)
-
-    const [formData, setFormData] = useState({
+export const UpdateCourse = ({ course ,tab }) => {
+      const [formData, setFormData] = useState({
         title: course?.title || '',
         description: course?.description || '',
         duration: course?.duration || '',
@@ -15,7 +13,7 @@ export const UpdateCourse = ({ course }) => {
         coverImage: course?.coverImage || ''
     })
 
-    console.log(formData)
+    // console.log(formData)
     const handleChange = (e) => {
         const { name, value } = e.target
         setFormData({ ...formData, [name]: value })
@@ -23,7 +21,7 @@ export const UpdateCourse = ({ course }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('Updated Data:', formData)
+        // console.log('Updated Data:', formData)
 
     }
 
@@ -42,9 +40,8 @@ export const UpdateCourse = ({ course }) => {
 
     // console.log(course)
     return (
-        <div className="w-full max-w-4xl">
-            <div className="p-1.5 md:p-4">
-
+        <div className="w-full max-w-3xl">
+            <div className="p-1.5 md:p-2">
                 {/* Heading */}
                 <div className="mb-8">
                     <h2 className="text-2xl font-bold text-gray-800 underline">Update Course Details</h2>
@@ -115,17 +112,17 @@ export const UpdateCourse = ({ course }) => {
 
                     <div className="flex items-center gap-4 pt-4">
                         <UpdateUserDetails
-                            label={'save'}
+                            label={'Save'}
                             endpoint={`courses/${course?._id}`}
                             payload={formData}
                             redirectTo={'/instructor'}
                         />
-                        <button
-                            type="button"
-                            className="px-8 py-3 rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50 transition"
+                        <Link to={'/courses'}
+                            type="reset"
+                            className="px-8 py-3 cursor-pointer rounded-md font-bold border border-gray-200 text-gray-600 hover:bg-gray-50 transition"
                         >
                             Cancel
-                        </button>
+                        </Link>
                     </div>
 
                 </form>
