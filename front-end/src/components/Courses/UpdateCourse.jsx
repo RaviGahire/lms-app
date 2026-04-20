@@ -3,7 +3,7 @@ import { DescriptionInput, Input, SelectInput } from '../Input'
 import { UpdateUserDetails } from '../../utils/UpdateUserDetails'
 import { Link, useNavigate } from 'react-router-dom'
 
-export const UpdateCourse = ({ course ,tab }) => {
+export const UpdateCourse = ({ course }) => {
       const [formData, setFormData] = useState({
         title: course?.title || '',
         description: course?.description || '',
