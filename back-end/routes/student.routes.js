@@ -4,11 +4,12 @@ const router = express.Router()
 // ─────────────────────────────────────────
 // Student 
 // ─────────────────────────────────────────
-const { 
-  getAllStudents, 
-  getStudentProfile, 
-  updateStudentDetails, 
-  getEnrolledCourses 
+const {
+  getAllStudents,
+  getStudentProfile,
+  updateStudentDetails,
+  getEnrolledCourses,
+  getStudentById
 } = require('../controllers/student.controller')
 
 const { verifyJwtToken } = require('../middlewares/auth.middleware')
@@ -23,8 +24,10 @@ router.route('/').get(verifyJwtToken, authorizeRoles('admin'), getAllStudents) /
 // ─────────────────────────────────────────
 // Student Profile Routes
 // ─────────────────────────────────────────
-router.route('/me').get(verifyJwtToken, createStudentProfile, getStudentProfile) 
-router.route('/me/:studentId').patch(verifyJwtToken, updateStudentDetails)
+router.route('/me').get(verifyJwtToken, createStudentProfile, getStudentProfile)
+router.route('/me/:studentId')
+  .get(getStudentById)
+  .patch(verifyJwtToken, updateStudentDetails)
 
 // ─────────────────────────────────────────
 // Student Enrolled Courses Routes
