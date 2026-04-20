@@ -422,7 +422,7 @@ exports.forgotPassword = async (req, res) => {
 
 exports.getUserById = async (req,res) => {
 const userId = req.params.id
-
+// console.log(userId)
 
 if(!userId){
   return res.status(400).json({
