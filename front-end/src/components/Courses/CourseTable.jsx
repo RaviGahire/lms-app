@@ -4,7 +4,7 @@ import { IconEdit, IconTrash } from "@tabler/icons-react";
 
 
 
-export const CourseTable = ({ courses,onEditCourse  }) => {
+export const CourseTable = ({ courses, onEditCourse }) => {
 
     const [search, setSearch] = useState({ query: '' })
     const [filter, setFilter] = useState([])
@@ -27,7 +27,7 @@ export const CourseTable = ({ courses,onEditCourse  }) => {
 
 
     const handleEdit = (course) => {
-      onEditCourse(course)
+        onEditCourse(course)
 
     }
 
@@ -37,9 +37,9 @@ export const CourseTable = ({ courses,onEditCourse  }) => {
 
     return (
         <div className="bg-gray-50 ">
-            <div className="shadow-sm bg-white">
+            <div className="shadow-sm ">
                 {/* Search Section */}
-                <div className="flex justify-between items-center px-6 py-4 bg-white border-b border-gray-100">
+                <div className="flex items-center py-4 bg-white border-b border-gray-100">
                     <form
                         onSubmit={handleSearchQuery}
                         className="w-full max-w-md">
@@ -52,7 +52,7 @@ export const CourseTable = ({ courses,onEditCourse  }) => {
                                 placeholder="Enter course name..."
                                 onChange={handleChange}
                                 value={search.query}
-                                className="pl-10"
+                                className="pl-1"
                             />
                         </div>
                     </form>
@@ -71,7 +71,9 @@ export const CourseTable = ({ courses,onEditCourse  }) => {
                             <tr className="bg-gray-100 text-gray-600 uppercase text-xs leading-normal">
                                 <th className="py-3 px-6">No</th>
                                 <th className="py-3 px-6">Title</th>
+                                <th className="py-3 px-6">Price</th>
                                 <th className="py-3 px-6">Description</th>
+                                <th className="py-3 px-6">Thumbnail</th>
                                 <th className="py-3 px-6">Duration</th>
                                 <th className="py-3 px-6">Created By</th>
                                 <th className="py-3 px-6 text-center">Actions</th>
@@ -82,7 +84,9 @@ export const CourseTable = ({ courses,onEditCourse  }) => {
                                 <tr key={index} className="border-b border-gray-200 hover:bg-gray-50 transition duration-150 cursor-pointer">
                                     <td className="py-3 px-6 font-medium">{index + 1}</td>
                                     <td className="py-3 px-6 font-semibold text-blue-600">{course.title}</td>
+                                    <td className="py-3 px-6 font-semibold text-blue-600">${course.price}</td>
                                     <td className="py-3 px-6">{course.description}</td>
+                                    <td className="py-3 px-6"><CoverImage image={course.coverImage} title={course.title} /></td>
                                     <td className="py-3 px-6">{course.duration} Hr</td>
                                     <td className="py-3 px-6">{course.createdBy[0].userName}</td>
                                     <td className="py-3 px-6 text-center">
@@ -91,7 +95,7 @@ export const CourseTable = ({ courses,onEditCourse  }) => {
                                                 <IconEdit stroke={2} />
                                             </button>
                                             <span className="text-gray-300 hidden">|</span>
-                                            <button  hidden className="text-red-500 hover:text-red-700 font-medium cursor-pointer">
+                                            <button hidden className="text-red-500 hover:text-red-700 font-medium cursor-pointer">
                                                 <IconTrash stroke={2} />
                                             </button>
                                         </div>
@@ -112,3 +116,13 @@ export const CourseTable = ({ courses,onEditCourse  }) => {
     );
 };
 
+
+const CoverImage = ({ image, title }) => {
+    return (<>
+        <div className="size-10 ">
+            <img
+                className="w-full h-full bg-cover rounded-md"
+                src={image} alt={title} />
+        </div>
+    </>)
+}
