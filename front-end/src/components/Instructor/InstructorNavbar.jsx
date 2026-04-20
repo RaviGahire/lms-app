@@ -9,10 +9,13 @@ export const InstructorNavbar = () => {
     const [activeTab, setActiveTab] = useState('create')
     const [selectedCourseId, setSelectedCourseId] = useState(null)
 
+
     const handleEditCourse = (course) => {
             setSelectedCourseId(course)  
-            setActiveTab('update')         
+            setActiveTab('update') 
+                  
         }
+
 
     return (
         <>
@@ -40,7 +43,7 @@ export const InstructorNavbar = () => {
                 {activeTab === 'create' && <CreateCourseView />}
                 {activeTab === 'update' && <UpdateCourse course={selectedCourseId} />}
                 {activeTab === 'courses' && <CourseLayout onEditCourse={handleEditCourse} />}
-                {activeTab === 'students' && <div className="text-center py-20 text-gray-400"><EnrolledStudents/></div>}
+                {activeTab === 'students' && <EnrolledStudents   />}
             </div>
         </>
 
