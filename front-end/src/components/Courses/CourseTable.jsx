@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { Input } from "../Input"
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 
-
-
 export const CourseTable = ({ courses, onEditCourse }) => {
 
     const [search, setSearch] = useState({ query: '' })
