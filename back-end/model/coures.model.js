@@ -35,7 +35,6 @@ const courseSchema = new mongoose.Schema({
         ref: "User"
     }],
 
-
     deletedBy: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
@@ -44,7 +43,7 @@ const courseSchema = new mongoose.Schema({
     enrolledBy: [
         {
             type: mongoose.Types.ObjectId,
-            ref: "User"
+            ref: "Student"
         }
     ]
 
