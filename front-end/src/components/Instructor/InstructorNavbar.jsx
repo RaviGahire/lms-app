@@ -5,18 +5,14 @@ import { CourseLayout } from '../Courses/CourseLayout'
 import { UpdateCourse } from '../Courses/UpdateCourse'
 import { EnrolledStudents } from '../Courses/EnrolledStudents'
 
-
-
-
 export const InstructorNavbar = () => {
     const [activeTab, setActiveTab] = useState('create')
     const [selectedCourseId, setSelectedCourseId] = useState(null)
 
-  const handleEditCourse = (course) => {
-        setSelectedCourseId(course)  
-        setActiveTab('update')         
-    }
-
+    const handleEditCourse = (course) => {
+            setSelectedCourseId(course)  
+            setActiveTab('update')         
+        }
 
     return (
         <>
@@ -24,7 +20,7 @@ export const InstructorNavbar = () => {
                 {[
                     { id: 'create', name: 'Create Course', icon: <IconPlus size={18} /> },
                     { id: 'update', name: 'Update Course', icon: <IconEdit size={18} /> },
-                    { id: 'courses', name: 'All Courses', icon: <IconBookDownload size={18} /> },
+                    { id: 'courses', name: 'Your Courses', icon: <IconBookDownload size={18} /> },
                     { id: 'students', name: 'Enrolled Students', icon: <IconUsers size={18} /> },
                 ].map((tab) => (
                     <button
