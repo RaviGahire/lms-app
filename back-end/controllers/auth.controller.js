@@ -6,7 +6,9 @@ const userVerificationOtp = require("../utils/UserVerificationOtp")
 const jwt = require('jsonwebtoken')
 const uploadOnCloudinary = require('../utils/Cloudinary')
 
-//user signup
+// ─────────────────────────────────────────
+// User Registeration Controller
+// ─────────────────────────────────────────
 exports.userRegister = async (req, res) => {
   const { email, password, userName, } = req.body;
   try {
@@ -53,9 +55,11 @@ exports.userRegister = async (req, res) => {
       message: "Internal server error"
     });
   }
-};
+}
 
-// email verification otp
+// ─────────────────────────────────────────
+// OTP Verification Controller
+// ─────────────────────────────────────────
 exports.generateEmailVerificationOtp = async (req, res) => {
   try {
     // user email 
@@ -113,9 +117,11 @@ exports.generateEmailVerificationOtp = async (req, res) => {
       error: error.message
     });
   }
-};
+}
 
-//login user
+// ─────────────────────────────────────────
+// User Login Controller
+// ─────────────────────────────────────────
 exports.userLogin = async (req, res) => {
   try {
     const { email, password, role } = req.body;
@@ -164,9 +170,11 @@ exports.userLogin = async (req, res) => {
       message: "Internal server error"
     });
   }
-};
+}
 
-//current user pass the token 
+// ─────────────────────────────────────────
+// Current User Controller
+// ─────────────────────────────────────────
 exports.getCurrentUser = async (req, res) => {
 
   const loggedInUserId = req.user._id
@@ -197,8 +205,11 @@ exports.getCurrentUser = async (req, res) => {
         error: error.message
       })
   }
-};
+}
 
+// ─────────────────────────────────────────
+// Get All User Controller
+// ─────────────────────────────────────────
 exports.getAllUsers = async (_, res) => {
   try {
     const users = await User.find().select("-password")
@@ -221,11 +232,57 @@ exports.getAllUsers = async (_, res) => {
       })
   }
 
-};
+}
 
+// ─────────────────────────────────────────
+// Get User By Id Controller
+// ─────────────────────────────────────────
+exports.getUserById = async (req,res) => {
+const userId = req.params.id
+// console.log(userId)
 
-// CRUD OPS FOR ADMIN
-//delete user 
+if(!userId){
+  return res.status(400).json({
+    success:false,
+    message: "User ID parameter is missing"
+  })
+}
+
+try {
+
+ const users = await User.findById(userId)
+
+if(!users){
+  return res.status(404).json({
+    success:false,
+    message: "User not found"
+  })
+}
+
+return res.status(200).json({
+  success:true,
+  message: 'User successfully fetched',
+  users
+})
+
+  
+} catch (error) {
+  return res.status(500).json({
+   success: false,
+      message: "Internal Server Error",
+      error: error.message
+  })
+  
+}
+}
+
+// ==========================================
+// ============CRUD Controllers==============
+// ==========================================
+
+// ─────────────────────────────────────────
+// Delete User (Admin Ops)
+// ─────────────────────────────────────────
 exports.deleteUser = async (req, res) => {
   const userId = req.params.id
   // console.log(userId)
@@ -253,9 +310,11 @@ exports.deleteUser = async (req, res) => {
       error: error.message,
     });
   }
-};
+}
 
-// user account deletion request
+// ─────────────────────────────────────────
+// User Account Deletion Request Controller 
+// ─────────────────────────────────────────
 exports.userAccountDeleteRequest = async (req, res) => {
   const userId = req.user._id
   // console.log(userId)
@@ -284,9 +343,11 @@ exports.userAccountDeleteRequest = async (req, res) => {
       error: error.message,
     });
   }
-};
+}
 
-//update user details TODO : save in db deletion request
+// ─────────────────────────────────────────
+// Update User Details Controller
+// ─────────────────────────────────────────
 exports.updateUserAccountDetails = async (req, res) => {
   const userId = req.user._id
   const updatedData = req.body
@@ -327,7 +388,9 @@ exports.updateUserAccountDetails = async (req, res) => {
 
 };
 
-//change current password
+// ─────────────────────────────────────────
+// Change Current Password Controlle
+// ─────────────────────────────────────────
 exports.changeCurrentUserPassword = async (req, res) => {
   const userId = req.user._id
   const { oldPassword, newPassword } = req.body
@@ -378,9 +441,11 @@ exports.changeCurrentUserPassword = async (req, res) => {
       error: error.message
     })
   }
-};
+}
 
-//forgot password 
+// ─────────────────────────────────────────
+// Forgot Password Controller 
+// ─────────────────────────────────────────
 exports.forgotPassword = async (req, res) => {
 
   const { email, userName, newPassword } = req.body
@@ -418,45 +483,6 @@ exports.forgotPassword = async (req, res) => {
 
 }
 
-// get users by id 
 
-exports.getUserById = async (req,res) => {
-const userId = req.params.id
-// console.log(userId)
-
-if(!userId){
-  return res.status(400).json({
-    success:false,
-    message: "User ID parameter is missing"
-  })
-}
-
-try {
-
- const users = await User.findById(userId)
-
-if(!users){
-  return res.status(404).json({
-    success:false,
-    message: "User not found"
-  })
-}
-
-return res.status(200).json({
-  success:true,
-  message: 'User successfully fetched',
-  users
-})
-
-  
-} catch (error) {
-  return res.status(500).json({
-   success: false,
-      message: "Internal Server Error",
-      error: error.message
-  })
-  
-}
-}
 
 
