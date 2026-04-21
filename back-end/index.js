@@ -9,7 +9,15 @@ const cors = require('cors')
 app.use(express.json({ limit: "10mb" }))
 app.use(express.urlencoded({ extended: true, limit: "10mb" }))
 app.use(express.static('public/'))
-app.use(cors({ origin: process.env.CORS_ORIGIN, credentials: true }))
+
+// ─────────────────────────────────────────
+// CORS
+// ─────────────────────────────────────────
+app.use(cors({
+  origin: process.env.CORS_ORIGIN,
+  methods:'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true
+}))
 
 // ─────────────────────────────────────────
 // Database Connection
@@ -19,6 +27,7 @@ const connectDB = require('./config/connectDB')
 // ─────────────────────────────────────────
 // All App Routes
 // ─────────────────────────────────────────
+const defaultRoutes = require('./routes/default.routes')
 const authRoutes = require('./routes/auth.routes')
 const studentRoutes = require('./routes/student.routes')
 const courseRoutes = require('./routes/course.routes')
@@ -28,6 +37,7 @@ const adminRoutes = require('./routes/admin.routes')
 // ─────────────────────────────────────────
 // All API End-points
 // ─────────────────────────────────────────
+app.use('/check',defaultRoutes)
 app.use('/api/v1/auth', authRoutes)
 app.use('/api/v1/students', studentRoutes)
 app.use('/api/v1/instructors', instructorRoutes)
