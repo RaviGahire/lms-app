@@ -1,5 +1,4 @@
-
-import { Input} from "../../../components/Input"
+import { Input} from "../../Auth/FormFields"
 import { CourseCard } from "../CourseCard"
 
 

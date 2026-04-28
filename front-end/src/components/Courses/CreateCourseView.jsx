@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { DescriptionInput, Input, SelectInput } from "../Input"
+import { TextArea, Input, Select } from "../../pages/Auth/FormFields"
 import { getStoredToken } from "../../utils/getStoredToken"
 import { toast } from "react-toastify"
 import { FormValidationConfigs } from "../../utils/FormValidationConfig"
@@ -143,7 +143,7 @@ export const CreateCourseView = () => {
 
                     {/* Course Category*/}
                     <div className="space-y-2">
-                        <SelectInput
+                        <Select
                             label={'Category'}
                             name={'category'}
                             defaultOption='Select Category'
@@ -172,7 +172,7 @@ export const CreateCourseView = () => {
 
                     {/* Course Description */}
                     <div className="space-y-2">
-                        <DescriptionInput
+                        <TextArea
                             label='Description'
                             id='description'
                             name='description'

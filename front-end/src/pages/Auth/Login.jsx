@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode'
-import ContextData from '../Contexts/Context';
+import ContextData from '../../contexts/Context';
 
 export const Login = ({ loggedInUser }) => {
   const [showPassword, setShowPassword] = useState(false);

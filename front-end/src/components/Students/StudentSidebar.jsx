@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { Link } from "react-router-dom";
 import { LogoutButton } from "../../utils/LogoutUser";
 import { VerificationStatus } from "../../utils/VerificationStatus"
-import ContextData from "../../Contexts/Context"
+import ContextData from "../../contexts/Context"
 import {
     IconBuilding,
     IconCalendar,

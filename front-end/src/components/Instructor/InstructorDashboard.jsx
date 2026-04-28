@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react'
-import ContextData from '../../Contexts/Context'
+import ContextData from '../../contexts/Context'
 import { InstructorAside } from './InstructorAside'
 import { InstructorNavbar } from './InstructorNavbar'
 

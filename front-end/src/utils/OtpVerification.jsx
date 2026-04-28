@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
-
+  const API_URL = import.meta.env.VITE_API_URL
 export const OtpVerification = () => {
     const [timer, setTimer] = useState(59); // Start at 59
     const [canResend, setCanResend] = useState(false);
@@ -13,7 +13,7 @@ export const OtpVerification = () => {
 
     const navigate = useNavigate(); // for redirect to one route to targeted route
     const { state } = useLocation(); // got email from verification status component
-    const API_URL = import.meta.env.VITE_API_URL
+  
 
     
 

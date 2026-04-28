@@ -1,7 +1,7 @@
 import React, { useState, useContext, useMemo } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import ContextData from '../Contexts/Context'; // Adjust path
 import { IconBellRinging, IconMessageDots, IconChevronRight } from '@tabler/icons-react'
+import { Link, NavLink } from 'react-router-dom';
+import ContextData from "../../contexts/Context"
 
 const NAV_ITEMS = [
     { name: 'Home', path: '/' },
@@ -20,9 +20,7 @@ const ROLE_PATHS = {
 export const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { loggedInUserProfile } = useContext(ContextData);
-
     const { userName, role, email } = loggedInUserProfile || {};
-
     // Calculate path safely
    const dashboardPath = ROLE_PATHS[role?.toLowerCase()] || "/login"
 

@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
-import ContextData from "../Contexts/Context"
+import ContextData from "../contexts/Context"
 import { IconLogout } from "@tabler/icons-react"
 
 

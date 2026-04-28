@@ -3,17 +3,12 @@ import { useNavigate } from "react-router-dom"
 import { useContext, useState } from "react"
 import ContextData from "../Contexts/Context"
 import { getStoredToken } from "./getStoredToken"
-
 const API_URL = import.meta.env.VITE_API_URL
 
 export const UpdateUserDetails = ({ label, endpoint, payload, redirectTo }) => {
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
-
-    // console.log(label, endpoint, payload, redirectTo)
-
     const { fetchUserProfile } = useContext(ContextData)
-
     // Handle Update function 
     const handleUpdate = async (e) => {
         if (e) e.preventDefault()

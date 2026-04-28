@@ -3,7 +3,7 @@ import { BlogHero } from './BlogHero';
 import { BlogDetails } from './BlogDetails';
 import BlogPlatform from './BlogPlatform';
 import { RelatedBlog } from './RelatedBlog';
-import { Footer } from '../../components/Footer';
+import { Footer } from '../../components/Common/Footer';
 
 
 

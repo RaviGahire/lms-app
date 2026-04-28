@@ -1,6 +1,6 @@
 import { getAllCourses } from "../../utils/GetCouresDetails"
 import { useContext, useEffect, useState } from "react"
-import ContextData from "../../Contexts/Context"
+import ContextData from "../../contexts/Context"
 import { getStoredToken } from "../../utils/getStoredToken"
 import axios from "axios"
 

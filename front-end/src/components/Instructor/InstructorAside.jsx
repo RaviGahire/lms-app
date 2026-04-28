@@ -1,6 +1,6 @@
 import { IconCamera, IconChalkboardTeacher, IconDeviceMobile, IconJewishStar, IconMail, IconUserCog, IconUserEdit, IconUserStar } from '@tabler/icons-react'
 import { LogoutButton } from '../../utils/LogoutUser'
-import ContextData from '../../Contexts/Context';
+import ContextData from '../../contexts/Context';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 

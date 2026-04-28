@@ -2,11 +2,10 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { IconCircleDashedCheck } from "@tabler/icons-react";
 
+const API_URL = import.meta.env.VITE_API_URL
 export const VerificationStatus = ({ labelOne, labelTwo, isUserVerified, userEmail, Error }) => {
-  const API_URL = import.meta.env.VITE_API_URL
-
+  
   const navigate = useNavigate()
-
   const verifyMe = async () => {
     try {
       const res = await axios.post(`${API_URL}/send-email-otp`, {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { getAllCourses } from "../../utils/GetCouresDetails"
 import { CourseTable } from "./CourseTable"
 import { useContext } from "react"
-import ContextData from "../../Contexts/Context"
+import ContextData from "../../contexts/Context"
 
 export const CourseLayout = ({ onEditCourse, childern ,enroll }) => {
     const { loggedInUserProfile } = useContext(ContextData)

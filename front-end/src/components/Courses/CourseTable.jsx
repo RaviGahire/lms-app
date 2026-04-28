@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Input } from "../Input"
+import { Input } from "../../pages/Auth/FormFields"
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 
 export const CourseTable = ({ courses, onEditCourse }) => {

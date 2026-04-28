@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { getAllCourses } from "../../utils/GetCouresDetails"
-import ContextData from "../../Contexts/Context"
+import ContextData from "../../contexts/Context"
 import axios from "axios"
 
 const API_URL = import.meta.env.VITE_API_URL

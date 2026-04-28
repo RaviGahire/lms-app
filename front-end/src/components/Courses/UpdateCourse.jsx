@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { DescriptionInput, Input, SelectInput } from '../Input'
+import { TextArea, Input, Select } from '../../pages/Auth/FormFields'
 import { UpdateUserDetails } from '../../utils/UpdateUserDetails'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -79,7 +79,7 @@ export const UpdateCourse = ({ course }) => {
                         value={formData.price}
                         onChange={handleChange}
                     />
-                    <SelectInput
+                    <Select
                         label='Category'
                         type='text'
                         id='category'
@@ -101,7 +101,7 @@ export const UpdateCourse = ({ course }) => {
 
                     />
                     {/* Description */}
-                    <DescriptionInput
+                    <TextArea
                         label="Description"
                         placeholder="Enter Course Description"
                         name="description"

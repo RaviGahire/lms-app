@@ -1,11 +1,7 @@
 
-//form input
-export const Input = ({ label,labelStyle, id, placeholder, name, type, value, onChange, className, isEditable, error }) => {
-
-  // console.log(error)
-  // handle file input
-  const inputValue = type === 'file' ? undefined : value;
-
+// Input 
+export const Input = ({ label, labelStyle, id, placeholder, name, type, value, onChange, className, isEditable, error }) => {
+   const inputValue = type === 'file' ? undefined : value;
   return (
     <div className={`flex flex-col gap-2 relative ${className}`} >
       {/* label */}
@@ -22,7 +18,7 @@ export const Input = ({ label,labelStyle, id, placeholder, name, type, value, on
 }
 
 // Text Area
-export function DescriptionInput({ label, id, placeholder, name, value, onChange, className, isEditable, rows, maxLength, error }) {
+export function TextArea({ label, id, placeholder, name, value, onChange, className, isEditable, rows, maxLength, error }) {
 
   return (
     <div className={`flex flex-col gap-2 relative ${className}`} >
@@ -45,8 +41,8 @@ export function DescriptionInput({ label, id, placeholder, name, value, onChange
 }
 
 //select input
-export const SelectInput = ({
-  style,
+export const Select = ({
+  className,
   label,
   name,
   id,
@@ -74,10 +70,10 @@ export const SelectInput = ({
           id={id}
           value={value}
           onChange={onChange}
-          className={`${style} block w-full px-3 py-1.5 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none cursor-pointer transition`}
+          className={`${className} block w-full px-3 py-1.5 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none cursor-pointer transition`}
         >
           {/* Placeholder */}
-          <option className={style} value="" disabled>
+          <option className={className} value="" disabled>
             {defaultOption || "Default Select"}
           </option>
 
@@ -88,7 +84,6 @@ export const SelectInput = ({
             </option>
           ))}
         </select>
-
         {/* Dropdown Icon */}
         <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-gray-500">
           <svg

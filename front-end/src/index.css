@@ -2,10 +2,21 @@
 
 
 /* for all input tag */
-input:-webkit-autofill {
+/* input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px rgb(17 24 39) inset;
   -webkit-text-fill-color: white;
+} */
+
+:root {
+  --color-neutral-300: #d4d4d4b4;
+  --pattern: var(--color-neutral-300);
 }
+
+@theme{
+   --color-neutral-300: #d4d4d4;
+  --pattern: var(--color-neutral-300);
+}
+
 /* for otp pop up */
 @keyframes gradient {
   0%,

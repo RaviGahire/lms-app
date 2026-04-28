@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import { UpdateUserDetails } from "../../utils/UpdateUserDetails"
 import { useLocation } from 'react-router-dom'
-import { Input, DescriptionInput } from '../Input'
+import { Input, TextArea } from '../../pages/Auth/FormFields'
 import ContextData from "../../Contexts/Context"
 
 export const InstructorUpdate = () => {
@@ -135,7 +135,7 @@ export const InstructorUpdate = () => {
                 onChange={handleChange}
               />
 
-              <DescriptionInput
+              <TextArea
                 label='Bio'
                 type='text'
                 name='bio'

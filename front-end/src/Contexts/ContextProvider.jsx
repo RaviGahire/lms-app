@@ -1,4 +1,4 @@
-import ContextData from "../Contexts/Context"
+import ContextData from "./Context"
 import { useCallback, useEffect, useState } from "react"
 import { getStoredToken } from "../utils/getStoredToken"
 import axios from "axios"

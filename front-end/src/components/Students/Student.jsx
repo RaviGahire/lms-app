@@ -4,13 +4,11 @@ import { StudentCurriculumCards } from "./StudentCurriculumCards";
 import { ActiveCurriculum } from "./ActiveCurriculum";
 import { StudentsBlogs } from "./StudentsBlogs";
 import { Recommended } from "./Recommended";
-import ContextData from "../../Contexts/Context";
+import ContextData from "../../contexts/Context";
 
 export const Student = () => {
 const {loggedInUserProfile,student}=useContext(ContextData)
-
     const [error, setError] = useState('')
-
     return (
         <div className="main-container bg-cyan-700">
             <div className="flex flex-col md:flex-row">
@@ -27,10 +25,7 @@ const {loggedInUserProfile,student}=useContext(ContextData)
                     </div>
 
                     {/* Cards*/}
-                    <StudentCurriculumCards
-                
-                    
-                    />
+                    <StudentCurriculumCards/>
 
                     {/* main container*/}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-5 lg:gap-10">
