@@ -1,3 +1,4 @@
+import { IconChevronRight, IconPlayerPlay } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -33,20 +34,34 @@ export const HomeHero = () => {
                         </span>
                     </h1>
                     {/* Subtext */}
-                    <p className="mt-6 md:mt-8 mx-auto font-light text-cyan-50/90 leading-relaxed text-md md:text-xl lg:text-2xl max-w-[90%] md:max-w-2xl lg:max-w-2xl">
+                    <p className="mt-6 md:mt-8 mx-auto font-light md:font-normal text-neutral-50/80 leading-relaxed text-md md:text-xl lg:text-2xl max-w-[90%] md:max-w-2xl lg:max-w-2xl">
                         MasterTrack is an interactive platform designed to make learning feel like an experience, not a chore.
                     </p>
-                    <div className="mt-10 md:mt-14 flex flex-col sm:flex-row items-center justify-center gap-5 md:gap-8">
-                        <Link to={'/signup'} className="w-full sm:w-auto px-12 py-4 md:py-5 bg-cyan-500 hover:bg-cyan-400 text-white font-bold rounded-full transition-all active:scale-95 shadow-2xl shadow-cyan-500/20 text-lg">
-                            Join for free
+                    <div className="mt-6 md:mt-8 flex flex-col sm:flex-row items-center justify-center gap-5 md:gap-8">
+                        <Link
+                            to={'/signup'}
+                            className="group inline-flex items-center  justify-center gap-2 px-4 py-1.5 md:px-8 md:py-3 text-[10px] md:text-sm font-semibold tracking-wide text-white transition-all duration-300 rounded-md shadow-md bg-linear-to-l from-cyan-800 via-cyan-700 to-cyan-600 bg-size-[200%_auto] hover:bg-position-[right_center] focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 active:scale-[0.98]"                        >
+                            <span>Join for free</span>
+                            {/* Icon */}
+                            <IconChevronRight
+                                size={18}
+                                stroke={2}
+                                className="transition-transform duration-200 group-hover:translate-x-0.5"
+                            />
                         </Link>
-                        <Link to={'/signup'} className="flex items-center gap-3 text-white font-bold hover:text-cyan-300 transition-colors group py-2">
-                            <span className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 border-2 border-white/20 rounded-full group-hover:border-cyan-300 group-hover:bg-white/5 transition-all">
-                                <svg className="w-6 h-6 fill-current translate-x-0.5" viewBox="0 0 24 24">
-                                    <path d="M8 5v14l11-7z" />
-                                </svg>
+                        <Link
+                            to={'/signup'}
+                            className="group flex items-center gap-4 text-sm font-semibold tracking-wide text-white transition-all duration-300 hover:text-cyan-400"
+                        >
+                            <span className="relative flex size-6 md:size-10.5 items-center justify-center rounded-full border border-white/20 bg-white/5 transition-all duration-300 group-hover:border-cyan-500/50 group-hover:bg-cyan-500/10 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+                                {/* Play Icon */}
+                                <IconPlayerPlay stroke={2}  className="w-4 h-4 sm:w-6 sm:h-6 md:w-6 md:h-6"  />
                             </span>
-                            Watch Demo
+                            <span className="relative text-[10px] md:text-sm">
+                                Watch Demo
+                                {/* Underline effect */}
+                                <span className="absolute -bottom-1 left-0 h-px w-0 bg-cyan-500 transition-all duration-300 group-hover:w-full" />
+                            </span>
                         </Link>
                     </div>
                 </motion.div>
