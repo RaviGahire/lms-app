@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode'
 import ContextData from '../../contexts/Context';
 
+  const API_URL = import.meta.env.VITE_API_URL
 export const Login = ({ loggedInUser }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -12,8 +13,6 @@ export const Login = ({ loggedInUser }) => {
   });
   const [error, setError] = useState("")
   const { fetchUserProfile } = useContext(ContextData)
-
-  const API_URL = import.meta.env.VITE_API_URL
 
   // for navigate 
   const navigate = useNavigate()
