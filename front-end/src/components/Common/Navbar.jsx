@@ -1,7 +1,8 @@
 import React, { useState, useContext, useMemo } from 'react';
 import { IconBellRinging, IconMessageDots, IconChevronRight } from '@tabler/icons-react'
 import { Link, NavLink } from 'react-router-dom';
-import ContextData from "../../contexts/Context"
+import ContextData from '../../contexts/Context'; 
+import LoginOptions from '../../utils/LoginOptions';
 
 const NAV_ITEMS = [
     { name: 'Home', path: '/' },
@@ -88,8 +89,7 @@ export const Navbar = () => {
                         </div>
                     ) : (
                         <div className="flex gap-2 lg:gap-4">
-                            <Link to='/login' className="px-4 py-1.5 text-sm bg-cyan-600 text-white rounded-full font-semibold border border-cyan-500 hover:bg-white hover:text-black transition duration-300">Login</Link>
-                            <Link to='/signup' className="px-4 py-1.5 text-sm bg-white text-black rounded-full font-semibold border border-cyan-500 hover:shadow-md transition duration-300">SignUp</Link>
+                         <LoginOptions/>
                         </div>
                     )}
                 </div>
@@ -120,10 +120,10 @@ export const Navbar = () => {
                             </Link>
                         ) : (
                             <div className="px-6 py-6">
-                                <p className="text-sm font-medium text-gray-700 mb-1">Welcome Guest</p>
+                                <p className="text-sm font-medium text-gray-700 mb-1 capitalize">Welcome to the master track</p>
                                 <div className="flex items-center gap-3 mt-4">
-                                    <Link to="/login" onClick={closeMenu} className="flex-1 text-center px-4 py-2 text-sm font-semibold border border-gray-300 rounded-xl bg-white">Login</Link>
-                                    <Link to="/signup" onClick={closeMenu} className="flex-1 text-center px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-xl">Sign Up</Link>
+                                    {/* Login and register */}
+                                <LoginOptions/>    
                                 </div>
                             </div>
                         )}
