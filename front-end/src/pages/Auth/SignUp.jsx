@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Input } from './FormFields';
+import { IconEye, IconMail, IconShieldCheck, IconUser } from '@tabler/icons-react';
 
 //Main component
 export const SignUp = () => {
@@ -72,14 +74,14 @@ export const SignUp = () => {
 
   //FORM UI
   return (
-    <div className="min-h-screen bg-gray-900 bg-[url('https://t4.ftcdn.net/jpg/05/39/10/47/360_F_539104776_BchIZKRhIUXDY0ZaVHxaoIDvRa2eAG3d.jpg')] bg-blend-soft-light  bg-cover bg-center bg-no-repeat ">
-      <div className="p-4 md:p-10">
+    <div className="bg-gray-900 bg-[url('https://t4.ftcdn.net/jpg/05/39/10/47/360_F_539104776_BchIZKRhIUXDY0ZaVHxaoIDvRa2eAG3d.jpg')] bg-blend-soft-light  bg-cover bg-center bg-no-repeat ">
+      <div className="p-1">
         <div className="flex justify-center max-w-7xl mx-auto">
-          {/* Right Side - Form */}
+          {/* Right Side*/}
           <div className="w-full lg:w-1/2 flex items-center justify-center md:p-8">
             <div className="w-full max-w-md">
               <div className="text-center md:mb-8">
-                <h2 className="text-lg md:text-4xl font-bold text-gray-100 mb-4">Welcome to MasterTrack</h2>
+                <h2 className="text-lg md:text-4xl font-bold text-gray-100 mb-4 capitalize">Welcome to master track</h2>
                 {/* Btns */}
                 <div className="inline-flex p-1 gap-2 bg-cyan-400/20 rounded-full text-xs md:text-[16px]">
                   <Link to="/login" className="px-10 py-2.5 text-cyan-600 rounded-full font-semibold hover:bg-cyan-500/10 transition-all">
@@ -90,99 +92,82 @@ export const SignUp = () => {
                   </Link>
                 </div>
               </div>
-
-              {/* Error */}
-              <div className='max-w-md relative h-5 my-4'>
-                {error && (
-                  <div className="absolute text-white mx-auto text-center p-1 w-full bg-red-500/40 border border-red-500 rounded-lg font-semibold text-xs md:text-sm">
-                    {error}
-                  </div>
-                )}
-                {/* Success */}
-                {success && (
-                  <div className="absolute text-white mb-2 text-center p-2 bg-green-500/40 border border-green-500 rounded-lg font-semibold text-sm">
-                    {success}
-                  </div>
-                )}
-
-              </div>
-
               {/* SignUP form */}
               <form onSubmit={handleSignUp} className="space-y-2.5 md:space-y-5">
                 {/* 1. User Name  */}
                 <div>
-                  <label className="block text-gray-100 text-sm font-semibold md:mb-2 ml-2 md:ml-4">User name</label>
-                  <input
-                    type="text"
-                    name="userName"
-                    value={formData.userName}
+                  <Input
+                    label={"User Name"}
+                    type={'text'}
+                    name={'userName'}
+                    id={'userName'}
+                    placeholder={"Enter your username"}
                     onChange={handleInputChange}
-                    placeholder="Enter your user name"
-                    required
-                    className="w-full text-xs md:text-sm px-3 py-1.5 md:px-6 md:py-3 border md:border-2 border-cyan-200/50 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100 text-white bg-gray-900/90 transition-colors"
+                    value={formData.userName}
+                    icon={<IconUser size={20} stroke={2} />}
+                    iconPosition='right'
+                    iconStyle={'cursor-pointer'}
+                    labelStyle={'text-white cursor-pointer'}
+                    inputStyle={'w-full text-xs md:text-sm py-1.5 md:px-6 md:py-3 border md:border-2 border-cyan-200/50 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100  text-white bg-gray-900/90 transition-colors'}
                   />
                 </div>
 
                 {/* 2. Email Address */}
                 <div>
-                  <label className="block text-gray-100 text-sm font-semibold md:mb-2 ml-2 md:ml-4">Email Address</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
+                  <Input
+                    label={"Email"}
+                    type={'email'}
+                    name={'email'}
+                    id={'email'}
+                    placeholder={"Enter your email"}
                     onChange={handleInputChange}
-                    placeholder="Enter your Email Address"
-                    required
-                    className="w-full text-xs md:text-sm px-3 py-1.5 md:px-6 md:py-3 border md:border-2 border-cyan-200/50 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100  text-white bg-gray-900/90 transition-colors"
+                    value={formData.email}
+                    icon={<IconMail size={20} stroke={2} />}
+                    iconPosition='right'
+                    iconStyle={'cursor-pointer'}
+                    labelStyle={'text-white cursor-pointer'}
+                    inputStyle={'w-full text-xs md:text-sm px-3 py-1.5 md:px-6 md:py-3 border md:border-2 border-cyan-200/50 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100  text-white bg-gray-900/90 transition-colors'}
                   />
                 </div>
 
                 {/* 3. Password */}
                 <div>
-                  <label className="block text-gray-100 text-sm font-semibold md:mb-2 ml-2 md:ml-4">Password</label>
-                  <div className="relative">
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      name="password"
-                      value={formData.password}
-                      onChange={handleInputChange}
-                      placeholder="Enter your Password"
-                      required
-                    className="w-full text-xs md:text-sm  px-3 py-1.5 md:px-6 md:py-3 border md:border-2 border-cyan-200/50 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100 text-white bg-gray-900/90 transition-colors"
-                    />
-                    <button type="button" onClick={togglePassword} className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-500">
-                      {showPassword ? (
-                        <svg className="w-5 h-5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.956 9.956 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg>
-                      ) : (
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
-                      )}
-                    </button>
-                  </div>
+                  <Input
+                    label={"Password"}
+                    type={'password'}
+                    name={'password'}
+                    id={'password'}
+                    placeholder={"Enter your username"}
+                    onChange={handleInputChange}
+                    value={formData.password}
+                    icon={<IconEye stroke={2} />}
+                    iconPosition='right'
+                    iconStyle={'cursor-pointer'}
+                    labelStyle={'text-white cursor-pointer'}
+                    inputStyle={'w-full text-xs md:text-sm px-3 py-1.5 md:px-6 md:py-3 border md:border-2 border-cyan-200/50 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100  text-white bg-gray-900/90 transition-colors'}
+                  />
                 </div>
                 {/* 4. Confirm Password (Added) */}
-                <div className='relative'>
-                  <label className="block text-gray-100 text-sm font-semibold md:mb-2 ml-2 md:ml-4">Confirm Password</label>
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
+                <div>
+                  <Input
+                    label={"Confirm Password"}
+                    type={'password'}
+                    name={'confirmpassword'}
+                    id={'confirmpassword'}
+                    placeholder={"Enter your Confirm Password"}
                     onChange={handleInputChange}
-                    placeholder="Confirm your Password"
-                    required
-                    className="w-full text-xs md:text-sm  px-3 py-1.5 md:px-6 md:py-3 border md:border-2 border-cyan-200/50 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100 text-white bg-gray-900/90 transition-colors"
+                    value={formData.confirmpassword}
+                    icon={<IconEye stroke={2} />}
+                    iconPosition='right'
+                    iconStyle={'cursor-pointer'}
+                    labelStyle={'text-white cursor-pointer'}
+                    inputStyle={'w-full text-xs md:text-sm px-3 py-1.5 md:px-6 md:py-3 border md:border-2 border-cyan-200/50 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100  text-white bg-gray-900/90 transition-colors'}
                   />
-                  <button type="button" onClick={togglePassword} className="absolute right-5 top-9 md:top-13 -translate-y-1/2 text-gray-500">
-                    {showPassword ? (
-                      <svg className="w-5 h-5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.956 9.956 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg>
-                    ) : (
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
-                    )}
-                  </button>
                 </div>
                 {/* send otp on email loading btn */}
                 <button
                   type="submit"
-                  className="w-full cursor-pointer bg-cyan-500 text-white py-2 md:py-4 rounded-full font-bold md:text-lg hover:bg-cyan-600 active:scale-[0.98] transition md:mt-6 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full cursor-pointer  bg-cyan-500 text-white py-2 md:py-4 rounded-full font-bold md:text-lg hover:bg-cyan-600 active:scale-[0.98] transition md:mt-6 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Sign Up
                 </button>
@@ -193,7 +178,7 @@ export const SignUp = () => {
                   <div className="w-1/2 border-t border-cyan-100"></div>
                 </div>
                 {/* 6. Continue with Google btn */}
-                  <button
+                <button
                   type="button"
                   onClick={handleGoogleLogin}
                   className="w-full flex items-center cursor-pointer justify-center md:text-lg gap-1.5 md:gap-3 bg-white border-2 border-gray-100 text-gray-700 py-1.5 md:py-3.5 rounded-full font-semibold hover:bg-gray-50 hover:border-gray-200 transition-all active:scale-[0.98]"

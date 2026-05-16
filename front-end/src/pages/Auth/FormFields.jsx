@@ -1,21 +1,61 @@
+// Input Tag
+export const Input = ({ label, id, error, icon, rightIcon, className, ...props }) => {
+  const inputId = id || props.name;
 
-// Input 
-export const Input = ({ label, labelStyle, id, placeholder, name, type, value, onChange, className, isEditable, error }) => {
-   const inputValue = type === 'file' ? undefined : value;
   return (
-    <div className={`flex flex-col gap-2 relative ${className}`} >
-      {/* label */}
-      <label htmlFor={id} className={`text-sm font-semibold text-slate-700 ${labelStyle}`}>{label}</label>
-      {/* Input  */}
-      <input type={type} id={id} name={name} placeholder={placeholder} disabled={isEditable}
-        value={inputValue}
-        onChange={onChange}
-        className='w-full shadow-sm text-[12px] tracking-wide md:text-[16px] px-2 md:px-3 py-1 md:py-1.5 disabled rounded-md border border-slate-300 focus:ring-1 focus:ring-blue-500/80 focus:outline-none transition-all' />
-      {/* Error Message */}
-      <p className="absolute top-18 text-[8px] md:text-xs text-red-500 font-medium">{error}</p>
+    <div className="w-full">
+      {/* Label */}
+      {label && (
+        <label
+          htmlFor={inputId}
+          className="block text-gray-100 text-sm font-bold mb-2 ml-2 md:ml-4"
+        >
+          {label}
+        </label>
+      )}
+
+      <div className="relative flex items-center">
+        {/* Left Icon*/}
+        {icon && (
+          <div className="absolute left-3 md:left-5 text-gray-400 peer-focus:text-cyan-400 transition-colors pointer-events-none">
+            {icon}
+          </div>
+        )}
+
+        <input
+          id={inputId}
+          className={`
+            w-full text-xs md:text-sm py-1.5 md:py-3 
+            border md:border-2 rounded-full focus:outline-none 
+            placeholder-gray-100 text-white bg-gray-900/90 transition-colors peer
+            ${icon ? "pl-9 md:pl-12" : "pl-3 md:pl-6"} 
+            ${rightIcon ? "pr-10 md:pr-14" : "pr-3 md:pr-6"}
+            ${error ? "border-red-500 focus:border-red-500" : "border-cyan-200/50 focus:border-cyan-400"}
+            ${className || ""}
+          `}
+          {...props}
+        />
+
+        {/* Right Icon */}
+        {rightIcon && (
+          <div className="absolute right-3 md:right-5 text-gray-400 hover:text-cyan-500 transition-colors cursor-pointer z-10">
+            {rightIcon}
+          </div>
+        )}
+      </div>
+
+      {error && (
+        <p className="mt-1 ml-2 md:ml-4 text-xs text-red-500 font-semibold">
+          {error}
+        </p>
+      )}
     </div>
-  )
-}
+  );
+};
+
+
+
+
 
 // Text Area
 export function TextArea({ label, id, placeholder, name, value, onChange, className, isEditable, rows, maxLength, error }) {

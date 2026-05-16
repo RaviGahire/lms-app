@@ -50,7 +50,6 @@ export const AppRoutes = () => {
       <Router>
         <MainLayout>
           <Routes>
-
             {/* Pages routes */}
             <Route path="/" element={<Home />} />
             <Route path="/courses" element={<ProtectedRoute loading={loading} user={loggedInUserProfile} allowedUserRoles={["student", "instructor", "admin"]}><Courses /></ProtectedRoute>} />
@@ -58,9 +57,11 @@ export const AppRoutes = () => {
             <Route path="/aboutus" element={<AboutUs />} />
 
             {/* Auth Routes */}
-            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signup" element={<SignUp/>} />
+            <Route path="/login/student" element={<Login loggedInUser={setLoggedInUser} />} />
+            <Route path="/login/instructor" element={<Login loggedInUser={setLoggedInUser} />} />
+            <Route path="/login/admin" element={<Login loggedInUser={setLoggedInUser} />} />
             <Route path="/otp_pop_up" element={<OtpVerification />} />
-            <Route path="/login" element={<Login loggedInUser={setLoggedInUser} />} />
 
             {/* Dashboard routes */}
             <Route
