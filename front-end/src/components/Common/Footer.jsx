@@ -11,27 +11,22 @@ export const Footer = () => {
     };
 
     return (
-        <footer className="w-full py-20 bg-[#1B1D3C] text-gray-300">
-            {/* TOP LOGO + TEXT */}
-            <div className="flex flex-col items-center justify-center text-center gap-6 px-4">
-
-                <div className="flex items-center gap-6">
+        <footer className="w-full py-10 bg-[#1B1D3C] text-gray-300">
+            <div className="flex flex-col items-center justify-center text-center gap-3 px-4">
+                    <div className="flex items-center gap-6">
                     {/* Logo */}
                     <div className="flex items-center gap-3">
-                        <div className="border-2 border-teal-300 p-3 md:p-4 rounded-xl">
-                            <span className="text-white font-bold text-lg md:text-xl tracking-wide">
-                                MasterTrack
+                        <div className="border-2 border-teal-300 hover:border-linear-to transition-all duration-150 cursor-pointer px-3 py-2 rounded-md">
+                            <span className="text-white font-semibold text-base md:text-lg leading-tight">
+                                Master-Track
                             </span>
                         </div>
                     </div>
-
-                    {/* Vertical Divider */}
-                    <div className="w-px h-10 bg-gray-600"></div>
-
+                       <div className="w-px h-10 bg-gray-600"></div>
                     {/* Right Text */}
                     <div className="text-left">
                         <p className="text-white font-semibold text-base md:text-lg leading-tight">Virtual Class</p>
-                        <p className="text-white font-semibold text-base md:text-lg leading-tight">for Zoom</p>
+                        <p className="text-white font-semibold text-base md:text-lg leading-tight">for Students</p>
                     </div>
                 </div>
 
