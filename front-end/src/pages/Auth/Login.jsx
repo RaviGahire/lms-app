@@ -1,29 +1,34 @@
 import axios from 'axios';
-import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode'
 import ContextData from '../../contexts/Context';
 import { Input } from './FormFields';
 import { IconEye, IconMail } from '@tabler/icons-react';
 
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const Login = ({ loggedInUser }) => {
-  //user login state
+  const navigate = useNavigate();
+  const { role } = useParams();
+  
+  //user login data
   const [formData, setFormData] = useState({
     email: '',
     password: '',
+    role: role,
     rememberMe: false
   });
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
+  
   const [showPassword, setShowPassword] = useState(false);
   const { fetchUserProfile } = useContext(ContextData)
 
-  // for navigate 
-  const navigate = useNavigate()
-
   const togglePassword = () => setShowPassword(!showPassword);
 
+
+  console.log(formData)
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({
@@ -37,10 +42,6 @@ export const Login = ({ loggedInUser }) => {
     e.preventDefault();
     setError("");
 
-    if (!formData.role) {
-      setError("Please select your role (Student or Instructor) to continue.");
-      return; // Stop the function here
-    }
 
     try {
 
@@ -65,13 +66,21 @@ export const Login = ({ loggedInUser }) => {
 
       await fetchUserProfile(); //Tell context to go fetch the user now
 
-      navigate("/student") //navigate to student dashboard 
+      navigate(`/${formData.role}`);
 
     } catch (error) {
       setError(error?.response?.data?.message || "Login failed");
     }
 
   };
+
+  // When user chose login option 
+useEffect(() => {
+    setFormData(prev => ({
+      ...prev,
+      role: role 
+    }));
+  }, [role]);
 
   // Placeholder for Google Login
   const handleGoogleLogin = () => {
@@ -111,7 +120,7 @@ export const Login = ({ loggedInUser }) => {
                     onChange={handleInputChange}
                     value={formData?.email}
                     icon={<IconMail size={20
-                      
+
                     } />}
                   />
                 </div>
@@ -124,7 +133,7 @@ export const Login = ({ loggedInUser }) => {
                     placeholder="Enter your password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    icon={<IconEye size={20}/>}
+                    icon={<IconEye size={20} />}
                   />
                 </div>
 

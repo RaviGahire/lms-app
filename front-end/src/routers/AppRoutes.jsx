@@ -58,9 +58,8 @@ export const AppRoutes = () => {
 
             {/* Auth Routes */}
             <Route path="/signup" element={<SignUp/>} />
-            <Route path="/login/student" element={<Login loggedInUser={setLoggedInUser} />} />
-            <Route path="/login/instructor" element={<Login loggedInUser={setLoggedInUser} />} />
-            <Route path="/login/admin" element={<Login loggedInUser={setLoggedInUser} />} />
+            <Route path="/login/:role" element={<Login loggedInUser={setLoggedInUser} />} />
+            
             <Route path="/otp_pop_up" element={<OtpVerification />} />
 
             {/* Dashboard routes */}
