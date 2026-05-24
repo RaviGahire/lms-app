@@ -1,13 +1,23 @@
-import { API } from "./API";
+import API from "./API";
 
 export const AuthService = {
 
-    // register
-    usersRegister : (data) => API.post('/users/register',data),
+    // Register a new user
+    register: async (data) => {
+        const response = await API.post('/auth/register', data);
+        return response.data;
+    },
 
-    // login method
-    // usersLogin: (data) => API.post('/users',data),
+    // Login an existing user
+    login: async (data) => {
+        // Adjusted the endpoint to standard RESTful naming convention
+        const response = await API.post('/auth/login', data);
+        return response.data;
+    },
 
-    // forgot-password
-    // forgotPassword : (data) => API.put('/users/update ',data)
-}
+    // Update password
+    forgotPassword: async (data) => {
+        const response = await API.put('/auth/forgot-password', data);
+        return response.data;
+    }
+};

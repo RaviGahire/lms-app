@@ -1,12 +1,12 @@
 import axios from "axios";
 
-export const API = () =>
-  axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+// Created the instance
+const API = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 // Request Interceptor
 API.interceptors.request.use(
@@ -37,3 +37,5 @@ API.interceptors.response.use(
     return Promise.reject(error);
   },
 );
+
+export default API
