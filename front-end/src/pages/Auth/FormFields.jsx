@@ -1,5 +1,7 @@
 // Input Tag
+
 export const Input = ({ label, id, error, icon, rightIcon, className, ...props }) => {
+
   const inputId = id || props.name;
 
   return (
@@ -8,7 +10,8 @@ export const Input = ({ label, id, error, icon, rightIcon, className, ...props }
       {label && (
         <label
           htmlFor={inputId}
-          className="block text-gray-100 text-sm font-bold mb-2 ml-2 md:ml-4"
+          className="block text-gray-100 text-xs
+           md:text-sm font-bold mb-2 ml-2 md:ml-4"
         >
           {label}
         </label>
@@ -25,9 +28,9 @@ export const Input = ({ label, id, error, icon, rightIcon, className, ...props }
         <input
           id={inputId}
           className={`
-            w-full text-xs md:text-sm py-1.5 md:py-3 
+            w-full text-xs md:text-sm  py-2.5 md:py-3 placeholder:text-white/50
             border md:border-2 rounded-full focus:outline-none 
-            placeholder-gray-100 text-white bg-gray-900/90 transition-colors peer
+             text-white bg-gray-900/90 transition-colors peer
             ${icon ? "pl-9 md:pl-12" : "pl-3 md:pl-6"} 
             ${rightIcon ? "pr-10 md:pr-14" : "pr-3 md:pr-6"}
             ${error ? "border-red-500 focus:border-red-500" : "border-cyan-200/50 focus:border-cyan-400"}
@@ -64,7 +67,7 @@ export function TextArea({ label, id, placeholder, name, value, onChange, classN
     <div className={`flex flex-col gap-2 relative ${className}`} >
       <label htmlFor={id} className="text-sm font-semibold text-slate-700">{label}</label>
       <textarea
-        className="w-full shadow-sm text-[12px] tracking-wide md:text-[16px] px-2 md:px-3 py-1 md:py-1.5 disabled rounded-md border border-slate-300 focus:ring-1 focus:ring-blue-500/80 focus:outline-none transition-all"
+        className="w-full shadow-sm text-[12px] placeholder:text-white/50 tracking-wide md:text-[16px] px-2 md:px-3 py-1 md:py-1.5 disabled rounded-md border border-slate-300 focus:ring-1 focus:ring-blue-500/80 focus:outline-none transition-all"
         placeholder={placeholder}
         value={value}
         name={name}
