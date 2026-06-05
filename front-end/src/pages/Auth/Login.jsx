@@ -27,8 +27,8 @@ export const Login = ({ loggedInUser }) => {
 
   const togglePassword = () => setShowPassword(!showPassword);
 
-
-  console.log(formData)
+  // console.log(formData)
+  
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({
