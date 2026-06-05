@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Input } from './FormFields';
+import { AuthService } from '../../services/AuthService';
 import { IconEye, IconMail, IconShieldCheck, IconUser } from '@tabler/icons-react';
 
 //Main component
@@ -34,7 +35,7 @@ export const SignUp = () => {
 
 
   // register User
-  const handleSignUp = async (e) => {
+  const handleSignUp = (e) => {
     e.preventDefault();
 
     const { userName, email, password, confirmPassword } = formData;
@@ -48,24 +49,33 @@ export const SignUp = () => {
       setLoading(false);
       return setError("Passwords do not match");
     }
-    try {
-      //API call to register user
-      const { data } = await axios.post(`${API_URL}auth/register`, {
-        userName,
-        email,
-        password
-      });
 
-      setSuccess(data.message || "Registration successful!");
+    const { data } = AuthService.register(formData)
 
-      setTimeout(() => navigate("/login"), 2000);
 
-    } catch (error) {
-      setError(error?.response?.data?.message || "Something went wrong during registration.");
-    } finally {
-      setLoading(false);
-    }
+
+
+    // try {
+    //   //API call to register user
+    //   const { data } = await axios.post(`${API_URL}auth/register`, {
+    //     userName,
+    //     email,
+    //     password
+    //   });
+
+    //   setSuccess(data.message || "Registration successful!");
+
+    //   setTimeout(() => navigate("/login"), 2000);
+
+    // } catch (error) {
+    //   setError(error?.response?.data?.message || "Something went wrong during registration.");
+    // } finally {
+    //   setLoading(false);
+    // }
   };
+
+
+
 
   //google login
   const handleGoogleLogin = () => {
@@ -75,58 +85,42 @@ export const SignUp = () => {
   //FORM UI
   return (
     <div className="bg-gray-900 bg-[url('https://t4.ftcdn.net/jpg/05/39/10/47/360_F_539104776_BchIZKRhIUXDY0ZaVHxaoIDvRa2eAG3d.jpg')] bg-blend-soft-light  bg-cover bg-center bg-no-repeat ">
-      <div className="p-1">
-        <div className="flex justify-center max-w-7xl mx-auto">
+      <div className="p-1 ">
+        <div className="min-h-screen flex justify-center max-w-7xl mx-auto">
           {/* Right Side*/}
           <div className="w-full lg:w-1/2 flex items-center justify-center md:p-8">
             <div className="w-full max-w-md">
               <div className="text-center md:mb-8">
-                <h2 className="text-lg md:text-4xl font-bold text-gray-100 mb-4 capitalize">Welcome to master track</h2>
-                {/* Btns */}
-                <div className="inline-flex p-1 gap-2 bg-cyan-400/20 rounded-full text-xs md:text-[16px]">
-                  <Link to="/login" className="px-10 py-2.5 text-cyan-600 rounded-full font-semibold hover:bg-cyan-500/10 transition-all">
-                    Login
-                  </Link>
-                  <Link to={'/signup'} className="px-10 py-2.5 bg-cyan-500 text-white rounded-full font-semibold shadow-md transition-all">
-                    Register
-                  </Link>
-                </div>
+                <h2 className="text-2xl md:text-4xl font-bold text-gray-100 mb-4 capitalize">Welcome to master track</h2>
+                
               </div>
               {/* SignUP form */}
-              <form onSubmit={handleSignUp} className="space-y-2.5 md:space-y-5">
+              <form onSubmit={handleSignUp} className="space-y-2.5 md:space-y-5 p-3 md:p-0">
                 {/* 1. User Name  */}
                 <div>
                   <Input
                     label={"User Name"}
-                    type={'text'}
-                    name={'userName'}
-                    id={'userName'}
-                    placeholder={"Enter your username"}
-                    onChange={handleInputChange}
+                    name={"userName"}
+                    id={"userName"}
+                    type={"text"}
+                    placeholder={"Please enter your user name"}
                     value={formData.userName}
-                    icon={<IconUser size={20} stroke={2} />}
-                    iconPosition='right'
-                    iconStyle={'cursor-pointer'}
-                    labelStyle={'text-white cursor-pointer'}
-                    inputStyle={'w-full text-xs md:text-sm py-1.5 md:px-6 md:py-3 border md:border-2 border-cyan-200/50 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100  text-white bg-gray-900/90 transition-colors'}
-                  />
+                    onChange={handleInputChange}
+                    error={'error'}
+                      />
                 </div>
 
                 {/* 2. Email Address */}
                 <div>
                   <Input
-                    label={"Email"}
-                    type={'email'}
-                    name={'email'}
-                    id={'email'}
-                    placeholder={"Enter your email"}
-                    onChange={handleInputChange}
+                    label={"Email Address"}
+                    name={"email"}
+                    id={"email"}
+                    type={"email"}
+                    placeholder={"Please enter your email"}
                     value={formData.email}
-                    icon={<IconMail size={20} stroke={2} />}
-                    iconPosition='right'
-                    iconStyle={'cursor-pointer'}
-                    labelStyle={'text-white cursor-pointer'}
-                    inputStyle={'w-full text-xs md:text-sm px-3 py-1.5 md:px-6 md:py-3 border md:border-2 border-cyan-200/50 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100  text-white bg-gray-900/90 transition-colors'}
+                    onChange={handleInputChange}
+                    error={'error'}
                   />
                 </div>
 
@@ -134,35 +128,29 @@ export const SignUp = () => {
                 <div>
                   <Input
                     label={"Password"}
-                    type={'password'}
-                    name={'password'}
-                    id={'password'}
-                    placeholder={"Enter your username"}
-                    onChange={handleInputChange}
+                    name={"password"}
+                    id={"password"}
+                    type={"password"}
+                    placeholder={"Please enter your password"}
                     value={formData.password}
-                    icon={<IconEye stroke={2} />}
-                    iconPosition='right'
-                    iconStyle={'cursor-pointer'}
-                    labelStyle={'text-white cursor-pointer'}
-                    inputStyle={'w-full text-xs md:text-sm px-3 py-1.5 md:px-6 md:py-3 border md:border-2 border-cyan-200/50 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100  text-white bg-gray-900/90 transition-colors'}
+                    onChange={handleInputChange}
+                    error={'error'}
+
                   />
                 </div>
                 {/* 4. Confirm Password (Added) */}
                 <div>
                   <Input
                     label={"Confirm Password"}
-                    type={'password'}
-                    name={'confirmpassword'}
-                    id={'confirmpassword'}
-                    placeholder={"Enter your Confirm Password"}
+                    name={"confirmPassword"}
+                    id={"confirmPassword"}
+                    type={"password"}
+                    placeholder={"Please confirm your password"}
+                    value={formData.confirmPassword}
                     onChange={handleInputChange}
-                    value={formData.confirmpassword}
-                    icon={<IconEye stroke={2} />}
-                    iconPosition='right'
-                    iconStyle={'cursor-pointer'}
-                    labelStyle={'text-white cursor-pointer'}
-                    inputStyle={'w-full text-xs md:text-sm px-3 py-1.5 md:px-6 md:py-3 border md:border-2 border-cyan-200/50 rounded-full focus:outline-none focus:border-cyan-400 placeholder-gray-100  text-white bg-gray-900/90 transition-colors'}
+                    error={'error'}
                   />
+
                 </div>
                 {/* send otp on email loading btn */}
                 <button
