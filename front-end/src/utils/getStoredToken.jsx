@@ -1,1 +1,0 @@
-export const getStoredToken = () => localStorage.getItem("token");
