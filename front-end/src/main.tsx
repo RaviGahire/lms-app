@@ -1,19 +1,20 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App";
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { ErrorBoundary } from './shared/components/ErrorBoundary';
+import App from './App';
 // @ts-expect-error CSS side-effect imports are handled by the bundler.
-import "./styles/index.css";
+import './styles/index.css';
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 
 if (!rootElement) {
-  throw new Error("Root element not found");
+  throw new Error('Root element not found');
 }
 
 createRoot(rootElement).render(
   <StrictMode>
-    <ContextProvider>
+    <ErrorBoundary>
       <App />
-    </ContextProvider>
-  </StrictMode>,
+    </ErrorBoundary>
+  </StrictMode>
 );
