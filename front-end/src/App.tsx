@@ -1,8 +1,8 @@
-import { AppRoutes } from "./routers/AppRoutes.tsx";
+
 const App = () => {
   return (
     <>
-      <AppRoutes />
+      hello world
     </>
   );
 };
