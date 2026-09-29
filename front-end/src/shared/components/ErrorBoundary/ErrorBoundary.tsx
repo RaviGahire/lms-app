@@ -36,7 +36,7 @@ export class ErrorBoundary extends Component<Props, State> {
             }
             
             return (
-                <div className='p-[2rem] text-center'>
+                <div className='p-8 text-center'>
                     <h2 className='text-xl font-bold text-red-500'>Something went wrong.</h2>
                     <p>{this.state.error?.message || 'An unexpected error occurred.'}</p>
                     <button
