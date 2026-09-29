@@ -88,44 +88,44 @@ export const ForgotPassword = () => {
           )}
           {/* Form */}
           <form onSubmit={handleForgotPassword}>
-           <div className="flex flex-col gap-2 mb-2">
-             {/* Email */}
-            <Input
-              label={"Email/Username"}
-              name={"email"}
-              placeholder="Enter your email or username"
-              type="email"
-              id={"email"}
-              value={formData.email}
-              onChange={handleInputChange}
-              labelStyle={"text-white"}
-            />
+            <div className="flex flex-col gap-2 mb-2">
+              {/* Email */}
+              <Input
+                label={"Email/Username"}
+                name={"email"}
+                placeholder="Enter your email or username"
+                type="email"
+                id={"email"}
+                value={formData.email}
+                onChange={handleInputChange}
+                labelStyle={"text-white"}
+              />
 
-            {/* New Password */}
-            <Input
-              label={"New Password"}
-              type="password"
-              name="newPassword"
-              id={"newPassword"}
-              required
-              value={formData.newPassword}
-              onChange={handleInputChange}
-              placeholder="Enter new password"
-              labelStyle={"text-white"}
-            />
+              {/* New Password */}
+              <Input
+                label={"New Password"}
+                type="password"
+                name="newPassword"
+                id={"newPassword"}
+                required
+                value={formData.newPassword}
+                onChange={handleInputChange}
+                placeholder="Enter new password"
+                labelStyle={"text-white"}
+              />
 
-            {/* confirm Password */}
-            <Input
-              type="password"
-              name="confirmPassword"
-              required
-              value={formData.confirmPassword}
-              onChange={handleInputChange}
-              placeholder="Confirm password"
-              label={"Confirm Password"}
-              labelStyle={"text-white"}
-            />
-           </div>
+              {/* confirm Password */}
+              <Input
+                type="password"
+                name="confirmPassword"
+                required
+                value={formData.confirmPassword}
+                onChange={handleInputChange}
+                placeholder="Confirm password"
+                label={"Confirm Password"}
+                labelStyle={"text-white"}
+              />
+            </div>
 
             <button
               type="submit"

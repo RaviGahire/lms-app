@@ -1,22 +1,21 @@
-
 import { useNavigate } from "react-router-dom";
 
-export const Unauthorized = ({ heading, subHeading,statusCode }) => {
+export const Unauthorized = ({ heading, subHeading, statusCode }) => {
   const navigate = useNavigate();
 
   const deafultMsg = {
-    mainText: 'Unauthorized Access',
+    mainText: "Unauthorized Access",
     subText: ` You don’t have permission to access this page.  
-          Please login with the correct account or go back to the homepage.`
-  }
+          Please login with the correct account or go back to the homepage.`,
+  };
 
   return (
     <section className="min-h-screen flex justify-center bg-gray-50 px-4">
-
       <div className="text-center mt-8 max-w-md">
-
         {/* Error Code */}
-        <h1 className="text-3xl md:text-6xl font-bold text-red-500 ">{statusCode || 403}</h1>
+        <h1 className="text-3xl md:text-6xl font-bold text-red-500 ">
+          {statusCode || 403}
+        </h1>
 
         {/* Title */}
         <h2 className="mt-4 md:text-4xl font-semibold text-gray-800">
@@ -30,7 +29,6 @@ export const Unauthorized = ({ heading, subHeading,statusCode }) => {
 
         {/* Buttons */}
         <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
-
           <button
             onClick={() => navigate("/")}
             className="px-3 py-1.5 md:px-6 md:py-3 font-semibold bg-teal-600 cursor-pointer text-sm md:text-lg text-white rounded-lg hover:bg-teal-600 transition-all duration-200 shadow-md"
@@ -44,12 +42,8 @@ export const Unauthorized = ({ heading, subHeading,statusCode }) => {
           >
             Login
           </button>
-
         </div>
-
       </div>
-
     </section>
   );
 };
-

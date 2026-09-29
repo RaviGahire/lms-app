@@ -1,44 +1,52 @@
-import { useContext, useEffect, useState } from "react"
-import { getAllCourses } from "../../utils/GetCouresDetails"
-import ContextData from "../../contexts/Context"
-import axios from "axios"
+import { useContext, useEffect, useState } from "react";
+import { getAllCourses } from "../../utils/GetCouresDetails";
+import ContextData from "../../contexts/Context";
+import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const EnrolledStudents = () => {
-  const { loggedInUserProfile } = useContext(ContextData)
-  const [enrolledBy, setEnrolledBy] = useState([])
+  const { loggedInUserProfile } = useContext(ContextData);
+  const [enrolledBy, setEnrolledBy] = useState([]);
 
   const getEnrolledStudents = async () => {
     try {
-      const courses = await getAllCourses()
+      const courses = await getAllCourses();
       // console.log(courses)
-      const mycourses = courses.filter((course) => course.createdBy[0]._id === loggedInUserProfile?.id)
+      const mycourses = courses.filter(
+        (course) => course.createdBy[0]._id === loggedInUserProfile?.id,
+      );
 
-      const studentId = courses.flatMap((course) => course?.enrolledBy || []).filter(Boolean)
+      const studentId = courses
+        .flatMap((course) => course?.enrolledBy || [])
+        .filter(Boolean);
       // console.log(studentId)
 
-      const student = await Promise.all(studentId.map((id) => axios.get(`${API_URL}students/me/${id}`)))
+      const student = await Promise.all(
+        studentId.map((id) => axios.get(`${API_URL}students/me/${id}`)),
+      );
 
       // console.log(student)
 
-      const users = await Promise.all(student.map((stud) => axios.get(`${API_URL}auth/users/${stud?.data?.data?.user}`)))
+      const users = await Promise.all(
+        student.map((stud) =>
+          axios.get(`${API_URL}auth/users/${stud?.data?.data?.user}`),
+        ),
+      );
 
-      const enrolledStudents = users.map((data) => data?.data?.users)
+      const enrolledStudents = users.map((data) => data?.data?.users);
 
-
-      setEnrolledBy(enrolledStudents)
-
+      setEnrolledBy(enrolledStudents);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
   // console.log(enrolledBy)
 
   useEffect(() => {
-    getEnrolledStudents()
-  }, [loggedInUserProfile])
+    getEnrolledStudents();
+  }, [loggedInUserProfile]);
 
   return (
     <>
@@ -47,7 +55,6 @@ export const EnrolledStudents = () => {
 
         <div className="overflow-x-auto">
           <table className="w-full border border-gray-200 rounded-lg overflow-hidden">
-
             {/* Table Head */}
             <thead className="bg-gray-100 text-gray-700">
               <tr>
@@ -71,26 +78,20 @@ export const EnrolledStudents = () => {
                     <td className="px-4 py-2">{student.userName}</td>
                     <td className="px-4 py-2">{student.email}</td>
                     <td className="px-4 py-2">{student.email}</td>
-                    <td className="px-4 py-2">
-
-                    </td>
+                    <td className="px-4 py-2"></td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td
-                    colSpan="4"
-                    className="text-center py-4 text-gray-500"
-                  >
+                  <td colSpan="4" className="text-center py-4 text-gray-500">
                     No students enrolled yet
                   </td>
                 </tr>
               )}
             </tbody>
-
           </table>
         </div>
       </div>
     </>
-  )
-}
+  );
+};

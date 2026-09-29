@@ -1,29 +1,32 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export const MasterTrack = () => {
   const cards = [
     {
       title: "FOR INSTRUCTORS",
       buttonText: "Create Course Today",
-      image: "https://images.unsplash.com/photo-1596495577886-d920f1fb7238?auto=format&fit=crop&w=900&q=80",
+      image:
+        "https://images.unsplash.com/photo-1596495577886-d920f1fb7238?auto=format&fit=crop&w=900&q=80",
       buttonStyles: "border-2 border-white hover:bg-white hover:text-slate-900",
-      overlay: "bg-slate-900/40"
+      overlay: "bg-slate-900/40",
     },
     {
       title: "FOR STUDENTS",
       buttonText: "Start Learning Today",
-      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80",
-      buttonStyles: "bg-blue-500 hover:bg-blue-600 text-white shadow-lg shadow-blue-500/30",
-      overlay: "bg-blue-900/30"
-    }
+      image:
+        "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80",
+      buttonStyles:
+        "bg-blue-500 hover:bg-blue-600 text-white shadow-lg shadow-blue-500/30",
+      overlay: "bg-blue-900/30",
+    },
   ];
 
   return (
     <section className="max-w-6xl mx-auto px-2 md:px-6 py-5 md:py-20">
       {/* Heading Container */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -34,9 +37,12 @@ export const MasterTrack = () => {
         </h1>
 
         <p className="max-w-3xl mx-auto text-md md:text-xl md:leading-relaxed text-slate-500">
-          MasterTrack is a comprehensive platform that allows educators to create courses, 
-          store course materials, manage assignments, and provide real-time feedback—all 
-          within a <span className="text-slate-800 font-semibold text-nowrap underline decoration-blue-500/30">single secure workspace.</span>
+          MasterTrack is a comprehensive platform that allows educators to
+          create courses, store course materials, manage assignments, and
+          provide real-time feedback—all within a{" "}
+          <span className="text-slate-800 font-semibold text-nowrap underline decoration-blue-500/30">
+            single secure workspace.
+          </span>
         </p>
       </motion.div>
 
@@ -52,14 +58,16 @@ export const MasterTrack = () => {
             className="relative h-50 md:h-96 rounded-md overflow-hidden shadow-2xl group cursor-pointer"
           >
             {/* Zoom Effect */}
-            <img 
+            <img
               src={card.image}
               alt={card.title}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
-            
+
             {/* Dark Overlay  */}
-            <div className={`absolute inset-0 ${card.overlay} transition-opacity duration-300 group-hover:opacity-60`} />
+            <div
+              className={`absolute inset-0 ${card.overlay} transition-opacity duration-300 group-hover:opacity-60`}
+            />
 
             {/* Content Overlay */}
             <div className="absolute inset-0 flex flex-col justify-center items-center text-white p-6">
@@ -67,7 +75,10 @@ export const MasterTrack = () => {
                 {card.title}
               </h2>
 
-              <Link to={'/login'} className={`px-4 py-3 md:px-8 md:py-4 cursor-pointer rounded-full md:text-lg font-semibold md:font-bold transition-all duration-300 transform active:scale-95 ${card.buttonStyles}`}>
+              <Link
+                to={"/login"}
+                className={`px-4 py-3 md:px-8 md:py-4 cursor-pointer rounded-full md:text-lg font-semibold md:font-bold transition-all duration-300 transform active:scale-95 ${card.buttonStyles}`}
+              >
                 {card.buttonText}
               </Link>
             </div>

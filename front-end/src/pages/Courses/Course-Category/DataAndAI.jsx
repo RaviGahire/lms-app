@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export const DataAndAI = () => {
-  return (
-    <div>DataAndAI</div>
-  )
-}
+  return <div>DataAndAI</div>;
+};

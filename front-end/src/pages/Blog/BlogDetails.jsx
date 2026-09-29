@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom";
 
-
 // Sub-component for Tags
-const BlogTag = ({ label , link }) => (
+const BlogTag = ({ label, link }) => (
   <Link
     to={link}
     className=" px-2 md:px-4 py-2 bg-cyan-800 text-sm text-gray-100 font-medium tracking-tight rounded-xl hover:bg-cyan-700 transition-colors"
   >
     {label}
   </Link>
-)
+);
 
 export const BlogDetails = () => {
   const tags = ["#affordable", "#making", "#design", "#affordable"];
@@ -35,20 +34,24 @@ export const BlogDetails = () => {
         {/* Blog Body Text */}
         <div className="text-gray-600 text-sm md:text-xl leading-relaxed space-y-3 md:space-y-6">
           <p>
-            Master track is a platform that allows educators to create online classes whereby they can store the
-            course materials online; manage assignments, quizzes and exams; monitor due dates; grade results and
+            Master track is a platform that allows educators to create online
+            classes whereby they can store the course materials online; manage
+            assignments, quizzes and exams; monitor due dates; grade results and
             provide students with feedback all in one place.
           </p>
           <p>
-            Master track  is a platform that allows educators to create online classes whereby they can store the
-            course materials online; manage assignments, quizzes and exams; monitor due dates; grade results and
-            provide students with feedback all in one place. TOTC is a platform that allows educators to create
-            online classes whereby they can store the course materials online.
+            Master track is a platform that allows educators to create online
+            classes whereby they can store the course materials online; manage
+            assignments, quizzes and exams; monitor due dates; grade results and
+            provide students with feedback all in one place. TOTC is a platform
+            that allows educators to create online classes whereby they can
+            store the course materials online.
           </p>
           <p>
-            Master track  is a platform that allows educators to create online classes whereby they can
-            store the course materials online; manage assignments, quizzes and exams; monitor due dates;
-            grade results and provide students with feedback all in one place.
+            Master track is a platform that allows educators to create online
+            classes whereby they can store the course materials online; manage
+            assignments, quizzes and exams; monitor due dates; grade results and
+            provide students with feedback all in one place.
           </p>
         </div>
 
@@ -74,7 +77,9 @@ export const BlogDetails = () => {
             </div>
             <div>
               <p className="text-gray-400 text-sm">Written by</p>
-              <p className="text-gray-800 font-bold text-lg leading-tight">Ravi Gahire</p>
+              <p className="text-gray-800 font-bold text-lg leading-tight">
+                Ravi Gahire
+              </p>
             </div>
           </div>
 
@@ -86,7 +91,6 @@ export const BlogDetails = () => {
           </div>
         </div>
       </div>
-      
     </section>
-  )
-}
+  );
+};

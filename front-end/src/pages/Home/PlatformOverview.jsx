@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export const PlatformOverview = () => {
   return (
@@ -21,20 +21,24 @@ export const PlatformOverview = () => {
 
         <h2 className="text-2xl md:text-5xl md:font-black text-slate-800 md:leading-tight">
           Everything you can do in a physical <br />
-          <span className="text-blue-600 ">classroom</span>,{' '}
+          <span className="text-blue-600 ">classroom</span>,{" "}
           <span className="text-teal-500">you can do with MasterTrack</span>
         </h2>
 
         <p className="md:mt-8 text-slate-600 text-md md:text-xl leading-relaxed max-w-xl">
           Our school management software helps traditional and online schools
-          manage <span className="font-semibold text-slate-800">scheduling, attendance, payments</span> and virtual classrooms all in one secure cloud-based system.
+          manage{" "}
+          <span className="font-semibold text-slate-800">
+            scheduling, attendance, payments
+          </span>{" "}
+          and virtual classrooms all in one secure cloud-based system.
         </p>
 
         {/* Small decorative dot */}
         <div className="w-4 h-4 bg-green-400 rounded-full mt-2 md:mt-8 animate-pulse" />
 
         <Link
-          to={'/login'}
+          to={"/login"}
           className="inline-block cursor-pointer  md:mt-4 text-blue-600 font-bold text-md underline decoration-2 underline-offset-4 hover:text-blue-700 transition-colors"
         >
           Learn more
@@ -89,11 +93,13 @@ export const PlatformOverview = () => {
 
           {/* Optional: Floating Badge */}
           <div className="absolute md:top-6 md:left-6 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-md">
-            <span className="text-xs font-bold text-slate-800 uppercase tracking-widest"> Demo Video</span>
+            <span className="text-xs font-bold text-slate-800 uppercase tracking-widest">
+              {" "}
+              Demo Video
+            </span>
           </div>
         </div>
       </motion.div>
     </section>
   );
 };
-

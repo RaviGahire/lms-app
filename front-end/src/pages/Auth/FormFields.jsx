@@ -1,7 +1,14 @@
 // Input Tag
 
-export const Input = ({ label, id, error, icon, rightIcon, className, ...props }) => {
-
+export const Input = ({
+  label,
+  id,
+  error,
+  icon,
+  rightIcon,
+  className,
+  ...props
+}) => {
   const inputId = id || props.name;
 
   return (
@@ -56,16 +63,25 @@ export const Input = ({ label, id, error, icon, rightIcon, className, ...props }
   );
 };
 
-
-
-
-
 // Text Area
-export function TextArea({ label, id, placeholder, name, value, onChange, className, isEditable, rows, maxLength, error }) {
-
+export function TextArea({
+  label,
+  id,
+  placeholder,
+  name,
+  value,
+  onChange,
+  className,
+  isEditable,
+  rows,
+  maxLength,
+  error,
+}) {
   return (
-    <div className={`flex flex-col gap-2 relative ${className}`} >
-      <label htmlFor={id} className="text-sm font-semibold text-slate-700">{label}</label>
+    <div className={`flex flex-col gap-2 relative ${className}`}>
+      <label htmlFor={id} className="text-sm font-semibold text-slate-700">
+        {label}
+      </label>
       <textarea
         className="w-full shadow-sm text-[12px] placeholder:text-white/50 tracking-wide md:text-[16px] px-2 md:px-3 py-1 md:py-1.5 disabled rounded-md border border-slate-300 focus:ring-1 focus:ring-blue-500/80 focus:outline-none transition-all"
         placeholder={placeholder}
@@ -75,10 +91,10 @@ export function TextArea({ label, id, placeholder, name, value, onChange, classN
         rows={rows}
         onChange={onChange}
         maxLength={maxLength}
-
       />
-      <p className="absolute top-18 text-xs text-red-500 font-medium">{error}</p>
-
+      <p className="absolute top-18 text-xs text-red-500 font-medium">
+        {error}
+      </p>
     </div>
   );
 }
@@ -93,14 +109,12 @@ export const Select = ({
   onChange,
   options = [],
   defaultOption,
-  error
+  error,
 }) => {
-
   // console.log(error)
 
   return (
     <div className="flex flex-col gap-2 w-full ">
-
       {label && (
         <label htmlFor={id} className="text-sm font-medium text-gray-700">
           {label}
@@ -135,11 +149,18 @@ export const Select = ({
             stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M19 9l-7 7-7-7"
+            />
           </svg>
         </div>
         {/* error */}
-        <p className="absolute top-11.5 text-xs text-red-500 font-medium animate-in fade-in slide-in-from-top-1">{error}</p>
+        <p className="absolute top-11.5 text-xs text-red-500 font-medium animate-in fade-in slide-in-from-top-1">
+          {error}
+        </p>
       </div>
     </div>
   );

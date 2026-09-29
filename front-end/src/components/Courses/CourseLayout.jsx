@@ -1,31 +1,31 @@
-import { useEffect, useState } from "react"
-import { getAllCourses } from "../../utils/GetCouresDetails"
-import { CourseTable } from "./CourseTable"
-import { useContext } from "react"
-import ContextData from "../../contexts/Context"
+import { useEffect, useState } from "react";
+import { getAllCourses } from "../../utils/GetCouresDetails";
+import { CourseTable } from "./CourseTable";
+import { useContext } from "react";
+import ContextData from "../../contexts/Context";
 
-export const CourseLayout = ({ onEditCourse, childern ,enroll }) => {
-    const { loggedInUserProfile } = useContext(ContextData)
-    const [courses, setCourses] = useState([])
+export const CourseLayout = ({ onEditCourse, childern, enroll }) => {
+  const { loggedInUserProfile } = useContext(ContextData);
+  const [courses, setCourses] = useState([]);
 
-    useEffect(() => {
+  useEffect(() => {
+    const getCourseData = async () => {
+      const data = await getAllCourses();
 
-        const getCourseData = async () => {
-            const data = await getAllCourses()
+      //filter only courses belonging to this teacher
+      const myCourses = data.filter(
+        (course) => course.createdBy[0]._id === loggedInUserProfile?.id,
+      );
 
-            //filter only courses belonging to this teacher
-            const myCourses = data.filter((course) => course.createdBy[0]._id === loggedInUserProfile?.id)
-        
+      setCourses(myCourses || []);
+    };
+    getCourseData();
+  }, [loggedInUserProfile]);
 
-            setCourses(myCourses || [])
-        }
-        getCourseData()
-    }, [loggedInUserProfile])
-
-    return (
-        <>
-            <CourseTable courses={courses} onEditCourse={onEditCourse} />
-            <div className="bg-gray-400">{childern}</div>
-        </>
-    )
-}
+  return (
+    <>
+      <CourseTable courses={courses} onEditCourse={onEditCourse} />
+      <div className="bg-gray-400">{childern}</div>
+    </>
+  );
+};

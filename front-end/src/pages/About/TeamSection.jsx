@@ -30,16 +30,14 @@ const teamMembers = [
 export const TeamSection = () => {
   return (
     <section className="bg-gray-50 px-4 sm:px-6 lg:px-8 py-16">
-      
       <div className="max-w-7xl mx-auto text-center">
-        
         <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
           Meet the Minds Behind the Learning
         </h2>
 
         <p className="mt-4 text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
-          Our team combines academic excellence and technical expertise to deliver 
-          high-quality, engaging, and accessible learning experiences.
+          Our team combines academic excellence and technical expertise to
+          deliver high-quality, engaging, and accessible learning experiences.
         </p>
 
         {/* Team Grid */}
@@ -63,10 +61,7 @@ export const TeamSection = () => {
             </div>
           ))}
         </div>
-
       </div>
-
     </section>
   );
 };
-

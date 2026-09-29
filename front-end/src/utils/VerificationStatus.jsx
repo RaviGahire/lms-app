@@ -1,11 +1,16 @@
-import { useNavigate } from "react-router-dom"
-import axios from "axios"
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { IconCircleDashedCheck } from "@tabler/icons-react";
 
-const API_URL = import.meta.env.VITE_API_URL
-export const VerificationStatus = ({ labelOne, labelTwo, isUserVerified, userEmail, Error }) => {
-  
-  const navigate = useNavigate()
+const API_URL = import.meta.env.VITE_API_URL;
+export const VerificationStatus = ({
+  labelOne,
+  labelTwo,
+  isUserVerified,
+  userEmail,
+  Error,
+}) => {
+  const navigate = useNavigate();
   const verifyMe = async () => {
     try {
       const res = await axios.post(`${API_URL}/send-email-otp`, {
@@ -15,14 +20,13 @@ export const VerificationStatus = ({ labelOne, labelTwo, isUserVerified, userEma
       if (res?.data?.success) {
         navigate("/otp_pop_up", {
           state: {
-            email: userEmail
-          }
-        })
-        alert('Please check your email')
-
+            email: userEmail,
+          },
+        });
+        alert("Please check your email");
       } else {
         console.log("Verification failed");
-        alert('Verification failed')
+        alert("Verification failed");
       }
     } catch (error) {
       console.error("Error while verifying:", error);

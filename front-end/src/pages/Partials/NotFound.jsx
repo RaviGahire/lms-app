@@ -5,9 +5,7 @@ export const NotFound = () => {
 
   return (
     <section className="min-h-screen flex justify-center bg-gray-50 px-4">
-      
       <div className="text-center max-w-md mt-8">
-        
         <h1 className="text-3xl md:text-6xl font-bold text-red-500">404</h1>
 
         <h2 className="mt-4 text-xl  md:text-4xl font-semibold text-gray-800">
@@ -24,10 +22,7 @@ export const NotFound = () => {
         >
           Go Home
         </button>
-
       </div>
-
     </section>
   );
 };
-

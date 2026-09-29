@@ -1,8 +1,8 @@
-import { PlatformOverview } from './PlatformOverview';
-import { HomeHero } from './HomeHero';
-import { SuccessAndFeatures } from './SuccessAndFeatures'
-import { MasterTrack } from './WhatIsMasterTrack';
-import { Footer } from '../../components/Common/Footer'
+import { PlatformOverview } from "./PlatformOverview";
+import { HomeHero } from "./HomeHero";
+import { SuccessAndFeatures } from "./SuccessAndFeatures";
+import { MasterTrack } from "./WhatIsMasterTrack";
+import { Footer } from "../../components/Common/Footer";
 
 export const Home = () => {
   return (
@@ -24,5 +24,3 @@ export const Home = () => {
     </>
   );
 };
-
-

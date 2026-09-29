@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export const LanguageLearning = () => {
-  return (
-    <div>LanguageLearning</div>
-  )
-}
+  return <div>LanguageLearning</div>;
+};

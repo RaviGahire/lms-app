@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export const Creative = () => {
-  return (
-    <div>Creative</div>
-  )
-}
+  return <div>Creative</div>;
+};

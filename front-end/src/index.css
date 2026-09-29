@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 /* for all input tag */
 /* input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px rgb(17 24 39) inset;
@@ -12,8 +11,8 @@
   --pattern: var(--color-neutral-300);
 }
 
-@theme{
-   --color-neutral-300: #d4d4d4;
+@theme {
+  --color-neutral-300: #d4d4d4;
   --pattern: var(--color-neutral-300);
 }
 
@@ -30,5 +29,3 @@
 .animate-gradient {
   animation: gradient 6s ease infinite;
 }
-
-
