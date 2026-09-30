@@ -7,7 +7,7 @@ import {
   IconX,
 } from '@tabler/icons-react';
 import { VersionBadge } from './Badges';
-import MasterTrackLogo from './icons/Logo';
+import MasterTrackLogo from './Icons/Logo';
 
 interface NavItem {
   title: string;

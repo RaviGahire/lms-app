@@ -10,3 +10,4 @@ export const VersionBadge = ({version}:VersionBadgeProps) => {
     </div>
   );
 };
+ 
