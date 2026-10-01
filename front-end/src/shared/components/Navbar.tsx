@@ -7,7 +7,7 @@ import {
   IconX,
 } from '@tabler/icons-react';
 import { VersionBadge } from './Badges';
-import MasterTrackLogo from './Icons/Logo';
+import MasterTrackLogo from './icons/Logo';
 
 interface NavItem {
   title: string;
@@ -16,7 +16,7 @@ interface NavItem {
 
 const NAV_TABS: NavItem[] = [
   { title: 'Home', path: '/' },
-  { title: 'Explore', path: '/explore' },
+  { title: 'Courses', path: '/courses' },
   { title: 'About', path: '/about' },
   { title: 'Contact', path: '/contact' },
 ];
@@ -122,7 +122,7 @@ export const Navbar = () => {
 
       {/* Mobile & Tablet Dropdown */}
       {isOpen && (
-        <div className="md:hidden border-t border-border-subtle bg-bg-secondary px-4 pt-3 pb-6 space-y-4">
+        <div className="absolute left-0 right-0 md:hidden border-t border-border-subtle bg-bg-secondary px-4 pt-3 pb-6 space-y-4">
           {/* Navigation Links */}
           <div className="flex flex-col space-y-1">
             {NAV_TABS.map((item) => (
