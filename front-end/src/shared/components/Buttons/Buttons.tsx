@@ -1,58 +1,52 @@
-import React, { ReactNode, ButtonHTMLAttributes, isValidElement, cloneElement } from "react";
+import { ReactNode, ButtonHTMLAttributes } from 'react';
 import {
   buttonConfig,
   ButtonVariant,
   ButtonSize,
   IconPosition,
   ButtonClickHandler,
-} from "./ButtonConfig";
-
+  ButtonShape,
+} from './ButtonConfig';
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string;
   icon?: ReactNode;
   iconPosition?: IconPosition;
-  iconSize?: number; // Optional manual override
   onClick?: ButtonClickHandler;
   variant?: ButtonVariant;
   size?: ButtonSize;
   active?: boolean;
   className?: string;
   disabled?: boolean;
+  buttonShape?: ButtonShape;
 }
 
 export const Button = ({
   label = buttonConfig.defaultLabel,
   icon,
   iconPosition = buttonConfig.defaultIconPosition,
-  iconSize,
   onClick = buttonConfig.defaultOnClick,
   variant = buttonConfig.defaultVariant,
   size = buttonConfig.defaultSize,
   active = buttonConfig.defaultIsActive,
-  className = "",
+  className = '',
   disabled = false,
+  buttonShape,
   ...props
 }: ButtonProps) => {
   const classes = [
     buttonConfig.baseStyles,
     buttonConfig.variants[variant],
     buttonConfig.sizes[size],
-    active ? buttonConfig.activeStyles[variant] : "",
+    active ? buttonConfig.activeStyles[variant] : '',
     className,
   ]
     .filter(Boolean)
-    .join(" ");
+    .join(' ');
 
-  // Resolve pixel size: prop override -> config preset -> fallback 18
-  const resolvedSize = iconSize ?? buttonConfig.iconSizes[size] ?? 18;
-
-  // Clone element to inject numeric size into Tabler Icon
-  const renderedIcon = isValidElement(icon)
-    ? cloneElement(icon as React.ReactElement<{ size?: number; className?: string }>, {
-        size: resolvedSize,
-        className: "shrink-0",
-      })
-    : null;
+  const hoverMove =
+    iconPosition === 'right'
+      ? 'group-hover:translate-x-1.5'
+      : 'group-hover:-translate-x-0';
 
   return (
     <button
@@ -63,9 +57,24 @@ export const Button = ({
       aria-pressed={active}
       {...props}
     >
-      {renderedIcon && iconPosition === "left" && renderedIcon}
+      {/* Left Icon */}
+      {icon && iconPosition === 'left' && (
+        <span
+          className={`inline-block transition-transform duration-200 ${hoverMove}`}
+        >
+          {icon}
+        </span>
+      )}
+      {/* Button label */}
       <span>{label}</span>
-      {renderedIcon && iconPosition === "right" && renderedIcon}
+      {/* Right Icon */}
+      {icon && iconPosition === 'right' && (
+        <span
+          className={`inline-block transition-transform duration-200 ${hoverMove}`}
+        >
+          {icon}
+        </span>
+      )}
     </button>
   );
 };
