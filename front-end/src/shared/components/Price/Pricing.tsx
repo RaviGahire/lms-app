@@ -135,7 +135,11 @@ export const PricingSection = () => {
                   }`}
 
                   label={plan.ctaLabel}
-                  onClick={()=>{alert("Done")}}
+                  onClick={() => {
+                    alert('Done');
+                  }}
+                  icon={<IconArrowRight />}
+                  iconPosition="right"
                 />
               </div>
             </div>
