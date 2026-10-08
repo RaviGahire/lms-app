@@ -41,7 +41,7 @@
   --white-muted: rgba(255, 255, 255, 0.05);
 
   /* ─────────────── Font ─────────────── */
-  --inter: 'Inter';
+  --inter: 'Inter', sans-serif;
 }
 
 html {
@@ -51,7 +51,7 @@ html {
 }
 
 body {
-  font-family: var(--inter, sans-serif);
+  font-family: var(--inter);
 }
 
 @theme {
@@ -84,4 +84,7 @@ body {
   --color-white: var(--white, #ffffff);
   --color-white-subtle: var(--white-subtle, rgba(255, 255, 255, 0.02));
   --color-white-muted: var(--white-muted, rgba(255, 255, 255, 0.05));
+
+  /* ─────────────── Fonts ─────────────── */
+  --font-inter:var(--inter)
 }
