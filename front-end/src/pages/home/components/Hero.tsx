@@ -22,7 +22,7 @@ export const Hero = () => {
   return (
     <section
       aria-label="hero-section"
-      className="relative w-full text-text-highlight text-balance bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.1)_0%,_rgba(255,255,255,0.2)_0%,_#0d0e11_50%)]"
+      className="relative w-full text-text-highlight text-pretty bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.1)_0%,_rgba(255,255,255,0.2)_0%,_#0d0e11_50%)]"
     >
     
           
@@ -34,7 +34,7 @@ export const Hero = () => {
           </div>
 
           {/* Main Heading */}
-          <h1 className="font- uppercase text-4xl tracking-tighter leading-18 max-lg:font-normal sm:text-3xlxl lg:text-4xl xl:text-6xl text-text-highlight">
+          <h1 className="uppercase text-4xl tracking-tighter md:leading-14 xl:leading-18 max-lg:font-normal sm:text-3xlxl lg:text-4xl xl:text-6xl text-text-highlight">
             Master any subject
             accelerate your <br /> <span className='text-green-500'>Potential</span>.
           </h1>
