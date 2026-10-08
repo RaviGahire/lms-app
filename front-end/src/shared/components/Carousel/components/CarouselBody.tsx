@@ -8,6 +8,7 @@ interface CarouselBodyProps {
 }
 
 export const CarouselBody = ({ items }: CarouselBodyProps) => {
+  
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {
