@@ -76,7 +76,7 @@ export const PricingSection = () => {
                 </div>
 
                 {/* Plan Description */}
-                <p className="mt-4 text-xs sm:text-sm text-text-secondary leading-relaxed min-h-[48px]">
+                <p className="mt-4 text-xs sm:text-sm text-text-secondary leading-relaxed min-h-12">
                   {plan.description}
                 </p>
 
