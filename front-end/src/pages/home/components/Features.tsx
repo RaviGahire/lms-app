@@ -123,7 +123,7 @@ export const FeaturesSection = () => {
         </div>
 
         {/* Bottom Wide Card: Accreditation & Certificate */}
-        <div className="mt-6 w-full rounded-2xl border border-white/[0.08] bg-[#0d111a] p-8 md:p-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div className="mt-6 w-full rounded-2xl border border-white/8 bg-[#0d111a] p-8 md:p-10 flex flex-col lg:flex-row items-center justify-between gap-8">
           {/* Left Text Info */}
           <div className="w-full lg:max-w-md">
             <span className="text-[11px] font-mono tracking-widest text-slate-500 uppercase block mb-3">
@@ -160,8 +160,8 @@ export const FeaturesSection = () => {
           </div>
 
           {/* Right Certificate Terminal / Mockup */}
-          <div className="w-full lg:max-w-xl rounded-xl border border-white/[0.08] bg-[#090c13] p-5 font-mono text-xs">
-            <div className="flex items-center justify-between pb-4 border-b border-white/[0.06] text-[11px] text-slate-400">
+          <div className="w-full lg:max-w-xl rounded-xl border border-white/8 bg-[#090c13] p-5 font-mono text-xs">
+            <div className="flex items-center justify-between pb-4 border-b border-white/6 text-[11px] text-slate-400">
               <span>credential-verification: #SKF-89241-GLOBAL</span>
               <span className="flex items-center gap-1.5 text-emerald-400">
                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -169,7 +169,7 @@ export const FeaturesSection = () => {
               </span>
             </div>
 
-            <div className="mt-4 rounded-lg bg-[#0e1422] border border-white/[0.05] p-5">
+            <div className="mt-4 rounded-lg bg-[#0e1422] border border-white/5 p-5">
               <div className="flex justify-between items-start">
                 <div>
                   <span className="text-[10px] uppercase tracking-wider text-slate-400 block mb-1">
@@ -189,7 +189,7 @@ export const FeaturesSection = () => {
                 </div>
               </div>
 
-              <div className="mt-6 pt-3 border-t border-white/[0.05] flex flex-wrap items-center justify-between text-[11px] text-slate-400 gap-2">
+              <div className="mt-6 pt-3 border-t border-white/5 flex flex-wrap items-center justify-between text-[11px] text-slate-400 gap-2">
                 <div>
                   Curriculum:{" "}
                   <span className="text-slate-200 font-semibold">
