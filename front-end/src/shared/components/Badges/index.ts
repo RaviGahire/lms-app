@@ -1,3 +1,3 @@
-import { VersionBadge, HeroBadge } from './Badges';
+import { VersionBadge, HeroBottomBadges, Badge } from './Badges';
 
-export { VersionBadge, HeroBadge };
+export { VersionBadge, Badge, HeroBottomBadges };
