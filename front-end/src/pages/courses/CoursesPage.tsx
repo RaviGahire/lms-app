@@ -1,11 +1,17 @@
-
+import { CataLogHero } from './components/CataLogHero';
+import { CategoryGrid } from './components/CategoryGrid';
+import { CourseFilterBar } from './components/CourseFilterBar';
+import { CuratedPathways } from './components/CuratedPathways';
+import { MasterclassesAndOutcomes } from './components/MasterclassesAndOutcomes';
 
 export const CoursesPage = () => {
   return (
-    <div className="text-2xl">
-      This is Explore page
-    </div>
-  )
-}
-
-
+    <section aria-label="courses-page">
+      <CataLogHero />
+      <CourseFilterBar />
+      <CategoryGrid />
+      <CuratedPathways />
+      <MasterclassesAndOutcomes />
+    </section>
+  );
+};
