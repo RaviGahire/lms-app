@@ -1,0 +1,90 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Inter', sans-serif;
+  src: url('../assets/fonts/Inter-VariableFont_opsz,wght.ttf')
+    format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ─────────────── Text ─────────────── */
+  --text-primary: #e7e9eb;
+  --text-muted: #878e99;
+  --text-secondary: #c2c6d6;
+  --text-highlight: #dae2fd;
+
+  /* ─────────────── Backgrounds ─────────────── */
+  --bg-primary: #0d0e11;
+  --bg-secondary: #0b1326;
+  --bg-surface: #2b2f35;
+
+  /* ─────────────── Borders / Dividers ─────────────── */
+  --border: #373a42;
+  --border-subtle: rgba(255, 255, 255, 0.1);
+
+  /* ─────────────── Blue ─────────────── */
+  --blue: #002e6a;
+  --blue-light: #adc6ff;
+  --blue-dark: #171f33;
+  --blue-surface: #222a3d;
+
+  /* ─────────────── Green ─────────────── */
+  --success: #4edea3;
+  --success-dark: #00bc7b;
+
+  /* ─────────────── White / Overlays ─────────────── */
+  --white: #ffffff;
+  --white-subtle: rgba(255, 255, 255, 0.02);
+  --white-muted: rgba(255, 255, 255, 0.05);
+
+  /* ─────────────── Font ─────────────── */
+  --inter: 'Inter', sans-serif;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--inter);
+}
+
+@theme {
+  /* ─────────────── Text ─────────────── */
+  --color-text-primary: var(--text-primary, #e7e9eb);
+  --color-text-secondary: var(--text-secondary, #c2c6d6);
+  --color-text-muted: var(--text-muted, #878e99);
+  --color-text-highlight: var(--text-highlight, #dae2fd);
+
+  /* ─────────────── Backgrounds ─────────────── */
+  --color-bg-primary: var(--bg-primary, #0d0e11);
+  --color-bg-secondary: var(--bg-secondary, #0b1326);
+  --color-bg-surface: var(----bg-surface, #2b2f35);
+
+  /* ─────────────── Borders / Dividers ─────────────── */
+  --color-border: var(--border, #373a42);
+  --color-border-subtle: var(--border-subtle, rgba(255, 255, 255, 0.1));
+
+  /* ─────────────── Blue ─────────────── */
+  --color-blue: var(--blue, #002e6a);
+  --color-blue-light: var(--blue-light, #adc6ff);
+  --color-blue-dark: var(--blue-dark, #171f33);
+  --color-blue-surface: var(--blue-surface, #222a3d);
+
+  /* ─────────────── Green ─────────────── */
+  --color-success: var(--success, #4edea3);
+  --color-success-dark: var(--success-dark, #00bc7b);
+
+  /* ─────────────── White / Overlays ─────────────── */
+  --color-white: var(--white, #ffffff);
+  --color-white-subtle: var(--white-subtle, rgba(255, 255, 255, 0.02));
+  --color-white-muted: var(--white-muted, rgba(255, 255, 255, 0.05));
+
+  /* ─────────────── Fonts ─────────────── */
+  --font-inter:var(--inter)
+}
