@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { MainLayout } from '../layouts/MainLayout';
 import { HomePage } from '../pages/home';
-import { ExplorePage } from '../pages/explore';
+import { CoursesPage } from '../pages/courses';
 import { AboutPage } from '../pages/about';
 import { ContactPage } from '../pages/contact';
+
 
 
 export const AppRoutes = () => {
@@ -15,7 +16,7 @@ export const AppRoutes = () => {
                 <Route element={<MainLayout />}>
                     {/* Home-Page */}
                     <Route element={<HomePage />} path="/" />
-                    <Route element={<ExplorePage />} path="/courses" />
+                    <Route element={<CoursesPage />} path="/courses" />
                     <Route element={<AboutPage />} path="/about" />
                     <Route element={<ContactPage />} path="/contact" />
                 </Route>
