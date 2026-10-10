@@ -138,7 +138,7 @@ export const CategoryGrid = () => {
   };
 
   return (
-    <section className="w-full bg-[#070D18] pt-6 xl:pt-14 px-4 sm:px-8 lg:px-12 text-slate-100 font-sans">
+    <section aria-label='category-section' className="w-full pt-6 xl:pt-14 px-4 sm:px-8 lg:px-12 text-slate-100">
       <div className="mx-auto max-w-7xl">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10">

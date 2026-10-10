@@ -5,7 +5,7 @@ export const CataLogHero = () => {
   return (
     <section
       aria-label="courses-hero"
-      className="relative w-full overflow-hidden py-8 xl:py-16 px-6 sm:px-8 lg:px-10 text-text-highlight font-sans"
+      className="relative w-full overflow-hidden py-8 xl:py-16 px-6 sm:px-8 lg:px-10 text-text-highlight"
     >
       <div className="relative mx-auto max-w-7xl">
         {/* Top Badges */}
