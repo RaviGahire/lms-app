@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { IconTrendingUp, IconStarFilled, IconArrowRight, IconBolt } from '@tabler/icons-react';
+import {
+  IconTrendingUp,
+  IconStarFilled,
+  IconArrowRight,
+  IconBolt,
+} from '@tabler/icons-react';
+import { Button } from '../../../shared/components/Buttons/Buttons';
+import { useNavigate } from 'react-router-dom';
 
 interface CourseCard {
   id: string;
@@ -36,7 +43,8 @@ const TAB_DATA: Record<TabKey, { label: string; courses: CourseCard[] }> = {
         instructor: {
           name: 'Markus Brandt',
           role: 'Ex-AWS Kernel',
-          avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80',
+          avatar:
+            'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80',
         },
         rating: '4.95',
       },
@@ -51,7 +59,8 @@ const TAB_DATA: Record<TabKey, { label: string; courses: CourseCard[] }> = {
         instructor: {
           name: 'Dr. Elena Rostova',
           role: 'DeepMind Fellow',
-          avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&auto=format&fit=crop&q=80',
+          avatar:
+            'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&auto=format&fit=crop&q=80',
         },
         rating: '4.98',
       },
@@ -66,7 +75,8 @@ const TAB_DATA: Record<TabKey, { label: string; courses: CourseCard[] }> = {
         instructor: {
           name: 'Christian H.',
           role: 'Citadel Alumni',
-          avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80',
+          avatar:
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80',
         },
         rating: '4.91',
       },
@@ -86,7 +96,8 @@ const TAB_DATA: Record<TabKey, { label: string; courses: CourseCard[] }> = {
         instructor: {
           name: 'Siddharth Roy',
           role: 'Spatial UX Lead',
-          avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80',
+          avatar:
+            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80',
         },
         rating: '4.96',
       },
@@ -101,7 +112,8 @@ const TAB_DATA: Record<TabKey, { label: string; courses: CourseCard[] }> = {
         instructor: {
           name: 'Kavita Patel',
           role: 'AI Staff Engineer',
-          avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=80',
+          avatar:
+            'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=80',
         },
         rating: '4.94',
       },
@@ -116,7 +128,8 @@ const TAB_DATA: Record<TabKey, { label: string; courses: CourseCard[] }> = {
         instructor: {
           name: 'Alexei Vaneev',
           role: 'Kernel Maintainer',
-          avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop&q=80',
+          avatar:
+            'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop&q=80',
         },
         rating: '4.99',
       },
@@ -136,7 +149,8 @@ const TAB_DATA: Record<TabKey, { label: string; courses: CourseCard[] }> = {
         instructor: {
           name: 'Tanya Morales',
           role: 'Principal UI Arch',
-          avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80',
+          avatar:
+            'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80',
         },
         rating: '4.97',
       },
@@ -151,7 +165,8 @@ const TAB_DATA: Record<TabKey, { label: string; courses: CourseCard[] }> = {
         instructor: {
           name: 'Daniel Chen',
           role: 'VP Infrastructure',
-          avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&auto=format&fit=crop&q=80',
+          avatar:
+            'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&auto=format&fit=crop&q=80',
         },
         rating: '4.92',
       },
@@ -166,7 +181,8 @@ const TAB_DATA: Record<TabKey, { label: string; courses: CourseCard[] }> = {
         instructor: {
           name: 'Rachel Sterling',
           role: 'Chief Data Arch',
-          avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&auto=format&fit=crop&q=80',
+          avatar:
+            'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&auto=format&fit=crop&q=80',
         },
         rating: '4.93',
       },
@@ -186,7 +202,8 @@ const TAB_DATA: Record<TabKey, { label: string; courses: CourseCard[] }> = {
         instructor: {
           name: 'Dr. Lucas Bauer',
           role: 'Cryptography Fellow',
-          avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&auto=format&fit=crop&q=80',
+          avatar:
+            'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&auto=format&fit=crop&q=80',
         },
         rating: '4.99',
       },
@@ -201,7 +218,8 @@ const TAB_DATA: Record<TabKey, { label: string; courses: CourseCard[] }> = {
         instructor: {
           name: 'Marta Gomez',
           role: 'Compiler Engineer',
-          avatar: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=100&auto=format&fit=crop&q=80',
+          avatar:
+            'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=100&auto=format&fit=crop&q=80',
         },
         rating: '4.98',
       },
@@ -216,7 +234,8 @@ const TAB_DATA: Record<TabKey, { label: string; courses: CourseCard[] }> = {
         instructor: {
           name: 'Kenji Sato',
           role: 'Robotics Team Lead',
-          avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&auto=format&fit=crop&q=80',
+          avatar:
+            'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&auto=format&fit=crop&q=80',
         },
         rating: '4.97',
       },
@@ -226,6 +245,8 @@ const TAB_DATA: Record<TabKey, { label: string; courses: CourseCard[] }> = {
 
 export const CuratedPathways: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabKey>('demand');
+
+  const navigate = useNavigate()
 
   const renderBadge = (badge: CourseCard['badge']) => {
     switch (badge.type) {
@@ -261,7 +282,7 @@ export const CuratedPathways: React.FC = () => {
   };
 
   return (
-    <section className="w-full bg-[#060D18] py-14 px-4 sm:px-8 lg:px-12 text-slate-100 font-sans">
+    <section className="w-full py-14 px-4 sm:px-8 lg:px-12 text-slate-100">
       <div className="mx-auto max-w-7xl">
         {/* Top Header & Tab Controls */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-10">
@@ -270,37 +291,41 @@ export const CuratedPathways: React.FC = () => {
               <IconTrendingUp size={15} stroke={2.2} />
               <span>Curated Pathways</span>
             </div>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-[2.6rem] leading-tight">
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-text-highlight sm:text-4xl lg:text-[2.65rem] leading-tight text-balance xl:text-pretty">
               Trending Tracks &amp; High-Velocity Learning
             </h2>
-            <p className="mt-3 max-w-2xl text-sm sm:text-base text-slate-400 leading-relaxed">
-              Filter through the industry&apos;s most rigorous hands-on technical programs updated weekly.
+            <p className="mt-3 max-w-2xl text-sm sm:text-base text-slate-400 leading-relaxed text-balance">
+              Filter through the industry&apos;s most rigorous hands-on
+              technical programs updated weekly.
             </p>
           </div>
 
-          {/* Interactive Navigation Tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar rounded-xl border border-slate-800/80 bg-[#0B1220]/90 p-1.5 backdrop-blur-md">
+          {/* Navigation Tabs */}
+          <div
+            className="flex items-center gap-2 overflow-x-auto rounded-xl border border-border-subtle bg-bg-secondary p-1.5 backdrop-blur-md"
+            style={{ scrollbarWidth: 'none' }}
+          >
             {(Object.keys(TAB_DATA) as TabKey[]).map((tabKey) => {
               const isActive = activeTab === tabKey;
               return (
-                <button
+                <Button
                   key={tabKey}
-                  type="button"
+                  variant="ghost"
+                  size='sm'
+                  label={TAB_DATA[tabKey].label}
                   onClick={() => setActiveTab(tabKey)}
-                  className={`rounded-lg px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap ${
+                  className={`cursor-pointer rounded-lg px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap ${
                     isActive
-                      ? 'bg-[#3B82F6] text-white shadow-md font-semibold'
+                      ? 'bg-bg-surface text-white shadow-md font-semibold'
                       : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
                   }`}
-                >
-                  {TAB_DATA[tabKey].label}
-                </button>
+                />
               );
             })}
           </div>
         </div>
 
-        {/* Dynamic Cards Grid */}
+        {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {TAB_DATA[activeTab].courses.map((course) => (
             <div
@@ -362,13 +387,16 @@ export const CuratedPathways: React.FC = () => {
                     <IconStarFilled size={12} className="text-emerald-400" />
                     <span>{course.rating}</span>
                   </div>
-                  <button
-                    type="button"
-                    className="inline-flex items-center gap-1 rounded-lg border border-slate-700/80 bg-[#141F32] px-3 py-1.5 text-xs font-medium text-white transition-all hover:bg-blue-600 hover:border-blue-500 active:scale-95 shadow-sm"
-                  >
-                    <span>Enroll</span>
-                    <IconArrowRight size={13} stroke={2} />
-                  </button>
+                  <Button
+                  key={course.title}
+                  label='Enroll'
+                  size='sm'
+                  onClick={()=>navigate("/courses")}
+                  variant='ghost'
+                  icon={<IconArrowRight size={14}/>}
+                  iconPosition='right'
+                  />
+
                 </div>
               </div>
             </div>
@@ -378,3 +406,4 @@ export const CuratedPathways: React.FC = () => {
     </section>
   );
 };
+                    <IconArrowRight size={13} stroke={2} />

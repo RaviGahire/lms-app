@@ -4,6 +4,7 @@ import {
   IconCalendarEvent,
   IconChartBar,
 } from '@tabler/icons-react';
+import { Button } from '../../../shared/components/Buttons/Buttons';
 
 interface MasterclassCard {
   id: string;
@@ -93,9 +94,9 @@ const OUTCOMES_METRICS = [
   },
 ];
 
-export const MasterclassesAndOutcomes: React.FC = () => {
+export const MasterclassesAndOutcomes = () => {
   return (
-    <section className="w-full bg-[#060D18] py-16 px-4 sm:px-8 lg:px-12 text-slate-100 font-sans">
+    <section className="w-full xl:pt-16 px-4 sm:px-8 lg:px-12 ">
       <div className="mx-auto max-w-7xl space-y-12">
         {/* ================= SECTION 1: MASTERCLASSES ================= */}
         <div>
@@ -106,11 +107,12 @@ export const MasterclassesAndOutcomes: React.FC = () => {
                 <IconClock size={15} stroke={2.2} />
                 <span>Live Interactive Cohorts</span>
               </div>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-[2.5rem] leading-tight">
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-text-highlight sm:text-4xl lg:text-[2.65rem] leading-tight text-balance xl:text-pretty">
                 Upcoming Masterclasses &amp; Mentor Sprints
               </h2>
               <p className="mt-2.5 max-w-2xl text-xs sm:text-sm text-slate-400 leading-relaxed">
-                Live architectural teardowns, pair programming, and synchronous code reviews with senior principal engineers.
+                Live architectural teardowns, pair programming, and synchronous
+                code reviews with senior principal engineers.
               </p>
             </div>
 
@@ -153,7 +155,13 @@ export const MasterclassesAndOutcomes: React.FC = () => {
                 <div className="mt-6 pt-4 border-t border-slate-800/50">
                   <div className="flex items-center justify-between text-xs text-slate-400 mb-2 font-medium">
                     <span>Seats Filled: {cohort.percentageFilled}%</span>
-                    <span className={cohort.seatsRemaining <= 5 ? 'text-rose-400 font-semibold' : 'text-emerald-400'}>
+                    <span
+                      className={
+                        cohort.seatsRemaining <= 5
+                          ? 'text-rose-400 font-semibold'
+                          : 'text-emerald-400'
+                      }
+                    >
                       {cohort.seatsRemaining} Remaining
                     </span>
                   </div>
@@ -167,13 +175,13 @@ export const MasterclassesAndOutcomes: React.FC = () => {
                   </div>
 
                   {/* Button */}
-                  <button
-                    type="button"
-                    className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl border border-slate-800 bg-[#141F32]/70 py-2.5 text-xs font-semibold text-slate-200 transition-all duration-150 hover:bg-[#1A2840] hover:text-white hover:border-slate-700 active:scale-[0.98]"
-                  >
-                    <IconCalendarEvent size={15} stroke={2} />
-                    <span>RSVP &amp; Add to Calendar</span>
-                  </button>
+                
+                  <Button
+                    key={cohort.title}
+                    label={'RSVP &amp; Add to Calendar'}
+                    className="mt-5 flex w-full items-center justify-center"
+                    icon={<IconCalendarEvent size={18} />}
+                  />
                 </div>
               </div>
             ))}
@@ -193,7 +201,9 @@ export const MasterclassesAndOutcomes: React.FC = () => {
                 Alumni Outcomes &amp; Technical Proof
               </h3>
               <p className="mt-3 text-xs sm:text-sm leading-relaxed text-slate-400">
-                SkillForge micro-degrees verify hands-on commits, not multiple-choice tests. Employers verify your sandbox commits directly via cryptographically signed hashes.
+                SkillForge micro-degrees verify hands-on commits, not
+                multiple-choice tests. Employers verify your sandbox commits
+                directly via cryptographically signed hashes.
               </p>
 
               {/* Placement Rate Badge */}
@@ -212,7 +222,9 @@ export const MasterclassesAndOutcomes: React.FC = () => {
                   key={idx}
                   className="flex flex-col justify-center rounded-xl border border-slate-800/80 bg-[#070D18]/90 px-6 py-6 min-w-[170px] text-center"
                 >
-                  <div className={`text-2xl sm:text-3xl font-extrabold tracking-tight ${metric.color}`}>
+                  <div
+                    className={`text-2xl sm:text-3xl font-extrabold tracking-tight ${metric.color}`}
+                  >
                     {metric.stat}
                   </div>
                   <div className="mt-2 text-xs font-semibold text-slate-200 leading-tight">
