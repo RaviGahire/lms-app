@@ -1,11 +1,16 @@
-import React from 'react'
+import { ContactDeskCard } from './components/ContactDeskCard';
+import { ContactHero } from './components/ContactHero';
+import { InquiryForm } from './components/InquiryForm';
 
 export const ContactPage = () => {
   return (
-    <div>
-      Contact Page
-    </div>
-  )
-}
-
-
+    <section aria-label="contact-page">
+      {/* Hero */}
+      <ContactHero />
+      {/* DeskCards */}
+      <ContactDeskCard />
+      {/* Inquiey form */}
+      <InquiryForm />
+    </section>
+  );
+};
