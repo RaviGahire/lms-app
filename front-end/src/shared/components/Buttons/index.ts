@@ -5,7 +5,7 @@ import type {
   ButtonClickHandler,
   ButtonDefaultConfig,
   IconPosition,
-  ButtonShape
+  ButtonShape,
 } from './ButtonConfig';
 export {
   buttonConfig,
@@ -14,5 +14,5 @@ export {
   ButtonClickHandler,
   ButtonDefaultConfig,
   IconPosition,
-  ButtonShape
+  ButtonShape,
 };

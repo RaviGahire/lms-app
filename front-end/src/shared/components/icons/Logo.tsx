@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react';
 
 export function MasterTrackLogo(props: SVGProps<SVGSVGElement>) {
   return (
@@ -21,16 +21,8 @@ export function MasterTrackLogo(props: SVGProps<SVGSVGElement>) {
           d="M460 0H424C412.954 0 404 8.9543 404 20V360C404 371.046 412.954 380 424 380H460C471.046 380 480 371.046 480 360V20C480 8.9543 471.046 0 460 0Z"
           fill="white"
         />
-        <path
-          id="4e7ff2ba"
-          d="M76 80L180 210V296L76 180V80Z"
-          fill="white"
-        />
-        <path
-          id="423b57cf"
-          d="M404 80L300 210V296L404 180V80Z"
-          fill="white"
-        />
+        <path id="4e7ff2ba" d="M76 80L180 210V296L76 180V80Z" fill="white" />
+        <path id="423b57cf" d="M404 80L300 210V296L404 180V80Z" fill="white" />
         <path
           id="b4deeff4"
           d="M90 0H390C402 0 412 10 412 22C412 34 402 44 390 44H90C78 44 68 34 68 22C68 10 78 0 90 0Z"

@@ -246,7 +246,7 @@ const TAB_DATA: Record<TabKey, { label: string; courses: CourseCard[] }> = {
 export const CuratedPathways: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabKey>('demand');
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const renderBadge = (badge: CourseCard['badge']) => {
     switch (badge.type) {
@@ -311,7 +311,7 @@ export const CuratedPathways: React.FC = () => {
                 <Button
                   key={tabKey}
                   variant="ghost"
-                  size='sm'
+                  size="sm"
                   label={TAB_DATA[tabKey].label}
                   onClick={() => setActiveTab(tabKey)}
                   className={`cursor-pointer rounded-lg px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap ${
@@ -388,15 +388,14 @@ export const CuratedPathways: React.FC = () => {
                     <span>{course.rating}</span>
                   </div>
                   <Button
-                  key={course.title}
-                  label='Enroll'
-                  size='sm'
-                  onClick={()=>navigate("/courses")}
-                  variant='ghost'
-                  icon={<IconArrowRight size={14}/>}
-                  iconPosition='right'
+                    key={course.title}
+                    label="Enroll"
+                    size="sm"
+                    onClick={() => navigate('/courses')}
+                    variant="ghost"
+                    icon={<IconArrowRight size={14} />}
+                    iconPosition="right"
                   />
-
                 </div>
               </div>
             </div>
@@ -406,4 +405,4 @@ export const CuratedPathways: React.FC = () => {
     </section>
   );
 };
-                    <IconArrowRight size={13} stroke={2} />
+<IconArrowRight size={13} stroke={2} />;
