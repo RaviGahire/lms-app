@@ -99,7 +99,7 @@ export const TextAreaInput = forwardRef<
     };
 
     return (
-      <div className={`w-full flex flex-col font-sans ${containerClassName}`}>
+      <div className={`w-full flex flex-col ${containerClassName}`}>
         {/* Label & Header Row */}
         {label && (
           <div className="flex items-center justify-between mb-2 select-none">
