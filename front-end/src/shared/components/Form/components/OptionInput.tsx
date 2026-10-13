@@ -1,8 +1,4 @@
-import {
-  IconCheck,
-  IconChevronDown,
-  IconChevronUp,
-} from '@tabler/icons-react';
+import { IconCheck, IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 import React, {
   useState,
   useRef,

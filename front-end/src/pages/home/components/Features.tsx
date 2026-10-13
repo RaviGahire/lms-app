@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 import {
   IconFlask,
   IconBrain,
@@ -6,8 +6,8 @@ import {
   IconCheck,
   IconCertificate,
   IconBriefcase,
-} from "@tabler/icons-react";
-import { Badge } from "../../../shared/components/Badges";
+} from '@tabler/icons-react';
+import { Badge } from '../../../shared/components/Badges';
 
 export interface FeatureCardItem {
   id: string;
@@ -23,41 +23,41 @@ export interface FeatureCardItem {
 
 export const cardData: FeatureCardItem[] = [
   {
-    id: "card-1",
+    id: 'card-1',
     icon: <IconFlask size={20} stroke={1.8} />,
-    iconContainerClass: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400",
-    title: "Active Hands-On Learning",
+    iconContainerClass:
+      'bg-emerald-500/10 border-emerald-500/20 text-emerald-400',
+    title: 'Active Hands-On Learning',
     subTitle:
-      "Interactive virtual labs, Figma design sandboxes, financial modeling spreadsheets, and live coding playgrounds. Build real work instead of taking notes.",
-    footerLeft: "Simulations & Playgrounds",
-    footerRightText: "Fully Interactive",
+      'Interactive virtual labs, Figma design sandboxes, financial modeling spreadsheets, and live coding playgrounds. Build real work instead of taking notes.',
+    footerLeft: 'Simulations & Playgrounds',
+    footerRightText: 'Fully Interactive',
     isInteractiveBadge: true,
   },
   {
-    id: "card-2",
+    id: 'card-2',
     icon: <IconBrain size={20} stroke={1.8} />,
-    iconContainerClass: "bg-white/5 border-white/10 text-slate-300",
-    title: "Personalized Adaptive Paths",
+    iconContainerClass: 'bg-white/5 border-white/10 text-slate-300',
+    title: 'Personalized Adaptive Paths',
     subTitle:
-      "AI-guided curricula intelligently adjust pacing, prerequisites, and practice drills to your individual strengths, goals, and academic background.",
-    footerLeft: "Dynamic Pacing Engine",
-    footerRightText: "Custom Tailored",
+      'AI-guided curricula intelligently adjust pacing, prerequisites, and practice drills to your individual strengths, goals, and academic background.',
+    footerLeft: 'Dynamic Pacing Engine',
+    footerRightText: 'Custom Tailored',
   },
   {
-    id: "card-3",
+    id: 'card-3',
     icon: <IconChartLine size={20} stroke={1.8} />,
-    iconContainerClass: "bg-white/5 border-white/10 text-slate-300",
-    title: "Real-Time Mastery & Analytics",
+    iconContainerClass: 'bg-white/5 border-white/10 text-slate-300',
+    title: 'Real-Time Mastery & Analytics',
     subTitle:
-      "Cognitive growth indexes, retention heatmaps, and micro-credential checkpoints prove conceptual fluency to top universities, instructors, and employers.",
-    footerLeft: "Retention Index: 96.8%",
-    footerRightText: "+22% Faster Recall",
+      'Cognitive growth indexes, retention heatmaps, and micro-credential checkpoints prove conceptual fluency to top universities, instructors, and employers.',
+    footerLeft: 'Retention Index: 96.8%',
+    footerRightText: '+22% Faster Recall',
     isHighlightText: true,
   },
 ];
 
 export const FeaturesSection = () => {
-
   return (
     <section className="relative w-full text-white py-8  xl:py-16 px-4 sm:px-6 lg:px-8 select-none">
       <div className="max-w-7xl mx-auto flex flex-col items-center">
@@ -179,7 +179,7 @@ export const FeaturesSection = () => {
                     Applied Data Science & Economic Modeling
                   </h4>
                   <p className="text-[11px] text-slate-400 mt-1">
-                    Conferred upon:{" "}
+                    Conferred upon:{' '}
                     <span className="text-slate-200">Alex Morgan</span> • Grade:
                     Distinction (97%)
                   </p>
@@ -191,19 +191,19 @@ export const FeaturesSection = () => {
 
               <div className="mt-6 pt-3 border-t border-white/5 flex flex-wrap items-center justify-between text-[11px] text-slate-400 gap-2">
                 <div>
-                  Curriculum:{" "}
+                  Curriculum:{' '}
                   <span className="text-slate-200 font-semibold">
                     12 Modules
                   </span>
                 </div>
                 <div>
-                  Lab Score:{" "}
+                  Lab Score:{' '}
                   <span className="text-emerald-400 font-semibold">
                     100% Practical
                   </span>
                 </div>
                 <div>
-                  Issued By:{" "}
+                  Issued By:{' '}
                   <span className="text-slate-200 font-semibold">
                     SkillForge Board
                   </span>

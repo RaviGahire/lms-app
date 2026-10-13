@@ -1,2 +1,2 @@
-import { PricingSection } from "./Pricing";
-export{PricingSection}
+import { PricingSection } from './Pricing';
+export { PricingSection };

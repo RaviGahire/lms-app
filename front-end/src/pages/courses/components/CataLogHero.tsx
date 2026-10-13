@@ -23,7 +23,7 @@ export const CataLogHero = () => {
           <div className="max-w-3xl">
             <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl lg:text-6xl xl:leading-[1.1] text-balance xl:text-pretty">
               Explore high-impact skills <br />
-              for{' '} modern learners.
+              for modern learners.
             </h1>
             <p className="mt-6 max-w-2xl text-base sm:text-lg xl:leading-relaxed text-text-muted font-normal">
               From neural engineering and distributed systems to brand design

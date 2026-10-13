@@ -11,7 +11,7 @@ export const Footer = () => {
           <div className="flex gap-4 items-start max-w-xl">
             {/* Placeholder Logo Icon */}
             <div className="h-10 w-10 shrink-0 rounded-lg bg-slate-800/80 border border-slate-700/30 flex items-center justify-center">
-              <MasterTrackLogo width={24} height={24}/>
+              <MasterTrackLogo width={24} height={24} />
             </div>
             <div>
               <h2 className="text-[20px] font-bold text-[#3b82f6] tracking-tight">

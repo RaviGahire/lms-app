@@ -5,7 +5,7 @@ import React, {
   useId,
   DragEvent,
   ChangeEvent,
-} from "react";
+} from 'react';
 
 export interface FileInputProps {
   label?: string;
@@ -26,9 +26,9 @@ export interface FileInputProps {
 
 // Format bytes into readable string (KB, MB)
 const formatFileSize = (bytes: number): string => {
-  if (bytes === 0) return "0 B";
+  if (bytes === 0) return '0 B';
   const k = 1024;
-  const sizes = ["B", "KB", "MB", "GB"];
+  const sizes = ['B', 'KB', 'MB', 'GB'];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(1))} ${sizes[i]}`;
 };
@@ -39,17 +39,17 @@ const formatFileSize = (bytes: number): string => {
 export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
   (
     {
-      label = "Upload Capstone Artifact",
+      label = 'Upload Capstone Artifact',
       accept,
-      allowedExtensions = [".pdf", ".zip", ".tar.gz", ".json"],
+      allowedExtensions = ['.pdf', '.zip', '.tar.gz', '.json'],
       maxSizeMB = 15,
       multiple = false,
       required = false,
       disabled = false,
       error: controlledError,
       helperText,
-      containerClassName = "",
-      className = "",
+      containerClassName = '',
+      className = '',
       value: controlledFiles,
       onChange,
       onError,
@@ -64,10 +64,12 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
     const internalInputRef = useRef<HTMLInputElement>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [internalFiles, setInternalFiles] = useState<File[]>([]);
-    const [internalError, setInternalError] = useState<string>("");
+    const [internalError, setInternalError] = useState<string>('');
 
-    const activeFiles = controlledFiles !== undefined ? controlledFiles : internalFiles;
-    const activeError = controlledError !== undefined ? controlledError : internalError;
+    const activeFiles =
+      controlledFiles !== undefined ? controlledFiles : internalFiles;
+    const activeError =
+      controlledError !== undefined ? controlledError : internalError;
 
     // Validate a single file against extension and size
     const validateFile = (file: File): string | null => {
@@ -79,12 +81,14 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
 
       // 2. Extension validation
       if (allowedExtensions.length > 0) {
-        const fileExt = `.${file.name.split(".").pop()?.toLowerCase()}`;
+        const fileExt = `.${file.name.split('.').pop()?.toLowerCase()}`;
         const isMatch = allowedExtensions.some(
-          (ext) => ext.toLowerCase() === fileExt || file.name.toLowerCase().endsWith(ext.toLowerCase())
+          (ext) =>
+            ext.toLowerCase() === fileExt ||
+            file.name.toLowerCase().endsWith(ext.toLowerCase())
         );
         if (!isMatch) {
-          return `"${file.name}" has an unsupported format. Allowed: ${allowedExtensions.join(", ")}`;
+          return `"${file.name}" has an unsupported format. Allowed: ${allowedExtensions.join(', ')}`;
         }
       }
 
@@ -92,11 +96,16 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
     };
 
     const handleFiles = (incomingFileList: FileList | null) => {
-      if (!incomingFileList || incomingFileList.length === 0 || disabled) return;
+      if (!incomingFileList || incomingFileList.length === 0 || disabled)
+        return;
 
       const fileArray = Array.from(incomingFileList);
       // Strictly guarantee an array of File (never contains undefined)
-      const candidates: File[] = multiple ? fileArray : (fileArray[0] ? [fileArray[0]] : []);
+      const candidates: File[] = multiple
+        ? fileArray
+        : fileArray[0]
+          ? [fileArray[0]]
+          : [];
 
       if (candidates.length === 0) return;
 
@@ -111,10 +120,12 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
       }
 
       // Valid files
-      setInternalError("");
-      onError?.("");
+      setInternalError('');
+      onError?.('');
 
-      const nextFiles: File[] = multiple ? [...activeFiles, ...candidates] : candidates;
+      const nextFiles: File[] = multiple
+        ? [...activeFiles, ...candidates]
+        : candidates;
       if (controlledFiles === undefined) {
         setInternalFiles(nextFiles);
       }
@@ -123,7 +134,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
       handleFiles(e.target.files);
-      if (e.target) e.target.value = "";
+      if (e.target) e.target.value = '';
     };
 
     const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
@@ -160,12 +171,17 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
         {/* Label */}
         {label && (
           <div className="flex items-center justify-between mb-2 select-none">
-            <label htmlFor={inputId} className="text-sm font-medium text-slate-300 flex items-center gap-1">
+            <label
+              htmlFor={inputId}
+              className="text-sm font-medium text-slate-300 flex items-center gap-1"
+            >
               {label}
               {required && <span className="text-red-400 text-xs">*</span>}
             </label>
             <span className="text-xs text-slate-500 font-normal">
-              Max {maxSizeMB}MB {allowedExtensions.length > 0 && `(${allowedExtensions.join(", ")})`}
+              Max {maxSizeMB}MB{' '}
+              {allowedExtensions.length > 0 &&
+                `(${allowedExtensions.join(', ')})`}
             </span>
           </div>
         )}
@@ -173,19 +189,25 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
         {/* Hidden Native File Input */}
         <input
           ref={(node) => {
-            (internalInputRef as React.MutableRefObject<HTMLInputElement | null>).current = node;
-            if (typeof ref === "function") ref(node);
-            else if (ref) (ref as React.MutableRefObject<HTMLInputElement | null>).current = node;
+            (
+              internalInputRef as React.MutableRefObject<HTMLInputElement | null>
+            ).current = node;
+            if (typeof ref === 'function') ref(node);
+            else if (ref)
+              (ref as React.MutableRefObject<HTMLInputElement | null>).current =
+                node;
           }}
           id={inputId}
           type="file"
-          accept={accept || allowedExtensions.join(",")}
+          accept={accept || allowedExtensions.join(',')}
           multiple={multiple}
           disabled={disabled}
           onChange={handleInputChange}
           className="hidden"
           aria-invalid={Boolean(activeError)}
-          aria-describedby={activeError ? errorId : helperText ? helperId : undefined}
+          aria-describedby={
+            activeError ? errorId : helperText ? helperId : undefined
+          }
         />
 
         {/* Custom Dropzone Container */}
@@ -199,12 +221,12 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
             cursor-pointer border-2 border-dashed transition-all duration-200 text-center
             ${
               disabled
-                ? "bg-[#0b1324]/50 border-slate-800/50 opacity-50 cursor-not-allowed"
+                ? 'bg-[#0b1324]/50 border-slate-800/50 opacity-50 cursor-not-allowed'
                 : isDragging
-                ? "bg-[#132238] border-blue-400 shadow-lg shadow-blue-500/10"
-                : activeError
-                ? "bg-[#161220] border-red-500/80 hover:border-red-400"
-                : "bg-[#0b1324] border-slate-800 hover:border-slate-700 hover:bg-[#0e172c]"
+                  ? 'bg-[#132238] border-blue-400 shadow-lg shadow-blue-500/10'
+                  : activeError
+                    ? 'bg-[#161220] border-red-500/80 hover:border-red-400'
+                    : 'bg-[#0b1324] border-slate-800 hover:border-slate-700 hover:bg-[#0e172c]'
             }
             ${className}
           `}
@@ -213,13 +235,19 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
           <div
             className={`w-12 h-12 rounded-xl flex items-center justify-center mb-3.5 transition-colors duration-200 ${
               isDragging
-                ? "bg-blue-500/20 text-blue-400"
+                ? 'bg-blue-500/20 text-blue-400'
                 : activeError
-                ? "bg-red-500/10 text-red-400"
-                : "bg-[#141f36] border border-slate-700/60 text-slate-300"
+                  ? 'bg-red-500/10 text-red-400'
+                  : 'bg-[#141f36] border border-slate-700/60 text-slate-300'
             }`}
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              viewBox="0 0 24 24"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -230,10 +258,13 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
 
           <div className="space-y-1">
             <p className="text-sm font-semibold text-white">
-              <span className="text-[#38bdf8] hover:underline">Click to browse</span> or drag and drop
+              <span className="text-[#38bdf8] hover:underline">
+                Click to browse
+              </span>{' '}
+              or drag and drop
             </p>
             <p className="text-xs text-slate-400">
-              {allowedExtensions.join(" ")} files supported up to {maxSizeMB}MB
+              {allowedExtensions.join(' ')} files supported up to {maxSizeMB}MB
             </p>
           </div>
         </div>
@@ -248,7 +279,13 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
               >
                 <div className="flex items-center gap-3 min-w-0 pr-3">
                   <div className="w-8 h-8 rounded-lg bg-[#172338] border border-slate-700/50 flex items-center justify-center text-[#38bdf8] shrink-0">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                    >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -258,8 +295,12 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
                   </div>
 
                   <div className="truncate">
-                    <p className="text-xs font-semibold text-slate-200 truncate">{file.name}</p>
-                    <p className="text-[11px] text-slate-500">{formatFileSize(file.size)}</p>
+                    <p className="text-xs font-semibold text-slate-200 truncate">
+                      {file.name}
+                    </p>
+                    <p className="text-[11px] text-slate-500">
+                      {formatFileSize(file.size)}
+                    </p>
                   </div>
                 </div>
 
@@ -273,8 +314,18 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
                     className="p-1.5 rounded-lg text-slate-400 hover:text-red-400 hover:bg-[#1f1a29] transition-colors shrink-0"
                     aria-label={`Remove ${file.name}`}
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
                     </svg>
                   </button>
                 )}
@@ -285,8 +336,18 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
 
         {/* Error / Helper text */}
         {activeError ? (
-          <p id={errorId} role="alert" className="mt-2.5 flex items-center gap-1.5 text-xs text-red-400">
-            <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <p
+            id={errorId}
+            role="alert"
+            className="mt-2.5 flex items-center gap-1.5 text-xs text-red-400"
+          >
+            <svg
+              className="w-3.5 h-3.5 shrink-0"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
               <circle cx="12" cy="12" r="10" />
               <line x1="12" y1="8" x2="12" y2="12" />
               <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -303,11 +364,11 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
   }
 );
 
-FileInput.displayName = "FileInput";
+FileInput.displayName = 'FileInput';
 
 export default function FileInputDemo() {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
-  const [customError, setCustomError] = useState<string>("");
+  const [customError, setCustomError] = useState<string>('');
 
   return (
     <div className="min-h-screen bg-[#070b14] flex items-center justify-center p-6 antialiased">
@@ -318,17 +379,21 @@ export default function FileInputDemo() {
 
         <FileInput
           label="Verification Tarball or ZIP"
-          allowedExtensions={[".zip", ".tar.gz", ".tar", ".json"]}
+          allowedExtensions={['.zip', '.tar.gz', '.tar', '.json']}
           maxSizeMB={25}
           multiple={true}
           value={uploadedFiles}
           onChange={(files) => {
             setUploadedFiles(files);
-            setCustomError("");
+            setCustomError('');
           }}
           error={customError}
           onError={(err) => setCustomError(err)}
-          helperText={!customError ? "Bundles will run inside an isolated SOC2 sandbox container." : undefined}
+          helperText={
+            !customError
+              ? 'Bundles will run inside an isolated SOC2 sandbox container.'
+              : undefined
+          }
           required
         />
       </div>

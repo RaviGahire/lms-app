@@ -1,7 +1,7 @@
 import { IconAlertTriangle } from '@tabler/icons-react';
 import React, { forwardRef, useId } from 'react';
 
-// Regex 
+// Regex
 export const Text_REGEX = /^[A-Za-zÀ-ÖØ-öø-ÿ]+([ '.\-][A-Za-zÀ-ÖØ-öø-ÿ]+)+$/;
 
 export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -98,4 +98,3 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     );
   }
 );
-

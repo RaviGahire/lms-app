@@ -1,5 +1,11 @@
-import { IconAlertTriangle } from "@tabler/icons-react";
-import React, { forwardRef, useState, useId, KeyboardEvent, ChangeEvent } from "react";
+import { IconAlertTriangle } from '@tabler/icons-react';
+import React, {
+  forwardRef,
+  useState,
+  useId,
+  KeyboardEvent,
+  ChangeEvent,
+} from 'react';
 
 // Regex for valid numerical strings (allows optional negative sign, integers, and decimals)
 export const NUMBER_REGEX = /^-?\d*(\.\d*)?$/;
@@ -7,8 +13,10 @@ export const NUMBER_REGEX = /^-?\d*(\.\d*)?$/;
 // Strict number validator (ensures non-empty and well-formed decimal/integer)
 export const STRICT_NUMBER_REGEX = /^-?\d+(\.\d+)?$/;
 
-export interface NumberInputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange" | "value" | "min" | "max" | "step"> {
+export interface NumberInputProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  'onChange' | 'value' | 'min' | 'max' | 'step'
+> {
   label?: string;
   value?: number | string;
   defaultValue?: number | string;
@@ -32,9 +40,9 @@ export interface NumberInputProps
 export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
   (
     {
-      label = "Number of Seats",
+      label = 'Number of Seats',
       value: controlledValue,
-      defaultValue = "",
+      defaultValue = '',
       min = -Infinity,
       max = Infinity,
       step = 1,
@@ -43,8 +51,8 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       suffix,
       error,
       helperText,
-      containerClassName = "",
-      className = "",
+      containerClassName = '',
+      className = '',
       hideSteppers = false,
       disabled = false,
       readOnly = false,
@@ -63,11 +71,11 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 
     const isControlled = controlledValue !== undefined;
     const [internalValue, setInternalValue] = useState<string>(
-      String(defaultValue ?? "")
+      String(defaultValue ?? '')
     );
 
     const displayString = isControlled
-      ? String(controlledValue ?? "")
+      ? String(controlledValue ?? '')
       : internalValue;
 
     // Helper: round to precision if specified
@@ -84,7 +92,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         setInternalValue(nextStr);
       }
 
-      if (nextStr === "" || nextStr === "-") {
+      if (nextStr === '' || nextStr === '-') {
         onChange?.(undefined, nextStr);
         return;
       }
@@ -120,7 +128,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       const raw = e.target.value;
 
       // Allow empty string or match partial valid numeric expression
-      if (raw === "" || NUMBER_REGEX.test(raw)) {
+      if (raw === '' || NUMBER_REGEX.test(raw)) {
         updateValue(raw);
       }
     };
@@ -130,15 +138,15 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       if (disabled || readOnly) return;
 
       switch (e.key) {
-        case "ArrowUp":
+        case 'ArrowUp':
           e.preventDefault();
           handleStep(1);
           break;
-        case "ArrowDown":
+        case 'ArrowDown':
           e.preventDefault();
           handleStep(-1);
           break;
-        case "PageUp":
+        case 'PageUp':
           e.preventDefault();
           if (step) {
             const currentNum = parseFloat(displayString) || 0;
@@ -146,7 +154,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
             updateValue(String(nextNum));
           }
           break;
-        case "PageDown":
+        case 'PageDown':
           e.preventDefault();
           if (step) {
             const currentNum = parseFloat(displayString) || 0;
@@ -182,8 +190,8 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
                 {min !== -Infinity && max !== Infinity
                   ? `${min} – ${max}`
                   : min !== -Infinity
-                  ? `Min: ${min}`
-                  : `Max: ${max}`}
+                    ? `Min: ${min}`
+                    : `Max: ${max}`}
               </span>
             )}
           </label>
@@ -195,10 +203,10 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
             relative flex items-center w-full rounded-xl bg-[#0b1324] border transition-all duration-200
             ${
               error
-                ? "border-red-500/80 focus-within:border-red-500 focus-within:ring-2 focus-within:ring-red-500/20"
-                : "border-slate-800 hover:border-slate-700 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/20"
+                ? 'border-red-500/80 focus-within:border-red-500 focus-within:ring-2 focus-within:ring-red-500/20'
+                : 'border-slate-800 hover:border-slate-700 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/20'
             }
-            ${disabled ? "opacity-50 cursor-not-allowed" : ""}
+            ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
           `}
         >
           {/* Prefix (e.g. $, #) */}
@@ -219,7 +227,9 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
             aria-valuemin={min !== -Infinity ? min : undefined}
             aria-valuemax={max !== Infinity ? max : undefined}
             aria-invalid={Boolean(error)}
-            aria-describedby={error ? errorId : helperText ? helperId : undefined}
+            aria-describedby={
+              error ? errorId : helperText ? helperId : undefined
+            }
             disabled={disabled}
             readOnly={readOnly}
             value={displayString}
@@ -228,8 +238,8 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
             className={`
               w-full h-12 bg-transparent text-white text-base
               placeholder:text-slate-600 outline-none
-              ${prefix ? "pl-1" : "pl-4"}
-              ${suffix || !hideSteppers ? "pr-2" : "pr-4"}
+              ${prefix ? 'pl-1' : 'pl-4'}
+              ${suffix || !hideSteppers ? 'pr-2' : 'pr-4'}
               ${className}
             `}
             {...props}
@@ -254,8 +264,18 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
                 onClick={() => handleStep(-1)}
                 className="cursor-pointer w-8 h-8 rounded-lg bg-[#141d33] border border-slate-700/60 flex items-center justify-center text-slate-300 hover:bg-[#1a2642] hover:text-white active:scale-95 transition-all disabled:opacity-40 disabled:pointer-events-none"
               >
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15" />
+                <svg
+                  className="w-3.5 h-3.5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19.5 12h-15"
+                  />
                 </svg>
               </button>
 
@@ -268,8 +288,18 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
                 onClick={() => handleStep(1)}
                 className="cursor-pointer w-8 h-8 rounded-lg bg-[#141d33] border border-slate-700/60 flex items-center justify-center text-slate-300 hover:bg-[#1a2642] hover:text-white active:scale-95 transition-all disabled:opacity-40 disabled:pointer-events-none"
               >
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                <svg
+                  className="w-3.5 h-3.5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 4.5v15m7.5-7.5h-15"
+                  />
                 </svg>
               </button>
             </div>
@@ -278,8 +308,12 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 
         {/* Error / Helper text */}
         {error ? (
-          <p id={errorId} role="alert" className="mt-2 flex items-center gap-1.5 text-xs text-red-400">
-         <IconAlertTriangle size={18}/>
+          <p
+            id={errorId}
+            role="alert"
+            className="mt-2 flex items-center gap-1.5 text-xs text-red-400"
+          >
+            <IconAlertTriangle size={18} />
             <span>{error}</span>
           </p>
         ) : helperText ? (
@@ -291,4 +325,3 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
     );
   }
 );
-

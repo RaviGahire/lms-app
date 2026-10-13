@@ -86,5 +86,5 @@ body {
   --color-white-muted: var(--white-muted, rgba(255, 255, 255, 0.05));
 
   /* ─────────────── Fonts ─────────────── */
-  --font-inter:var(--inter)
+  --font-inter: var(--inter);
 }

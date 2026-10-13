@@ -175,7 +175,7 @@ export const MasterclassesAndOutcomes = () => {
                   </div>
 
                   {/* Button */}
-                
+
                   <Button
                     key={cohort.title}
                     label={'RSVP &amp; Add to Calendar'}

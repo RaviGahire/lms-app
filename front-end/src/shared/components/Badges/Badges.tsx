@@ -21,7 +21,9 @@ type BadgeProps = {
 };
 export const Badge = ({ text, badgeStyle }: BadgeProps) => {
   return (
-    <div className={`${badgeStyle} border border-border-subtle px-4 py-1 rounded-full`}>
+    <div
+      className={`${badgeStyle} border border-border-subtle px-4 py-1 rounded-full`}
+    >
       <p>{text}</p>
     </div>
   );
@@ -39,7 +41,7 @@ type HeroBottomBadgesProps = {
 
 export const HeroBottomBadges = ({ badges }: HeroBottomBadgesProps) => {
   return (
-<div className="flex flex-row flex-wrap items-center gap-2.5">
+    <div className="flex flex-row flex-wrap items-center gap-2.5">
       {badges.map((badge, index) => (
         <Link
           key={`${badge.path}-${index}`}
@@ -52,5 +54,3 @@ export const HeroBottomBadges = ({ badges }: HeroBottomBadgesProps) => {
     </div>
   );
 };
-
-

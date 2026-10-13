@@ -13,7 +13,6 @@ export const CarouselProfileCard = ({
 }: ProfileCardProps) => {
   return (
     <div className="text-pretty relative w-64 h-102.5 shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-[#070b19] p-4 flex flex-col justify-end items-center text-center shadow-2xl select-none group transition-all duration-300 hover:border-white/20">
-      
       {/* Background Portrait Image */}
       <div className="absolute inset-0 flex items-start justify-center pt-8 ">
         <img
@@ -42,7 +41,6 @@ export const CarouselProfileCard = ({
           {achievement}
         </p>
       </div>
-
     </div>
   );
 };
