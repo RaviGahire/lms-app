@@ -1,10 +1,15 @@
+import {
+  IconCheck,
+  IconChevronDown,
+  IconChevronUp,
+} from '@tabler/icons-react';
 import React, {
   useState,
   useRef,
   useEffect,
   useId,
   KeyboardEvent,
-} from "react";
+} from 'react';
 
 export interface OptionItem {
   value: string;
@@ -35,17 +40,17 @@ export interface OptionInputProps {
  * Features a custom table icon in place of the standard dropdown arrow
  */
 export const OptionInput: React.FC<OptionInputProps> = ({
-  label = "Select Track",
+  label = 'Select Track',
   options,
   value: controlledValue,
-  defaultValue = "",
-  placeholder = "Select an option...",
+  defaultValue = '',
+  placeholder = 'Select an option...',
   error,
   helperText,
   required = false,
   disabled = false,
-  containerClassName = "",
-  className = "",
+  containerClassName = '',
+  className = '',
   onChange,
   onBlur,
 }) => {
@@ -62,7 +67,8 @@ export const OptionInput: React.FC<OptionInputProps> = ({
   const [internalValue, setInternalValue] = useState<string>(defaultValue);
   const [focusedIndex, setFocusedIndex] = useState<number>(-1);
 
-  const selectedValue = controlledValue !== undefined ? controlledValue : internalValue;
+  const selectedValue =
+    controlledValue !== undefined ? controlledValue : internalValue;
   const selectedOption = options.find((opt) => opt.value === selectedValue);
 
   // Close dropdown on outside click
@@ -79,8 +85,8 @@ export const OptionInput: React.FC<OptionInputProps> = ({
       }
     };
 
-    document.addEventListener("mousedown", handleOutsideClick);
-    return () => document.removeEventListener("mousedown", handleOutsideClick);
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
   }, [isOpen, onBlur]);
 
   // Sync focused index when opening
@@ -106,8 +112,8 @@ export const OptionInput: React.FC<OptionInputProps> = ({
     if (disabled) return;
 
     switch (e.key) {
-      case "Enter":
-      case " ":
+      case 'Enter':
+      case ' ':
         e.preventDefault();
         if (isOpen && focusedIndex >= 0 && options[focusedIndex]) {
           handleSelect(options[focusedIndex]);
@@ -115,7 +121,7 @@ export const OptionInput: React.FC<OptionInputProps> = ({
           setIsOpen(!isOpen);
         }
         break;
-      case "ArrowDown":
+      case 'ArrowDown':
         e.preventDefault();
         if (!isOpen) {
           setIsOpen(true);
@@ -123,7 +129,7 @@ export const OptionInput: React.FC<OptionInputProps> = ({
           setFocusedIndex((prev) => (prev < options.length - 1 ? prev + 1 : 0));
         }
         break;
-      case "ArrowUp":
+      case 'ArrowUp':
         e.preventDefault();
         if (!isOpen) {
           setIsOpen(true);
@@ -131,14 +137,14 @@ export const OptionInput: React.FC<OptionInputProps> = ({
           setFocusedIndex((prev) => (prev > 0 ? prev - 1 : options.length - 1));
         }
         break;
-      case "Escape":
+      case 'Escape':
         if (isOpen) {
           e.preventDefault();
           setIsOpen(false);
           triggerRef.current?.focus();
         }
         break;
-      case "Tab":
+      case 'Tab':
         if (isOpen) {
           setIsOpen(false);
         }
@@ -151,7 +157,7 @@ export const OptionInput: React.FC<OptionInputProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full flex flex-col font-sans ${containerClassName}`}
+      className={`relative w-full flex flex-col ${containerClassName}`}
     >
       {/* Label */}
       {label && (
@@ -180,17 +186,17 @@ export const OptionInput: React.FC<OptionInputProps> = ({
         onClick={() => setIsOpen((prev) => !prev)}
         onKeyDown={handleKeyDown}
         className={`
-          relative w-full h-13 px-4 py-3 rounded-xl
+          relative w-full h-13 px-4 py-3 rounded-md
           bg-[#0b1324] text-left text-base
           border transition-all duration-200 outline-none
           flex items-center justify-between gap-3
           disabled:opacity-50 disabled:cursor-not-allowed
           ${
             error
-              ? "border-red-500/80 focus:border-red-500 focus:ring-2 focus:ring-red-500/20"
+              ? 'border-red-500/80 focus:border-red-500 focus:ring-2 focus:ring-red-500/20'
               : isOpen
-              ? "border-blue-500 ring-2 ring-blue-500/20"
-              : "border-slate-800 hover:border-slate-700"
+                ? 'border-blue-500 ring-2 ring-blue-500/20'
+                : 'border-slate-800 hover:border-slate-700'
           }
           ${className}
         `}
@@ -198,7 +204,7 @@ export const OptionInput: React.FC<OptionInputProps> = ({
         {/* Selected Label Display */}
         <span
           className={`truncate block ${
-            selectedOption ? "text-white" : "text-slate-500"
+            selectedOption ? 'text-white' : 'text-slate-500'
           }`}
         >
           {selectedOption ? selectedOption.label : placeholder}
@@ -206,24 +212,12 @@ export const OptionInput: React.FC<OptionInputProps> = ({
 
         {/* Custom Table Icon in place of Arrow */}
         <div
-          className={`shrink-0 transition-colors duration-200 ${
-            isOpen ? "text-blue-400" : "text-slate-400"
+          className={`shrink-0 transition-colors duration-200 cursor-pointer ${
+            isOpen ? 'text-blue-400' : 'text-slate-400'
           }`}
           aria-hidden="true"
         >
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            viewBox="0 0 24 24"
-          >
-            {/* Table / Grid Icon */}
-            <rect x="3" y="4" width="18" height="16" rx="2.5" />
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18" />
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3 15h18" />
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9.5 4v16" />
-          </svg>
+          {isOpen ? <IconChevronUp size={20} /> : <IconChevronDown size={20} />}
         </div>
       </button>
 
@@ -234,7 +228,7 @@ export const OptionInput: React.FC<OptionInputProps> = ({
           role="listbox"
           tabIndex={-1}
           aria-labelledby={`${inputId}-label`}
-          className="absolute top-[calc(100%+8px)] left-0 w-full z-50 rounded-xl bg-[#101726] border border-slate-700/80 p-1.5 shadow-2xl backdrop-blur-xl max-h-64 overflow-y-auto focus:outline-none"
+          className="absolute top-[calc(100%+8px)] left-0 w-full z-50 rounded-md bg-[#101726] border border-slate-700/80 p-1.5 shadow-2xl backdrop-blur-xl max-h-64 overflow-y-auto focus:outline-none"
         >
           {options.length === 0 ? (
             <div className="py-3 px-4 text-xs text-slate-500 text-center">
@@ -257,12 +251,12 @@ export const OptionInput: React.FC<OptionInputProps> = ({
                     w-full px-3.5 py-2.5 rounded-lg text-sm flex items-center justify-between cursor-pointer transition-all duration-150 select-none
                     ${
                       option.disabled
-                        ? "opacity-40 cursor-not-allowed"
+                        ? 'opacity-40 cursor-not-allowed'
                         : isSelected
-                        ? "bg-[#182642] text-white"
-                        : isFocused
-                        ? "bg-[#141d33] text-slate-200"
-                        : "text-slate-300 hover:bg-[#141d33] hover:text-white"
+                          ? 'bg-[#182642] text-white'
+                          : isFocused
+                            ? 'bg-[#141d33] text-slate-200'
+                            : 'text-slate-300 hover:bg-[#141d33] hover:text-white'
                     }
                   `}
                 >
@@ -286,21 +280,7 @@ export const OptionInput: React.FC<OptionInputProps> = ({
                     )}
 
                     {/* Active Selected Checkmark */}
-                    {isSelected && (
-                      <svg
-                        className="w-4 h-4 text-blue-400 shrink-0"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.2"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="m4.5 12.75 6 6 9-13.5"
-                        />
-                      </svg>
-                    )}
+                    {isSelected && <IconCheck size={18} />}
                   </div>
                 </div>
               );
