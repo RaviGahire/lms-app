@@ -46,7 +46,7 @@ export const HeroBottomBadges = ({ badges }: HeroBottomBadgesProps) => {
         <Link
           key={`${badge.path}-${index}`}
           to={badge.path}
-          className="inline-flex items-center justify-center border border-border-subtle px-4 py-1 rounded-full text-sm hover:bg-surface transition-colors"
+          className="inline-flex items-center justify-center border border-subtle px-4 py-1 rounded-full text-sm hover:bg-surface transition-colors duration-300 ease-in"
         >
           <span>{badge.title}</span>
         </Link>

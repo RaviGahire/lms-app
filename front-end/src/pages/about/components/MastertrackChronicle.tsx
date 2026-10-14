@@ -51,17 +51,20 @@ const milestones: TimelineMilestone[] = [
 
 export const MastertrackChronicle = () => {
   return (
-    <section className="min-h-screen bg-[#070b14] py-16 px-6 flex flex-col justify-center">
-      <div className="max-w-7xl mx-auto w-full">
+    <section
+      aria-label="Master-track-chronicle"
+      className=" px-6 flex flex-col justify-center"
+    >
+      <div className="max-w-7xl mx-auto w-full text-white">
         {/* Header */}
-        <div className="mb-14 max-w-3xl">
+        <div className=" max-w-3xl mb-7">
           <span className="text-xs font-bold tracking-widest text-success-dark uppercase block mb-3">
             The Mastertrack Chronicle
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-[44px] leading-tight font-semibold text-text-secondary tracking-tight mb-4">
-            The evolution of a new learning standard
+          <h2 className="mt-2 text-3xl font-medium tracking-tight text-text-highlight sm:text-4xl lg:text-[2.65rem] leading-tight">
+            The evolution of a new learning standard.
           </h2>
-          <p className="text-sm sm:text-base text-text-muted leading-relaxed">
+          <p className="text-sm sm:text-base text-muted leading-relaxed">
             From a handful of custom containerized labs to a distributed global
             knowledge network.
           </p>
@@ -91,19 +94,19 @@ export const MastertrackChronicle = () => {
                   </div>
                 ) : (
                   <div className="mb-4">
-                    <h3 className="text-2xl lg:text-[28px] font-extrabold text-white tracking-tight">
+                    <h3 className="text-2xl lg:text-[28px] font-extrabold text-success tracking-tight">
                       {item.period}
                     </h3>
                   </div>
                 )}
 
                 {/* Subtitle / Tag */}
-                <span className="text-[11px] font-bold tracking-wider text-text-secondary uppercase block mb-4 leading-snug">
+                <span className="text-[11px] font-bold tracking-wider text-secondary uppercase block mb-4 leading-snug">
                   {item.tag}
                 </span>
 
                 {/* Description Body */}
-                <p className="text-[13px] leading-relaxed text-text-muted">
+                <p className="text-[13px] leading-relaxed text-muted">
                   {item.description}
                 </p>
               </div>
@@ -112,7 +115,7 @@ export const MastertrackChronicle = () => {
               <div className="pt-8 mt-6">
                 <span
                   className={`text-[10px] sm:text-[11px] font-bold tracking-wider uppercase block ${
-                    item.isCurrent ? 'text-success' : 'text-slate-500'
+                    item.isCurrent ? 'text-success' : 'text-muted'
                   }`}
                 >
                   {item.meta}

@@ -15,7 +15,7 @@ export const HomePage = () => {
       <Carousels />
 
       {/* Stats */}
-      <div className="text-balance mx-auto flex flex-wrap justify-center items-center gap-3 md:gap-4 xl:gap-8 border-t border-b border-border-subtle py-2 xl:py-4 ">
+      <div className="text-balance mx-auto flex flex-wrap justify-center items-center gap-3 md:gap-4 xl:gap-8 border-t border-b border-subtle py-2 xl:py-4 ">
         {/* Courses Count */}
         <LiveNumberStrip
           count={1200}

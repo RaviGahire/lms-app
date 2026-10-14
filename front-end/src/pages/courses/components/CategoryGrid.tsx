@@ -140,20 +140,20 @@ export const CategoryGrid = () => {
   return (
     <section
       aria-label="category-section"
-      className="w-full pt-6 xl:pt-14 px-4 sm:px-8 lg:px-12 text-slate-100"
+      className="w-full pt-6 xl:pt-14 px-4 sm:px-8 lg:px-12 text-white"
     >
       <div className="mx-auto max-w-7xl">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10">
           <div className="text-balance xl:text-pretty">
-            <div className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-blue-light">
+            <div className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-success">
               <IconLayoutGrid size={15} stroke={2} />
               <span>Comprehensive Disciplines</span>
             </div>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-text-highlight sm:text-4xl lg:text-[2.65rem] leading-tight">
+            <h2 className="mt-2 text-3xl font-medium tracking-tight text-text-highlight sm:text-4xl lg:text-[2.65rem] leading-tight">
               Explore by category domain
             </h2>
-            <p className="mt-3 max-w-2xl text-sm sm:text-base text-text-muted leading-relaxed">
+            <p className="mt-3 max-w-2xl text-sm sm:text-base text-muted leading-relaxed">
               Dive into 8 comprehensive disciplines with interactive sandboxes,
               verified micro-degrees, and expert-led curricula tailored for
               career acceleration.
@@ -163,9 +163,9 @@ export const CategoryGrid = () => {
           <div className="flex items-center gap-2 self-start md:self-auto text-xs sm:text-sm font-medium text-slate-300">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
             </span>
-            <span>Interactive Tracks Active</span>
+            <span className='text-muted'>Interactive Tracks Active</span>
           </div>
         </div>
 
@@ -178,7 +178,7 @@ export const CategoryGrid = () => {
             return (
               <div
                 key={cat.id}
-                className="group relative flex flex-col justify-between rounded-xl border border-slate-800/80 bg-[#0B1220]/75 p-5 transition-all duration-200 hover:border-slate-700 hover:bg-[#0E1728] hover:shadow-lg"
+                className="group relative flex flex-col justify-between rounded-xl border border-subtle bg-card/75 p-5 transition-all duration-200 hover:border-slate-700 hover:bg-app/50 hover:shadow-lg"
               >
                 {/* Header within card */}
                 <div>
@@ -190,21 +190,21 @@ export const CategoryGrid = () => {
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <span className="rounded-md border border-slate-800 bg-[#121A2A] px-2.5 py-1 text-[11px] font-medium text-slate-300">
+                      <span className="rounded-md border border-slate-800 bg-[#121A2A] px-2.5 py-1 text-[11px] font-medium text-muted">
                         {cat.coursesCount}
                       </span>
 
-                      {/* Expand/Collapse Toggle on mobile (< sm) */}
+                      {/* Toggle on mobile */}
                       <button
                         type="button"
                         onClick={() => toggleExpand(cat.id)}
                         aria-label={`Expand details for ${cat.title}`}
-                        className="flex sm:hidden h-7 w-7 items-center justify-center rounded-md border border-slate-800 bg-[#121A2A] text-slate-400 hover:text-white transition-transform"
+                        className="flex sm:hidden h-7 w-7 items-center justify-center rounded-md border border-subtle bg-card text-muted hover:text-white transition-transform"
                       >
                         <IconChevronDown
                           size={16}
                           className={`transition-transform duration-200 ${
-                            isExpanded ? 'rotate-180 text-blue-400' : ''
+                            isExpanded ? 'rotate-180 text-blue' : ''
                           }`}
                         />
                       </button>
@@ -221,7 +221,7 @@ export const CategoryGrid = () => {
                       isExpanded ? 'block mt-2' : 'hidden'
                     } sm:block sm:mt-2 transition-all duration-200`}
                   >
-                    <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-muted line-clamp-2 leading-relaxed">
                       {cat.description}
                     </p>
                   </div>
@@ -231,7 +231,7 @@ export const CategoryGrid = () => {
                 <div
                   className={`${
                     isExpanded ? 'flex' : 'hidden'
-                  } sm:flex items-center justify-between pt-5 mt-4 border-t border-slate-800/60 text-xs`}
+                  } sm:flex items-center justify-between pt-5 mt-4 border-t border-muted text-xs`}
                 >
                   <span className={`font-medium ${cat.tagColor}`}>
                     {cat.tag}
@@ -240,7 +240,7 @@ export const CategoryGrid = () => {
                   <Link
                     to={cat.id}
                     type="button"
-                    className="inline-flex items-center gap-1.5 text-slate-400 transition-colors group-hover:text-blue-300 hover:underline cursor-pointer"
+                    className="inline-flex items-center gap-1.5 text-muted transition-colors group-hover:text-primary hover:underline cursor-pointer"
                   >
                     <span>Explore Track</span>
                     <IconArrowRight

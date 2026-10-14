@@ -5,7 +5,7 @@ export const CataLogHero = () => {
   return (
     <section
       aria-label="courses-hero"
-      className="relative w-full overflow-hidden py-8 xl:py-16 px-6 sm:px-8 lg:px-10 text-text-highlight"
+      className="relative w-full overflow-hidden py-8 xl:py-16 px-6 sm:px-8 lg:px-10 text-highlight"
     >
       <div className="relative mx-auto max-w-7xl">
         {/* Top Badges */}
@@ -13,7 +13,7 @@ export const CataLogHero = () => {
           {/* Left badge */}
           <Badge
             text="1,200+ Interactive Programs"
-            badgeStyle="bg-bg-surface"
+            badgeStyle="bg-surface text-muted"
           />
         </div>
 
@@ -21,11 +21,13 @@ export const CataLogHero = () => {
         <div className="mt-8 flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-end">
           {/* Main Title & Subtitle */}
           <div className="max-w-3xl">
-            <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl lg:text-6xl xl:leading-[1.1] text-balance xl:text-pretty">
-              Explore high-impact skills <br />
-              for modern learners.
+            <h1 className="text-4xl font-medium tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-5xl lg:text-6xl leading-tight text-balance">
+              Explore high-impact skills{' '}
+              <span className="text-neutral-500 dark:text-neutral-400 inline sm:block">
+                for modern learners.
+              </span>
             </h1>
-            <p className="mt-6 max-w-2xl text-base sm:text-lg xl:leading-relaxed text-text-muted font-normal">
+            <p className="mt-6 max-w-2xl text-base sm:text-lg xl:leading-relaxed text-muted font-normal">
               From neural engineering and distributed systems to brand design
               and quantitative finance. Learn with live sandboxes, interactive
               3D simulations, and industry mentors.

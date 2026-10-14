@@ -115,7 +115,7 @@ const trustCards: TrustCardItem[] = [
 
 export const InstitutionalTrust = () => {
   return (
-    <section className="min-h-screen bg-[#070b14] py-16 px-6 sm:px-8 lg:px-12 flex flex-col justify-center text-white">
+    <section className=" px-6 sm:px-8 lg:px-12 flex flex-col justify-center text-white">
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
         {/* Heading, Context & Stats */}
         <div className="lg:col-span-6 flex flex-col justify-between">
@@ -123,11 +123,11 @@ export const InstitutionalTrust = () => {
             <span className="text-xs font-bold tracking-widest text-success-dark uppercase block mb-4">
               Institutional Trust
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-semibold tracking-tight leading-[1.15] mb-6">
+            <h2 className="mt-2 text-3xl font-medium tracking-tight text-text-highlight sm:text-4xl lg:text-[2.65rem] leading-tight">
               Endorsed by engineering leaders and accredited institutions
               worldwide
             </h2>
-            <p className="text-sm sm:text-base text-text-muted leading-relaxed mb-10 max-w-xl">
+            <p className="text-sm sm:text-base text-muted leading-relaxed mb-10 max-w-xl">
               MasterTrack certifications are recognized as gold-standard
               technical validations by top technology employers, university
               consortia, and open-source foundations. Our assessment frameworks
@@ -177,7 +177,7 @@ export const InstitutionalTrust = () => {
           </div>
         </div>
 
-        {/* Right Column: 2x2 Feature Cards Grid */}
+        {/* Feature Cards Grid */}
         <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-5">
           {trustCards.map((card) => (
             <div

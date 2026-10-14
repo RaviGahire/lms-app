@@ -282,19 +282,19 @@ export const CuratedPathways: React.FC = () => {
   };
 
   return (
-    <section className="w-full py-14 px-4 sm:px-8 lg:px-12 text-slate-100">
+    <section className="w-full pt-14 px-4 sm:px-8 lg:px-12 text-slate-100">
       <div className="mx-auto max-w-7xl">
         {/* Top Header & Tab Controls */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-10">
           <div>
-            <div className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-blue-400">
+            <div className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-success">
               <IconTrendingUp size={15} stroke={2.2} />
               <span>Curated Pathways</span>
             </div>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-text-highlight sm:text-4xl lg:text-[2.65rem] leading-tight text-balance xl:text-pretty">
-              Trending Tracks &amp; High-Velocity Learning
+            <h2 className="mt-2 text-3xl font-medium tracking-tight text-text-highlight sm:text-4xl lg:text-[2.65rem] leading-tight">
+              Trending tracks &amp; high-velocity learning
             </h2>
-            <p className="mt-3 max-w-2xl text-sm sm:text-base text-slate-400 leading-relaxed text-balance">
+            <p className="mt-3 max-w-2xl text-sm sm:text-base text-muted leading-relaxed text-balance">
               Filter through the industry&apos;s most rigorous hands-on
               technical programs updated weekly.
             </p>
@@ -302,7 +302,7 @@ export const CuratedPathways: React.FC = () => {
 
           {/* Navigation Tabs */}
           <div
-            className="flex items-center gap-2 overflow-x-auto rounded-xl border border-border-subtle bg-bg-secondary p-1.5 backdrop-blur-md"
+            className="flex items-center gap-2 overflow-x-auto rounded-xl border border-subtle bg-card p-1.5 backdrop-blur-md"
             style={{ scrollbarWidth: 'none' }}
           >
             {(Object.keys(TAB_DATA) as TabKey[]).map((tabKey) => {
@@ -316,8 +316,8 @@ export const CuratedPathways: React.FC = () => {
                   onClick={() => setActiveTab(tabKey)}
                   className={`cursor-pointer rounded-lg px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap ${
                     isActive
-                      ? 'bg-bg-surface text-white shadow-md font-semibold'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                      ? 'bg-success/30  shadow-md font-semibold'
+                      : 'text-muted hover:text-blue-light hover:bg-card/50'
                   }`}
                 />
               );
@@ -330,12 +330,13 @@ export const CuratedPathways: React.FC = () => {
           {TAB_DATA[activeTab].courses.map((course) => (
             <div
               key={course.id}
-              className="flex flex-col justify-between rounded-2xl border border-slate-800/80 bg-[#0B1220]/80 p-6 transition-all duration-200 hover:border-slate-700 hover:bg-[#0E1728] hover:shadow-xl"
+              className="flex flex-col justify-between rounded-2xl border border-muted/40
+               bg-app p-6 transition-all duration-200 hover:border-slate-700 hover:bg-card/50 hover:shadow-xl"
             >
               <div>
                 {/* Meta pills header */}
                 <div className="flex items-center justify-between gap-2">
-                  <span className="rounded-lg border border-slate-800/80 bg-[#121A2A] px-3 py-1 text-xs text-slate-300 font-medium">
+                  <span className="rounded-lg border border-muted/40 bg-app/50 px-3 py-1 text-xs text-muted font-medium">
                     {course.durationCategory}
                   </span>
                   {renderBadge(course.badge)}
@@ -347,7 +348,7 @@ export const CuratedPathways: React.FC = () => {
                 </h3>
 
                 {/* Card Description */}
-                <p className="mt-3 text-xs sm:text-sm text-slate-400 leading-relaxed line-clamp-3">
+                <p className="mt-3 text-xs sm:text-sm text-muted leading-relaxed line-clamp-3">
                   {course.description}
                 </p>
 
@@ -356,7 +357,7 @@ export const CuratedPathways: React.FC = () => {
                   {course.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-md border border-slate-800 bg-[#070D18] px-2.5 py-1 text-[11px] font-medium text-slate-400"
+                      className="rounded-md border border-subtle bg-[#070D18] px-2.5 py-1 text-[11px] font-medium text-slate-400"
                     >
                       {tag}
                     </span>
@@ -405,4 +406,3 @@ export const CuratedPathways: React.FC = () => {
     </section>
   );
 };
-<IconArrowRight size={13} stroke={2} />;
