@@ -144,6 +144,8 @@ export const InquiryForm = () => {
               <TextInput
                 label="Name"
                 type="text"
+                name="fullName"
+                value={formData.fullName}
                 placeholder="e.g. Jonh Doe"
                 error={error}
                 required
@@ -155,6 +157,8 @@ export const InquiryForm = () => {
               <TextInput
                 label="Email"
                 type="email"
+                name="email"
+                value={formData.workEmail}
                 placeholder="e.g. example@gmail.com"
                 error={error}
                 required
@@ -162,16 +166,22 @@ export const InquiryForm = () => {
             </div>
           </div>
 
-          {/* 2-Column Inputs: Organization & Role */}
+          {/* Organization & Role */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <TextInput
               label="Organization / University"
+              type="text"
+              name="organization"
+              value={formData.organization}
               placeholder="e.g. SPPU niversity"
               error={error}
             />
-
             <div>
               <TextInput
+              id='role'
+                type="text"
+                name="role"
+                value={formData.role}
                 label="Role / Title"
                 placeholder="Staff Software Engineer / VP Eng"
                 error={error}
@@ -199,6 +209,7 @@ export const InquiryForm = () => {
               onChange={handleChange}
               label="Message"
               error={error}
+              required
             />
           </div>
 
@@ -224,12 +235,15 @@ export const InquiryForm = () => {
           </div>
 
           {/* Submit Button */}
-          <Button
-            size="md"
-            type="submit"
-            className="w-full"
-            label="Send Message"
-          />
+          <div className="flex justify-center items-center">
+            <Button
+              size="md"
+              type="submit"
+              variant="danger"
+              className="max-w-md w-full"
+              label="Send Message"
+            />
+          </div>
         </form>
 
         {/* Security & Compliance Footer */}
@@ -253,7 +267,6 @@ export const InquiryForm = () => {
           </div>
 
           <span className="text-slate-700">·</span>
-
           <div className="flex items-center gap-1.5">
             <svg
               className="w-3.5 h-3.5 text-slate-400"
