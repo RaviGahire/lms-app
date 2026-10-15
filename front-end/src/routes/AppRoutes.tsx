@@ -4,19 +4,26 @@ import { HomePage } from '../pages/home';
 import { CoursesPage } from '../pages/courses';
 import { AboutPage } from '../pages/about';
 import { ContactPage } from '../pages/contact';
+import { AuthRoutes } from './AuthRoutes';
+
 
 export const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        {/* Routes inside the shared MainLayout */}
+
+        {/* Main site pages with shared MainLayout */}
         <Route element={<MainLayout />}>
-          {/* Home-Page */}
+          {/* Main Pages */}
           <Route element={<HomePage />} path="/" />
           <Route element={<CoursesPage />} path="/courses" />
           <Route element={<AboutPage />} path="/about" />
           <Route element={<ContactPage />} path="/contact" />
         </Route>
+
+        {/* Auth Routes */}
+        <Route element={<AuthRoutes />}  path="/auth/*" />
+
         {/* 404 Fallback */}
         <Route path="*" element={<div>404 - Page Not Found</div>} />
       </Routes>

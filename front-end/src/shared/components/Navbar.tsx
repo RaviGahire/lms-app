@@ -30,7 +30,7 @@ export const Navbar = () => {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <header className="relative w-full bg-card text-highlight border-b borde-subtle/40 z-50">
+    <header className="relative w-full bg-card text-highlight z-50">
       <nav className="flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16 text-[14px]">
         {/*Brand Logo & Version Badge */}
         <div className="flex items-center gap-3 sm:gap-4">
@@ -82,14 +82,14 @@ export const Navbar = () => {
             /* Logged Out View */
             <>
               <Link
-                to="/login"
+                to="/auth/sign-in"
                 className="capitalize text-primary hover:text-secondary transition-colors"
               >
                 Log in
               </Link>
               {/* Signin btn */}
               <Link
-                to="/signin"
+                to="/auth/sign-up"
                 className="group flex items-center gap-1.5 border border-subtle hover:border-muted px-3.5 py-1.5 rounded-md text-sm font-semibold capitalize transition-all hover:bg-surface"
               >
                 <span>Start free</span>
@@ -159,7 +159,7 @@ export const Navbar = () => {
               /* Logged Out View */
               <>
                 <Link
-                  to="/login"
+                  to="/auth/sign-in"
                   onClick={closeMenu}
                   className="w-full flex items-center justify-center py-2 rounded-md text-sm font-medium capitalize text-primary hover:text-white transition-colors"
                 >
@@ -167,7 +167,7 @@ export const Navbar = () => {
                 </Link>
 
                 <Link
-                  to="/signin"
+                  to="/auth/sign-up"
                   onClick={closeMenu}
                   className="group w-full flex items-center justify-center gap-2 border border-subtle hover:border-white py-2.5 rounded-md text-sm font-bold capitalize transition-all hover:bg-surface"
                 >
