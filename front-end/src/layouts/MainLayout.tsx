@@ -8,7 +8,7 @@ export const MainLayout = () => {
       {/* Navigation bar */}
       <Navbar />
       {/* main container all content rendered here */}
-      <main className="bg-bg-primary">
+      <main className="bg-app">
         <Outlet />
       </main>
       <Footer />

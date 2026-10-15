@@ -30,8 +30,8 @@ export const Navbar = () => {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <header className="relative w-full bg-bg-secondary text-text-highlight border-b border-border-subtle/40 z-50">
-      <nav className="flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+    <header className="relative w-full bg-card text-highlight border-b borde-subtle/40 z-50">
+      <nav className="flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16 text-[14px]">
         {/*Brand Logo & Version Badge */}
         <div className="flex items-center gap-3 sm:gap-4">
           <Link
@@ -55,10 +55,10 @@ export const Navbar = () => {
               to={item.path}
               end={item.path === '/'}
               className={({ isActive }) =>
-                `text-sm lg:text-base leading-6 px-3 lg:px-4 py-0.5 rounded-md transition-colors ${
+                `leading-6 px-3 lg:px-4 py-0.5 rounded-md transition-colors ${
                   isActive
-                    ? 'border border-border-subtle bg-bg-surface text-text-primary font-medium'
-                    : 'text-text-primary hover:text-text-secondary hover:bg-bg-surface/50 font-normal'
+                    ? 'border border-subtle bg-surface text-primary font-medium'
+                    : 'text-primary hover:text-secondary hover:bg-surface/50 font-normal'
                 }`
               }
             >
@@ -68,13 +68,13 @@ export const Navbar = () => {
         </div>
 
         {/* User Profile and Login btns */}
-        <div className="hidden md:flex items-center gap-3 lg:gap-4">
+        <div className="hidden md:flex items-center gap-3 lg:gap-4 text-sm">
           {isUserLogin ? (
             /* Logged In View */
             <Link
               to="/profile"
               aria-label="User Profile"
-              className="flex items-center gap-2 p-1.5 rounded-full text-text-primary hover:text-text-secondary hover:bg-bg-surface/50 transition-colors"
+              className="flex items-center gap-2 p-1.5 rounded-full text-primary hover:text-secondary hover:bg-surface/50 transition-colors"
             >
               <IconUser size={22} />
             </Link>
@@ -83,14 +83,14 @@ export const Navbar = () => {
             <>
               <Link
                 to="/login"
-                className="text-sm lg:text-base capitalize text-text-primary hover:text-text-secondary transition-colors"
+                className="capitalize text-primary hover:text-secondary transition-colors"
               >
                 Log in
               </Link>
               {/* Signin btn */}
               <Link
                 to="/signin"
-                className="group flex items-center gap-1.5 border border-border-subtle hover:border-white-muted px-3.5 py-1.5 rounded-md text-sm font-semibold capitalize transition-all hover:bg-bg-surface"
+                className="group flex items-center gap-1.5 border border-subtle hover:border-muted px-3.5 py-1.5 rounded-md text-sm font-semibold capitalize transition-all hover:bg-surface"
               >
                 <span>Start free</span>
                 <IconArrowRight
@@ -104,7 +104,7 @@ export const Navbar = () => {
 
         {/* ==========Mobile============== */}
         {/* Mobile Menu Button */}
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-2 md:hidden text-sm">
           <div className="sm:hidden">
             <VersionBadge />
           </div>
@@ -113,7 +113,7 @@ export const Navbar = () => {
             onClick={toggleMenu}
             aria-label="Toggle navigation menu"
             aria-expanded={isOpen}
-            className="p-2 rounded-md text-text-primary hover:text-text-secondary hover:bg-bg-surface focus:outline-none focus:ring-2 focus:ring-inset focus:ring-text-muted"
+            className="p-2 rounded-md text-primary hover:text-secondary hover:bg-surface focus:outline-none focus:ring-2 focus:ring-inset focus:ring-muted"
           >
             {isOpen ? <IconX size={24} /> : <IconMenu2 size={24} />}
           </button>
@@ -122,7 +122,7 @@ export const Navbar = () => {
 
       {/* Mobile & Tablet Dropdown */}
       {isOpen && (
-        <div className="absolute left-0 right-0 md:hidden border-t border-border-subtle bg-bg-secondary px-4 pt-3 pb-6 space-y-4">
+        <div className="absolute left-0 right-0 md:hidden border-t border-subtle bg-card px-4 pt-3 pb-6 space-y-4">
           {/* Navigation Links */}
           <div className="flex flex-col space-y-1">
             {NAV_TABS.map((item) => (
@@ -134,8 +134,8 @@ export const Navbar = () => {
                 className={({ isActive }) =>
                   `px-3 py-2 rounded-md text-base font-medium transition-colors ${
                     isActive
-                      ? 'border border-border-subtle bg-bg-surface text-text-secondary'
-                      : 'text-text-primary hover:text-text-secondary hover:bg-bg-surface/50'
+                      ? 'border border-subtle bg-surface text-secondary'
+                      : 'text-primary hover:text-secondary hover:bg-surface/50'
                   }`
                 }
               >
@@ -144,13 +144,13 @@ export const Navbar = () => {
             ))}
           </div>
 
-          <div className="pt-4 border-t border-border-subtle flex flex-col gap-3">
+          <div className="pt-4 border-t border-subtle flex flex-col gap-3">
             {isUserLogin ? (
               /* Logged In View */
               <Link
                 to="/profile"
                 onClick={closeMenu}
-                className="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm font-medium text-text-primary hover:text-text-secondary hover:bg-bg-surface/50 transition-colors"
+                className="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm font-medium text-primary hover:text-secondary hover:bg-surface/50 transition-colors"
               >
                 <IconUser size={20} />
                 <span>My Profile</span>
@@ -161,7 +161,7 @@ export const Navbar = () => {
                 <Link
                   to="/login"
                   onClick={closeMenu}
-                  className="w-full flex items-center justify-center py-2 rounded-md text-sm font-medium capitalize text-text-primary hover:text-white transition-colors"
+                  className="w-full flex items-center justify-center py-2 rounded-md text-sm font-medium capitalize text-primary hover:text-white transition-colors"
                 >
                   Log in
                 </Link>
@@ -169,7 +169,7 @@ export const Navbar = () => {
                 <Link
                   to="/signin"
                   onClick={closeMenu}
-                  className="group w-full flex items-center justify-center gap-2 border border-border-subtle hover:border-white py-2.5 rounded-md text-sm font-bold capitalize transition-all hover:bg-bg-surface"
+                  className="group w-full flex items-center justify-center gap-2 border border-subtle hover:border-white py-2.5 rounded-md text-sm font-bold capitalize transition-all hover:bg-surface"
                 >
                   <span>Start free</span>
                   <IconArrowRight

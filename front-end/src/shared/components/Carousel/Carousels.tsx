@@ -16,10 +16,10 @@ export const Carousels = () => {
   );
 
   return (
-    <section className="w-full py-3 md:py-8 xl:py-16 bg-[#030712] text-white text-balance">
+    <section className="w-full py-3 md:py-8 xl:pb-16 text-balance">
       {/* Carousel Heading */}
       <div className="max-w-4xl mx-auto px-4 text-center">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-highlight tracking-tight">
           Learn from the best in the industry
         </h2>
       </div>

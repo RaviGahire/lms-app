@@ -134,14 +134,14 @@ const deskCards: DeskCard[] = [
 
 export const ContactDeskCard = () => {
   return (
-    <section className="bg-[#070b14]  px-6  flex flex-col justify-center font-sans antialiased text-white selection:bg-emerald-500 selection:text-white">
+    <section className="px-6  flex flex-col justify-center font-sans antialiased text-white">
       <div className="max-w-7xl mx-auto w-full">
-        {/* 3 Cards Responsive Grid */}
+        {/* Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
           {deskCards.map((card) => (
             <div
               key={card.id}
-              className="bg-[#101726] border border-slate-800/80 rounded-2xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-200 hover:border-slate-700 shadow-xl shadow-black/30"
+              className="bg-card border border-subtle rounded-2xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-200 hover:border-muted shadow-xl shadow-black/30"
             >
               <div>
                 {/* Header: Icon & Top-Right Pill Badge */}
@@ -162,7 +162,7 @@ export const ContactDeskCard = () => {
                   >
                     <span
                       className={`h-1.5 w-1.5 rounded-full ${
-                        card.badge.dotColor || 'bg-slate-400'
+                        card.badge.dotColor || 'bg-subtle'
                       }`}
                     />
                     <span>{card.badge.text}</span>
@@ -175,22 +175,22 @@ export const ContactDeskCard = () => {
                 </h3>
 
                 {/* Description */}
-                <p className="text-[13px] sm:text-sm leading-relaxed text-[#8f9eb3] mb-8 min-h-18">
+                <p className="text-[13px] sm:text-sm leading-relaxed text-muted mb-8">
                   {card.description}
                 </p>
 
-                {/* Middle SLA & Direct Mailbox Box */}
-                <div className="rounded-xl bg-[#0b1324] border border-slate-800/90 p-4 mb-8">
+                {/* Middle SLA Mailbox Box */}
+                <div className="rounded-xl bg-app border border-subtle p-4 mb-8">
                   {/* SLA Header Row */}
                   <div className="flex items-center justify-between text-[11px] font-bold tracking-wider uppercase mb-2">
-                    <span className="text-slate-500">{card.slaLabel}</span>
-                    <span className="text-slate-300 font-mono font-medium lowercase">
+                    <span className="text-muted">{card.slaLabel}</span>
+                    <span className="text-success font-mono font-medium lowercase">
                       {card.slaValue}
                     </span>
                   </div>
 
                   {/* Mailbox Label */}
-                  <div className="text-[10px] font-bold tracking-wider uppercase text-slate-500 mb-1">
+                  <div className="text-[10px] font-bold tracking-wider uppercase text-blue-light mb-1">
                     DIRECT MAILBOX
                   </div>
 
@@ -198,7 +198,7 @@ export const ContactDeskCard = () => {
                   <a
                     href={`mailto:${card.email}`}
                     className={`inline-flex items-center gap-1.5 text-sm font-mono font-medium transition-opacity hover:opacity-80 ${
-                      card.emailHighlight ? 'text-[#10b981]' : 'text-slate-100'
+                      card.emailHighlight ? 'text-success' : 'text-muted'
                     }`}
                   >
                     <span>{card.email}</span>
@@ -212,7 +212,7 @@ export const ContactDeskCard = () => {
                 {/* Action Link */}
                 <a
                   href={card.linkHref}
-                  className="inline-flex items-center gap-1 text-slate-200 hover:text-white transition-colors group"
+                  className="inline-flex items-center gap-1 text-muted hover:text-white transition-colors group"
                 >
                   <span>{card.linkText}</span>
                   <span className="group-hover:translate-x-0.5 transition-transform">
@@ -224,7 +224,7 @@ export const ContactDeskCard = () => {
                 <div className="flex items-center gap-1.5 text-slate-400 font-medium">
                   <span
                     className={`h-1.5 w-1.5 rounded-full ${
-                      card.statusDotColor || 'bg-slate-400'
+                      card.statusDotColor || 'bg-subtle'
                     }`}
                   />
                   <span>{card.statusText}</span>

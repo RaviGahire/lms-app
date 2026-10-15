@@ -37,7 +37,7 @@ export const CourseFilterBar = ({
 
   return (
     <div className="px-4 lg:px-10">
-      <div className="w-full mx-auto max-w-7xl rounded-2xl border border-slate-800/80 bg-bg-secondary p-2 sm:p-5 shadow-2xl backdrop-blur-md">
+      <div className="w-full mx-auto max-w-7xl rounded-2xl border border-muted/40 bg-card/50 p-2 sm:p-5 shadow-2xl backdrop-blur-md">
         {/* Search Input Box */}
         <form
           onSubmit={handleSearchSubmit}
@@ -83,7 +83,7 @@ export const CourseFilterBar = ({
                   size="sm"
                   variant="outline"
                   onClick={() => handleCategoryClick(category.id)}
-                  className={`${isSelected ? 'bg-bg-surface text-white shadow-sm font-semibold' : 'text-text-muted'}`}
+                  className={`${isSelected ? 'bg-success/40 text-white shadow-sm font-semibold' : 'text-muted'}`}
                 />
               );
             })}

@@ -5,6 +5,7 @@ import {
   TextAreaInput,
   TextInput,
 } from '../../../shared/components/Form';
+import { IconAlertHexagon, IconIndentDecrease } from '@tabler/icons-react';
 
 const subjects = [
   'Enterprise Training',
@@ -99,14 +100,14 @@ export const InquiryForm = () => {
             <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-white mb-2">
               Send an inquiry
             </h2>
-            <p className="text-sm text-text-muted">
+            <p className="text-sm text-muted">
               Our engineering operations desk handles requests directly.
             </p>
           </div>
 
           {/* Response SLA Badge */}
-          <div className="self-start inline-flex items-center gap-2 rounded-xl border border-slate-800/90 bg-[#0a1220] px-3.5 py-2 text-xs font-mono text-[#10b981]">
-            <span className="h-2 w-2 rounded-full bg-[#10b981] animate-pulse" />
+          <div className="self-start inline-flex items-center gap-2 rounded-xl border border-subtle px-3.5 py-2 text-xs font-mono text-success">
+            <span className="h-2 w-2 rounded-full bg-success animate-pulse" />
             <span>Avg Response: ~2.5 hrs</span>
           </div>
         </div>
@@ -114,8 +115,10 @@ export const InquiryForm = () => {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Inquiry Subject Selection */}
           <div>
-            <label className="block text-xs font-bold tracking-wider uppercase text-yellow-400 mb-3">
-              SELECT INQUIRY SUBJECT
+            <label className=" flex justify-start items-center gap-2 text-xs font-bold tracking-wider uppercase text-muted mb-3">
+                <IconAlertHexagon size={18} className='text-red-400 animate-pulse'  />
+             <span> SELECT INQUIRY SUBJECT</span>
+            
             </label>
             <div className="flex flex-wrap gap-2">
               {subjects.map((subject) => {
@@ -144,6 +147,8 @@ export const InquiryForm = () => {
               <TextInput
                 label="Name"
                 type="text"
+                name="fullName"
+                value={formData.fullName}
                 placeholder="e.g. Jonh Doe"
                 error={error}
                 required
@@ -155,6 +160,8 @@ export const InquiryForm = () => {
               <TextInput
                 label="Email"
                 type="email"
+                name="email"
+                value={formData.workEmail}
                 placeholder="e.g. example@gmail.com"
                 error={error}
                 required
@@ -162,16 +169,22 @@ export const InquiryForm = () => {
             </div>
           </div>
 
-          {/* 2-Column Inputs: Organization & Role */}
+          {/* Organization & Role */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <TextInput
               label="Organization / University"
+              type="text"
+              name="organization"
+              value={formData.organization}
               placeholder="e.g. SPPU niversity"
               error={error}
             />
-
             <div>
               <TextInput
+              id='role'
+                type="text"
+                name="role"
+                value={formData.role}
                 label="Role / Title"
                 placeholder="Staff Software Engineer / VP Eng"
                 error={error}
@@ -199,21 +212,22 @@ export const InquiryForm = () => {
               onChange={handleChange}
               label="Message"
               error={error}
+              required
             />
           </div>
 
           {/* Checkbox Notice */}
-          <div className="flex items-start gap-3 pt-1">
+          <div className="flex items-center justify-start gap-3 pt-1">
             <input
               id="compliance-checkbox"
               type="checkbox"
               checked={sendCompliance}
               onChange={(e) => setSendCompliance(e.target.checked)}
-              className="mt-1 h-4 w-4 rounded border-slate-700 bg-[#09101d] text-blue-500 focus:ring-0 focus:ring-offset-0 cursor-pointer accent-blue-500"
+              className="mt-1 size-4 rounded border-slate-700  text-blue focus:ring-0 focus:ring-offset-0 cursor-pointer accent-blue-500"
             />
             <label
               htmlFor="compliance-checkbox"
-              className="text-xs text-slate-300 leading-relaxed cursor-pointer select-none"
+              className="text-xs text-muted leading-relaxed cursor-pointer select-none"
             >
               Send me a copy of the{' '}
               <strong className="font-semibold text-white">
@@ -224,12 +238,15 @@ export const InquiryForm = () => {
           </div>
 
           {/* Submit Button */}
-          <Button
-            size="md"
-            type="submit"
-            className="w-full"
-            label="Send Message"
-          />
+          <div className="flex justify-center items-center">
+            <Button
+              size="md"
+              type="submit"
+              variant="danger"
+              className="max-w-md w-full"
+              label="Send Message"
+            />
+          </div>
         </form>
 
         {/* Security & Compliance Footer */}
@@ -253,7 +270,6 @@ export const InquiryForm = () => {
           </div>
 
           <span className="text-slate-700">·</span>
-
           <div className="flex items-center gap-1.5">
             <svg
               className="w-3.5 h-3.5 text-slate-400"

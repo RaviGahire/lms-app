@@ -12,20 +12,19 @@ export const AboutHero = () => {
         {/* Pill Badge */}
         <Badge
           text="About Mastertrack. our mission & origin "
-          badgeStyle="max-w-fit text-text-secondary text-sm sm:text-base"
+          badgeStyle="max-w-fit text-muted text-sm sm:text-sm"
         />
 
         {/* Heading */}
-        <h1 className="mt-8 text-4xl sm:text-6xl md:text-[60px] font-semibold tracking-tight leading-[1.08] text-text-highlight text-balance">
+        <h1 className="text-4xl font-medium tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-5xl lg:text-6xl leading-tight text-balance">
           Accelerating human mastery
-          <br />
-          through frictionless,
-          <br />
-          hands-on learning.
+          <span className="text-neutral-500 dark:text-neutral-400 inline sm:block">
+            hands-on learning.
+          </span>
         </h1>
 
         {/* Narrative */}
-        <p className="mt-7 max-w-2xl text-base sm:text-lg leading-relaxed text-text-secondary">
+        <p className="mt-7 max-w-2xl text-base sm:text-lg leading-relaxed text-muted">
           MasterTrack was founded on a singular conviction: passive video
           watching fails modern learners...
         </p>

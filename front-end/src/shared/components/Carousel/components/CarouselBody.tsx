@@ -22,20 +22,20 @@ export const CarouselBody = ({ items }: CarouselBodyProps) => {
 
   if (items.length === 0) {
     return (
-      <div className="py-16 text-center text-slate-400 text-sm">
+      <div className="py-16 text-center text-subtle text-sm">
         No instructors found in this category.
       </div>
     );
   }
 
   return (
-    <div className="relative w-full max-w-7xl mx-auto px-4 group/carousel">
+    <div className="relative w-full max-w-7xl mx-auto px-4">
       {/* Left Scroll Button */}
       <button
         type="button"
         onClick={() => scroll('left')}
         aria-label="Previous Slide"
-        className="cursor-pointer absolute left-2 top-1/2 -translate-y-1/2 z-20 hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-black/60 border border-white/10 text-white backdrop-blur-sm transition-all hover:bg-black/90 active:scale-95"
+        className="cursor-pointer absolute left-2 top-1/2 -translate-y-1/2 z-20 hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-app/50 border border-subtle/50 text-white backdrop-blur-sm transition-all hover:bg-app/30 active:scale-95"
       >
         <IconChevronLeft size={20} />
       </button>
@@ -43,7 +43,7 @@ export const CarouselBody = ({ items }: CarouselBodyProps) => {
       {/* Horizontal Scroll Track */}
       <div
         ref={scrollContainerRef}
-        className="flex items-center gap-4 overflow-x-auto scroll-smooth py-6 px-2 no-scrollbar"
+        className="flex items-center gap-4 overflow-x-auto scroll-smooth py-6 px-2"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {items.map((item) => (
@@ -62,7 +62,7 @@ export const CarouselBody = ({ items }: CarouselBodyProps) => {
         type="button"
         onClick={() => scroll('right')}
         aria-label="Next Slide"
-        className="cursor-pointer absolute right-2 top-1/2 -translate-y-1/2 z-20 hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-bg-secondary border border-border/50 text-text-secondary backdrop-blur-sm transition-colors hover:bg-bg-primary active:scale-95"
+        className="cursor-pointer absolute right-2 top-1/2 -translate-y-1/2 z-20 hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-app/50 border border-subtle/50 text-secondary backdrop-blur-sm transition-colors hover:bg-bg-primary active:scale-95"
       >
         <IconChevronRight size={20} />
       </button>

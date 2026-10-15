@@ -1,3 +1,4 @@
+import { IconCheck } from '@tabler/icons-react';
 import React from 'react';
 
 interface PillarItem {
@@ -88,16 +89,17 @@ const pillars: PillarItem[] = [
 
 export const LearningPhilosophy = () => {
   return (
-    <section className="min-h-screen  py-16 px-6 flex flex-col justify-center">
+    <section className="min-h-screen  py-16 px-6 flex flex-col justify-center text-white">
       <div className="max-w-7xl mx-auto w-full">
         {/* Header */}
         <div className="mb-12">
           <span className="text-xs font-semibold tracking-widest text-success-dark uppercase block mb-3">
             Pedagogical Philosophy
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-text-secondary tracking-tight">
-            Built for how engineers actually learn
-          </h2>
+          
+          <h2 className="mt-2 text-3xl font-medium tracking-tight text-text-highlight sm:text-4xl lg:text-[2.65rem] leading-tight">
+              Built for how engineers actually learn
+            </h2>
         </div>
 
         {/* Grid */}
@@ -105,7 +107,7 @@ export const LearningPhilosophy = () => {
           {pillars.map((pillar) => (
             <div
               key={pillar.id}
-              className="bg-bg-secondary border border-border-subtle rounded-2xl p-4 xl:p-8 flex flex-col justify-between transition-all duration-200 hover:border-border"
+              className="bg-bg-secondary border border-subtle rounded-2xl p-4 xl:p-8 flex flex-col justify-between transition-all duration-200 hover:border-border"
             >
               <div>
                 {/* Icon */}
@@ -122,19 +124,19 @@ export const LearningPhilosophy = () => {
                 {/* Pillar Tag */}
                 <span
                   className={`text-xs font-bold uppercase tracking-wider block mb-2 ${
-                    pillar.highlighted ? 'text-[#10b981]' : 'text-slate-400'
+                    pillar.highlighted ? 'text-success' : 'text-muted'
                   }`}
                 >
                   {pillar.tag}
                 </span>
 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-white mb-4 tracking-tight leading-snug">
+                <h3 className="text-xl font-bold text-highlight mb-4 tracking-tight leading-snug">
                   {pillar.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm leading-relaxed text-text-muted">
+                <p className="text-sm leading-relaxed text-muted">
                   {pillar.description}
                 </p>
               </div>
@@ -142,23 +144,10 @@ export const LearningPhilosophy = () => {
               {/* Card Footer Check */}
               <div
                 className={`pt-8 mt-6 flex items-center gap-2.5 text-xs font-medium ${
-                  pillar.highlighted ? 'text-[#10b981]' : 'text-slate-400'
+                  pillar.highlighted ? 'text-success' : 'text-muted'
                 }`}
               >
-                <svg
-                  className="w-4 h-4 shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <circle cx="12" cy="12" r="9" />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m8.5 12 2.5 2.5 5-5"
-                  />
-                </svg>
+               <IconCheck size={14}/>
                 <span>{pillar.footerText}</span>
               </div>
             </div>

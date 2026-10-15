@@ -11,34 +11,34 @@
 
 :root {
   /* ─────────────── Text ─────────────── */
-  --text-primary: #e7e9eb;
-  --text-muted: #878e99;
-  --text-secondary: #c2c6d6;
-  --text-highlight: #dae2fd;
+  --text-primary: oklch(0.933 0.003 247.86);
+  --text-muted: oklch(0.645 0.018 259.421);
+  --text-secondary: oklch(0.828 0.023 274.683);
+  --text-highlight: oklch(0.915 0.038 272.524);
 
   /* ─────────────── Backgrounds ─────────────── */
-  --bg-primary: #0d0e11;
-  --bg-secondary: #0b1326;
-  --bg-surface: #2b2f35;
+  --bg-primary: oklch(0.164 0.007 270.998);
+  --bg-secondary: oklch(0.19 0.041 265.486);
+  --bg-surface: oklch(0.304 0.012 258.371);
 
   /* ─────────────── Borders / Dividers ─────────────── */
-  --border: #373a42;
-  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border: oklch(0.349 0.015 269.27);
+  --border-subtle: oklch(100% 0.00011 271.152 / 0.1);
 
   /* ─────────────── Blue ─────────────── */
-  --blue: #002e6a;
-  --blue-light: #adc6ff;
-  --blue-dark: #171f33;
-  --blue-surface: #222a3d;
+  --blue: oklch(0.314 0.115 257.729);
+  --blue-light: oklch(0.828 0.085 266.166);
+  --blue-dark: oklch(0.242 0.04 266.81);
+  --blue-surface: oklch(0.287 0.037 266.523);
 
   /* ─────────────── Green ─────────────── */
-  --success: #4edea3;
-  --success-dark: #00bc7b;
+  --success: oklch(0.809 0.15 162.305);
+  --success-dark: oklch(0.701 0.159 159.717);
 
   /* ─────────────── White / Overlays ─────────────── */
-  --white: #ffffff;
-  --white-subtle: rgba(255, 255, 255, 0.02);
-  --white-muted: rgba(255, 255, 255, 0.05);
+  --white: oklch(1 0 0);
+  --white-subtle: oklch(100% 0.00011 271.152 / 0.02);
+  --white-muted: oklch(100% 0.00011 271.152 / 0.05);
 
   /* ─────────────── Font ─────────────── */
   --inter: 'Inter', sans-serif;
@@ -56,34 +56,34 @@ body {
 
 @theme {
   /* ─────────────── Text ─────────────── */
-  --color-text-primary: var(--text-primary, #e7e9eb);
-  --color-text-secondary: var(--text-secondary, #c2c6d6);
-  --color-text-muted: var(--text-muted, #878e99);
-  --color-text-highlight: var(--text-highlight, #dae2fd);
+  --color-primary: var(--text-primary, #e7e9eb);
+  --color-secondary: var(--text-secondary, #c2c6d6);
+  --color-muted: var(--text-muted, #878e99);
+  --color-highlight: var(--text-highlight, #dae2fd);
 
   /* ─────────────── Backgrounds ─────────────── */
-  --color-bg-primary: var(--bg-primary, #0d0e11);
-  --color-bg-secondary: var(--bg-secondary, #0b1326);
-  --color-bg-surface: var(----bg-surface, #2b2f35);
+  --color-app: var(--bg-primary, #0d0e11);
+  --color-card: var(--bg-secondary, #0b1326);
+  --color-surface: var(--bg-surface, #2b2f35);
 
   /* ─────────────── Borders / Dividers ─────────────── */
-  --color-border: var(--border, #373a42);
-  --color-border-subtle: var(--border-subtle, rgba(255, 255, 255, 0.1));
+  --color-border: var(--border);
+  --color-subtle: var(--border-subtle, rgba(255, 255, 255, 0.1));
 
   /* ─────────────── Blue ─────────────── */
-  --color-blue: var(--blue, #002e6a);
-  --color-blue-light: var(--blue-light, #adc6ff);
-  --color-blue-dark: var(--blue-dark, #171f33);
-  --color-blue-surface: var(--blue-surface, #222a3d);
+  --color-blue: var(--blue);
+  --color-blue-light: var(--blue-light);
+  --color-blue-dark: var(--blue-dark);
+  --color-blue-surface: var(--blue-surface);
 
   /* ─────────────── Green ─────────────── */
   --color-success: var(--success, #4edea3);
   --color-success-dark: var(--success-dark, #00bc7b);
 
   /* ─────────────── White / Overlays ─────────────── */
-  --color-white: var(--white, #ffffff);
-  --color-white-subtle: var(--white-subtle, rgba(255, 255, 255, 0.02));
-  --color-white-muted: var(--white-muted, rgba(255, 255, 255, 0.05));
+  --color-white: var(--white);
+  --color-white-subtle: var(--white-subtle);
+  --color-white-muted: var(--white-muted);
 
   /* ─────────────── Fonts ─────────────── */
   --font-inter: var(--inter);

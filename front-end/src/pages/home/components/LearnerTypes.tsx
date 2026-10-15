@@ -76,65 +76,65 @@ export const LearnerTypesSection = () => {
   };
 
   return (
-    <section className="relative w-full bg-bg-primary text-text-primary py-8 xl:py-16 px-4 sm:px-6 lg:px-8 select-none">
+    <section className="relative w-full px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto flex flex-col items-center">
         {/* Top Tag Pill */}
-        <div className="inline-flex items-center px-3.5 py-1 rounded-full border border-border-subtle bg-white-subtle text-[11px] font-mono tracking-widest text-text-muted uppercase mb-5">
+        <div className="inline-flex items-center px-3.5 py-1 rounded-full border border-subtle bg-subtle text-[11px] tracking-widest text-muted uppercase mb-5">
           Diverse Learning Journeys
         </div>
 
         {/* Main Heading (Exact 40px scale) */}
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-balance text-center">
-          Built for Every Type of Learner
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-highlight text-balance text-center">
+          Built for every type of learner
         </h2>
 
         {/* Subtitle Description */}
-        <p className="mt-4 text-center text-sm md:text-base text-text-secondary max-w-2xl leading-relaxed">
+        <p className="mt-4 text-center text-sm md:text-base text-muted max-w-2xl leading-relaxed">
           Whether you're prepping for college exams, transforming your career,
           or pursuing an intellectual passion, SkillForge adapts to you.
         </p>
 
-        {/* 3-Column Card Layout */}
+        {/* Card Layout */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
           {learnerCardsData.map((card) => (
             <div
               key={card.id}
-              className="flex flex-col justify-between rounded-2xl border border-border-subtle bg-bg-secondary p-7 transition-all duration-300 hover:border-white/20"
+              className="flex flex-col justify-between rounded-2xl border border-subtle bg-card p-7 transition-all duration-300 hover:border-white/20"
             >
               <div>
                 {/* Icon Container */}
-                <div className="w-10 h-10 rounded-lg bg-blue-dark border border-border-subtle flex items-center justify-center mb-6">
+                <div className="w-10 h-10 rounded-lg bg-blue-surface border border-subtle flex items-center justify-center mb-6">
                   {renderIcon(card.iconType)}
                 </div>
 
                 {/* Category Label */}
                 <span
-                  className={`text-[11px] font-mono tracking-wider uppercase block mb-2 font-medium ${
+                  className={`text-[11px] tracking-wider uppercase block mb-2 font-medium ${
                     card.categoryColorClass
                       ? card.categoryColorClass
-                      : 'text-text-muted'
+                      : 'text-muted'
                   }`}
                 >
                   {card.category}
                 </span>
 
                 {/* Card Title */}
-                <h3 className="text-xl font-bold text-text-highlight tracking-tight">
+                <h3 className="text-xl font-bold text-highlight tracking-tight">
                   {card.title}
                 </h3>
 
                 {/* Description */}
-                <p className="mt-3 text-xs sm:text-sm text-text-secondary leading-relaxed">
+                <p className="mt-3 text-xs sm:text-sm text-muted leading-relaxed">
                   {card.description}
                 </p>
               </div>
 
               {/* Feature Checklist Footer */}
-              <div className="mt-8 pt-5 border-t border-border-subtle space-y-2.5">
+              <div className="mt-8 pt-5 border-t border-subtle space-y-2.5">
                 {card.features.map((feature, idx) => (
                   <div
                     key={idx}
-                    className="flex items-center gap-2 text-xs text-text-secondary"
+                    className="flex items-center gap-2 text-xs text-blue-light"
                   >
                     <IconCheck
                       size={14}

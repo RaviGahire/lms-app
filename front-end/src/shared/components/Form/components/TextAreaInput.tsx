@@ -158,7 +158,7 @@ export const TextAreaInput = forwardRef<
                 .join(' ') || undefined
             }
             className={`
-              w-full px-4 py-3.5 rounded-xl
+              w-full px-4 py-3.5 rounded-md
               bg-[#0b1324] text-white text-sm sm:text-base leading-relaxed
               placeholder:text-slate-500
               border transition-all duration-200 outline-none

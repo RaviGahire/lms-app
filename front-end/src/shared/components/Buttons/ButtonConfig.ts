@@ -44,13 +44,13 @@ export const buttonConfig: ButtonDefaultConfig = {
 
   variants: {
     primary:
-      'bg-text-highlight text-bg-primary hover:opacity-90 shadow-sm border border-transparent focus-visible:ring-text-highlight',
+      'bg-highlight text-app hover:opacity-90 shadow-sm border border-transparent focus-visible:ring-highlight',
     secondary:
-      'bg-white/10 text-text-highlight hover:bg-white/15 border border-border-subtle focus-visible:ring-white/20',
+      'bg-subtle text-highlight hover:bg-surface border border-subtle focus-visible:ring-white/20',
     outline:
-      'border border-border-subtle text-text-highlight hover:bg-white/5 focus-visible:ring-border-subtle',
+      'border border-subtle text-highlight hover:bg-white/5 focus-visible:ring-border-subtle',
     ghost:
-      'text-text-highlight hover:bg-white/5 border border-transparent focus-visible:ring-white/10',
+      'text-highlight hover:bg-white/5 border border-transparent focus-visible:ring-white/10',
     danger:
       'bg-red-600 text-white hover:bg-red-700 shadow-sm border border-transparent focus-visible:ring-red-500',
   },
@@ -58,8 +58,8 @@ export const buttonConfig: ButtonDefaultConfig = {
   activeStyles: {
     primary: 'ring-2 ring-text-highlight ring-offset-2 opacity-100',
     secondary: 'bg-white/25 text-white border-white/30 shadow-inner',
-    outline: 'bg-white/10 border-text-highlight text-text-highlight',
-    ghost: 'bg-white/10 text-text-highlight font-semibold',
+    outline: 'bg-white/10 border-text-highlight text-highlight',
+    ghost: 'bg-white/10 text-highlight font-semibold',
     danger: 'bg-red-700 ring-2 ring-red-400 ring-offset-2',
   },
 

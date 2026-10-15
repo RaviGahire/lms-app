@@ -6,6 +6,7 @@ import {
   IconCheck,
   IconCertificate,
   IconBriefcase,
+  IconCopy,
 } from '@tabler/icons-react';
 import { Badge } from '../../../shared/components/Badges';
 
@@ -59,22 +60,22 @@ export const cardData: FeatureCardItem[] = [
 
 export const FeaturesSection = () => {
   return (
-    <section className="relative w-full text-white py-8  xl:py-16 px-4 sm:px-6 lg:px-8 select-none">
+    <section className="relative w-full text-highlight py-8  xl:py-16 px-4 sm:px-6 lg:px-8 select-none">
       <div className="max-w-7xl mx-auto flex flex-col items-center">
         {/* Top Badge */}
         <Badge
-          text="Complete Learning Operating System"
+          text="Complete Learning"
           badgeStyle="uppercase text-[12px]"
         />
 
         {/* Main Heading */}
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-pretty text-center">
-          Active Hands-On Learning <br />
-          Across Every Subject
+          Active hands-on learning <br />
+          Across every subject
         </h2>
 
         {/* Subtitle */}
-        <p className="mt-4 text-center text-sm md:text-[18px] text-slate-400 max-w-2xl xl:leading-7 tracking-[0.09px] text-pretty">
+        <p className="mt-4 text-center text-sm md:text-[18px] text-muted max-w-2xl xl:leading-7 tracking-[0.09px] text-pretty">
           Passive lectures lead to 80% knowledge drop-off. SkillForge replaces
           sterile video watching with interactive simulations, live problem
           sets, and studio labs.
@@ -85,55 +86,55 @@ export const FeaturesSection = () => {
           {cardData.map((card) => (
             <div
               key={card.id}
-              className="flex flex-col justify-between rounded-2xl border-2 border-border-subtle bg-bg-surface/50 p-4 transition-colors hover:border-white/15"
+              className="flex flex-col justify-between rounded-2xl border-2 border-subtle bg-surface p-4 transition-colors hover:border-white/15"
             >
-              <div className="bg-bg-primary p-3 rounded-md">
+              <div className="bg-app p-3 rounded-md">
                 <div
                   className={`w-10 h-10 rounded-lg flex items-center justify-center mb-6 ${card.iconContainerClass}`}
                 >
                   {card.icon}
                 </div>
-                <h3 className="text-[20px] font-bold text-text-highlight tracking-tight">
+                <h3 className="text-[20px] font-bold text-highlight tracking-tight">
                   {card.title}
                 </h3>
-                <p className="mt-3 text-sm leading-6 sm:text-[16px] text-text-muted">
+                <p className="mt-3 text-sm leading-6 sm:text-[16px] text-muted">
                   {card.subTitle}
                 </p>
               </div>
 
               {/* Card Footer */}
-              <div className="mt-8 pt-4 border-t border-border-subtle flex items-center justify-between text-xs font-mono">
+              <div className="mt-8 pt-4 border-t border-subtle flex items-center justify-between text-xs font-mono">
                 <span className="text-text-muted">{card.footerLeft}</span>
 
                 {card.isInteractiveBadge ? (
-                  <span className="inline-flex items-center gap-1.5 text-emerald-400">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  <span className="inline-flex items-center gap-1.5 text-success">
+                    <span className="h-1.5 w-1.5 rounded-full bg-success" />
                     {card.footerRightText}
                   </span>
                 ) : card.isHighlightText ? (
-                  <span className="text-emerald-400 font-semibold">
+                  <span className="text-success font-semibold">
                     {card.footerRightText}
                   </span>
                 ) : (
-                  <span className="text-slate-400">{card.footerRightText}</span>
+                  <span className="text-muted">{card.footerRightText}</span>
                 )}
               </div>
             </div>
           ))}
         </div>
 
-        {/* Bottom Wide Card: Accreditation & Certificate */}
-        <div className="mt-6 w-full rounded-2xl border border-white/8 bg-[#0d111a] p-8 md:p-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+        {/* Bottom Wide Card */}
+        <div className="mt-6 w-full rounded-2xl border border-white/8 bg-card p-8 md:p-10 flex flex-col lg:flex-row items-center justify-between gap-8">
           {/* Left Text Info */}
           <div className="w-full lg:max-w-md">
-            <span className="text-[11px] font-mono tracking-widest text-slate-500 uppercase block mb-3">
+            <span className="text-[11px] font-mono tracking-widest text-muted uppercase block mb-3">
               Universal Accreditation
             </span>
-            <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug">
+            <h3 className="text-2xl sm:text-3xl font-semibold text-highlight tracking-tight leading-snug">
               Accredited Diplomas & <br />
               Industry Endorsements
             </h3>
-            <p className="mt-4 text-xs sm:text-sm text-slate-400 leading-relaxed">
+            <p className="mt-4 text-xs sm:text-sm text-muted leading-relaxed">
               Every completed track earns a cryptographically verified,
               university-aligned credential. Share directly with admissions
               boards, LinkedIn, and hiring teams.
@@ -143,7 +144,7 @@ export const FeaturesSection = () => {
               <div className="flex items-center gap-1.5">
                 <IconCheck
                   size={16}
-                  className="text-emerald-400 shrink-0"
+                  className="text-success shrink-0"
                   stroke={2.5}
                 />
                 <span>Accredited Micro-Degrees</span>
@@ -151,7 +152,7 @@ export const FeaturesSection = () => {
               <div className="flex items-center gap-1.5">
                 <IconBriefcase
                   size={16}
-                  className="text-emerald-400 shrink-0"
+                  className="text-success shrink-0"
                   stroke={2}
                 />
                 <span>Portfolio-Ready Projects</span>
@@ -159,10 +160,14 @@ export const FeaturesSection = () => {
             </div>
           </div>
 
-          {/* Right Certificate Terminal / Mockup */}
-          <div className="w-full lg:max-w-xl rounded-xl border border-white/8 bg-[#090c13] p-5 font-mono text-xs">
-            <div className="flex items-center justify-between pb-4 border-b border-white/6 text-[11px] text-slate-400">
-              <span>credential-verification: #SKF-89241-GLOBAL</span>
+          {/* Right Certificate Terminal */}
+          <div className="w-full lg:max-w-xl rounded-xl border border-subtle bg-app p-5 font-mono text-xs">
+            <div className="flex items-center justify-between pb-4 border-b border-subtle text-[11px] text-slate-400">
+           
+              <div className='flex justify-center items-center gap-2'>
+                   <span>credential-verification: #SKF-89241-GLOBAL </span>
+                <IconCopy size={14} className='cursor-pointer hover:text-success'/>
+              </div>
               <span className="flex items-center gap-1.5 text-emerald-400">
                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
                 OFFICIALLY VERIFIED
@@ -199,13 +204,13 @@ export const FeaturesSection = () => {
                 <div>
                   Lab Score:{' '}
                   <span className="text-emerald-400 font-semibold">
-                    100% Practical
+                    90% Practical
                   </span>
                 </div>
                 <div>
                   Issued By:{' '}
                   <span className="text-slate-200 font-semibold">
-                    SkillForge Board
+                    Master-Track Board
                   </span>
                 </div>
               </div>

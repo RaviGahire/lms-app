@@ -51,29 +51,29 @@ export const LeadershipTeam = () => {
   return (
     <section
       aria-label="leadership-team"
-      className="min-h-screen py-16 px-6 flex flex-col justify-center"
+      className="min-h-screen py-16 px-6 flex flex-col justify-center text-white"
     >
       <div className="max-w-7xl mx-auto w-full">
         {/* Header */}
         <div className="mb-12 ">
-          <span className="text-xs font-bold tracking-widest text-success-dark uppercase block mb-3">
+          <span className="text-xs font-bold tracking-widest text-success uppercase block mb-3">
             Visionary Stewards
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-semibold text-text-highlight tracking-tight mb-4">
-            The leadership team behind MasterTrack
+          <h2 className="mt-2 text-3xl font-medium tracking-tight text-text-highlight sm:text-4xl lg:text-[2.65rem] leading-tight">
+            The leadership team behind MasterTrack.
           </h2>
-          <p className="text-sm sm:text-base text-text-muted leading-relaxed">
+          <p className="text-sm sm:text-base text-muted leading-relaxed">
             Engineers, researchers, and educators dedicated to modernizing tech
             education through verifiable rigor.
           </p>
         </div>
 
-        {/* 4-Card Grid */}
+        {/* Card Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           {leaders.map((leader) => (
             <div
               key={leader.name}
-              className="bg-bg-secondary border border-border-subtle rounded-2xl overflow-hidden flex flex-col justify-between transition-all duration-300 hover:border-slate-700 shadow-lg shadow-black/30"
+              className="bg-bg-secondary border border-subtle rounded-2xl overflow-hidden flex flex-col justify-between transition-all duration-300 hover:border-slate-700 shadow-lg shadow-black/30"
             >
               {/* Card Image Area  */}
               <div>
@@ -89,17 +89,17 @@ export const LeadershipTeam = () => {
 
                 {/* Content Info */}
                 <div className="px-6 pt-2 pb-4">
-                  <h3 className="text-lg font-bold text-white tracking-tight mb-1">
+                  <h3 className="text-lg font-bold text-highlight tracking-tight mb-1">
                     {leader.name}
                   </h3>
                   <p
                     className={`text-xs font-semibold leading-snug mb-3 ${
-                      leader.roleAccent ? 'text-[#10b981]' : 'text-[#818cf8]'
+                      leader.roleAccent ? 'text-success' : 'text-blue-light'
                     }`}
                   >
                     {leader.role}
                   </p>
-                  <p className="text-xs text-[#8f9eb3] leading-relaxed">
+                  <p className="text-xs text-secondary leading-relaxed">
                     {leader.background}
                   </p>
                 </div>
@@ -107,7 +107,7 @@ export const LeadershipTeam = () => {
 
               {/* Quote Footer */}
               <div className="px-6 pb-6 pt-2 border-t border-slate-800/30">
-                <p className="text-xs text-slate-400 italic leading-relaxed">
+                <p className="text-xs text-muted italic leading-relaxed">
                   {leader.quote}
                 </p>
               </div>

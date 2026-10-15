@@ -22,7 +22,7 @@ export const Hero = () => {
   return (
     <section
       aria-label="hero-section"
-      className="relative w-full text-text-highlight text-pretty bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.2)_0%,#0d0e11_50%)]"
+      className="relative w-full text-highlight text-pretty bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.2)_0%,#0d0e11_50%)]"
     >
       <div className="mx-auto flex min-h-[calc(100vh-4.5rem)] max-w-7xl flex-col items-center justify-between px-4 pt-10 pb-8 sm:px-6 lg:px-8">
         <div className="flex flex-1 flex-col items-center justify-center text-center max-w-4xl w-full">
@@ -32,13 +32,13 @@ export const Hero = () => {
           </div>
 
           {/* Main Heading */}
-          <h1 className="uppercase text-4xl tracking-tighter md:leading-14 xl:leading-18 max-lg:font-normal sm:text-3xlxl lg:text-4xl xl:text-6xl text-text-highlight">
+          <h1 className="uppercase text-4xl tracking-tighter md:leading-14 xl:leading-18 max-lg:font-normal sm:text-3xlxl lg:text-4xl xl:text-6xl text-highlight">
             Master any subject accelerate your <br />{' '}
-            <span className="text-green-500">Potential</span>.
+            <span className="text-success">Potential</span>.
           </h1>
 
           {/* Subtitle */}
-          <p className="mt-6 max-w-2xl text-base sm:text-lg text-text-subtle/80 leading-relaxed font-normal">
+          <p className="mt-6 max-w-2xl text-base sm:text-lg text-muted leading-relaxed font-normal">
             From computer science and digital design to business strategy, data
             analytics, and sciences experience friction-free, hands-on learning
             built for every curious mind.
