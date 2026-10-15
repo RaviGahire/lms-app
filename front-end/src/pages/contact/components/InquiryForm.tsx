@@ -5,7 +5,7 @@ import {
   TextAreaInput,
   TextInput,
 } from '../../../shared/components/Form';
-import { IconAlertHexagon, IconIndentDecrease } from '@tabler/icons-react';
+import { IconAlertHexagon } from '@tabler/icons-react';
 
 const subjects = [
   'Enterprise Training',
