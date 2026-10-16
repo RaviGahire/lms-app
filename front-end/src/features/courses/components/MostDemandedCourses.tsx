@@ -89,13 +89,13 @@ const COURSES: CourseCardData[] = [
 
 export const MostDemandedCourses = () => {
   return (
-    <section className="w-full bg-[var(--color-app)] p-6 font-[var(--font-inter)] antialiased md:p-10">
+    <section className="w-full md:p-10">
       <div className="mx-auto max-w-7xl space-y-8">
         {/* Header Section */}
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="space-y-3">
             {/* Category Pill */}
-            <div className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-subtle)] bg-[var(--color-card)] px-3 py-1 text-xs font-semibold text-[var(--color-secondary)]">
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-subtle bg-card px-3 py-1 text-xs font-semibold text-secondary">
               <IconFlame size={14} className="text-amber-400" />
               <span>IT &amp; Software</span>
             </div>
