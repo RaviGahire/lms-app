@@ -25,23 +25,24 @@ export const SignUpPage = () => {
         </p>
 
         {/* OAuth Buttons */}
-        <div className="mt-8 grid grid-cols-3 gap-3">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-3">
           <Button
             id="google"
             label="Google"
-            size="sm"
+            size="md"
             variant="outline"
             icon={<IconBrandGoogleFilled size={16} />}
           />
           <Button
             id="facebook"
             label="facebook"
-            size="sm"
+            size="md"
             variant="outline"
             icon={<IconBrandFacebook size={16} />}
           />
           <Button
             id="apple-id"
+            size="md"
             label="apple ID"
             icon={<IconBrandApple size={16} />}
             variant="outline"
