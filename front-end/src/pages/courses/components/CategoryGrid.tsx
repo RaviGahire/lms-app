@@ -238,7 +238,7 @@ export const CategoryGrid = () => {
                   </span>
 
                   <Link
-                    to={cat.id}
+                    to={`/category/${cat.id}`}
                     type="button"
                     className="inline-flex items-center gap-1.5 text-muted transition-colors group-hover:text-primary hover:underline cursor-pointer"
                   >
