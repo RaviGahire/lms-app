@@ -5,6 +5,7 @@ import { CoursesPage } from '../pages/courses';
 import { AboutPage } from '../pages/about';
 import { ContactPage } from '../pages/contact';
 import { AuthRoutes } from './AuthRoutes';
+import { CourseCategoryDetails } from '../features/courses';
 
 
 export const AppRoutes = () => {
@@ -19,6 +20,7 @@ export const AppRoutes = () => {
           <Route element={<CoursesPage />} path="/courses" />
           <Route element={<AboutPage />} path="/about" />
           <Route element={<ContactPage />} path="/contact" />
+          <Route element={<CourseCategoryDetails categoryDetails={"category"}/> } path="/category/:id" />
         </Route>
 
         {/* Auth Routes */}
