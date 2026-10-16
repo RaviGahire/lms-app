@@ -15,8 +15,8 @@ export const CourseCategoryDetails = ({
       {/* Category Hero Banner */}
       <CategoryHeroBanner />
 
-{/*  */}
-<CourseFilterBar/>
+      {/* Course Filter Bar */}
+      <CourseFilterBar />
       {/* Most Demanded Courses */}
       <MostDemandedCourses />
 
