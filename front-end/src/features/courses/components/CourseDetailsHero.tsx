@@ -1,5 +1,4 @@
 import {
-  IconChevronRight,
   IconFlame,
   IconBolt,
   IconCircleCheck,
