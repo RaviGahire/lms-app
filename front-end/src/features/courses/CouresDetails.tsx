@@ -15,11 +15,13 @@ export const CouresDetails = ({ courseDetails }: CouresDetailsProps) => {
       {/* Course Details Hero */}
       <CourseDetailsHero />
 
-      {/*  Course Blueprint*/}
-      <CourseBlueprint />
+      <div className='max-w-7xl mx-auto flex justify-center items-center gap-8 items-stretch '>
+        {/*  Course Blueprint*/}
+        <CourseBlueprint />
 
-      {/* Course Enrollment Card */}
-      <CourseEnrollmentCard />
+        {/* Course Enrollment Card */}
+        <CourseEnrollmentCard />
+      </div>
 
       {/* Course Curriculum */}
       <CourseCurriculum />
@@ -29,7 +31,6 @@ export const CouresDetails = ({ courseDetails }: CouresDetailsProps) => {
 
       {/* Recommended Track */}
       <RecommendedTracks />
-      
     </section>
   );
 };
