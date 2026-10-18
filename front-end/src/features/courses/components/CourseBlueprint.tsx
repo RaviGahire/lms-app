@@ -54,7 +54,7 @@ const PREREQUISITES = [
 
 export const CourseBlueprint = () => {
   return (
-    <div className="flex-1 space-y-8 rounded-2xl border border-subtle bg-card p-6 md:p-8 font-inter antialiased">
+    <div className="flex-1 space-y-8 rounded-2xl border border-subtle bg-card p-6 ">
       {/* Header */}
       <div>
         <div className="flex flex-wrap items-center justify-between gap-4">

@@ -78,6 +78,39 @@ const MODULES_DATA: Module[] = [
     lessonsCount: 6,
     duration: '4h 10m',
     sandboxesCount: 4,
+     lessons: [
+      {
+        id: '1.1',
+        number: '1.1',
+        title: 'Semantic Document Outlining & Landmark Elements',
+        duration: '32:15',
+        icon: IconPlayerPlay,
+        badge: { text: 'Free Preview', variant: 'preview' },
+      },
+      {
+        id: '1.2',
+        number: '1.2',
+        title: 'Accessible Forms, Validation Patterns & ARIA Roles',
+        duration: '44:10',
+        icon: IconLayoutSidebar,
+        badge: { text: 'Cloud Lab', variant: 'lab' },
+      },
+      {
+        id: '1.3',
+        number: '1.3',
+        title: 'SEO Microdata, JSON-LD & OpenGraph Social Cards',
+        duration: '28:40',
+        icon: IconPlayerPlay,
+      },
+      {
+        id: '1.4',
+        number: '1.4',
+        title: 'Capstone Project: Accessible Enterprise Customer Portal',
+        duration: '59:55',
+        icon: IconCode,
+        badge: { text: 'Cloud Lab', variant: 'lab' },
+      },
+    ],
   },
   {
     id: 'module-03',
@@ -119,7 +152,7 @@ export const CourseCurriculum = () => {
 
   return (
     <section className="w-full bg-app p-6 font-inter text-primary antialiased md:p-10">
-      <div className="mx-auto max-w-5xl space-y-6">
+      <div className="mx-auto max-w-7xl space-y-6">
         {/* Header */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>

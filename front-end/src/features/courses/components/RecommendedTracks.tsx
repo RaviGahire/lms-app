@@ -74,10 +74,10 @@ export const RecommendedTracks = () => {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div className="space-y-1.5">
             <span className="text-xs font-bold uppercase tracking-wider text-highlight">
-              Curated Career Roadmap[cite: 8]
+              Curated Career Roadmap
             </span>
             <h2 className="text-2xl font-bold tracking-tight text-primary sm:text-3xl">
-              Recommended Follow-Up Tracks[cite: 8]
+              Recommended Follow-Up Tracks
             </h2>
           </div>
 
@@ -85,7 +85,7 @@ export const RecommendedTracks = () => {
             href="#all-sequences"
             className="group inline-flex items-center gap-1.5 text-xs font-semibold text-highlight transition-colors hover:text-primary sm:text-sm"
           >
-            <span>View All Full-Stack Sequences</span>[cite: 8]
+            <span>View All Full-Stack Sequences</span>
             <IconArrowRight
               size={15}
               stroke={2}
@@ -119,7 +119,7 @@ export const RecommendedTracks = () => {
                         : 'border border-success-dark/40 bg-card/90 text-success'
                     }`}
                   >
-                    {track.badge.label}[cite: 8]
+                    {track.badge.label}
                   </span>
                 </div>
 
@@ -129,7 +129,7 @@ export const RecommendedTracks = () => {
                   <div className="flex items-center gap-2 text-xs">
                     <div className="flex items-center gap-1 font-semibold text-primary">
                       <IconStarFilled size={13} className="text-amber-400" />
-                      <span>{track.rating}</span>[cite: 8]
+                      <span>{track.rating}</span>
                     </div>
                     <span className="text-subtle">•</span>
                     <span className="text-muted">{track.duration}</span>[cite:
@@ -138,10 +138,10 @@ export const RecommendedTracks = () => {
 
                   {/* Title & Description */}
                   <h3 className="mt-3 text-base font-bold leading-snug text-primary sm:text-lg">
-                    {track.title}[cite: 8]
+                    {track.title}
                   </h3>
                   <p className="mt-2 text-xs leading-relaxed text-muted line-clamp-3">
-                    {track.description}[cite: 8]
+                    {track.description}
                   </p>
                 </div>
               </div>
@@ -149,14 +149,14 @@ export const RecommendedTracks = () => {
               {/* Card Footer: Price & CTA Link */}
               <div className="flex items-center justify-between border-t border-subtle/50 px-5 py-4 sm:px-6">
                 <span className="text-lg font-bold text-primary sm:text-xl">
-                  {track.price}[cite: 8]
+                  {track.price}
                 </span>
 
                 <a
                   href={`#${track.id}`}
                   className="inline-flex items-center gap-1 text-xs font-semibold text-secondary transition-colors group-hover:text-highlight"
                 >
-                  <span>Explore Syllabus</span>[cite: 8]
+                  <span>Explore Syllabus</span>
                   <IconChevronRight
                     size={14}
                     stroke={2.5}

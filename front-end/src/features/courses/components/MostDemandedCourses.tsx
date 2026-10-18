@@ -8,6 +8,7 @@ import {
   IconArrowRight,
   IconCheck,
 } from '@tabler/icons-react';
+import { Link } from 'react-router-dom';
 
 interface CourseCardData {
   id: string;
@@ -178,13 +179,13 @@ export const MostDemandedCourses = () => {
                     <span className="text-muted">{course.reviews}</span>
                   </div>
 
-                  <a
-                    href={`#${course.id}`}
+                  <Link
+                    to={`/course-details/${course.id}`}
                     className="inline-flex items-center gap-1 text-xs font-semibold text-secondary transition-colors group-hover:text-primary"
                   >
                     <span>View Track</span>
                     <IconArrowRight size={13} stroke={2} className="transition-transform group-hover:translate-x-0.5" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             );

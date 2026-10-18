@@ -16,8 +16,8 @@ const RATING_DATA: RatingBreakdown[] = [
 
 export const StudentFeedbackCard = () => {
   return (
-    <section className="w-full bg-app p-6 font-inter text-primary antialiased md:p-10">
-      <div className="mx-auto max-w-5xl space-y-8">
+    <section className="w-full bg-app p-4 font-inter text-primary">
+      <div className="mx-auto max-w-7xl space-y-8">
         {/* Top Header */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-1.5">
