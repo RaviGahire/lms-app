@@ -15,7 +15,7 @@ export const CouresDetails = ({ courseDetails }: CouresDetailsProps) => {
       {/* Course Details Hero */}
       <CourseDetailsHero />
 
-      <div className='max-w-7xl mx-auto flex justify-center items-center gap-8 items-stretch '>
+      <div className='max-w-7xl mx-auto flex justify-center  gap-8 items-stretch '>
         {/*  Course Blueprint*/}
         <CourseBlueprint />
 
