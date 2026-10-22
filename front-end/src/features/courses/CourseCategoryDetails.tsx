@@ -10,10 +10,15 @@ interface CourseCategoryProps {
 export const CourseCategoryDetails = ({
   categoryDetails,
 }: CourseCategoryProps) => {
+
+
+
+
+
   return (
     <section aria-label="courses-category-page">
       {/* Category Hero Banner */}
-      <CategoryHeroBanner />
+      <CategoryHeroBanner/>
 
       {/* Course Filter Bar */}
       <CourseFilterBar />
