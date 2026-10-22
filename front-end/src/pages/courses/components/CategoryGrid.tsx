@@ -151,7 +151,7 @@ export const CategoryGrid = () => {
               <span>Comprehensive Disciplines</span>
             </div>
             <h2 className="mt-2 text-3xl font-medium tracking-tight text-text-highlight sm:text-4xl lg:text-[2.65rem] leading-tight">
-              Explore by category domain
+              Explore by category 
             </h2>
             <p className="mt-3 max-w-2xl text-sm sm:text-base text-muted leading-relaxed">
               Dive into 8 comprehensive disciplines with interactive sandboxes,
@@ -242,7 +242,7 @@ export const CategoryGrid = () => {
                     type="button"
                     className="inline-flex items-center gap-1.5 text-muted transition-colors group-hover:text-primary hover:underline cursor-pointer"
                   >
-                    <span>Explore Track</span>
+                    <span>See More</span>
                     <IconArrowRight
                       size={14}
                       stroke={2}
