@@ -106,7 +106,8 @@ export const MostDemandedCourses = () => {
               Most Demanded Courses
             </h2>
             <p className="max-w-3xl text-sm leading-relaxed text-muted sm:text-base">
-              Highest enrollment velocity, industry completion rates, and hiring partner endorsements this month.
+              Highest enrollment velocity, industry completion rates, and hiring
+              partner endorsements this month.
             </p>
           </div>
 
@@ -181,10 +182,23 @@ export const MostDemandedCourses = () => {
 
                   <Link
                     to={`/course-details/${course.id}`}
+                    state={{
+                      course: {
+                        id: course?.id,
+                        title: course?.title,
+                        description: course?.description,
+                       
+                      },
+                    }}
+
                     className="inline-flex items-center gap-1 text-xs font-semibold text-secondary transition-colors group-hover:text-primary"
                   >
                     <span>View Track</span>
-                    <IconArrowRight size={13} stroke={2} className="transition-transform group-hover:translate-x-0.5" />
+                    <IconArrowRight
+                      size={13}
+                      stroke={2}
+                      className="transition-transform group-hover:translate-x-0.5"
+                    />
                   </Link>
                 </div>
               </div>
