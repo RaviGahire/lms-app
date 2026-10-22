@@ -1,10 +1,76 @@
-import { IconAward, IconStarFilled, IconArrowUpRight } from '@tabler/icons-react';
+import {
+  IconAward,
+  IconStarFilled,
+  IconArrowUpRight,
+} from '@tabler/icons-react';
 
-export const CategoryHeroBanner = ()=> {
+import { useLocation } from 'react-router-dom';
+
+type CategoryInfo = {
+  title: string;
+  subTitle: string;
+};
+
+const categoryTitles: Record<string, CategoryInfo> = {
+  '/category/it-software': {
+    title: 'IT & Software',
+    subTitle:
+      'Master industrial-grade engineering from semantic HTML5 and modern CSS foundations to asynchronous JavaScript, TypeScript enterprise stacks, and high-scale microservices.',
+  },
+
+  '/category/design-creative': {
+    title: 'Design & Creativity',
+    subTitle:
+      'Transform your creative ideas into stunning visual experiences through graphic design, UI/UX, digital illustration, and modern creative tools.',
+  },
+
+  '/category/ai-data-science': {
+    title: 'AI & Data Science',
+    subTitle:
+      'Explore artificial intelligence, machine learning, data analytics, and deep learning to turn complex data into intelligent solutions.',
+  },
+
+  '/category/personal-development': {
+    title: 'Personal Development',
+    subTitle:
+      'Build confidence, improve communication, strengthen leadership skills, and develop productive habits to reach your personal and professional goals.',
+  },
+
+  '/category/photography-video': {
+    title: 'Photography & Video',
+    subTitle:
+      'Learn photography, video production, lighting, composition, and editing techniques to create compelling visual stories.',
+  },
+
+  '/category/business-management': {
+    title: 'Business Management',
+    subTitle:
+      'Develop essential business skills in management, entrepreneurship, strategic planning, project leadership, and organizational growth.',
+  },
+
+  '/category/marketing-growth': {
+    title: 'Marketing & Growth',
+    subTitle:
+      'Learn digital marketing, SEO, content strategy, social media, and growth techniques to reach audiences and build successful brands.',
+  },
+
+  '/category/science-engineering': {
+    title: 'Science & Engineering',
+    subTitle:
+      'Explore scientific principles and engineering concepts through practical learning, innovative technologies, and real-world problem-solving.',
+  },
+};
+
+export const CategoryHeroBanner = () => {
+  const url = useLocation();
+const category = categoryTitles[url?.pathname ?? ''];
+const bannerTitle = category?.title ?? 'All Courses';
+const bannerSubTitle =
+  category?.subTitle ?? 'Explore courses and develop new skills.';
 
   return (
     <div className="w-full p-6">
-            <div className="mx-auto flex max-w-7xl flex-col gap-10 rounded-2xl border border-subtle bg-card p-8 lg:flex-row lg:items-center lg:justify-between lg:p-12">
+      <div className="mx-auto flex max-w-7xl flex-col gap-10 rounded-2xl border border-subtle bg-card p-8 lg:flex-row lg:items-center lg:justify-between lg:p-12">
         {/* Information & Tags */}
         <div className="flex-1 space-y-6">
           {/* Badge */}
@@ -16,15 +82,12 @@ export const CategoryHeroBanner = ()=> {
           {/* Title & Description */}
           <div className="space-y-4">
             <h1 className="text-3xl font-extrabold tracking-tight text-primary sm:text-4xl lg:text-5xl">
-              IT &amp; Software Architecture
+              {bannerTitle}
             </h1>
             <p className="max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-              Master industrial-grade engineering from semantic HTML5 and modern CSS
-              foundations to asynchronous JavaScript, TypeScript enterprise stacks, and high-scale
-              microservices.
+            {bannerSubTitle}
             </p>
           </div>
-       
         </div>
 
         {/*  Metric Cards */}
@@ -33,7 +96,9 @@ export const CategoryHeroBanner = ()=> {
           <div className="grid grid-cols-2 gap-4">
             {/* Courses Available */}
             <div className="rounded-xl border border-subtle bg-app/50 p-5 backdrop-blur-sm">
-              <span className="text-xs font-medium text-muted">Courses Available</span>
+              <span className="text-xs font-medium text-muted">
+                Courses Available
+              </span>
               <div className="mt-2 text-2xl font-bold text-primary sm:text-3xl">
                 340+
               </div>
@@ -45,12 +110,14 @@ export const CategoryHeroBanner = ()=> {
 
             {/* Active Students */}
             <div className="rounded-xl border border-subtle bg-app/50 p-5 backdrop-blur-sm">
-              <span className="text-xs font-medium text-muted">Active Students</span>
-              <div className="mt-2 text-2xl font-bold text-primary sm:text-3xl">
-                48,210
+              <span className="text-xs font-medium text-muted">
+                Active Students
+              </span>
+              <div className="mt-2 text-2xl font-bold text-primary sm:text-3xl tabular-nums">
+                10
               </div>
-              <span className="mt-2 block text-xs font-medium text-muted">
-                In sandbox labs
+              <span className="mt-2 block text-xs font-medium text-muted tabular-nums">
+                All Students 120
               </span>
             </div>
           </div>
@@ -58,11 +125,15 @@ export const CategoryHeroBanner = ()=> {
           {/* Track Rating Card */}
           <div className="flex items-center justify-between rounded-xl border border-subtle bg-app/50 p-5 backdrop-blur-sm">
             <div>
-              <span className="text-xs font-medium text-muted">Track Rating</span>
+              <span className="text-xs font-medium text-muted">
+                Track Rating
+              </span>
               <div className="mt-2 flex items-center gap-1.5 text-lg font-bold text-primary">
                 <IconStarFilled size={16} className="text-amber-400" />
                 <span>4.94</span>
-                <span className="text-xs font-normal text-muted">(12.4k reviews)</span>
+                <span className="text-xs font-normal text-muted">
+                  (12.4k reviews)
+                </span>
               </div>
             </div>
             {/* Award Icon */}
@@ -74,4 +145,4 @@ export const CategoryHeroBanner = ()=> {
       </div>
     </div>
   );
-}
+};
