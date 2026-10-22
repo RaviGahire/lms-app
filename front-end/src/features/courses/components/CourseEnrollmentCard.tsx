@@ -55,7 +55,8 @@ const INCLUDES = [
 
 export const CourseEnrollmentCard = () => {
   return (
-    <div className="w-full shrink-0 space-y-6 rounded-2xl border border-subtle bg-card p-6 font-inter antialiased lg:w-95 xl:w-105">
+ <div className=''>
+    <div className="w-full shrink-0 space-y-6 rounded-2xl border border-subtle bg-card p-4 md:p-6  font-inter antialiased lg:w-95 xl:w-105">
       {/* Video Preview Card */}
       <div className="group relative aspect-video w-full overflow-hidden rounded-xl border border-subtle bg-surface">
         {/* Placeholder Simulated Code Background */}
@@ -169,5 +170,6 @@ export const CourseEnrollmentCard = () => {
         </button>
       </div>
     </div>
+ </div> 
   );
 };
