@@ -7,8 +7,13 @@ import {
   IconClock,
   IconLanguage,
 } from '@tabler/icons-react';
+import { useLocation } from 'react-router-dom';
+
 
 export const CourseDetailsHero = () => {
+const url = useLocation()
+let localData = url?.state?.course
+console.log(localData)
   return (
     <section className="relative w-full overflow-hidden bg-app py-10 font-inter text-primary antialiased md:py-16">
       {/* radial-glow*/}
@@ -40,12 +45,10 @@ export const CourseDetailsHero = () => {
         {/* Course Title & Description */}
         <div className="mt-6 max-w-6xl space-y-4">
           <h1 className="text-4xl font-medium tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-5xl lg:text-6xl leading-tight text-balance">
-            Modern JavaScript to Full-Stack Web Apps
+            {localData.title}
           </h1>
           <p className="max-w-3xl text-sm leading-relaxed text-secondary sm:text-base">
-            Master semantic web architecture, modern responsive CSS layouts,
-            modern ESNext asynchronous runtime, and deploy production full-stack
-            web applications with cloud sandboxes.
+          {localData.description}
           </p>
         </div>
 
