@@ -111,7 +111,7 @@ const LAB_CARDS: LabCardData[] = [
   },
 ];
 
-export const CurriculumLabCards: React.FC = () => {
+export const CurriculumLabCards = () => {
   return (
     <section className="w-full p-6 md:p-10">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 lg:grid-cols-2">
@@ -124,7 +124,7 @@ export const CurriculumLabCards: React.FC = () => {
               className="group flex flex-col justify-between rounded-2xl border border-subtle bg-card p-6 sm:p-8"
             >
               <div>
-                {/* Header: Level/Duration Badge & Lab Feature Pill */}
+                {/* Duration Badge & Lab Feature Pill */}
                 <div className="flex items-center justify-between gap-3">
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-subtle bg-surface/40 px-3.5 py-1 text-xs font-medium text-secondary">
                     {card.badge.hasBolt && (
