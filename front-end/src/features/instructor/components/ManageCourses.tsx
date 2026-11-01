@@ -1,4 +1,4 @@
-import { IconDotsVertical, IconSettings, IconPlus } from '@tabler/icons-react';
+import { IconSettings, IconPlus } from '@tabler/icons-react';
 import { Button } from '../../../shared/components/Buttons/Buttons';
 
 const courses = [
@@ -165,7 +165,7 @@ export const ManageCourses = () => {
         ))}
 
         {/* Create New Course */}
-        <div className="bg-[#0B0F19] border-2 border-dashed border-gray-800 rounded-xl p-6 flex flex-col items-center justify-center text-center hover:border-gray-600 hover:bg-[#131825] transition-all cursor-pointer min-h-[320px]">
+        <div className="bg-[#0B0F19] border-2 border-dashed border-gray-800 rounded-xl p-6 flex flex-col items-center justify-center text-center hover:border-gray-600 hover:bg-[#131825] transition-all cursor-pointer min-h-80">
           <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 mb-4">
             <IconPlus size={24} />
           </div>
