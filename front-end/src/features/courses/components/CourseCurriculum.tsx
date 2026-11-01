@@ -29,6 +29,8 @@ interface Module {
   lessons?: Lesson[];
 }
 
+
+
 const MODULES_DATA: Module[] = [
   {
     id: 'module-01',
@@ -78,7 +80,7 @@ const MODULES_DATA: Module[] = [
     lessonsCount: 6,
     duration: '4h 10m',
     sandboxesCount: 4,
-     lessons: [
+    lessons: [
       {
         id: '1.1',
         number: '1.1',
@@ -138,8 +140,10 @@ const MODULES_DATA: Module[] = [
   },
 ];
 
-export const CourseCurriculum = () => {
-  const [expandedModules, setExpandedModules] = useState<Record<string, boolean>>({
+export const CourseCurriculum = ({ statBar = true }: { statBar?: boolean }) => {
+  const [expandedModules, setExpandedModules] = useState<
+    Record<string, boolean>
+  >({
     'module-01': true,
   });
 
@@ -151,7 +155,7 @@ export const CourseCurriculum = () => {
   };
 
   return (
-    <section className="w-full bg-app p-6 font-inter text-primary antialiased md:p-10">
+    <section className="w-full p-6 text-primary antialiased md:p-10">
       <div className="mx-auto max-w-7xl space-y-6">
         {/* Header */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -165,13 +169,16 @@ export const CourseCurriculum = () => {
           </div>
 
           {/* Stats Bar */}
-          <div className="flex flex-wrap items-center gap-1.5 text-xs text-muted">
-            <span className="font-semibold text-primary">5</span> Modules
-            <span className="mx-1 text-subtle">•</span>
-            <span className="font-semibold text-primary">29</span> Lessons
-            <span className="mx-1 text-subtle">•</span>
-            <span className="font-semibold text-primary">22h 30m</span> Total Duration
-          </div>
+          {statBar && (
+            <div className="flex flex-wrap items-center gap-1.5 text-xs text-muted">
+              <span className="font-semibold text-primary">5</span> Modules
+              <span className="mx-1 text-subtle">•</span>
+              <span className="font-semibold text-primary">29</span> Lessons
+              <span className="mx-1 text-subtle">•</span>
+              <span className="font-semibold text-primary">22h 30m</span> Total
+              Duration
+            </div>
+          )}
         </div>
 
         {/* Modules Accordion List */}
@@ -207,7 +214,9 @@ export const CourseCurriculum = () => {
                         <span className="text-subtle">•</span>
                         <span>{module.duration}</span>
                         <span className="text-subtle">•</span>
-                        <span className="text-success">{module.sandboxesCount} Sandboxes</span>
+                        <span className="text-success">
+                          {module.sandboxesCount} Sandboxes
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -235,7 +244,11 @@ export const CourseCurriculum = () => {
                         >
                           {/* Lesson Icon, Number & Title */}
                           <div className="flex items-center gap-3">
-                            <LessonIcon size={16} className="shrink-0 text-muted" stroke={1.8} />
+                            <LessonIcon
+                              size={16}
+                              className="shrink-0 text-muted"
+                              stroke={1.8}
+                            />
                             <span className="text-xs font-medium text-secondary hover:text-primary sm:text-sm">
                               {lesson.number} {lesson.title}
                             </span>
@@ -254,7 +267,9 @@ export const CourseCurriculum = () => {
                                 {lesson.badge.text}
                               </span>
                             )}
-                            <span className="font-mono text-muted">{lesson.duration}</span>
+                            <span className=" text-muted">
+                              {lesson.duration}
+                            </span>
                           </div>
                         </div>
                       );
