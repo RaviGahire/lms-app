@@ -1,11 +1,8 @@
 import {
   IconBolt,
-  IconCircle2,
   IconCircleCheck,
-  IconShield,
   IconShieldCheck,
   IconTag,
-  IconZoomPan,
 } from '@tabler/icons-react';
 import { Button } from '../../../shared/components/Buttons/Buttons';
 
@@ -13,7 +10,7 @@ export const OrderSummaryCard = () => {
   return (
     <div className="bg-[#0B0F19] border border-gray-800 rounded-2xl p-6 lg:p-8 shadow-2xl flex flex-col h-full relative overflow-hidden">
       {/* Subtle top gradient accent */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-blue-500"></div>
+      <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-emerald-500 to-blue-500"></div>
 
       {/* Header Section */}
       <div className="mb-6 pb-6 border-b border-gray-800">
