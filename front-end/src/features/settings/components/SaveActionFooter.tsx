@@ -1,4 +1,4 @@
-import { IconInfoCircle, IconDeviceFloppy } from '@tabler/icons-react';
+import { IconInfoCircle } from '@tabler/icons-react';
 import { Button } from '../../../shared/components/Buttons/Buttons';
 
 export const SaveActionFooter = () => {

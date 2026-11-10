@@ -1,4 +1,4 @@
-import { IconUpload, IconTrash } from '@tabler/icons-react';
+import { IconUpload } from '@tabler/icons-react';
 import { Button } from '../../../shared/components/Buttons/Buttons';
 
 export const ProfileBannerCard = () => {
