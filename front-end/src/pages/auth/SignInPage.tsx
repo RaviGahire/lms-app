@@ -38,7 +38,7 @@ export const SignInPage = () => {
         </div>
 
         {/* OAuth Buttons */}
-        <div className="flex justify-around items-center gap-4">
+        <div className="flex flex-col md:flex-row justify-around items-center gap-4">
           {/* Google */}
           <Button
             size="md"
