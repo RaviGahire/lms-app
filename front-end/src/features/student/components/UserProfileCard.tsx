@@ -5,9 +5,11 @@ import {
   IconMapPin,
   IconCalendar,
   IconBriefcase,
-  IconArrowRight,
+  
 } from "@tabler/icons-react";
 import type { Icon } from "@tabler/icons-react";
+import { Button } from "../../../shared/components/Buttons/Buttons";
+import { useNavigate } from "react-router-dom";
 
 export interface User {
   name: string;
@@ -97,6 +99,7 @@ function Progress({ label, value, percent }: ProgressProps) {
 export const UserProfileCard = ({ user }: ProfileCardProps) => {
   const u: User = { ...defaultUser, ...user };
   const weeklyPercent = Math.round((u.weeklyGoalDays / u.weeklyGoalTotal) * 100);
+ const navigate = useNavigate()
 
   return (
     <article
@@ -143,13 +146,12 @@ export const UserProfileCard = ({ user }: ProfileCardProps) => {
       {/* mt-auto pushes the footer to the bottom, making the card stretch naturally */}
       <div className="mt-auto pt-6">
         <div className="flex items-center justify-between border-t border-gray-800 pt-4 text-xs text-gray-400">
-          <a
-            href="#settings"
-            className="inline-flex items-center gap-1.5 hover:text-white transition-colors"
-          >
-            Account settings
-            <IconArrowRight size={14} stroke={1.5} aria-hidden="true" />
-          </a>
+         <Button
+         label="Account settings"
+         size="sm"
+         variant="ghost"
+         onClick={()=>navigate("/settings")}
+         />
           <span className="text-gray-500">{u.synced}</span>
         </div>
       </div>
