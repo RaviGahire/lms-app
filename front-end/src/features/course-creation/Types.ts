@@ -1,0 +1,1 @@
+export type TabType = 'basic-details' | 'curriculum' | 'media-assets' | 'pricing' ;
