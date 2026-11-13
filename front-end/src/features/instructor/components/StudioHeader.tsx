@@ -6,8 +6,6 @@ export const StudioHeader = () => {
 
   const navigate = useNavigate()
   
-
-
   return (
     <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-8">
       <div>
@@ -28,7 +26,7 @@ export const StudioHeader = () => {
       <Button
         label="Create New Course"
         icon={<IconPlus size={18} stroke={2} />}
-        onClick={()=> navigate("/create-course")}
+        onClick={()=> navigate("/course/create")}
       />
     </div>
   );
